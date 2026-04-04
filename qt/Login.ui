@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Login</class>
+ <widget class="QMainWindow" name="Login">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>410</width>
+    <height>559</height>
+   </rect>
+  </property>
+  <property name="font">
+   <font>
+    <family>Arial</family>
+    <pointsize>10</pointsize>
+    <weight>75</weight>
+    <bold>true</bold>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>Login</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">/* Background only for the stacked widget */
+
+
+
+/* Make stacked widget pages transparent */
+#stackedWidget &gt; QWidget {
+    background: transparent;
+}
+
+/* Optional: Make labels transparent */
+#stackedWidget QLabel {
+    background: transparent;
+}
+
+/* Optional: Style input fields cleanly */
+#stackedWidget QLineEdit {
+    background-color: white;
+    border-radius: 6px;
+    padding: 5px;
+}
+
+/* Optional: Style buttons */
+#stackedWidget QPushButton {
+    background-color: #3498db;
+    color: white;
+    border-radius: 6px;
+    padding: 6px;
+}
+
+/* Modern White Input Fields with Dark Hover (fixed for Qt) */
+QLineEdit#usernameEdit, QLineEdit#passwordEdit {
+    background-color: white;
+    color: #333333;
+    border: 1.5px solid #DCDCDC;
+    border-radius: 10px;
+    padding: 8px 35px 8px 10px; /* extra space for eye icon in password */
+    font-size: 14px;
+}
+
+/* Hover Effect */
+QLineEdit#usernameEdit:hover, QLineEdit#passwordEdit:hover {
+    background-color: #F0F0F0;
+    border: 1.5px solid #BFBFBF;
+}
+
+/* Focus */
+QLineEdit#usernameEdit:focus, QLineEdit#passwordEdit:focus {
+    border: 2px solid #4CAF50;
+    background-color: white;
+}
+
+/* Placeholder text */
+QLineEdit#usernameEdit::placeholder,
+QLineEdit#passwordEdit::placeholder {
+    color: #9E9E9E;
+}</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QWidget" name="containerlogin" native="true">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>391</width>
+      <height>541</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Tahoma</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QWidget {
+    background-color: rgba(255, 255, 255, 220);  /* frosted white */
+    border-radius: 15px;                         
+    padding: 15px;
+    border-style: solid;
+    border-width: 2px;
+    border-top-color: #346739;      /* lighter green */
+    border-left-color: #79AE6F;     
+    border-bottom-color: #008000;   /* darker green */
+    border-right-color: #008000;
+}</string>
+    </property>
+    <widget class="QLineEdit" name="usernameEdit">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>260</y>
+       <width>291</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>-1</pointsize>
+      </font>
+     </property>
+     <property name="cursor">
+      <cursorShape>IBeamCursor</cursorShape>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLineEdit {
+    background-color: white;                /* base white */
+    color: #333333;
+    border-style: solid;
+    border-width: 2px;
+    border-top-color: #FFFFFF;              /* lighter top */
+    border-left-color: #FFFFFF;             /* lighter left */
+    border-bottom-color: #BFBFBF;           /* darker bottom */
+    border-right-color: #BFBFBF;            /* darker right */
+    border-radius: 10px;                    
+    padding: 8px 10px;
+    font-size: 14px;
+    transition: all 0.2s ease;              /* smooth hover/focus transitions */
+}
+
+/* Hover Effect — slightly darker background &amp; subtle border change */
+QLineEdit:hover {
+    background-color: #F0F0F0;
+    border-top-color: #F5F5F5;
+    border-left-color: #F5F5F5;
+    border-bottom-color: #AAAAAA;
+    border-right-color: #AAAAAA;
+}
+
+/* Focus Effect — bright green border with 3D depth */
+QLineEdit:focus {
+    border-top-color: #4CAF50;              /* brighter green top/left */
+    border-left-color: #4CAF50;
+    border-bottom-color: #388E3C;           /* darker green bottom/right */
+    border-right-color: #388E3C;
+    background-color: white;
+}
+
+/* Placeholder text */
+QLineEdit::placeholder {
+    color: #9E9E9E;
+}</string>
+     </property>
+     <property name="inputMask">
+      <string/>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="maxLength">
+      <number>32767</number>
+     </property>
+     <property name="frame">
+      <bool>true</bool>
+     </property>
+     <property name="readOnly">
+      <bool>false</bool>
+     </property>
+     <property name="placeholderText">
+      <string>Username</string>
+     </property>
+     <property name="cursorMoveStyle">
+      <enum>Qt::LogicalMoveStyle</enum>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="passwordEdit">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>360</y>
+       <width>291</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>-1</pointsize>
+      </font>
+     </property>
+     <property name="cursor">
+      <cursorShape>IBeamCursor</cursorShape>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLineEdit {
+    background-color: white;                /* base white */
+    color: #333333;
+    border-style: solid;
+    border-width: 2px;
+    border-top-color: #FFFFFF;              /* lighter top */
+    border-left-color: #FFFFFF;             /* lighter left */
+    border-bottom-color: #BFBFBF;           /* darker bottom */
+    border-right-color: #BFBFBF;            /* darker right */
+    border-radius: 10px;                    
+    padding: 8px 10px;
+    font-size: 14px;
+    transition: all 0.2s ease;              /* smooth hover/focus transitions */
+}
+
+/* Hover Effect — slightly darker background &amp; subtle border change */
+QLineEdit:hover {
+    background-color: #F0F0F0;
+    border-top-color: #F5F5F5;
+    border-left-color: #F5F5F5;
+    border-bottom-color: #AAAAAA;
+    border-right-color: #AAAAAA;
+}
+
+/* Focus Effect — bright green border with 3D depth */
+QLineEdit:focus {
+    border-top-color: #4CAF50;              /* brighter green top/left */
+    border-left-color: #4CAF50;
+    border-bottom-color: #388E3C;           /* darker green bottom/right */
+    border-right-color: #388E3C;
+    background-color: white;
+}
+
+/* Placeholder text */
+QLineEdit::placeholder {
+    color: #9E9E9E;
+}</string>
+     </property>
+     <property name="inputMask">
+      <string/>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="maxLength">
+      <number>32767</number>
+     </property>
+     <property name="frame">
+      <bool>true</bool>
+     </property>
+     <property name="echoMode">
+      <enum>QLineEdit::Password</enum>
+     </property>
+     <property name="readOnly">
+      <bool>false</bool>
+     </property>
+     <property name="placeholderText">
+      <string>Password</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="loginbutton">
+     <property name="geometry">
+      <rect>
+       <x>140</x>
+       <y>460</y>
+       <width>111</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Segoe UI</family>
+       <pointsize>15</pointsize>
+       <weight>50</weight>
+       <italic>false</italic>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="mouseTracking">
+      <bool>false</bool>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background-color: #28a745;
+    color: white;
+    border-style: solid;
+    border-width: 2px;
+    border-top-color: #5cd65c;      /* lighter top */
+    border-left-color: #5cd65c;     /* lighter left */
+    border-bottom-color: #1e7e34;   /* darker bottom */
+    border-right-color: #1e7e34;    /* darker right */
+    padding: 6px 12px;
+    font: 15pt &quot;Segoe UI&quot;;
+    border-radius: 5px;             /* optional: rounded corners */
+}
+
+QPushButton:hover {
+    background-color: #218838;
+    border-top-color: #66c266;
+    border-left-color: #66c266;
+    border-bottom-color: #1a6c2f;
+    border-right-color: #1a6c2f;
+}
+
+QPushButton:pressed {
+    background-color: #1e7e34;
+    border-top-color: #1a6c2f;       /* invert for pressed */
+    border-left-color: #1a6c2f;
+    border-bottom-color: #66c266;
+    border-right-color: #66c266;
+}
+
+QPushButton:disabled {
+    background-color: #a8d5b7;
+    color: #f0f0f0;
+    border-top-color: #c0e0c2;
+    border-left-color: #c0e0c2;
+    border-bottom-color: #8ebf96;
+    border-right-color: #8ebf96;
+}</string>
+     </property>
+     <property name="text">
+      <string>LOGIN</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="title">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>150</y>
+       <width>321</width>
+       <height>70</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Modern No. 20</family>
+       <pointsize>28</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel {
+	background: transparent;
+	border: none
+}</string>
+     </property>
+     <property name="text">
+      <string>RAIONN ADMIN</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="title_2">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>220</y>
+       <width>119</width>
+       <height>50</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>11</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel {
+	background: transparent;
+	border: none
+}</string>
+     </property>
+     <property name="text">
+      <string>USERNAME:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="title_3">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>320</y>
+       <width>122</width>
+       <height>50</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>11</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel {
+	background: transparent;
+	border: none
+}</string>
+     </property>
+     <property name="text">
+      <string>PASSWORD:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="Logo">
+     <property name="geometry">
+      <rect>
+       <x>87</x>
+       <y>-20</y>
+       <width>221</width>
+       <height>211</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel {
+background: transparent;
+border: none;
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="pixmap">
+      <pixmap>Logo.png</pixmap>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="title_4">
+     <property name="geometry">
+      <rect>
+       <x>60</x>
+       <y>190</y>
+       <width>271</width>
+       <height>50</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>11</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel {
+	background: transparent;
+	border: none
+}</string>
+     </property>
+     <property name="text">
+      <string>VALIDATOR</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </widget>
+  </widget>
+ </widget>
+ <resources>
+  <include location="bg admin.qrc"/>
+ </resources>
+ <connections/>
+</ui>

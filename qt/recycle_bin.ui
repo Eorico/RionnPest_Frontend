@@ -1,0 +1,529 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>RecycleBin</class>
+ <widget class="QMainWindow" name="RecycleBin">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>931</width>
+    <height>717</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>RecyleBin</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QTableWidget" name="recycle_table">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>90</y>
+      <width>931</width>
+      <height>631</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Segoe UI</family>
+      <pointsize>13</pointsize>
+      <weight>50</weight>
+      <italic>false</italic>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QTableWidget {
+    background-color: #ffffff;            /* white background */
+    border-style: solid;
+    border-width: 2px;
+    border-top-color: #ffffff;            /* light top */
+    border-left-color: #ffffff;           /* light left */
+    border-bottom-color: #cccccc;         /* dark bottom */
+    border-right-color: #cccccc;          /* dark right */
+    gridline-color: #e6e6e6;
+    font: 13pt &quot;Segoe UI&quot;;
+    selection-background-color: #2ecc71;
+    selection-color: white;
+    alternate-background-color: #f9f9f9;
+}
+
+QTableWidget::item {
+    padding: 6px;
+    border-bottom: 1px solid #e6e6e6;
+}
+
+QTableWidget::item:selected {
+    background-color: #2ecc71;   /* green when selected */
+    color: white;
+}
+
+QTableWidget::item:hover {
+    background-color: #f0f0f0;   /* darker on hover */
+}
+
+QHeaderView::section {
+    background-color: #f3f3f3;
+    color: #333333;
+    padding: 6px;
+    border-style: solid;
+    border-width: 2px;
+    border-top-color: #ffffff;
+    border-left-color: #ffffff;
+    border-bottom-color: #cccccc;
+    border-right-color: #cccccc;
+    font: 10pt &quot;Segoe UI&quot;;
+}
+
+QTableCornerButton::section {
+    background-color: #f3f3f3;
+    border-style: solid;
+    border-width: 2px;
+    border-top-color: #ffffff;
+    border-left-color: #ffffff;
+    border-bottom-color: #cccccc;
+    border-right-color: #cccccc;
+}</string>
+    </property>
+    <property name="editTriggers">
+     <set>QAbstractItemView::NoEditTriggers</set>
+    </property>
+    <property name="selectionMode">
+     <enum>QAbstractItemView::NoSelection</enum>
+    </property>
+    <attribute name="horizontalHeaderDefaultSectionSize">
+     <number>250</number>
+    </attribute>
+    <attribute name="verticalHeaderDefaultSectionSize">
+     <number>50</number>
+    </attribute>
+    <row>
+     <property name="text">
+      <string>1</string>
+     </property>
+    </row>
+    <column>
+     <property name="text">
+      <string>Type of inventory</string>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Name - User</string>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Date</string>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Name - Client</string>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Time</string>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Chemical/Used</string>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Acutal chemical used</string>
+     </property>
+    </column>
+    <item row="0" column="0">
+     <property name="text">
+      <string/>
+     </property>
+    </item>
+    <item row="0" column="1">
+     <property name="text">
+      <string/>
+     </property>
+    </item>
+    <item row="0" column="2">
+     <property name="text">
+      <string/>
+     </property>
+    </item>
+    <item row="0" column="3">
+     <property name="text">
+      <string/>
+     </property>
+    </item>
+    <item row="0" column="4">
+     <property name="text">
+      <string/>
+     </property>
+    </item>
+    <item row="0" column="5">
+     <property name="text">
+      <string/>
+     </property>
+    </item>
+   </widget>
+   <widget class="QWidget" name="widget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>931</width>
+      <height>91</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">/* Main light gray container */
+QWidget{
+    background-color: #DADADA; /* light gray */
+}</string>
+    </property>
+    <widget class="Line" name="line_4">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>0</y>
+       <width>20</width>
+       <height>91</height>
+      </rect>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+    </widget>
+    <widget class="Line" name="line_6">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>21</y>
+       <width>1041</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label">
+     <property name="geometry">
+      <rect>
+       <x>112</x>
+       <y>8</y>
+       <width>53</width>
+       <height>19</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Restore</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_8">
+     <property name="geometry">
+      <rect>
+       <x>195</x>
+       <y>8</y>
+       <width>81</width>
+       <height>19</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Restore All</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_9">
+     <property name="geometry">
+      <rect>
+       <x>780</x>
+       <y>7</y>
+       <width>137</width>
+       <height>19</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Delete Permanently</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="Restore_btn">
+     <property name="geometry">
+      <rect>
+       <x>112</x>
+       <y>34</y>
+       <width>51</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background-color: transparent;      /* make background see-through */
+    border-style: solid;
+    border-width: 2px;
+    border-top-color: #ffffff;          /* light top/left edge */
+    border-left-color: #ffffff;
+    border-bottom-color: #555555;       /* dark bottom/right edge */
+    border-right-color: #555555;
+    border-radius: 4px;                  /* optional: rounded corners */
+    padding: 5px;
+}
+
+QPushButton:pressed {
+    /* invert border for “pressed” effect */
+    border-top-color: #555555;
+    border-left-color: #555555;
+    border-bottom-color: #ffffff;
+    border-right-color: #ffffff;
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="Restore_all_btn">
+     <property name="geometry">
+      <rect>
+       <x>209</x>
+       <y>34</y>
+       <width>51</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background-color: transparent;      /* make background see-through */
+    border-style: solid;
+    border-width: 2px;
+    border-top-color: #ffffff;          /* light top/left edge */
+    border-left-color: #ffffff;
+    border-bottom-color: #555555;       /* dark bottom/right edge */
+    border-right-color: #555555;
+    border-radius: 4px;                  /* optional: rounded corners */
+    padding: 5px;
+}
+
+QPushButton:pressed {
+    /* invert border for “pressed” effect */
+    border-top-color: #555555;
+    border-left-color: #555555;
+    border-bottom-color: #ffffff;
+    border-right-color: #ffffff;
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="Delete_permanently_btn">
+     <property name="geometry">
+      <rect>
+       <x>820</x>
+       <y>34</y>
+       <width>51</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background-color: transparent;      /* make background see-through */
+    border-style: solid;
+    border-width: 2px;
+    border-top-color: #ffffff;          /* light top/left edge */
+    border-left-color: #ffffff;
+    border-bottom-color: #555555;       /* dark bottom/right edge */
+    border-right-color: #555555;
+    border-radius: 4px;                  /* optional: rounded corners */
+    padding: 5px;
+}
+
+QPushButton:pressed {
+    /* invert border for “pressed” effect */
+    border-top-color: #555555;
+    border-left-color: #555555;
+    border-bottom-color: #ffffff;
+    border-right-color: #ffffff;
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="Line" name="line_7">
+     <property name="geometry">
+      <rect>
+       <x>-1</x>
+       <y>80</y>
+       <width>1041</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_14">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>15</y>
+       <width>71</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel {
+	background: transparent
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="pixmap">
+      <pixmap>Recycle Bin.png</pixmap>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_16">
+     <property name="geometry">
+      <rect>
+       <x>112</x>
+       <y>34</y>
+       <width>51</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel {
+	background: transparent
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="pixmap">
+      <pixmap>restore.png</pixmap>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_17">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>42</y>
+       <width>51</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel {
+	background: transparent
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="pixmap">
+      <pixmap>restore-all.png</pixmap>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_18">
+     <property name="geometry">
+      <rect>
+       <x>820</x>
+       <y>41</y>
+       <width>51</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel {
+	background: transparent
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="pixmap">
+      <pixmap>hard-delete.png</pixmap>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <zorder>label_18</zorder>
+    <zorder>label_17</zorder>
+    <zorder>label_16</zorder>
+    <zorder>line_7</zorder>
+    <zorder>line_4</zorder>
+    <zorder>line_6</zorder>
+    <zorder>label</zorder>
+    <zorder>label_8</zorder>
+    <zorder>label_9</zorder>
+    <zorder>Restore_btn</zorder>
+    <zorder>Restore_all_btn</zorder>
+    <zorder>Delete_permanently_btn</zorder>
+    <zorder>label_14</zorder>
+   </widget>
+   <zorder>widget</zorder>
+   <zorder>recycle_table</zorder>
+  </widget>
+ </widget>
+ <resources>
+  <include location="bg main.qrc"/>
+ </resources>
+ <connections/>
+</ui>

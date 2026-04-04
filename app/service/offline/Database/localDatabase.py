@@ -1,10 +1,10 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
 
-SQLITE_URL = "sqlite://local_inventory.db"
+SQLITE_URL = "sqlite:///local_inventory.db"
 
 engine = create_engine(SQLITE_URL, connect_args={"check_same_thread": False})
 
-SessionLocal = sessionmaker(bind=engine, autoflush=False, autocommit=False)
+session_local = sessionmaker(bind=engine, autoflush=False, autocommit=False)
 
 Base = declarative_base()
