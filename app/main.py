@@ -12,7 +12,7 @@ class MainApp:
         self.app = QApplication(sys.argv)
         self.api = ApiService()
 
-        self.sync_manager = SyncManager()
+        self.sync_manager = SyncManager(self.api)
         
         self.intro = IntroWindow(self.sync_manager, self.api)
         self.login = LoginWindow(self.api)

@@ -11,6 +11,9 @@ class LoginWindow(QMainWindow):
         self.ui.setupUi(self)
         self.api = api_service
         
+        self.ui.usernameEdit.returnPressed.connect(self.ui.passwordEdit.setFocus)
+        self.ui.passwordEdit.returnPressed.connect(self.attempt_login)
+        
         self.ui.loginbutton.clicked.connect(self.attempt_login)
         
     def attempt_login(self):
@@ -28,3 +31,4 @@ class LoginWindow(QMainWindow):
         else:
             QMessageBox.warning(self, "Login Failed", f"Error: {msg}")
             self.ui.passwordEdit.clear()
+            self.ui.passwordEdit.setFocus()

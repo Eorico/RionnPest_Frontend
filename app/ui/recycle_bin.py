@@ -16,7 +16,7 @@ image_path = os.path.join(base_dir, "assets")
 
 class Ui_RecycleBin(object):
     def setupUi(self, RecycleBin):
-        RecycleBin.setObjectName("RecycleBin")
+        RecycleBin.setObjectName("Recycle Bin")
         RecycleBin.setFixedSize(931, 717)
         self.centralwidget = QtWidgets.QWidget(RecycleBin)
         self.centralwidget.setObjectName("centralwidget")
@@ -300,7 +300,7 @@ class Ui_RecycleBin(object):
 
     def retranslateUi(self, RecycleBin):
         _translate = QtCore.QCoreApplication.translate
-        RecycleBin.setWindowTitle(_translate("RecycleBin", "RecyleBin"))
+        RecycleBin.setWindowTitle(_translate("Recycle Bin", "Recycle Bin"))
         item = self.recycle_table.verticalHeaderItem(0)
         item.setText(_translate("RecycleBin", "1"))
         item = self.recycle_table.horizontalHeaderItem(0)

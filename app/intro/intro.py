@@ -19,7 +19,7 @@ class IntroWindow(QMainWindow):
         
         self.timer = QTimer()
         self.timer.timeout.connect(self.update_progress_intro)
-        self.timer.start(50)
+        self.timer.start(30)
         
     def update_progress_intro(self):
         val = self.ui.Progress_Loader.value()
@@ -37,9 +37,25 @@ class IntroWindow(QMainWindow):
             if self.is_online:
                 self.ui.indicator.setText("Status: Online")
                 self.ui.indicator.setStyleSheet("color: #27AE60; font-weight: bold;")
+                self.ui.Progress_Loader.setStyleSheet("""
+                     QProgressBar {
+                         border: 2px solid #aaaaa;
+                         border-radius: 5px;
+                         text-align: center;
+                         color: #79AE6F;
+                     }                                                                     
+                """)
             else:
                 self.ui.indicator.setText("Status: Offline Mode")
                 self.ui.indicator.setStyleSheet("color: #E67E22;")
+                self.ui.Progress_Loader.setStyleSheet("""
+                     QProgressBar {
+                         border: 2px solid #aaaaa;
+                         border-radius: 5px;
+                         text-align: center;
+                         color: #79AE6F;
+                     }                                   
+                """)
             
             QApplication.processEvents()
                 
@@ -47,8 +63,7 @@ class IntroWindow(QMainWindow):
             if self.is_online:
                 self.ui.indicator.setText("Syncing Records...")
                 QApplication.processEvents()
-                msg = self.sync_manager.sync_data()
-                self.ui.indicator.setText(f"Sync: {msg}")
+                self.sync_manager.sync_data()
             else:
                 self.ui.indicator.setText("Offline: Skiping Cloud Sync")
                 

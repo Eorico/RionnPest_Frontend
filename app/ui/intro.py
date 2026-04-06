@@ -16,7 +16,7 @@ image_path = os.path.join(base_dir, "assets")
 
 class Ui_Intro(object):
     def setupUi(self, Intro):
-        Intro.setObjectName("Intro")
+        Intro.setObjectName("Raionn Admin")
         Intro.setFixedSize(822, 485)
         self.centralwidget = QtWidgets.QWidget(Intro)
         self.centralwidget.setObjectName("centralwidget")
@@ -47,8 +47,8 @@ class Ui_Intro(object):
 
     def retranslateUi(self, Intro):
         _translate = QtCore.QCoreApplication.translate
-        Intro.setWindowTitle(_translate("Intro", "Intro"))
-        self.indicator.setText(_translate("Intro", "Loading......"))
+        Intro.setWindowTitle(_translate("Raionn Admin", "Raionn Admin"))
+        self.indicator.setText(_translate("Raionn Admin", "Loading......"))
 
 
 if __name__ == "__main__":

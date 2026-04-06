@@ -16,7 +16,7 @@ image_path = os.path.join(base_dir, "assets")
 
 class Ui_Login(object):
     def setupUi(self, Login):
-        Login.setObjectName("Login")
+        Login.setObjectName("Raion Admin")
         Login.setFixedSize(410, 559)
         font = QtGui.QFont()
         font.setFamily("Arial")
@@ -298,7 +298,7 @@ class Ui_Login(object):
 
     def retranslateUi(self, Login):
         _translate = QtCore.QCoreApplication.translate
-        Login.setWindowTitle(_translate("Login", "Login"))
+        Login.setWindowTitle(_translate("Raionn Admin", "Raionn Admin"))
         self.usernameEdit.setPlaceholderText(_translate("Login", "Username"))
         self.passwordEdit.setPlaceholderText(_translate("Login", "Password"))
         self.loginbutton.setText(_translate("Login", "LOGIN"))
