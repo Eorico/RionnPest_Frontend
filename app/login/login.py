@@ -26,6 +26,7 @@ class LoginWindow(QMainWindow):
         
         success, msg = self.api.login_service(user, password)
         if success:
+            self.api.admin_under = user
             print(f"Login successful for user: {user}")
             self.login_success.emit()
         else:

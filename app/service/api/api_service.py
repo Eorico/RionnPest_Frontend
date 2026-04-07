@@ -54,7 +54,7 @@ class ApiService:
         except requests.exceptions.RequestException as e:
             return False, str(e)
         
-    def soft_delete(self, record_id):
+    def move_to_bin(self, record_id):
         try:
             response = self.session.delete(f"{self.base_url}/inventory/{record_id}")
             return response.json() if response.status_code == 200 else []

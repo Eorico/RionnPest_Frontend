@@ -1526,7 +1526,7 @@ class Ui_Dashboard(object):
         item = self.tableListahan.verticalHeaderItem(0)
         item.setText(_translate("Dashboard", "1"))
         item = self.tableListahan.horizontalHeaderItem(0)
-        item.setText(_translate("Dashboard", "Name of User"))
+        item.setText(_translate("Dashboard", "Admin - User"))
         item = self.tableListahan.horizontalHeaderItem(1)
         item.setText(_translate("Dashboard", "Date of Treatment"))
         item = self.tableListahan.horizontalHeaderItem(2)
