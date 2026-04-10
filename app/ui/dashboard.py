@@ -1540,7 +1540,7 @@ class Ui_Dashboard(object):
         __sortingEnabled = self.tableListahan.isSortingEnabled()
         self.tableListahan.setSortingEnabled(False)
         self.tableListahan.setSortingEnabled(__sortingEnabled)
-        self.searchDate.setPlaceholderText(_translate("Dashboard", "Search......."))
+        self.searchDate.setPlaceholderText(_translate("Dashboard", "Search: Ex 01/20/206"))
         self.confirmButton.setText(_translate("Dashboard", "Submit"))
         item = self.actualchemicalUsed.verticalHeaderItem(0)
         item.setText(_translate("Dashboard", "1"))

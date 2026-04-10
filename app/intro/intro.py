@@ -25,11 +25,10 @@ class IntroWindow(QMainWindow):
         val = self.ui.Progress_Loader.value()
         
         if 20 <= val <= 25 and not hasattr(self, '_checked_conn'):
-            self._checked_conn = True # Temporary flag
+            self._checked_conn = True 
             self.ui.indicator.setText("Checking Connection...")
             QApplication.processEvents()
             
-            # Check if self.api actually exists
             if self.api:
                 self.is_online = self.api.check_connection_service()
                 print(f"Connection: {self.is_online}")

@@ -17,7 +17,7 @@ class MainApp:
         self.intro = IntroWindow(self.sync_manager, self.api)
         self.login = LoginWindow(self.api)
         self.dashboard = DashboardWindow(self.api)
-        self.recycle_bin = RecyclBinWindow(self.api)
+        self.recycle_bin = RecyclBinWindow(self.api, self.dashboard.load_table_data_dashboard, parent=self.dashboard)
         
         self.intro.finished.connect(self.show_login)
         self.login.login_success.connect(self.show_dashboard)

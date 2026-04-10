@@ -30,6 +30,10 @@ class LoginWindow(QMainWindow):
             print(f"Login successful for user: {user}")
             self.login_success.emit()
         else:
+            if "429" in str(msg) or "Too Many Request" in str(msg):
+                self.ui.loginbutton.setEnabled(False)
+                QMessageBox.critical(self, "locked", "Too many requests. Try again in 60s")
+                
             QMessageBox.warning(self, "Login Failed", f"Error: {msg}")
             self.ui.passwordEdit.clear()
             self.ui.passwordEdit.setFocus()

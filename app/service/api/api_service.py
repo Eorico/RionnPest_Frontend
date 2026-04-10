@@ -57,27 +57,35 @@ class ApiService:
     def move_to_bin(self, record_id):
         try:
             response = self.session.delete(f"{self.base_url}/inventory/{record_id}")
-            return response.json() if response.status_code == 200 else []
+            if response.status_code == 200:
+                return True, response.json().get("message", "Moved to bin")
+            return False, f"Server Error: {response.status_code}"
         except requests.exceptions.RequestException as e:
-            return False
+            return False, str(e)
         
     def restore_record(self, record_id):
         try:
             response = self.session.post(f"{self.base_url}/inventory/restore/{record_id}")
-            return response.json() if response.status_code == 200 else []
+            if response.status_code == 200:
+                return True, response.json().get("message", "Record restored")
+            return False, f"Server Error: {response.status_code}"
         except requests.exceptions.RequestException as e:
-            return False 
+            return False, str(e) 
         
     def restore_all(self):
         try:
             response = self.session.post(f"{self.base_url}/inventory/restore-all")
-            return response.json() if response.status_code == 200 else []
+            if response.status_code == 200:
+                return True, response.json().get("message", "All record restored")
+            return False, f"Server Error: {response.status_code}"
         except requests.exceptions.RequestException as e:
-            return False
+            return False, str(e)
         
     def permanent_delete(self, record_id):
         try:
             response = self.session.delete(f"{self.base_url}/inventory/permanent/{record_id}")
-            return response.json() if response.status_code == 200 else []
+            if response.status_code == 200:
+                return True, response.json().get("message", "Permanently deleted")
+            return False, f"Server Error: {response.status_code}"
         except requests.exceptions.RequestException as e:
-            return False
+            return False, str(e)
