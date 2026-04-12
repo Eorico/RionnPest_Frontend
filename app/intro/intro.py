@@ -1,6 +1,11 @@
 from PyQt5.QtWidgets import QMainWindow, QApplication
 from PyQt5.QtCore import QTimer, pyqtSignal
+from PyQt5.QtGui import QIcon
 from ui.intro import Ui_Intro
+import os
+
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+IMAGE_PATH = os.path.join(os.path.dirname(CURRENT_DIR), "ui", "assets")
 
 class IntroWindow(QMainWindow):
     finished = pyqtSignal()
@@ -9,6 +14,8 @@ class IntroWindow(QMainWindow):
         super().__init__()
         self.ui = Ui_Intro()
         self.ui.setupUi(self)
+        
+        self.setWindowIcon(QIcon(f"{IMAGE_PATH}/Logo.png"))
         
         self.sync_manager = sync_manager
         self.is_online = False

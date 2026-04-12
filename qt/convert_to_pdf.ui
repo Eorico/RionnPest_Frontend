@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1205</width>
+    <height>883</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QTextEdit" name="textEdit">
+    <property name="geometry">
+     <rect>
+      <x>300</x>
+      <y>50</y>
+      <width>601</width>
+      <height>731</height>
+     </rect>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1205</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="toolBar_font">
+    <property name="title">
+     <string>INSERT</string>
+    </property>
+    <addaction name="actionBold"/>
+    <addaction name="actionItalic"/>
+   </widget>
+   <widget class="QMenu" name="toolBar_paragraph">
+    <property name="title">
+     <string>VIEW</string>
+    </property>
+    <addaction name="actionZoom_In"/>
+    <addaction name="actionZoom_Out"/>
+    <addaction name="actionFull_Screen"/>
+   </widget>
+   <widget class="QMenu" name="toolBar_quick">
+    <property name="title">
+     <string>HOME</string>
+    </property>
+    <widget class="QMenu" name="menuParagraph">
+     <property name="title">
+      <string>Paragraph</string>
+     </property>
+     <addaction name="actionAlign_Left_2"/>
+     <addaction name="actionAlign_Right"/>
+     <addaction name="actionAlign_Center"/>
+    </widget>
+    <widget class="QMenu" name="menuFont">
+     <property name="title">
+      <string>Font</string>
+     </property>
+     <addaction name="actionArial"/>
+     <addaction name="actionSan_Serif"/>
+    </widget>
+    <widget class="QMenu" name="menuClipboard">
+     <property name="title">
+      <string>Clipboard</string>
+     </property>
+     <addaction name="actionNew_2"/>
+     <addaction name="actionOpen_2"/>
+     <addaction name="actionSave_2"/>
+    </widget>
+    <addaction name="menuClipboard"/>
+    <addaction name="menuFont"/>
+    <addaction name="actionFont_Size_2"/>
+    <addaction name="menuParagraph"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <widget class="QMenu" name="menuHELP">
+    <property name="title">
+     <string>HELP</string>
+    </property>
+    <addaction name="actionAbout"/>
+    <addaction name="actionGuide"/>
+   </widget>
+   <addaction name="toolBar_quick"/>
+   <addaction name="toolBar_font"/>
+   <addaction name="toolBar_paragraph"/>
+   <addaction name="menuHELP"/>
+  </widget>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+  </widget>
+  <action name="actionBold">
+   <property name="text">
+    <string>Image</string>
+   </property>
+  </action>
+  <action name="actionItalic">
+   <property name="text">
+    <string>Table</string>
+   </property>
+  </action>
+  <action name="actionUnderline">
+   <property name="text">
+    <string>Underline</string>
+   </property>
+  </action>
+  <action name="actionFont">
+   <property name="text">
+    <string>Font</string>
+   </property>
+  </action>
+  <action name="actionFont_Size">
+   <property name="text">
+    <string>Font Size</string>
+   </property>
+  </action>
+  <action name="actionAlign_Left">
+   <property name="text">
+    <string>Align Left</string>
+   </property>
+  </action>
+  <action name="actionCenter">
+   <property name="text">
+    <string>Center</string>
+   </property>
+  </action>
+  <action name="actionRight">
+   <property name="text">
+    <string>Right</string>
+   </property>
+  </action>
+  <action name="actionJustify">
+   <property name="text">
+    <string>Justify</string>
+   </property>
+  </action>
+  <action name="actionBullet_List">
+   <property name="text">
+    <string>Bullet List</string>
+   </property>
+  </action>
+  <action name="actionUndo">
+   <property name="text">
+    <string>Undo</string>
+   </property>
+  </action>
+  <action name="actionRedo">
+   <property name="text">
+    <string>Redo</string>
+   </property>
+  </action>
+  <action name="actionSave_As">
+   <property name="text">
+    <string>Save As</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionFont_2">
+   <property name="text">
+    <string>Font</string>
+   </property>
+  </action>
+  <action name="actionZoom_In">
+   <property name="text">
+    <string>Zoom In</string>
+   </property>
+  </action>
+  <action name="actionZoom_Out">
+   <property name="text">
+    <string>Zoom Out</string>
+   </property>
+  </action>
+  <action name="actionArial">
+   <property name="text">
+    <string>Arial</string>
+   </property>
+  </action>
+  <action name="actionSan_Serif">
+   <property name="text">
+    <string>San Serif</string>
+   </property>
+  </action>
+  <action name="actionAlign_Left_2">
+   <property name="text">
+    <string>Align Left</string>
+   </property>
+  </action>
+  <action name="actionAlign_Right">
+   <property name="text">
+    <string>Align Right</string>
+   </property>
+  </action>
+  <action name="actionAlign_Center">
+   <property name="text">
+    <string>Align Center</string>
+   </property>
+  </action>
+  <action name="actionNew_2">
+   <property name="text">
+    <string>New</string>
+   </property>
+  </action>
+  <action name="actionOpen_2">
+   <property name="text">
+    <string>Open</string>
+   </property>
+  </action>
+  <action name="actionSave_2">
+   <property name="text">
+    <string>Save</string>
+   </property>
+  </action>
+  <action name="actionFont_Size_2">
+   <property name="text">
+    <string>Font Size</string>
+   </property>
+  </action>
+  <action name="actionFull_Screen">
+   <property name="text">
+    <string>Full Screen</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>About</string>
+   </property>
+  </action>
+  <action name="actionGuide">
+   <property name="text">
+    <string>Guide</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

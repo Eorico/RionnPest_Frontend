@@ -28,10 +28,15 @@ class DashboardTableRenderer:
         for row_idx, r in enumerate(records):
             self.table.insertRow(row_idx)
 
-            btn = QPushButton("Trash")
-            btn.setFixedSize(80, 28)
-            btn.setStyleSheet(btn_style)
-            btn.clicked.connect(lambda _, rid=r.get('id'): self.on_trash(rid))
+            btn_trash = QPushButton("Trash")
+            btn_trash.setFixedSize(80, 28)
+            btn_trash.setStyleSheet(btn_style)
+            btn_trash.clicked.connect(lambda _, rid=r.get('id'): self.on_trash(rid))
+            
+            btn_edit = QPushButton("Edit")
+            btn_edit.setFixedSize(80, 28)
+            btn_edit.setStyleSheet(btn_style)
+            btn_edit.clicked.connect(lambda _, rid=r.get('id'): self.on_trash(rid))
 
             date = DashboardFormatter.format_date(
                 r.get('date', ''),
@@ -45,10 +50,11 @@ class DashboardTableRenderer:
                 r.get('meridiem', 'n/a')
             )
 
-            self._set_cell(0, 0, r.get('admin_under') or 'n/a')
-            self._set_cell(0, 1, date)
-            self._set_cell(0, 2, r.get('client_name'))
-            self._set_cell(0, 3, time_range)
-            self._set_cell(0, 4, DashboardFormatter.format_chemicals(r.get('chemicals_use')))
-            self._set_cell(0, 5, DashboardFormatter.format_chemicals(r.get('actual_chemicals_used'), True))
-            self._set_cell(0, 6, btn)
+            self._set_cell(row_idx, 0, r.get('admin_under') or 'n/a')
+            self._set_cell(row_idx, 1, date)
+            self._set_cell(row_idx, 2, r.get('client_name'))
+            self._set_cell(row_idx, 3, time_range)
+            self._set_cell(row_idx, 4, DashboardFormatter.format_chemicals(r.get('chemicals_use')))
+            self._set_cell(row_idx, 5, DashboardFormatter.format_chemicals(r.get('actual_chemicals_used'), True))
+            self._set_cell(row_idx, 6, btn_edit)
+            self._set_cell(row_idx, 7, btn_trash)

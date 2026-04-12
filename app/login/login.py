@@ -2,6 +2,12 @@ from PyQt5.QtWidgets import QMainWindow, QMessageBox
 from PyQt5.QtCore import pyqtSignal
 from ui.login import Ui_Login
 
+from PyQt5.QtGui import QIcon
+import os
+
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+IMAGE_PATH = os.path.join(os.path.dirname(CURRENT_DIR), "ui", "assets")
+
 class LoginWindow(QMainWindow):
     login_success = pyqtSignal()
     
@@ -10,6 +16,8 @@ class LoginWindow(QMainWindow):
         self.ui = Ui_Login()
         self.ui.setupUi(self)
         self.api = api_service
+        
+        self.setWindowIcon(QIcon(f"{IMAGE_PATH}/Logo.png"))
         
         self.ui.usernameEdit.returnPressed.connect(self.ui.passwordEdit.setFocus)
         self.ui.passwordEdit.returnPressed.connect(self.attempt_login)

@@ -15,733 +15,33 @@ image_path = os.path.join(base_dir, "assets")
 
 class Ui_Dashboard(object):
     def setupUi(self, Dashboard):
-        Dashboard.setObjectName("Raionn Dashboard")
-        Dashboard.resize(1126, 886)
+        Dashboard.setObjectName("Dashboard")
+        Dashboard.resize(1126, 896)
         Dashboard.setStyleSheet("QMainWindow {\n"
 "    background-color: #EBEBEB;\n"
 "}\n"
 "")
         self.centralwidget = QtWidgets.QWidget(Dashboard)
         self.centralwidget.setObjectName("centralwidget")
-        self.label_2 = QtWidgets.QLabel(self.centralwidget)
-        self.label_2.setGeometry(QtCore.QRect(20, 197, 189, 19))
-        font = QtGui.QFont()
-        font.setPointSize(12)
-        self.label_2.setFont(font)
-        self.label_2.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.label_2.setTextFormat(QtCore.Qt.AutoText)
-        self.label_2.setAlignment(QtCore.Qt.AlignJustify|QtCore.Qt.AlignVCenter)
-        self.label_2.setIndent(67)
-        self.label_2.setObjectName("label_2")
-        self.label_3 = QtWidgets.QLabel(self.centralwidget)
-        self.label_3.setGeometry(QtCore.QRect(20, 94, 129, 19))
-        font = QtGui.QFont()
-        font.setPointSize(12)
-        self.label_3.setFont(font)
-        self.label_3.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.label_3.setTextFormat(QtCore.Qt.AutoText)
-        self.label_3.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_3.setIndent(67)
-        self.label_3.setObjectName("label_3")
-        self.label_4 = QtWidgets.QLabel(self.centralwidget)
-        self.label_4.setGeometry(QtCore.QRect(20, 272, 133, 19))
-        font = QtGui.QFont()
-        font.setPointSize(12)
-        self.label_4.setFont(font)
-        self.label_4.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.label_4.setTextFormat(QtCore.Qt.AutoText)
-        self.label_4.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_4.setIndent(67)
-        self.label_4.setObjectName("label_4")
-        self.label_5 = QtWidgets.QLabel(self.centralwidget)
-        self.label_5.setGeometry(QtCore.QRect(21, 420, 206, 19))
-        font = QtGui.QFont()
-        font.setPointSize(12)
-        self.label_5.setFont(font)
-        self.label_5.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.label_5.setTextFormat(QtCore.Qt.AutoText)
-        self.label_5.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_5.setIndent(67)
-        self.label_5.setObjectName("label_5")
-        self.label_6 = QtWidgets.QLabel(self.centralwidget)
-        self.label_6.setGeometry(QtCore.QRect(22, 630, 255, 19))
-        font = QtGui.QFont()
-        font.setPointSize(12)
-        self.label_6.setFont(font)
-        self.label_6.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.label_6.setTextFormat(QtCore.Qt.AutoText)
-        self.label_6.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_6.setIndent(67)
-        self.label_6.setObjectName("label_6")
-        self.nameofClientinput = QtWidgets.QLineEdit(self.centralwidget)
-        self.nameofClientinput.setGeometry(QtCore.QRect(40, 220, 251, 41))
-        self.nameofClientinput.setStyleSheet("QLineEdit {\n"
-"    background-color: #ffffff;        /* now white */\n"
-"    border-style: solid;\n"
-"    border-width: 2px;\n"
-"    border-top-color: #ffffff;        /* light top */\n"
-"    border-left-color: #ffffff;       /* light left */\n"
-"    border-bottom-color: #aaaaaa;     /* dark bottom */\n"
-"    border-right-color: #aaaaaa;      /* dark right */\n"
-"    padding: 6px 10px;\n"
-"    font: 11pt \"Segoe UI\";\n"
-"    color: #333333;\n"
-"    border-radius: 4px;               /* optional rounded corners */\n"
-"}\n"
-"\n"
-"QLineEdit:focus {\n"
-"    border-top-color: #28c770;        /* focus effect top */\n"
-"    border-left-color: #28c770;\n"
-"    border-bottom-color: #218c57;     /* focus effect bottom */\n"
-"    border-right-color: #218c57;\n"
-"    background-color: #ffffff;        /* stays white on focus */\n"
-"}\n"
-"\n"
-"QLineEdit:hover {\n"
-"    border-top-color: #eeeeee;\n"
-"    border-left-color: #eeeeee;\n"
-"    border-bottom-color: #888888;\n"
-"    border-right-color: #888888;\n"
-"}\n"
-"\n"
-"QLineEdit:disabled {\n"
-"    background-color: #eeeeee;        /* muted gray when disabled */\n"
-"    color: #aaaaaa;\n"
-"    border-top-color: #f5f5f5;\n"
-"    border-left-color: #f5f5f5;\n"
-"    border-bottom-color: #cccccc;\n"
-"    border-right-color: #cccccc;\n"
-"}")
-        self.nameofClientinput.setObjectName("nameofClientinput")
-        self.chemicalUsed = QtWidgets.QTableWidget(self.centralwidget)
-        self.chemicalUsed.setGeometry(QtCore.QRect(20, 440, 311, 171))
-        self.chemicalUsed.setStyleSheet("QTableWidget {\n"
-"    background-color: #ffffff;            /* white background */\n"
-"    border-style: solid;\n"
-"    border-width: 2px;\n"
-"    border-top-color: #ffffff;            /* light top */\n"
-"    border-left-color: #ffffff;           /* light left */\n"
-"    border-bottom-color: #cccccc;         /* dark bottom */\n"
-"    border-right-color: #cccccc;          /* dark right */\n"
-"    gridline-color: #e6e6e6;\n"
-"    font: 13pt \"Segoe UI\";\n"
-"    selection-background-color: #2ecc71;\n"
-"    selection-color: white;\n"
-"    alternate-background-color: #f9f9f9;\n"
-"}\n"
-"\n"
-"QTableWidget::item {\n"
-"    padding: 6px;\n"
-"    border-bottom: 1px solid #e6e6e6;\n"
-"}\n"
-"\n"
-"QTableWidget::item:selected {\n"
-"    background-color: #2ecc71;   /* green when selected */\n"
-"    color: white;\n"
-"}\n"
-"\n"
-"QTableWidget::item:hover {\n"
-"    background-color: #f0f0f0;   /* darker on hover */\n"
-"}\n"
-"\n"
-"QHeaderView::section {\n"
-"    background-color: #f3f3f3;\n"
-"    color: #333333;\n"
-"    padding: 6px;\n"
-"    border-style: solid;\n"
-"    border-width: 2px;\n"
-"    border-top-color: #ffffff;\n"
-"    border-left-color: #ffffff;\n"
-"    border-bottom-color: #cccccc;\n"
-"    border-right-color: #cccccc;\n"
-"    font: 10pt \"Segoe UI\";\n"
-"}\n"
-"\n"
-"QTableCornerButton::section {\n"
-"    background-color: #f3f3f3;\n"
-"    border-style: solid;\n"
-"    border-width: 2px;\n"
-"    border-top-color: #ffffff;\n"
-"    border-left-color: #ffffff;\n"
-"    border-bottom-color: #cccccc;\n"
-"    border-right-color: #cccccc;\n"
-"}")
-        self.chemicalUsed.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)
-        self.chemicalUsed.setObjectName("chemicalUsed")
-        self.chemicalUsed.setColumnCount(2)
-        self.chemicalUsed.setRowCount(5)
-        item = QtWidgets.QTableWidgetItem()
-        self.chemicalUsed.setVerticalHeaderItem(0, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.chemicalUsed.setVerticalHeaderItem(1, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.chemicalUsed.setVerticalHeaderItem(2, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.chemicalUsed.setVerticalHeaderItem(3, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.chemicalUsed.setVerticalHeaderItem(4, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.chemicalUsed.setHorizontalHeaderItem(0, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.chemicalUsed.setHorizontalHeaderItem(1, item)
-        item = QtWidgets.QTableWidgetItem()
-        item.setTextAlignment(QtCore.Qt.AlignCenter)
-        self.chemicalUsed.setItem(0, 0, item)
-        item = QtWidgets.QTableWidgetItem()
-        item.setTextAlignment(QtCore.Qt.AlignCenter)
-        self.chemicalUsed.setItem(1, 0, item)
-        item = QtWidgets.QTableWidgetItem()
-        item.setTextAlignment(QtCore.Qt.AlignCenter)
-        self.chemicalUsed.setItem(2, 0, item)
-        item = QtWidgets.QTableWidgetItem()
-        item.setTextAlignment(QtCore.Qt.AlignCenter)
-        self.chemicalUsed.setItem(3, 0, item)
-        item = QtWidgets.QTableWidgetItem()
-        item.setTextAlignment(QtCore.Qt.AlignCenter)
-        self.chemicalUsed.setItem(4, 0, item)
-        self.chemicalUsed.horizontalHeader().setDefaultSectionSize(250)
-        self.chemicalUsed.horizontalHeader().setSortIndicatorShown(False)
-        self.chemicalUsed.horizontalHeader().setStretchLastSection(False)
-        self.chemicalUsed.verticalHeader().setDefaultSectionSize(40)
-        self.tableListahan = QtWidgets.QTableWidget(self.centralwidget)
-        self.tableListahan.setGeometry(QtCore.QRect(340, 150, 791, 741))
-        font = QtGui.QFont()
-        font.setFamily("Segoe UI")
-        font.setPointSize(13)
-        font.setBold(False)
-        font.setItalic(False)
-        font.setWeight(50)
-        self.tableListahan.setFont(font)
-        self.tableListahan.setStyleSheet("QTableWidget {\n"
-"    background-color: #ffffff;            /* white background */\n"
-"    border-style: solid;\n"
-"    border-width: 2px;\n"
-"    border-top-color: #ffffff;            /* light top */\n"
-"    border-left-color: #ffffff;           /* light left */\n"
-"    border-bottom-color: #cccccc;         /* dark bottom */\n"
-"    border-right-color: #cccccc;          /* dark right */\n"
-"    gridline-color: #e6e6e6;\n"
-"    font: 13pt \"Segoe UI\";\n"
-"    selection-background-color: #2ecc71;\n"
-"    selection-color: white;\n"
-"    alternate-background-color: #f9f9f9;\n"
-"}\n"
-"\n"
-"QTableWidget::item {\n"
-"    padding: 6px;\n"
-"    border-bottom: 1px solid #e6e6e6;\n"
-"}\n"
-"\n"
-"QTableWidget::item:selected {\n"
-"    background-color: #2ecc71;   /* green when selected */\n"
-"    color: white;\n"
-"}\n"
-"\n"
-"QTableWidget::item:hover {\n"
-"    background-color: #f0f0f0;   /* darker on hover */\n"
-"}\n"
-"\n"
-"QHeaderView::section {\n"
-"    background-color: #f3f3f3;\n"
-"    color: #333333;\n"
-"    padding: 6px;\n"
-"    border-style: solid;\n"
-"    border-width: 2px;\n"
-"    border-top-color: #ffffff;\n"
-"    border-left-color: #ffffff;\n"
-"    border-bottom-color: #cccccc;\n"
-"    border-right-color: #cccccc;\n"
-"    font: 10pt \"Segoe UI\";\n"
-"}\n"
-"\n"
-"QTableCornerButton::section {\n"
-"    background-color: #f3f3f3;\n"
-"    border-style: solid;\n"
-"    border-width: 2px;\n"
-"    border-top-color: #ffffff;\n"
-"    border-left-color: #ffffff;\n"
-"    border-bottom-color: #cccccc;\n"
-"    border-right-color: #cccccc;\n"
-"}")
-        self.tableListahan.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
-        self.tableListahan.setSelectionMode(QtWidgets.QAbstractItemView.NoSelection)
-        self.tableListahan.setObjectName("tableListahan")
-        self.tableListahan.setColumnCount(6)
-        self.tableListahan.setRowCount(1)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableListahan.setVerticalHeaderItem(0, item)
-        item = QtWidgets.QTableWidgetItem()
-        font = QtGui.QFont()
-        font.setPointSize(10)
-        item.setFont(font)
-        self.tableListahan.setHorizontalHeaderItem(0, item)
-        item = QtWidgets.QTableWidgetItem()
-        font = QtGui.QFont()
-        font.setPointSize(10)
-        item.setFont(font)
-        self.tableListahan.setHorizontalHeaderItem(1, item)
-        item = QtWidgets.QTableWidgetItem()
-        font = QtGui.QFont()
-        font.setPointSize(10)
-        item.setFont(font)
-        self.tableListahan.setHorizontalHeaderItem(2, item)
-        item = QtWidgets.QTableWidgetItem()
-        font = QtGui.QFont()
-        font.setPointSize(10)
-        item.setFont(font)
-        self.tableListahan.setHorizontalHeaderItem(3, item)
-        item = QtWidgets.QTableWidgetItem()
-        font = QtGui.QFont()
-        font.setPointSize(10)
-        item.setFont(font)
-        self.tableListahan.setHorizontalHeaderItem(4, item)
-        item = QtWidgets.QTableWidgetItem()
-        font = QtGui.QFont()
-        font.setPointSize(10)
-        item.setFont(font)
-        self.tableListahan.setHorizontalHeaderItem(5, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableListahan.setItem(0, 0, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableListahan.setItem(0, 1, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableListahan.setItem(0, 2, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableListahan.setItem(0, 3, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableListahan.setItem(0, 4, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableListahan.setItem(0, 5, item)
-        self.tableListahan.horizontalHeader().setDefaultSectionSize(250)
-        self.tableListahan.verticalHeader().setDefaultSectionSize(50)
-        self.searchDate = QtWidgets.QLineEdit(self.centralwidget)
-        self.searchDate.setGeometry(QtCore.QRect(895, 100, 221, 41))
-        self.searchDate.setStyleSheet("QLineEdit {\n"
-"    background-color: #ffffff;        /* now white */\n"
-"    border-style: solid;\n"
-"    border-width: 2px;\n"
-"    border-top-color: #ffffff;        /* light top */\n"
-"    border-left-color: #ffffff;       /* light left */\n"
-"    border-bottom-color: #aaaaaa;     /* dark bottom */\n"
-"    border-right-color: #aaaaaa;      /* dark right */\n"
-"    padding: 6px 10px;\n"
-"    font: 11pt \"Segoe UI\";\n"
-"    color: #333333;\n"
-"    border-radius: 4px;               /* optional rounded corners */\n"
-"}\n"
-"\n"
-"QLineEdit:focus {\n"
-"    border-top-color: #28c770;        /* focus effect top */\n"
-"    border-left-color: #28c770;\n"
-"    border-bottom-color: #218c57;     /* focus effect bottom */\n"
-"    border-right-color: #218c57;\n"
-"    background-color: #ffffff;        /* stays white on focus */\n"
-"}\n"
-"\n"
-"QLineEdit:hover {\n"
-"    border-top-color: #eeeeee;\n"
-"    border-left-color: #eeeeee;\n"
-"    border-bottom-color: #888888;\n"
-"    border-right-color: #888888;\n"
-"}\n"
-"\n"
-"QLineEdit:disabled {\n"
-"    background-color: #eeeeee;        /* muted gray when disabled */\n"
-"    color: #aaaaaa;\n"
-"    border-top-color: #f5f5f5;\n"
-"    border-left-color: #f5f5f5;\n"
-"    border-bottom-color: #cccccc;\n"
-"    border-right-color: #cccccc;\n"
-"}")
-        self.searchDate.setObjectName("searchDate")
-        self.confirmButton = QtWidgets.QPushButton(self.centralwidget)
-        self.confirmButton.setGeometry(QtCore.QRect(70, 837, 211, 41))
-        self.confirmButton.setStyleSheet("QPushButton {\n"
-"    background-color: #28a745;\n"
-"    color: white;\n"
-"    border-style: solid;\n"
-"    border-width: 2px;\n"
-"    border-top-color: #5cd65c;      /* lighter top */\n"
-"    border-left-color: #5cd65c;     /* lighter left */\n"
-"    border-bottom-color: #1e7e34;   /* darker bottom */\n"
-"    border-right-color: #1e7e34;    /* darker right */\n"
-"    padding: 6px 12px;\n"
-"    font: 15pt \"Segoe UI\";\n"
-"    border-radius: 5px;             /* optional: rounded corners */\n"
-"}\n"
-"\n"
-"QPushButton:hover {\n"
-"    background-color: #218838;\n"
-"    border-top-color: #66c266;\n"
-"    border-left-color: #66c266;\n"
-"    border-bottom-color: #1a6c2f;\n"
-"    border-right-color: #1a6c2f;\n"
-"}\n"
-"\n"
-"QPushButton:pressed {\n"
-"    background-color: #1e7e34;\n"
-"    border-top-color: #1a6c2f;       /* invert for pressed */\n"
-"    border-left-color: #1a6c2f;\n"
-"    border-bottom-color: #66c266;\n"
-"    border-right-color: #66c266;\n"
-"}\n"
-"\n"
-"QPushButton:disabled {\n"
-"    background-color: #a8d5b7;\n"
-"    color: #f0f0f0;\n"
-"    border-top-color: #c0e0c2;\n"
-"    border-left-color: #c0e0c2;\n"
-"    border-bottom-color: #8ebf96;\n"
-"    border-right-color: #8ebf96;\n"
-"}")
-        self.confirmButton.setObjectName("confirmButton")
         self.line = QtWidgets.QFrame(self.centralwidget)
-        self.line.setGeometry(QtCore.QRect(882, 80, 241, 20))
+        self.line.setGeometry(QtCore.QRect(864, -10, 241, 20))
         self.line.setFrameShape(QtWidgets.QFrame.HLine)
         self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.line.setObjectName("line")
-        self.line_2 = QtWidgets.QFrame(self.centralwidget)
-        self.line_2.setGeometry(QtCore.QRect(868, 90, 31, 61))
-        self.line_2.setFrameShape(QtWidgets.QFrame.VLine)
-        self.line_2.setFrameShadow(QtWidgets.QFrame.Sunken)
-        self.line_2.setObjectName("line_2")
-        self.actualchemicalUsed = QtWidgets.QTableWidget(self.centralwidget)
-        self.actualchemicalUsed.setGeometry(QtCore.QRect(20, 650, 311, 171))
-        self.actualchemicalUsed.setStyleSheet("QTableWidget {\n"
-"    background-color: #ffffff;            /* white background */\n"
-"    border-style: solid;\n"
-"    border-width: 2px;\n"
-"    border-top-color: #ffffff;            /* light top */\n"
-"    border-left-color: #ffffff;           /* light left */\n"
-"    border-bottom-color: #cccccc;         /* dark bottom */\n"
-"    border-right-color: #cccccc;          /* dark right */\n"
-"    gridline-color: #e6e6e6;\n"
-"    font: 13pt \"Segoe UI\";\n"
-"    selection-background-color: #2ecc71;\n"
-"    selection-color: white;\n"
-"    alternate-background-color: #f9f9f9;\n"
-"}\n"
-"\n"
-"QTableWidget::item {\n"
-"    padding: 6px;\n"
-"    border-bottom: 1px solid #e6e6e6;\n"
-"}\n"
-"\n"
-"QTableWidget::item:selected {\n"
-"    background-color: #2ecc71;   /* green when selected */\n"
-"    color: white;\n"
-"}\n"
-"\n"
-"QTableWidget::item:hover {\n"
-"    background-color: #f0f0f0;   /* darker on hover */\n"
-"}\n"
-"\n"
-"QHeaderView::section {\n"
-"    background-color: #f3f3f3;\n"
-"    color: #333333;\n"
-"    padding: 6px;\n"
-"    border-style: solid;\n"
-"    border-width: 2px;\n"
-"    border-top-color: #ffffff;\n"
-"    border-left-color: #ffffff;\n"
-"    border-bottom-color: #cccccc;\n"
-"    border-right-color: #cccccc;\n"
-"    font: 10pt \"Segoe UI\";\n"
-"}\n"
-"\n"
-"QTableCornerButton::section {\n"
-"    background-color: #f3f3f3;\n"
-"    border-style: solid;\n"
-"    border-width: 2px;\n"
-"    border-top-color: #ffffff;\n"
-"    border-left-color: #ffffff;\n"
-"    border-bottom-color: #cccccc;\n"
-"    border-right-color: #cccccc;\n"
-"}")
-        self.actualchemicalUsed.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)
-        self.actualchemicalUsed.setObjectName("actualchemicalUsed")
-        self.actualchemicalUsed.setColumnCount(2)
-        self.actualchemicalUsed.setRowCount(5)
-        item = QtWidgets.QTableWidgetItem()
-        self.actualchemicalUsed.setVerticalHeaderItem(0, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.actualchemicalUsed.setVerticalHeaderItem(1, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.actualchemicalUsed.setVerticalHeaderItem(2, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.actualchemicalUsed.setVerticalHeaderItem(3, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.actualchemicalUsed.setVerticalHeaderItem(4, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.actualchemicalUsed.setHorizontalHeaderItem(0, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.actualchemicalUsed.setHorizontalHeaderItem(1, item)
-        item = QtWidgets.QTableWidgetItem()
-        item.setTextAlignment(QtCore.Qt.AlignCenter)
-        self.actualchemicalUsed.setItem(0, 0, item)
-        item = QtWidgets.QTableWidgetItem()
-        item.setTextAlignment(QtCore.Qt.AlignCenter)
-        self.actualchemicalUsed.setItem(1, 0, item)
-        item = QtWidgets.QTableWidgetItem()
-        item.setTextAlignment(QtCore.Qt.AlignCenter)
-        self.actualchemicalUsed.setItem(2, 0, item)
-        item = QtWidgets.QTableWidgetItem()
-        item.setTextAlignment(QtCore.Qt.AlignCenter)
-        self.actualchemicalUsed.setItem(3, 0, item)
-        item = QtWidgets.QTableWidgetItem()
-        item.setTextAlignment(QtCore.Qt.AlignCenter)
-        self.actualchemicalUsed.setItem(4, 0, item)
-        self.actualchemicalUsed.horizontalHeader().setDefaultSectionSize(250)
-        self.actualchemicalUsed.horizontalHeader().setSortIndicatorShown(False)
-        self.actualchemicalUsed.horizontalHeader().setStretchLastSection(False)
-        self.actualchemicalUsed.verticalHeader().setDefaultSectionSize(40)
-        self.widget = QtWidgets.QWidget(self.centralwidget)
-        self.widget.setGeometry(QtCore.QRect(0, 0, 1131, 91))
-        self.widget.setStyleSheet("/* Main light gray container */\n"
-"QWidget{\n"
-"    background-color: #DADADA; /* light gray */\n"
-"}")
-        self.widget.setObjectName("widget")
-        self.label_7 = QtWidgets.QLabel(self.widget)
-        self.label_7.setGeometry(QtCore.QRect(-5, 4, 91, 81))
-        self.label_7.setStyleSheet("QLabel#titleLabel {\n"
-"    background-color: transparent;      /* no background */\n"
-"    border: none;\n"
-"    qproperty-alignment: \'AlignCenter\'; /* center the logo */\n"
-"}")
-        self.label_7.setText("")
-        self.label_7.setPixmap(QtGui.QPixmap(f"{image_path}/Logo.png"))
-        self.label_7.setScaledContents(True)
-        self.label_7.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_7.setObjectName("label_7")
-        self.line_4 = QtWidgets.QFrame(self.widget)
-        self.line_4.setGeometry(QtCore.QRect(80, 0, 20, 91))
-        self.line_4.setFrameShape(QtWidgets.QFrame.VLine)
-        self.line_4.setFrameShadow(QtWidgets.QFrame.Sunken)
-        self.line_4.setObjectName("line_4")
-        self.line_6 = QtWidgets.QFrame(self.widget)
-        self.line_6.setGeometry(QtCore.QRect(90, 21, 1041, 20))
-        self.line_6.setFrameShape(QtWidgets.QFrame.HLine)
-        self.line_6.setFrameShadow(QtWidgets.QFrame.Sunken)
-        self.line_6.setObjectName("line_6")
-        self.label = QtWidgets.QLabel(self.widget)
-        self.label.setGeometry(QtCore.QRect(100, 8, 81, 19))
-        font = QtGui.QFont()
-        font.setPointSize(12)
-        self.label.setFont(font)
-        self.label.setObjectName("label")
-        self.label_8 = QtWidgets.QLabel(self.widget)
-        self.label_8.setGeometry(QtCore.QRect(198, 8, 81, 19))
-        font = QtGui.QFont()
-        font.setPointSize(12)
-        self.label_8.setFont(font)
-        self.label_8.setObjectName("label_8")
-        self.label_9 = QtWidgets.QLabel(self.widget)
-        self.label_9.setGeometry(QtCore.QRect(292, 7, 81, 19))
-        font = QtGui.QFont()
-        font.setPointSize(12)
-        self.label_9.setFont(font)
-        self.label_9.setObjectName("label_9")
-        self.Inspection_btn = QtWidgets.QPushButton(self.widget)
-        self.Inspection_btn.setGeometry(QtCore.QRect(110, 36, 51, 51))
-        self.Inspection_btn.setStyleSheet("QPushButton {\n"
-"    background-color: transparent;      /* make background see-through */\n"
-"    border-style: solid;\n"
-"    border-width: 2px;\n"
-"    border-top-color: #ffffff;          /* light top/left edge */\n"
-"    border-left-color: #ffffff;\n"
-"    border-bottom-color: #555555;       /* dark bottom/right edge */\n"
-"    border-right-color: #555555;\n"
-"    border-radius: 4px;                  /* optional: rounded corners */\n"
-"    padding: 5px;\n"
-"}\n"
-"\n"
-"QPushButton:pressed {\n"
-"    /* invert border for “pressed” effect */\n"
-"    border-top-color: #555555;\n"
-"    border-left-color: #555555;\n"
-"    border-bottom-color: #ffffff;\n"
-"    border-right-color: #ffffff;\n"
-"}")
-        self.Inspection_btn.setText("")
-        self.Inspection_btn.setObjectName("Inspection_btn")
-        self.Treatment_btn = QtWidgets.QPushButton(self.widget)
-        self.Treatment_btn.setGeometry(QtCore.QRect(209, 35, 51, 51))
-        self.Treatment_btn.setStyleSheet("QPushButton {\n"
-"    background-color: transparent;      /* make background see-through */\n"
-"    border-style: solid;\n"
-"    border-width: 2px;\n"
-"    border-top-color: #ffffff;          /* light top/left edge */\n"
-"    border-left-color: #ffffff;\n"
-"    border-bottom-color: #555555;       /* dark bottom/right edge */\n"
-"    border-right-color: #555555;\n"
-"    border-radius: 4px;                  /* optional: rounded corners */\n"
-"    padding: 5px;\n"
-"}\n"
-"\n"
-"QPushButton:pressed {\n"
-"    /* invert border for “pressed” effect */\n"
-"    border-top-color: #555555;\n"
-"    border-left-color: #555555;\n"
-"    border-bottom-color: #ffffff;\n"
-"    border-right-color: #ffffff;\n"
-"}")
-        self.Treatment_btn.setText("")
-        self.Treatment_btn.setObjectName("Treatment_btn")
-        self.RecycleBin_btn = QtWidgets.QPushButton(self.widget)
-        self.RecycleBin_btn.setGeometry(QtCore.QRect(301, 35, 51, 51))
-        self.RecycleBin_btn.setStyleSheet("QPushButton {\n"
-"    background-color: transparent;      /* make background see-through */\n"
-"    border-style: solid;\n"
-"    border-width: 2px;\n"
-"    border-top-color: #ffffff;          /* light top/left edge */\n"
-"    border-left-color: #ffffff;\n"
-"    border-bottom-color: #555555;       /* dark bottom/right edge */\n"
-"    border-right-color: #555555;\n"
-"    border-radius: 4px;                  /* optional: rounded corners */\n"
-"    padding: 5px;\n"
-"}\n"
-"\n"
-"QPushButton:pressed {\n"
-"    /* invert border for “pressed” effect */\n"
-"    border-top-color: #555555;\n"
-"    border-left-color: #555555;\n"
-"    border-bottom-color: #ffffff;\n"
-"    border-right-color: #ffffff;\n"
-"}")
-        self.RecycleBin_btn.setText("")
-        self.RecycleBin_btn.setObjectName("RecycleBin_btn")
-        self.Logout_btn = QtWidgets.QPushButton(self.widget)
-        self.Logout_btn.setGeometry(QtCore.QRect(1059, 35, 51, 51))
-        self.Logout_btn.setStyleSheet("QPushButton {\n"
-"    background-color: transparent;      /* make background see-through */\n"
-"    border-style: solid;\n"
-"    border-width: 2px;\n"
-"    border-top-color: #ffffff;          /* light top/left edge */\n"
-"    border-left-color: #ffffff;\n"
-"    border-bottom-color: #555555;       /* dark bottom/right edge */\n"
-"    border-right-color: #555555;\n"
-"    border-radius: 4px;                  /* optional: rounded corners */\n"
-"    padding: 5px;\n"
-"}\n"
-"\n"
-"QPushButton:pressed {\n"
-"    /* invert border for “pressed” effect */\n"
-"    border-top-color: #555555;\n"
-"    border-left-color: #555555;\n"
-"    border-bottom-color: #ffffff;\n"
-"    border-right-color: #ffffff;\n"
-"}")
-        self.Logout_btn.setText("")
-        self.Logout_btn.setObjectName("Logout_btn")
-        self.label_10 = QtWidgets.QLabel(self.widget)
-        self.label_10.setGeometry(QtCore.QRect(1059, 6, 49, 19))
-        font = QtGui.QFont()
-        font.setPointSize(12)
-        self.label_10.setFont(font)
-        self.label_10.setObjectName("label_10")
-        self.label_11 = QtWidgets.QLabel(self.widget)
-        self.label_11.setGeometry(QtCore.QRect(106, 43, 61, 41))
-        self.label_11.setStyleSheet("QLabel {\n"
-"    background: transparent\n"
-"}")
-        self.label_11.setText("")
-        self.label_11.setPixmap(QtGui.QPixmap(f"{image_path}/Inspection.png"))
-        self.label_11.setScaledContents(True)
-        self.label_11.setObjectName("label_11")
-        self.label_12 = QtWidgets.QLabel(self.widget)
-        self.label_12.setGeometry(QtCore.QRect(210, 30, 51, 61))
-        self.label_12.setStyleSheet("QLabel {\n"
-"    background: transparent\n"
-"}")
-        self.label_12.setText("")
-        self.label_12.setPixmap(QtGui.QPixmap(f"{image_path}/Treatment.png"))
-        self.label_12.setScaledContents(True)
-        self.label_12.setObjectName("label_12")
-        self.label_13 = QtWidgets.QLabel(self.widget)
-        self.label_13.setGeometry(QtCore.QRect(300, 40, 51, 41))
-        self.label_13.setStyleSheet("QLabel {\n"
-"    background: transparent\n"
-"}")
-        self.label_13.setText("")
-        self.label_13.setPixmap(QtGui.QPixmap(f"{image_path}/Recycle Bin.png"))
-        self.label_13.setScaledContents(True)
-        self.label_13.setObjectName("label_13")
-        self.label_14 = QtWidgets.QLabel(self.widget)
-        self.label_14.setGeometry(QtCore.QRect(1055, 40, 61, 41))
-        self.label_14.setStyleSheet("QLabel {\n"
-"    background: transparent\n"
-"}")
-        self.label_14.setText("")
-        self.label_14.setPixmap(QtGui.QPixmap(f"{image_path}/Logout.png"))
-        self.label_14.setScaledContents(True)
-        self.label_14.setObjectName("label_14")
-        self.label_15 = QtWidgets.QLabel(self.widget)
-        self.label_15.setGeometry(QtCore.QRect(956, 10, 38, 19))
-        font = QtGui.QFont()
-        font.setPointSize(12)
-        self.label_15.setFont(font)
-        self.label_15.setObjectName("label_15")
-        self.RecycleBin_btn_2 = QtWidgets.QPushButton(self.widget)
-        self.RecycleBin_btn_2.setGeometry(QtCore.QRect(950, 35, 51, 51))
-        self.RecycleBin_btn_2.setStyleSheet("QPushButton {\n"
-"    background-color: transparent;      /* make background see-through */\n"
-"    border-style: solid;\n"
-"    border-width: 2px;\n"
-"    border-top-color: #ffffff;          /* light top/left edge */\n"
-"    border-left-color: #ffffff;\n"
-"    border-bottom-color: #555555;       /* dark bottom/right edge */\n"
-"    border-right-color: #555555;\n"
-"    border-radius: 4px;                  /* optional: rounded corners */\n"
-"    padding: 5px;\n"
-"}\n"
-"")
-        self.RecycleBin_btn_2.setText("")
-        self.RecycleBin_btn_2.setObjectName("RecycleBin_btn_2")
-        self.label_16 = QtWidgets.QLabel(self.widget)
-        self.label_16.setGeometry(QtCore.QRect(955, 35, 41, 51))
-        self.label_16.setStyleSheet("QLabel {\n"
-"    background: transparent\n"
-"}")
-        self.label_16.setText("")
-        self.label_16.setPixmap(QtGui.QPixmap(f"{image_path}/offline.png"))
-        self.label_16.setScaledContents(True)
-        self.label_16.setObjectName("label_16")
-        self.label_16.raise_()
-        self.label_14.raise_()
-        self.label_13.raise_()
-        self.label_12.raise_()
-        self.label_11.raise_()
-        self.label_7.raise_()
-        self.line_4.raise_()
-        self.line_6.raise_()
-        self.label.raise_()
-        self.label_8.raise_()
-        self.label_9.raise_()
-        self.Inspection_btn.raise_()
-        self.Treatment_btn.raise_()
-        self.RecycleBin_btn.raise_()
-        self.Logout_btn.raise_()
-        self.label_10.raise_()
-        self.label_15.raise_()
-        self.RecycleBin_btn_2.raise_()
-        self.line_3 = QtWidgets.QFrame(self.centralwidget)
-        self.line_3.setGeometry(QtCore.QRect(1120, 140, 20, 61))
-        self.line_3.setFrameShape(QtWidgets.QFrame.VLine)
-        self.line_3.setFrameShadow(QtWidgets.QFrame.Sunken)
-        self.line_3.setObjectName("line_3")
-        self.line_5 = QtWidgets.QFrame(self.centralwidget)
-        self.line_5.setGeometry(QtCore.QRect(0, 83, 1131, 16))
-        self.line_5.setFrameShape(QtWidgets.QFrame.HLine)
-        self.line_5.setFrameShadow(QtWidgets.QFrame.Sunken)
-        self.line_5.setObjectName("line_5")
-        self.line_7 = QtWidgets.QFrame(self.centralwidget)
-        self.line_7.setGeometry(QtCore.QRect(1115, 90, 31, 61))
-        self.line_7.setFrameShape(QtWidgets.QFrame.VLine)
-        self.line_7.setFrameShadow(QtWidgets.QFrame.Sunken)
-        self.line_7.setObjectName("line_7")
-        self.label_17 = QtWidgets.QLabel(self.centralwidget)
-        self.label_17.setGeometry(QtCore.QRect(714, 102, 151, 31))
+        self.line_8 = QtWidgets.QFrame(self.centralwidget)
+        self.line_8.setGeometry(QtCore.QRect(682, -10, 181, 20))
+        self.line_8.setFrameShape(QtWidgets.QFrame.HLine)
+        self.line_8.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.line_8.setObjectName("line_8")
+        self.scrollArea = QtWidgets.QScrollArea(self.centralwidget)
+        self.scrollArea.setGeometry(QtCore.QRect(0, 0, 1131, 781))
+        self.scrollArea.setWidgetResizable(True)
+        self.scrollArea.setObjectName("scrollArea")
+        self.scrollAreaWidgetContents_2 = QtWidgets.QWidget()
+        self.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, 0, 1129, 779))
+        self.scrollAreaWidgetContents_2.setObjectName("scrollAreaWidgetContents_2")
+        self.label_17 = QtWidgets.QLabel(self.scrollAreaWidgetContents_2)
+        self.label_17.setGeometry(QtCore.QRect(670, 13, 151, 31))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.label_17.setFont(font)
@@ -750,225 +50,17 @@ class Ui_Dashboard(object):
         self.label_17.setAlignment(QtCore.Qt.AlignCenter)
         self.label_17.setIndent(67)
         self.label_17.setObjectName("label_17")
-        self.line_8 = QtWidgets.QFrame(self.centralwidget)
-        self.line_8.setGeometry(QtCore.QRect(700, 82, 181, 20))
-        self.line_8.setFrameShape(QtWidgets.QFrame.HLine)
-        self.line_8.setFrameShadow(QtWidgets.QFrame.Sunken)
-        self.line_8.setObjectName("line_8")
-        self.line_9 = QtWidgets.QFrame(self.centralwidget)
-        self.line_9.setGeometry(QtCore.QRect(686, 90, 31, 61))
+        self.line_9 = QtWidgets.QFrame(self.scrollAreaWidgetContents_2)
+        self.line_9.setGeometry(QtCore.QRect(606, -1, 31, 61))
         self.line_9.setFrameShape(QtWidgets.QFrame.VLine)
         self.line_9.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.line_9.setObjectName("line_9")
-        self.RecycleBin_btn_3 = QtWidgets.QPushButton(self.centralwidget)
-        self.RecycleBin_btn_3.setGeometry(QtCore.QRect(710, 100, 161, 41))
-        self.RecycleBin_btn_3.setStyleSheet("QPushButton {\n"
-"    background-color: transparent;      /* make background see-through */\n"
-"    border-style: solid;\n"
-"    border-width: 2px;\n"
-"    border-top-color: #ffffff;          /* light top/left edge */\n"
-"    border-left-color: #ffffff;\n"
-"    border-bottom-color: #555555;       /* dark bottom/right edge */\n"
-"    border-right-color: #555555;\n"
-"    border-radius: 4px;                  /* optional: rounded corners */\n"
-"    padding: 5px;\n"
-"}\n"
-"")
-        self.RecycleBin_btn_3.setText("")
-        self.RecycleBin_btn_3.setObjectName("RecycleBin_btn_3")
-        self.month = QtWidgets.QComboBox(self.centralwidget)
-        self.month.setGeometry(QtCore.QRect(39, 142, 61, 41))
-        font = QtGui.QFont()
-        font.setPointSize(11)
-        self.month.setFont(font)
-        self.month.setStyleSheet("QComboBox {\n"
-"    background-color: #ffffff;        /* now white */\n"
-"    border-style: solid;\n"
-"    border-width: 2px;\n"
-"    border-top-color: #ffffff;        /* light top */\n"
-"    border-left-color: #ffffff;       /* light left */\n"
-"    border-bottom-color: #aaaaaa;     /* dark bottom */\n"
-"    border-right-color: #aaaaaa;      /* dark right */\n"
-"    padding: 6px 10px;\n"
-"    color: #333333;\n"
-"    border-radius: 4px;               /* optional rounded corners */\n"
-"}\n"
-"\n"
-"QLineEdit:focus {\n"
-"    border-top-color: #28c770;        /* focus effect top */\n"
-"    border-left-color: #28c770;\n"
-"    border-bottom-color: #218c57;     /* focus effect bottom */\n"
-"    border-right-color: #218c57;\n"
-"    background-color: #ffffff;        /* stays white on focus */\n"
-"}\n"
-"\n"
-"QLineEdit:hover {\n"
-"    border-top-color: #eeeeee;\n"
-"    border-left-color: #eeeeee;\n"
-"    border-bottom-color: #888888;\n"
-"    border-right-color: #888888;\n"
-"}\n"
-"\n"
-"QComboBox:disabled {\n"
-"    background-color: #eeeeee;        /* muted gray when disabled */\n"
-"    color: #aaaaaa;\n"
-"    border-top-color: #f5f5f5;\n"
-"    border-left-color: #f5f5f5;\n"
-"    border-bottom-color: #cccccc;\n"
-"    border-right-color: #cccccc;\n"
-"}")
-        self.month.setEditable(False)
-        self.month.setObjectName("month")
-        self.month.addItem("")
-        self.month.addItem("")
-        self.month.addItem("")
-        self.month.addItem("")
-        self.month.addItem("")
-        self.month.addItem("")
-        self.month.addItem("")
-        self.month.addItem("")
-        self.month.addItem("")
-        self.month.addItem("")
-        self.month.addItem("")
-        self.month.addItem("")
-        self.date = QtWidgets.QComboBox(self.centralwidget)
-        self.date.setGeometry(QtCore.QRect(120, 143, 61, 41))
-        font = QtGui.QFont()
-        font.setPointSize(11)
-        self.date.setFont(font)
-        self.date.setStyleSheet("QComboBox {\n"
-"    background-color: #ffffff;        /* now white */\n"
-"    border-style: solid;\n"
-"    border-width: 2px;\n"
-"    border-top-color: #ffffff;        /* light top */\n"
-"    border-left-color: #ffffff;       /* light left */\n"
-"    border-bottom-color: #aaaaaa;     /* dark bottom */\n"
-"    border-right-color: #aaaaaa;      /* dark right */\n"
-"    padding: 6px 10px;\n"
-"    color: #333333;\n"
-"    border-radius: 4px;               /* optional rounded corners */\n"
-"}\n"
-"\n"
-"QLineEdit:focus {\n"
-"    border-top-color: #28c770;        /* focus effect top */\n"
-"    border-left-color: #28c770;\n"
-"    border-bottom-color: #218c57;     /* focus effect bottom */\n"
-"    border-right-color: #218c57;\n"
-"    background-color: #ffffff;        /* stays white on focus */\n"
-"}\n"
-"\n"
-"QLineEdit:hover {\n"
-"    border-top-color: #eeeeee;\n"
-"    border-left-color: #eeeeee;\n"
-"    border-bottom-color: #888888;\n"
-"    border-right-color: #888888;\n"
-"}\n"
-"\n"
-"QComboBox:disabled {\n"
-"    background-color: #eeeeee;        /* muted gray when disabled */\n"
-"    color: #aaaaaa;\n"
-"    border-top-color: #f5f5f5;\n"
-"    border-left-color: #f5f5f5;\n"
-"    border-bottom-color: #cccccc;\n"
-"    border-right-color: #cccccc;\n"
-"}")
-        self.date.setEditable(False)
-        self.date.setObjectName("date")
-        self.date.addItem("")
-        self.date.addItem("")
-        self.date.addItem("")
-        self.date.addItem("")
-        self.date.addItem("")
-        self.date.addItem("")
-        self.date.addItem("")
-        self.date.addItem("")
-        self.date.addItem("")
-        self.date.addItem("")
-        self.date.addItem("")
-        self.date.addItem("")
-        self.date.addItem("")
-        self.date.addItem("")
-        self.date.addItem("")
-        self.date.addItem("")
-        self.date.addItem("")
-        self.date.addItem("")
-        self.date.addItem("")
-        self.date.addItem("")
-        self.date.addItem("")
-        self.date.addItem("")
-        self.date.addItem("")
-        self.date.addItem("")
-        self.date.addItem("")
-        self.date.addItem("")
-        self.date.addItem("")
-        self.date.addItem("")
-        self.date.addItem("")
-        self.date.addItem("")
-        self.date.addItem("")
-        self.year = QtWidgets.QComboBox(self.centralwidget)
-        self.year.setGeometry(QtCore.QRect(210, 143, 81, 41))
-        font = QtGui.QFont()
-        font.setPointSize(11)
-        self.year.setFont(font)
-        self.year.setStyleSheet("QComboBox {\n"
-"    background-color: #ffffff;        /* now white */\n"
-"    border-style: solid;\n"
-"    border-width: 2px;\n"
-"    border-top-color: #ffffff;        /* light top */\n"
-"    border-left-color: #ffffff;       /* light left */\n"
-"    border-bottom-color: #aaaaaa;     /* dark bottom */\n"
-"    border-right-color: #aaaaaa;      /* dark right */\n"
-"    padding: 6px 10px;\n"
-"    color: #333333;\n"
-"    border-radius: 4px;               /* optional rounded corners */\n"
-"}\n"
-"\n"
-"QLineEdit:focus {\n"
-"    border-top-color: #28c770;        /* focus effect top */\n"
-"    border-left-color: #28c770;\n"
-"    border-bottom-color: #218c57;     /* focus effect bottom */\n"
-"    border-right-color: #218c57;\n"
-"    background-color: #ffffff;        /* stays white on focus */\n"
-"}\n"
-"\n"
-"QLineEdit:hover {\n"
-"    border-top-color: #eeeeee;\n"
-"    border-left-color: #eeeeee;\n"
-"    border-bottom-color: #888888;\n"
-"    border-right-color: #888888;\n"
-"}\n"
-"\n"
-"QComboBox:disabled {\n"
-"    background-color: #eeeeee;        /* muted gray when disabled */\n"
-"    color: #aaaaaa;\n"
-"    border-top-color: #f5f5f5;\n"
-"    border-left-color: #f5f5f5;\n"
-"    border-bottom-color: #cccccc;\n"
-"    border-right-color: #cccccc;\n"
-"}")
-        self.year.setEditable(False)
-        self.year.setObjectName("year")
-        self.year.addItem("")
-        self.year.addItem("")
-        self.year.addItem("")
-        self.year.addItem("")
-        self.year.addItem("")
-        self.year.addItem("")
-        self.year.addItem("")
-        self.year.addItem("")
-        self.year.addItem("")
-        self.year.addItem("")
-        self.year.addItem("")
-        self.year.addItem("")
-        self.year.addItem("")
-        self.year.addItem("")
-        self.year.addItem("")
-        self.year.addItem("")
-        self.hours = QtWidgets.QComboBox(self.centralwidget)
-        self.hours.setGeometry(QtCore.QRect(90, 317, 61, 41))
+        self.hours = QtWidgets.QComboBox(self.scrollAreaWidgetContents_2)
+        self.hours.setGeometry(QtCore.QRect(80, 226, 71, 41))
         font = QtGui.QFont()
         font.setPointSize(11)
         self.hours.setFont(font)
+        self.hours.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.hours.setStyleSheet("QComboBox {\n"
 "    background-color: #ffffff;        /* now white */\n"
 "    border-style: solid;\n"
@@ -1019,11 +111,88 @@ class Ui_Dashboard(object):
         self.hours.addItem("")
         self.hours.addItem("")
         self.hours.addItem("")
-        self.time = QtWidgets.QComboBox(self.centralwidget)
-        self.time.setGeometry(QtCore.QRect(160, 317, 61, 41))
+        self.PM_or_AM = QtWidgets.QComboBox(self.scrollAreaWidgetContents_2)
+        self.PM_or_AM.setGeometry(QtCore.QRect(240, 226, 81, 41))
+        font = QtGui.QFont()
+        font.setPointSize(11)
+        self.PM_or_AM.setFont(font)
+        self.PM_or_AM.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.PM_or_AM.setStyleSheet("QComboBox {\n"
+"    background-color: #ffffff;        /* now white */\n"
+"    border-style: solid;\n"
+"    border-width: 2px;\n"
+"    border-top-color: #ffffff;        /* light top */\n"
+"    border-left-color: #ffffff;       /* light left */\n"
+"    border-bottom-color: #aaaaaa;     /* dark bottom */\n"
+"    border-right-color: #aaaaaa;      /* dark right */\n"
+"    padding: 6px 10px;\n"
+"    color: #333333;\n"
+"    border-radius: 4px;               /* optional rounded corners */\n"
+"}\n"
+"\n"
+"QLineEdit:focus {\n"
+"    border-top-color: #28c770;        /* focus effect top */\n"
+"    border-left-color: #28c770;\n"
+"    border-bottom-color: #218c57;     /* focus effect bottom */\n"
+"    border-right-color: #218c57;\n"
+"    background-color: #ffffff;        /* stays white on focus */\n"
+"}\n"
+"\n"
+"QLineEdit:hover {\n"
+"    border-top-color: #eeeeee;\n"
+"    border-left-color: #eeeeee;\n"
+"    border-bottom-color: #888888;\n"
+"    border-right-color: #888888;\n"
+"}\n"
+"\n"
+"QComboBox:disabled {\n"
+"    background-color: #eeeeee;        /* muted gray when disabled */\n"
+"    color: #aaaaaa;\n"
+"    border-top-color: #f5f5f5;\n"
+"    border-left-color: #f5f5f5;\n"
+"    border-bottom-color: #cccccc;\n"
+"    border-right-color: #cccccc;\n"
+"}")
+        self.PM_or_AM.setEditable(False)
+        self.PM_or_AM.setObjectName("PM_or_AM")
+        self.PM_or_AM.addItem("")
+        self.PM_or_AM.addItem("")
+        self.label_23 = QtWidgets.QLabel(self.scrollAreaWidgetContents_2)
+        self.label_23.setGeometry(QtCore.QRect(73, 207, 46, 19))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.label_23.setFont(font)
+        self.label_23.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_23.setTextFormat(QtCore.Qt.AutoText)
+        self.label_23.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_23.setIndent(67)
+        self.label_23.setObjectName("label_23")
+        self.label_22 = QtWidgets.QLabel(self.scrollAreaWidgetContents_2)
+        self.label_22.setGeometry(QtCore.QRect(220, 29, 33, 19))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.label_22.setFont(font)
+        self.label_22.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_22.setTextFormat(QtCore.Qt.AutoText)
+        self.label_22.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_22.setIndent(67)
+        self.label_22.setObjectName("label_22")
+        self.label_19 = QtWidgets.QLabel(self.scrollAreaWidgetContents_2)
+        self.label_19.setGeometry(QtCore.QRect(30, 279, 33, 19))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.label_19.setFont(font)
+        self.label_19.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_19.setTextFormat(QtCore.Qt.AutoText)
+        self.label_19.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_19.setIndent(67)
+        self.label_19.setObjectName("label_19")
+        self.time = QtWidgets.QComboBox(self.scrollAreaWidgetContents_2)
+        self.time.setGeometry(QtCore.QRect(160, 226, 71, 41))
         font = QtGui.QFont()
         font.setPointSize(11)
         self.time.setFont(font)
+        self.time.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.time.setStyleSheet("QComboBox {\n"
 "    background-color: #ffffff;        /* now white */\n"
 "    border-style: solid;\n"
@@ -1122,58 +291,13 @@ class Ui_Dashboard(object):
         self.time.addItem("")
         self.time.addItem("")
         self.time.addItem("")
-        # Add "0" as an extra item at the end
         self.time.addItem("")
-        self.PM_or_AM = QtWidgets.QComboBox(self.centralwidget)
-        self.PM_or_AM.setGeometry(QtCore.QRect(230, 317, 61, 41))
-        font = QtGui.QFont()
-        font.setPointSize(11)
-        self.PM_or_AM.setFont(font)
-        self.PM_or_AM.setStyleSheet("QComboBox {\n"
-"    background-color: #ffffff;        /* now white */\n"
-"    border-style: solid;\n"
-"    border-width: 2px;\n"
-"    border-top-color: #ffffff;        /* light top */\n"
-"    border-left-color: #ffffff;       /* light left */\n"
-"    border-bottom-color: #aaaaaa;     /* dark bottom */\n"
-"    border-right-color: #aaaaaa;      /* dark right */\n"
-"    padding: 6px 10px;\n"
-"    color: #333333;\n"
-"    border-radius: 4px;               /* optional rounded corners */\n"
-"}\n"
-"\n"
-"QLineEdit:focus {\n"
-"    border-top-color: #28c770;        /* focus effect top */\n"
-"    border-left-color: #28c770;\n"
-"    border-bottom-color: #218c57;     /* focus effect bottom */\n"
-"    border-right-color: #218c57;\n"
-"    background-color: #ffffff;        /* stays white on focus */\n"
-"}\n"
-"\n"
-"QLineEdit:hover {\n"
-"    border-top-color: #eeeeee;\n"
-"    border-left-color: #eeeeee;\n"
-"    border-bottom-color: #888888;\n"
-"    border-right-color: #888888;\n"
-"}\n"
-"\n"
-"QComboBox:disabled {\n"
-"    background-color: #eeeeee;        /* muted gray when disabled */\n"
-"    color: #aaaaaa;\n"
-"    border-top-color: #f5f5f5;\n"
-"    border-left-color: #f5f5f5;\n"
-"    border-bottom-color: #cccccc;\n"
-"    border-right-color: #cccccc;\n"
-"}")
-        self.PM_or_AM.setEditable(False)
-        self.PM_or_AM.setObjectName("PM_or_AM")
-        self.PM_or_AM.addItem("")
-        self.PM_or_AM.addItem("")
-        self.time_2 = QtWidgets.QComboBox(self.centralwidget)
-        self.time_2.setGeometry(QtCore.QRect(160, 367, 61, 41))
+        self.time_2 = QtWidgets.QComboBox(self.scrollAreaWidgetContents_2)
+        self.time_2.setGeometry(QtCore.QRect(160, 276, 71, 41))
         font = QtGui.QFont()
         font.setPointSize(11)
         self.time_2.setFont(font)
+        self.time_2.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.time_2.setStyleSheet("QComboBox {\n"
 "    background-color: #ffffff;        /* now white */\n"
 "    border-style: solid;\n"
@@ -1272,13 +396,270 @@ class Ui_Dashboard(object):
         self.time_2.addItem("")
         self.time_2.addItem("")
         self.time_2.addItem("")
-        # Add "0" as an extra item at the end
         self.time_2.addItem("")
-        self.hours_2 = QtWidgets.QComboBox(self.centralwidget)
-        self.hours_2.setGeometry(QtCore.QRect(90, 367, 61, 41))
+        self.label_4 = QtWidgets.QLabel(self.scrollAreaWidgetContents_2)
+        self.label_4.setGeometry(QtCore.QRect(10, 181, 133, 19))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.label_4.setFont(font)
+        self.label_4.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_4.setTextFormat(QtCore.Qt.AutoText)
+        self.label_4.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_4.setIndent(67)
+        self.label_4.setObjectName("label_4")
+        self.RecycleBin_btn_3 = QtWidgets.QPushButton(self.scrollAreaWidgetContents_2)
+        self.RecycleBin_btn_3.setGeometry(QtCore.QRect(640, 10, 211, 41))
+        self.RecycleBin_btn_3.setStyleSheet("QPushButton {\n"
+"    background-color: transparent;      /* make background see-through */\n"
+"    border-style: solid;\n"
+"    border-width: 2px;\n"
+"    border-top-color: #ffffff;          /* light top/left edge */\n"
+"    border-left-color: #ffffff;\n"
+"    border-bottom-color: #555555;       /* dark bottom/right edge */\n"
+"    border-right-color: #555555;\n"
+"    border-radius: 4px;                  /* optional: rounded corners */\n"
+"    padding: 5px;\n"
+"}\n"
+"")
+        self.RecycleBin_btn_3.setText("")
+        self.RecycleBin_btn_3.setObjectName("RecycleBin_btn_3")
+        self.label_2 = QtWidgets.QLabel(self.scrollAreaWidgetContents_2)
+        self.label_2.setGeometry(QtCore.QRect(8, 106, 189, 19))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.label_2.setFont(font)
+        self.label_2.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_2.setTextFormat(QtCore.Qt.AutoText)
+        self.label_2.setAlignment(QtCore.Qt.AlignJustify|QtCore.Qt.AlignVCenter)
+        self.label_2.setIndent(67)
+        self.label_2.setObjectName("label_2")
+        self.label_18 = QtWidgets.QLabel(self.scrollAreaWidgetContents_2)
+        self.label_18.setGeometry(QtCore.QRect(30, 229, 33, 19))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.label_18.setFont(font)
+        self.label_18.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_18.setTextFormat(QtCore.Qt.AutoText)
+        self.label_18.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_18.setIndent(67)
+        self.label_18.setObjectName("label_18")
+        self.actualchemicalUsed = QtWidgets.QTableWidget(self.scrollAreaWidgetContents_2)
+        self.actualchemicalUsed.setGeometry(QtCore.QRect(17, 550, 311, 171))
+        self.actualchemicalUsed.setStyleSheet("QTableWidget {\n"
+"    background-color: #ffffff;            /* white background */\n"
+"    border-style: solid;\n"
+"    border-width: 2px;\n"
+"    border-top-color: #ffffff;            /* light top */\n"
+"    border-left-color: #ffffff;           /* light left */\n"
+"    border-bottom-color: #cccccc;         /* dark bottom */\n"
+"    border-right-color: #cccccc;          /* dark right */\n"
+"    gridline-color: #e6e6e6;\n"
+"    font: 13pt \"Segoe UI\";\n"
+"    selection-background-color: #2ecc71;\n"
+"    selection-color: white;\n"
+"    alternate-background-color: #f9f9f9;\n"
+"}\n"
+"\n"
+"QTableWidget::item {\n"
+"    padding: 6px;\n"
+"    border-bottom: 1px solid #e6e6e6;\n"
+"}\n"
+"\n"
+"QTableWidget::item:selected {\n"
+"    background-color: #2ecc71;   /* green when selected */\n"
+"    color: white;\n"
+"}\n"
+"\n"
+"QTableWidget::item:hover {\n"
+"    background-color: #f0f0f0;   /* darker on hover */\n"
+"}\n"
+"\n"
+"QHeaderView::section {\n"
+"    background-color: #f3f3f3;\n"
+"    color: #333333;\n"
+"    padding: 6px;\n"
+"    border-style: solid;\n"
+"    border-width: 2px;\n"
+"    border-top-color: #ffffff;\n"
+"    border-left-color: #ffffff;\n"
+"    border-bottom-color: #cccccc;\n"
+"    border-right-color: #cccccc;\n"
+"    font: 10pt \"Segoe UI\";\n"
+"}\n"
+"\n"
+"QTableCornerButton::section {\n"
+"    background-color: #f3f3f3;\n"
+"    border-style: solid;\n"
+"    border-width: 2px;\n"
+"    border-top-color: #ffffff;\n"
+"    border-left-color: #ffffff;\n"
+"    border-bottom-color: #cccccc;\n"
+"    border-right-color: #cccccc;\n"
+"}")
+        self.actualchemicalUsed.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)
+        self.actualchemicalUsed.setObjectName("actualchemicalUsed")
+        self.actualchemicalUsed.setColumnCount(2)
+        self.actualchemicalUsed.setRowCount(5)
+        item = QtWidgets.QTableWidgetItem()
+        self.actualchemicalUsed.setVerticalHeaderItem(0, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.actualchemicalUsed.setVerticalHeaderItem(1, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.actualchemicalUsed.setVerticalHeaderItem(2, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.actualchemicalUsed.setVerticalHeaderItem(3, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.actualchemicalUsed.setVerticalHeaderItem(4, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.actualchemicalUsed.setHorizontalHeaderItem(0, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.actualchemicalUsed.setHorizontalHeaderItem(1, item)
+        item = QtWidgets.QTableWidgetItem()
+        item.setTextAlignment(QtCore.Qt.AlignCenter)
+        self.actualchemicalUsed.setItem(0, 0, item)
+        item = QtWidgets.QTableWidgetItem()
+        item.setTextAlignment(QtCore.Qt.AlignCenter)
+        self.actualchemicalUsed.setItem(1, 0, item)
+        item = QtWidgets.QTableWidgetItem()
+        item.setTextAlignment(QtCore.Qt.AlignCenter)
+        self.actualchemicalUsed.setItem(2, 0, item)
+        item = QtWidgets.QTableWidgetItem()
+        item.setTextAlignment(QtCore.Qt.AlignCenter)
+        self.actualchemicalUsed.setItem(3, 0, item)
+        item = QtWidgets.QTableWidgetItem()
+        item.setTextAlignment(QtCore.Qt.AlignCenter)
+        self.actualchemicalUsed.setItem(4, 0, item)
+        self.actualchemicalUsed.horizontalHeader().setDefaultSectionSize(250)
+        self.actualchemicalUsed.horizontalHeader().setSortIndicatorShown(False)
+        self.actualchemicalUsed.horizontalHeader().setStretchLastSection(False)
+        self.actualchemicalUsed.verticalHeader().setDefaultSectionSize(40)
+        self.label_5 = QtWidgets.QLabel(self.scrollAreaWidgetContents_2)
+        self.label_5.setGeometry(QtCore.QRect(10, 329, 206, 19))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.label_5.setFont(font)
+        self.label_5.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_5.setTextFormat(QtCore.Qt.AutoText)
+        self.label_5.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_5.setIndent(67)
+        self.label_5.setObjectName("label_5")
+        self.line_3 = QtWidgets.QFrame(self.scrollAreaWidgetContents_2)
+        self.line_3.setGeometry(QtCore.QRect(-5, -9, 1131, 20))
+        self.line_3.setFrameShape(QtWidgets.QFrame.HLine)
+        self.line_3.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.line_3.setObjectName("line_3")
+        self.month = QtWidgets.QComboBox(self.scrollAreaWidgetContents_2)
+        self.month.setGeometry(QtCore.QRect(19, 51, 81, 41))
+        font = QtGui.QFont()
+        font.setPointSize(11)
+        self.month.setFont(font)
+        self.month.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.month.setStyleSheet("QComboBox {\n"
+"    background-color: #ffffff;        /* now white */\n"
+"    border-style: solid;\n"
+"    border-width: 2px;\n"
+"    border-top-color: #ffffff;        /* light top */\n"
+"    border-left-color: #ffffff;       /* light left */\n"
+"    border-bottom-color: #aaaaaa;     /* dark bottom */\n"
+"    border-right-color: #aaaaaa;      /* dark right */\n"
+"    padding: 6px 10px;\n"
+"    color: #333333;\n"
+"    border-radius: 4px;               /* optional rounded corners */\n"
+"}\n"
+"\n"
+"QLineEdit:focus {\n"
+"    border-top-color: #28c770;        /* focus effect top */\n"
+"    border-left-color: #28c770;\n"
+"    border-bottom-color: #218c57;     /* focus effect bottom */\n"
+"    border-right-color: #218c57;\n"
+"    background-color: #ffffff;        /* stays white on focus */\n"
+"}\n"
+"\n"
+"QLineEdit:hover {\n"
+"    border-top-color: #eeeeee;\n"
+"    border-left-color: #eeeeee;\n"
+"    border-bottom-color: #888888;\n"
+"    border-right-color: #888888;\n"
+"}\n"
+"\n"
+"QComboBox:disabled {\n"
+"    background-color: #eeeeee;        /* muted gray when disabled */\n"
+"    color: #aaaaaa;\n"
+"    border-top-color: #f5f5f5;\n"
+"    border-left-color: #f5f5f5;\n"
+"    border-bottom-color: #cccccc;\n"
+"    border-right-color: #cccccc;\n"
+"}")
+        self.month.setEditable(False)
+        self.month.setObjectName("month")
+        self.month.addItem("")
+        self.month.addItem("")
+        self.month.addItem("")
+        self.month.addItem("")
+        self.month.addItem("")
+        self.month.addItem("")
+        self.month.addItem("")
+        self.month.addItem("")
+        self.month.addItem("")
+        self.month.addItem("")
+        self.month.addItem("")
+        self.month.addItem("")
+        self.label_25 = QtWidgets.QLabel(self.scrollAreaWidgetContents_2)
+        self.label_25.setGeometry(QtCore.QRect(230, 207, 67, 19))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.label_25.setFont(font)
+        self.label_25.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_25.setTextFormat(QtCore.Qt.AutoText)
+        self.label_25.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_25.setIndent(67)
+        self.label_25.setObjectName("label_25")
+        self.nameofClientinput = QtWidgets.QLineEdit(self.scrollAreaWidgetContents_2)
+        self.nameofClientinput.setGeometry(QtCore.QRect(20, 129, 301, 41))
+        self.nameofClientinput.setStyleSheet("QLineEdit {\n"
+"    background-color: #ffffff;        /* now white */\n"
+"    border-style: solid;\n"
+"    border-width: 2px;\n"
+"    border-top-color: #ffffff;        /* light top */\n"
+"    border-left-color: #ffffff;       /* light left */\n"
+"    border-bottom-color: #aaaaaa;     /* dark bottom */\n"
+"    border-right-color: #aaaaaa;      /* dark right */\n"
+"    padding: 6px 10px;\n"
+"    font: 11pt \"Segoe UI\";\n"
+"    color: #333333;\n"
+"    border-radius: 4px;               /* optional rounded corners */\n"
+"}\n"
+"\n"
+"QLineEdit:focus {\n"
+"    border-top-color: #28c770;        /* focus effect top */\n"
+"    border-left-color: #28c770;\n"
+"    border-bottom-color: #218c57;     /* focus effect bottom */\n"
+"    border-right-color: #218c57;\n"
+"    background-color: #ffffff;        /* stays white on focus */\n"
+"}\n"
+"\n"
+"QLineEdit:hover {\n"
+"    border-top-color: #eeeeee;\n"
+"    border-left-color: #eeeeee;\n"
+"    border-bottom-color: #888888;\n"
+"    border-right-color: #888888;\n"
+"}\n"
+"\n"
+"QLineEdit:disabled {\n"
+"    background-color: #eeeeee;        /* muted gray when disabled */\n"
+"    color: #aaaaaa;\n"
+"    border-top-color: #f5f5f5;\n"
+"    border-left-color: #f5f5f5;\n"
+"    border-bottom-color: #cccccc;\n"
+"    border-right-color: #cccccc;\n"
+"}")
+        self.nameofClientinput.setObjectName("nameofClientinput")
+        self.hours_2 = QtWidgets.QComboBox(self.scrollAreaWidgetContents_2)
+        self.hours_2.setGeometry(QtCore.QRect(80, 276, 71, 41))
         font = QtGui.QFont()
         font.setPointSize(11)
         self.hours_2.setFont(font)
+        self.hours_2.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.hours_2.setStyleSheet("QComboBox {\n"
 "    background-color: #ffffff;        /* now white */\n"
 "    border-style: solid;\n"
@@ -1329,11 +710,92 @@ class Ui_Dashboard(object):
         self.hours_2.addItem("")
         self.hours_2.addItem("")
         self.hours_2.addItem("")
-        self.PM_or_AM_2 = QtWidgets.QComboBox(self.centralwidget)
-        self.PM_or_AM_2.setGeometry(QtCore.QRect(230, 367, 61, 41))
+        self.label_21 = QtWidgets.QLabel(self.scrollAreaWidgetContents_2)
+        self.label_21.setGeometry(QtCore.QRect(120, 29, 33, 19))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.label_21.setFont(font)
+        self.label_21.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_21.setTextFormat(QtCore.Qt.AutoText)
+        self.label_21.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_21.setIndent(67)
+        self.label_21.setObjectName("label_21")
+        self.label_20 = QtWidgets.QLabel(self.scrollAreaWidgetContents_2)
+        self.label_20.setGeometry(QtCore.QRect(14, 29, 46, 19))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.label_20.setFont(font)
+        self.label_20.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_20.setTextFormat(QtCore.Qt.AutoText)
+        self.label_20.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_20.setIndent(67)
+        self.label_20.setObjectName("label_20")
+        self.year = QtWidgets.QComboBox(self.scrollAreaWidgetContents_2)
+        self.year.setGeometry(QtCore.QRect(230, 52, 81, 41))
+        font = QtGui.QFont()
+        font.setPointSize(11)
+        self.year.setFont(font)
+        self.year.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.year.setStyleSheet("QComboBox {\n"
+"    background-color: #ffffff;        /* now white */\n"
+"    border-style: solid;\n"
+"    border-width: 2px;\n"
+"    border-top-color: #ffffff;        /* light top */\n"
+"    border-left-color: #ffffff;       /* light left */\n"
+"    border-bottom-color: #aaaaaa;     /* dark bottom */\n"
+"    border-right-color: #aaaaaa;      /* dark right */\n"
+"    padding: 6px 10px;\n"
+"    color: #333333;\n"
+"    border-radius: 4px;               /* optional rounded corners */\n"
+"}\n"
+"\n"
+"QLineEdit:focus {\n"
+"    border-top-color: #28c770;        /* focus effect top */\n"
+"    border-left-color: #28c770;\n"
+"    border-bottom-color: #218c57;     /* focus effect bottom */\n"
+"    border-right-color: #218c57;\n"
+"    background-color: #ffffff;        /* stays white on focus */\n"
+"}\n"
+"\n"
+"QLineEdit:hover {\n"
+"    border-top-color: #eeeeee;\n"
+"    border-left-color: #eeeeee;\n"
+"    border-bottom-color: #888888;\n"
+"    border-right-color: #888888;\n"
+"}\n"
+"\n"
+"QComboBox:disabled {\n"
+"    background-color: #eeeeee;        /* muted gray when disabled */\n"
+"    color: #aaaaaa;\n"
+"    border-top-color: #f5f5f5;\n"
+"    border-left-color: #f5f5f5;\n"
+"    border-bottom-color: #cccccc;\n"
+"    border-right-color: #cccccc;\n"
+"}")
+        self.year.setEditable(False)
+        self.year.setObjectName("year")
+        self.year.addItem("")
+        self.year.addItem("")
+        self.year.addItem("")
+        self.year.addItem("")
+        self.year.addItem("")
+        self.year.addItem("")
+        self.year.addItem("")
+        self.year.addItem("")
+        self.year.addItem("")
+        self.year.addItem("")
+        self.year.addItem("")
+        self.year.addItem("")
+        self.year.addItem("")
+        self.year.addItem("")
+        self.year.addItem("")
+        self.year.addItem("")
+        self.PM_or_AM_2 = QtWidgets.QComboBox(self.scrollAreaWidgetContents_2)
+        self.PM_or_AM_2.setGeometry(QtCore.QRect(240, 276, 81, 41))
         font = QtGui.QFont()
         font.setPointSize(11)
         self.PM_or_AM_2.setFont(font)
+        self.PM_or_AM_2.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.PM_or_AM_2.setStyleSheet("QComboBox {\n"
 "    background-color: #ffffff;        /* now white */\n"
 "    border-style: solid;\n"
@@ -1374,68 +836,113 @@ class Ui_Dashboard(object):
         self.PM_or_AM_2.setObjectName("PM_or_AM_2")
         self.PM_or_AM_2.addItem("")
         self.PM_or_AM_2.addItem("")
-        self.label_18 = QtWidgets.QLabel(self.centralwidget)
-        self.label_18.setGeometry(QtCore.QRect(36, 320, 33, 19))
+        self.chemicalUsed = QtWidgets.QTableWidget(self.scrollAreaWidgetContents_2)
+        self.chemicalUsed.setGeometry(QtCore.QRect(18, 349, 311, 171))
+        self.chemicalUsed.setStyleSheet("QTableWidget {\n"
+"    background-color: #ffffff;            /* white background */\n"
+"    border-style: solid;\n"
+"    border-width: 2px;\n"
+"    border-top-color: #ffffff;            /* light top */\n"
+"    border-left-color: #ffffff;           /* light left */\n"
+"    border-bottom-color: #cccccc;         /* dark bottom */\n"
+"    border-right-color: #cccccc;          /* dark right */\n"
+"    gridline-color: #e6e6e6;\n"
+"    font: 13pt \"Segoe UI\";\n"
+"    selection-background-color: #2ecc71;\n"
+"    selection-color: white;\n"
+"    alternate-background-color: #f9f9f9;\n"
+"}\n"
+"\n"
+"QTableWidget::item {\n"
+"    padding: 6px;\n"
+"    border-bottom: 1px solid #e6e6e6;\n"
+"}\n"
+"\n"
+"QTableWidget::item:selected {\n"
+"    background-color: #2ecc71;   /* green when selected */\n"
+"    color: white;\n"
+"}\n"
+"\n"
+"QTableWidget::item:hover {\n"
+"    background-color: #f0f0f0;   /* darker on hover */\n"
+"}\n"
+"\n"
+"QHeaderView::section {\n"
+"    background-color: #f3f3f3;\n"
+"    color: #333333;\n"
+"    padding: 6px;\n"
+"    border-style: solid;\n"
+"    border-width: 2px;\n"
+"    border-top-color: #ffffff;\n"
+"    border-left-color: #ffffff;\n"
+"    border-bottom-color: #cccccc;\n"
+"    border-right-color: #cccccc;\n"
+"    font: 10pt \"Segoe UI\";\n"
+"}\n"
+"\n"
+"QTableCornerButton::section {\n"
+"    background-color: #f3f3f3;\n"
+"    border-style: solid;\n"
+"    border-width: 2px;\n"
+"    border-top-color: #ffffff;\n"
+"    border-left-color: #ffffff;\n"
+"    border-bottom-color: #cccccc;\n"
+"    border-right-color: #cccccc;\n"
+"}")
+        self.chemicalUsed.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)
+        self.chemicalUsed.setObjectName("chemicalUsed")
+        self.chemicalUsed.setColumnCount(2)
+        self.chemicalUsed.setRowCount(5)
+        item = QtWidgets.QTableWidgetItem()
+        self.chemicalUsed.setVerticalHeaderItem(0, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.chemicalUsed.setVerticalHeaderItem(1, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.chemicalUsed.setVerticalHeaderItem(2, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.chemicalUsed.setVerticalHeaderItem(3, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.chemicalUsed.setVerticalHeaderItem(4, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.chemicalUsed.setHorizontalHeaderItem(0, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.chemicalUsed.setHorizontalHeaderItem(1, item)
+        item = QtWidgets.QTableWidgetItem()
+        item.setTextAlignment(QtCore.Qt.AlignCenter)
+        self.chemicalUsed.setItem(0, 0, item)
+        item = QtWidgets.QTableWidgetItem()
+        item.setTextAlignment(QtCore.Qt.AlignCenter)
+        self.chemicalUsed.setItem(1, 0, item)
+        item = QtWidgets.QTableWidgetItem()
+        item.setTextAlignment(QtCore.Qt.AlignCenter)
+        self.chemicalUsed.setItem(2, 0, item)
+        item = QtWidgets.QTableWidgetItem()
+        item.setTextAlignment(QtCore.Qt.AlignCenter)
+        self.chemicalUsed.setItem(3, 0, item)
+        item = QtWidgets.QTableWidgetItem()
+        item.setTextAlignment(QtCore.Qt.AlignCenter)
+        self.chemicalUsed.setItem(4, 0, item)
+        self.chemicalUsed.horizontalHeader().setDefaultSectionSize(250)
+        self.chemicalUsed.horizontalHeader().setSortIndicatorShown(False)
+        self.chemicalUsed.horizontalHeader().setStretchLastSection(False)
+        self.chemicalUsed.verticalHeader().setDefaultSectionSize(40)
+        self.line_2 = QtWidgets.QFrame(self.scrollAreaWidgetContents_2)
+        self.line_2.setGeometry(QtCore.QRect(855, -1, 31, 61))
+        self.line_2.setFrameShape(QtWidgets.QFrame.VLine)
+        self.line_2.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.line_2.setObjectName("line_2")
+        self.label_3 = QtWidgets.QLabel(self.scrollAreaWidgetContents_2)
+        self.label_3.setGeometry(QtCore.QRect(8, 3, 129, 19))
         font = QtGui.QFont()
         font.setPointSize(12)
-        self.label_18.setFont(font)
-        self.label_18.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.label_18.setTextFormat(QtCore.Qt.AutoText)
-        self.label_18.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_18.setIndent(67)
-        self.label_18.setObjectName("label_18")
-        self.label_19 = QtWidgets.QLabel(self.centralwidget)
-        self.label_19.setGeometry(QtCore.QRect(35, 370, 33, 19))
-        font = QtGui.QFont()
-        font.setPointSize(12)
-        self.label_19.setFont(font)
-        self.label_19.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.label_19.setTextFormat(QtCore.Qt.AutoText)
-        self.label_19.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_19.setIndent(67)
-        self.label_19.setObjectName("label_19")
-        self.label_20 = QtWidgets.QLabel(self.centralwidget)
-        self.label_20.setGeometry(QtCore.QRect(34, 120, 46, 19))
-        font = QtGui.QFont()
-        font.setPointSize(12)
-        self.label_20.setFont(font)
-        self.label_20.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.label_20.setTextFormat(QtCore.Qt.AutoText)
-        self.label_20.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_20.setIndent(67)
-        self.label_20.setObjectName("label_20")
-        self.label_21 = QtWidgets.QLabel(self.centralwidget)
-        self.label_21.setGeometry(QtCore.QRect(120, 120, 33, 19))
-        font = QtGui.QFont()
-        font.setPointSize(12)
-        self.label_21.setFont(font)
-        self.label_21.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.label_21.setTextFormat(QtCore.Qt.AutoText)
-        self.label_21.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_21.setIndent(67)
-        self.label_21.setObjectName("label_21")
-        self.label_22 = QtWidgets.QLabel(self.centralwidget)
-        self.label_22.setGeometry(QtCore.QRect(200, 120, 33, 19))
-        font = QtGui.QFont()
-        font.setPointSize(12)
-        self.label_22.setFont(font)
-        self.label_22.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.label_22.setTextFormat(QtCore.Qt.AutoText)
-        self.label_22.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_22.setIndent(67)
-        self.label_22.setObjectName("label_22")
-        self.label_23 = QtWidgets.QLabel(self.centralwidget)
-        self.label_23.setGeometry(QtCore.QRect(80, 298, 46, 19))
-        font = QtGui.QFont()
-        font.setPointSize(12)
-        self.label_23.setFont(font)
-        self.label_23.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.label_23.setTextFormat(QtCore.Qt.AutoText)
-        self.label_23.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_23.setIndent(67)
-        self.label_23.setObjectName("label_23")
-        self.label_24 = QtWidgets.QLabel(self.centralwidget)
-        self.label_24.setGeometry(QtCore.QRect(153, 298, 56, 19))
+        self.label_3.setFont(font)
+        self.label_3.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_3.setTextFormat(QtCore.Qt.AutoText)
+        self.label_3.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_3.setIndent(67)
+        self.label_3.setObjectName("label_3")
+        self.label_24 = QtWidgets.QLabel(self.scrollAreaWidgetContents_2)
+        self.label_24.setGeometry(QtCore.QRect(156, 207, 56, 19))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.label_24.setFont(font)
@@ -1444,104 +951,616 @@ class Ui_Dashboard(object):
         self.label_24.setAlignment(QtCore.Qt.AlignCenter)
         self.label_24.setIndent(67)
         self.label_24.setObjectName("label_24")
-        self.label_25 = QtWidgets.QLabel(self.centralwidget)
-        self.label_25.setGeometry(QtCore.QRect(222, 298, 67, 19))
+        self.confirmButton = QtWidgets.QPushButton(self.scrollAreaWidgetContents_2)
+        self.confirmButton.setGeometry(QtCore.QRect(16, 730, 311, 41))
+        self.confirmButton.setStyleSheet("QPushButton {\n"
+"    background-color: #2F6B3F;\n"
+"    color: white;\n"
+"    border-style: solid;\n"
+"    border-width: 2px;\n"
+"    border-top-color: #5cd65c;      /* lighter top */\n"
+"    border-left-color: #5cd65c;     /* lighter left */\n"
+"    border-bottom-color: #1e7e34;   /* darker bottom */\n"
+"    border-right-color: #1e7e34;    /* darker right */\n"
+"    padding: 6px 12px;\n"
+"    font: 15pt \"Segoe UI\";\n"
+"    border-radius: 5px;             /* optional: rounded corners */\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"    background-color: #218838;\n"
+"    border-top-color: #66c266;\n"
+"    border-left-color: #66c266;\n"
+"    border-bottom-color: #1a6c2f;\n"
+"    border-right-color: #1a6c2f;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"    background-color: #1e7e34;\n"
+"    border-top-color: #1a6c2f;       /* invert for pressed */\n"
+"    border-left-color: #1a6c2f;\n"
+"    border-bottom-color: #66c266;\n"
+"    border-right-color: #66c266;\n"
+"}\n"
+"\n"
+"QPushButton:disabled {\n"
+"    background-color: #a8d5b7;\n"
+"    color: #f0f0f0;\n"
+"    border-top-color: #c0e0c2;\n"
+"    border-left-color: #c0e0c2;\n"
+"    border-bottom-color: #8ebf96;\n"
+"    border-right-color: #8ebf96;\n"
+"}")
+        self.confirmButton.setObjectName("confirmButton")
+        self.searchDate = QtWidgets.QLineEdit(self.scrollAreaWidgetContents_2)
+        self.searchDate.setGeometry(QtCore.QRect(890, 9, 221, 41))
+        self.searchDate.setStyleSheet("QLineEdit {\n"
+"    background-color: #ffffff;        /* now white */\n"
+"    border-style: solid;\n"
+"    border-width: 2px;\n"
+"    border-top-color: #ffffff;        /* light top */\n"
+"    border-left-color: #ffffff;       /* light left */\n"
+"    border-bottom-color: #aaaaaa;     /* dark bottom */\n"
+"    border-right-color: #aaaaaa;      /* dark right */\n"
+"    padding: 6px 10px;\n"
+"    font: 11pt \"Segoe UI\";\n"
+"    color: #333333;\n"
+"    border-radius: 4px;               /* optional rounded corners */\n"
+"}\n"
+"\n"
+"QLineEdit:focus {\n"
+"    border-top-color: #28c770;        /* focus effect top */\n"
+"    border-left-color: #28c770;\n"
+"    border-bottom-color: #218c57;     /* focus effect bottom */\n"
+"    border-right-color: #218c57;\n"
+"    background-color: #ffffff;        /* stays white on focus */\n"
+"}\n"
+"\n"
+"QLineEdit:hover {\n"
+"    border-top-color: #eeeeee;\n"
+"    border-left-color: #eeeeee;\n"
+"    border-bottom-color: #888888;\n"
+"    border-right-color: #888888;\n"
+"}\n"
+"\n"
+"QLineEdit:disabled {\n"
+"    background-color: #eeeeee;        /* muted gray when disabled */\n"
+"    color: #aaaaaa;\n"
+"    border-top-color: #f5f5f5;\n"
+"    border-left-color: #f5f5f5;\n"
+"    border-bottom-color: #cccccc;\n"
+"    border-right-color: #cccccc;\n"
+"}")
+        self.searchDate.setObjectName("searchDate")
+        self.tableListahan = QtWidgets.QTableWidget(self.scrollAreaWidgetContents_2)
+        self.tableListahan.setGeometry(QtCore.QRect(338, 60, 791, 721))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(13)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.tableListahan.setFont(font)
+        self.tableListahan.setStyleSheet("QTableWidget {\n"
+"    background-color: #ffffff;            /* white background */\n"
+"    border-style: solid;\n"
+"    border-width: 2px;\n"
+"    border-top-color: #ffffff;            /* light top */\n"
+"    border-left-color: #ffffff;           /* light left */\n"
+"    border-bottom-color: #cccccc;         /* dark bottom */\n"
+"    border-right-color: #cccccc;          /* dark right */\n"
+"    gridline-color: #e6e6e6;\n"
+"    font: 13pt \"Segoe UI\";\n"
+"    selection-background-color: #2ecc71;\n"
+"    selection-color: white;\n"
+"    alternate-background-color: #f9f9f9;\n"
+"}\n"
+"\n"
+"QTableWidget::item {\n"
+"    padding: 6px;\n"
+"    border-bottom: 1px solid #e6e6e6;\n"
+"}\n"
+"\n"
+"QTableWidget::item:selected {\n"
+"    background-color: #2ecc71;   /* green when selected */\n"
+"    color: white;\n"
+"}\n"
+"\n"
+"QTableWidget::item:hover {\n"
+"    background-color: #f0f0f0;   /* darker on hover */\n"
+"}\n"
+"\n"
+"QHeaderView::section {\n"
+"    background-color: #f3f3f3;\n"
+"    color: #333333;\n"
+"    padding: 6px;\n"
+"    border-style: solid;\n"
+"    border-width: 2px;\n"
+"    border-top-color: #ffffff;\n"
+"    border-left-color: #ffffff;\n"
+"    border-bottom-color: #cccccc;\n"
+"    border-right-color: #cccccc;\n"
+"    font: 10pt \"Segoe UI\";\n"
+"}\n"
+"\n"
+"QTableCornerButton::section {\n"
+"    background-color: #f3f3f3;\n"
+"    border-style: solid;\n"
+"    border-width: 2px;\n"
+"    border-top-color: #ffffff;\n"
+"    border-left-color: #ffffff;\n"
+"    border-bottom-color: #cccccc;\n"
+"    border-right-color: #cccccc;\n"
+"}")
+        self.tableListahan.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
+        self.tableListahan.setSelectionMode(QtWidgets.QAbstractItemView.NoSelection)
+        self.tableListahan.setObjectName("tableListahan")
+        self.tableListahan.setColumnCount(8)
+        self.tableListahan.setRowCount(1)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableListahan.setVerticalHeaderItem(0, item)
+        item = QtWidgets.QTableWidgetItem()
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        item.setFont(font)
+        self.tableListahan.setHorizontalHeaderItem(0, item)
+        item = QtWidgets.QTableWidgetItem()
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        item.setFont(font)
+        self.tableListahan.setHorizontalHeaderItem(1, item)
+        item = QtWidgets.QTableWidgetItem()
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        item.setFont(font)
+        self.tableListahan.setHorizontalHeaderItem(2, item)
+        item = QtWidgets.QTableWidgetItem()
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        item.setFont(font)
+        self.tableListahan.setHorizontalHeaderItem(3, item)
+        item = QtWidgets.QTableWidgetItem()
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        item.setFont(font)
+        self.tableListahan.setHorizontalHeaderItem(4, item)
+        item = QtWidgets.QTableWidgetItem()
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        item.setFont(font)
+        self.tableListahan.setHorizontalHeaderItem(5, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableListahan.setHorizontalHeaderItem(6, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableListahan.setHorizontalHeaderItem(7, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableListahan.setItem(0, 0, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableListahan.setItem(0, 1, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableListahan.setItem(0, 2, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableListahan.setItem(0, 3, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableListahan.setItem(0, 4, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableListahan.setItem(0, 5, item)
+        self.tableListahan.horizontalHeader().setDefaultSectionSize(250)
+        self.tableListahan.verticalHeader().setDefaultSectionSize(50)
+        self.date = QtWidgets.QComboBox(self.scrollAreaWidgetContents_2)
+        self.date.setGeometry(QtCore.QRect(127, 52, 81, 41))
+        font = QtGui.QFont()
+        font.setPointSize(11)
+        self.date.setFont(font)
+        self.date.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.date.setStyleSheet("QComboBox {\n"
+"    background-color: #ffffff;        /* now white */\n"
+"    border-style: solid;\n"
+"    border-width: 2px;\n"
+"    border-top-color: #ffffff;        /* light top */\n"
+"    border-left-color: #ffffff;       /* light left */\n"
+"    border-bottom-color: #aaaaaa;     /* dark bottom */\n"
+"    border-right-color: #aaaaaa;      /* dark right */\n"
+"    padding: 6px 10px;\n"
+"    color: #333333;\n"
+"    border-radius: 4px;               /* optional rounded corners */\n"
+"}\n"
+"\n"
+"QLineEdit:focus {\n"
+"    border-top-color: #28c770;        /* focus effect top */\n"
+"    border-left-color: #28c770;\n"
+"    border-bottom-color: #218c57;     /* focus effect bottom */\n"
+"    border-right-color: #218c57;\n"
+"    background-color: #ffffff;        /* stays white on focus */\n"
+"}\n"
+"\n"
+"QLineEdit:hover {\n"
+"    border-top-color: #eeeeee;\n"
+"    border-left-color: #eeeeee;\n"
+"    border-bottom-color: #888888;\n"
+"    border-right-color: #888888;\n"
+"}\n"
+"\n"
+"QComboBox:disabled {\n"
+"    background-color: #eeeeee;        /* muted gray when disabled */\n"
+"    color: #aaaaaa;\n"
+"    border-top-color: #f5f5f5;\n"
+"    border-left-color: #f5f5f5;\n"
+"    border-bottom-color: #cccccc;\n"
+"    border-right-color: #cccccc;\n"
+"}")
+        self.date.setEditable(False)
+        self.date.setObjectName("date")
+        self.date.addItem("")
+        self.date.addItem("")
+        self.date.addItem("")
+        self.date.addItem("")
+        self.date.addItem("")
+        self.date.addItem("")
+        self.date.addItem("")
+        self.date.addItem("")
+        self.date.addItem("")
+        self.date.addItem("")
+        self.date.addItem("")
+        self.date.addItem("")
+        self.date.addItem("")
+        self.date.addItem("")
+        self.date.addItem("")
+        self.date.addItem("")
+        self.date.addItem("")
+        self.date.addItem("")
+        self.date.addItem("")
+        self.date.addItem("")
+        self.date.addItem("")
+        self.date.addItem("")
+        self.date.addItem("")
+        self.date.addItem("")
+        self.date.addItem("")
+        self.date.addItem("")
+        self.date.addItem("")
+        self.date.addItem("")
+        self.date.addItem("")
+        self.date.addItem("")
+        self.date.addItem("")
+        self.label_6 = QtWidgets.QLabel(self.scrollAreaWidgetContents_2)
+        self.label_6.setGeometry(QtCore.QRect(10, 530, 255, 19))
         font = QtGui.QFont()
         font.setPointSize(12)
-        self.label_25.setFont(font)
-        self.label_25.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.label_25.setTextFormat(QtCore.Qt.AutoText)
-        self.label_25.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_25.setIndent(67)
-        self.label_25.setObjectName("label_25")
-        self.label_2.raise_()
-        self.label_3.raise_()
-        self.label_4.raise_()
-        self.label_5.raise_()
-        self.label_6.raise_()
-        self.nameofClientinput.raise_()
-        self.chemicalUsed.raise_()
-        self.tableListahan.raise_()
-        self.searchDate.raise_()
-        self.confirmButton.raise_()
-        self.line.raise_()
-        self.line_2.raise_()
-        self.actualchemicalUsed.raise_()
-        self.widget.raise_()
-        self.line_3.raise_()
-        self.line_7.raise_()
-        self.label_17.raise_()
-        self.line_8.raise_()
-        self.line_9.raise_()
-        self.line_5.raise_()
-        self.RecycleBin_btn_3.raise_()
-        self.month.raise_()
-        self.date.raise_()
-        self.year.raise_()
-        self.hours.raise_()
-        self.time.raise_()
-        self.PM_or_AM.raise_()
-        self.time_2.raise_()
-        self.hours_2.raise_()
-        self.PM_or_AM_2.raise_()
-        self.label_18.raise_()
-        self.label_19.raise_()
-        self.label_20.raise_()
-        self.label_21.raise_()
-        self.label_22.raise_()
-        self.label_23.raise_()
-        self.label_24.raise_()
-        self.label_25.raise_()
+        self.label_6.setFont(font)
+        self.label_6.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_6.setTextFormat(QtCore.Qt.AutoText)
+        self.label_6.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_6.setIndent(67)
+        self.label_6.setObjectName("label_6")
+        self.scrollArea.setWidget(self.scrollAreaWidgetContents_2)
         Dashboard.setCentralWidget(self.centralwidget)
+        self.menuBar = QtWidgets.QMenuBar(Dashboard)
+        self.menuBar.setGeometry(QtCore.QRect(0, 0, 1126, 48))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.menuBar.setFont(font)
+        self.menuBar.setStyleSheet("QMenuBar {\n"
+"    background-color: #2F6B3F;\n"
+"    border-style: solid;\n"
+"    border-width: 2px;\n"
+"    border-top-color: #2F6B3F;\n"
+"    border-left-color: #2F6B3F;\n"
+"    border-bottom-color: #2F6B3F;\n"
+"    border-right-color: #2F6B3F;\n"
+"    padding: 6px 10px;\n"
+"    color: white;\n"
+"}\n"
+"\n"
+"/* THIS is the important part */\n"
+"QMenuBar::item {\n"
+"    background-color: transparent;\n"
+"    color: white;\n"
+"    padding: 5px 10px;\n"
+"}\n"
+"\n"
+"/* hover effect */\n"
+"QMenuBar::item:selected {\n"
+"    background-color: #2F6B3F;   /* SAME as menu bar */\n"
+"    color: white;\n"
+"}\n"
+"\n"
+"/* when pressed/open */\n"
+"QMenuBar::item:pressed {\n"
+"    background-color: #1e8f57;\n"
+"}")
+        self.menuBar.setObjectName("menuBar")
+        self.actions = QtWidgets.QMenu(self.menuBar)
+        self.actions.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.actions.setStyleSheet("QMenu {\n"
+"    background-color: #2F6B3F;\n"
+"    color: white;\n"
+"    border: 2px solid #1e8f57;\n"
+"    padding: 5px;\n"
+"}\n"
+"\n"
+"/* normal items */\n"
+"QMenu::item {\n"
+"    padding: 8px 25px;\n"
+"    background-color: transparent;\n"
+"}\n"
+"\n"
+"/* hover effect */\n"
+"QMenu::item:selected {\n"
+"    background-color: #3d8f56;   /* lighter highlight */\n"
+"    color: white;\n"
+"}\n"
+"\n"
+"/* pressed/clicked */\n"
+"QMenu::item:pressed {\n"
+"    background-color: #1e8f57;\n"
+"}")
+        self.actions.setObjectName("actions")
+        self.type_of_treatment = QtWidgets.QMenu(self.menuBar)
+        self.type_of_treatment.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.type_of_treatment.setStyleSheet("QMenu {\n"
+"    background-color: #2F6B3F;\n"
+"    color: white;\n"
+"    border: 2px solid #1e8f57;\n"
+"    padding: 5px;\n"
+"}\n"
+"\n"
+"/* normal items */\n"
+"QMenu::item {\n"
+"    padding: 8px 25px;\n"
+"    background-color: transparent;\n"
+"}\n"
+"\n"
+"/* hover effect */\n"
+"QMenu::item:selected {\n"
+"    background-color: #3d8f56;   /* lighter highlight */\n"
+"    color: white;\n"
+"}\n"
+"\n"
+"/* pressed/clicked */\n"
+"QMenu::item:pressed {\n"
+"    background-color: #1e8f57;\n"
+"}")
+        self.type_of_treatment.setObjectName("type_of_treatment")
+        Dashboard.setMenuBar(self.menuBar)
+        self.toolBar_logout = QtWidgets.QToolBar(Dashboard)
+        self.toolBar_logout.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.toolBar_logout.setStyleSheet("QToolBar {\n"
+"      /* make background see-through */\n"
+"    border-style: solid;\n"
+"    border-width: 2px;\n"
+"    border-top-color: #ffffff;          /* light top/left edge */\n"
+"    border-left-color: #ffffff;\n"
+"      /* dark bottom/right edge */\n"
+"\n"
+"    border-radius: 4px;                  /* optional: rounded corners */\n"
+"    padding: 5px;\n"
+"}\n"
+"")
+        self.toolBar_logout.setIconSize(QtCore.QSize(48, 48))
+        self.toolBar_logout.setObjectName("toolBar_logout")
+        Dashboard.addToolBar(QtCore.Qt.TopToolBarArea, self.toolBar_logout)
+        self.toolBar_files = QtWidgets.QToolBar(Dashboard)
+        font = QtGui.QFont()
+        font.setPointSize(3)
+        self.toolBar_files.setFont(font)
+        self.toolBar_files.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.toolBar_files.setStyleSheet("QToolBar {\n"
+"      /* make background see-through */\n"
+"    border-style: solid;\n"
+"    border-width: 2px;\n"
+"    border-top-color: #ffffff;          /* light top/left edge */\n"
+"    border-left-color: #ffffff;\n"
+"         /* dark bottom/right edge */\n"
+"    border-radius: 4px;                  /* optional: rounded corners */\n"
+"    padding: 5px;\n"
+"}\n"
+"")
+        self.toolBar_files.setIconSize(QtCore.QSize(48, 48))
+        self.toolBar_files.setObjectName("toolBar_files")
+        Dashboard.addToolBar(QtCore.Qt.TopToolBarArea, self.toolBar_files)
+        self.actionTREATMENT = QtWidgets.QAction(Dashboard)
+        self.actionTREATMENT.setObjectName("actionTREATMENT")
+        self.actionINSPECTION = QtWidgets.QAction(Dashboard)
+        self.actionINSPECTION.setObjectName("actionINSPECTION")
+        self.actionRECYCLE_BIN = QtWidgets.QAction(Dashboard)
+        self.actionRECYCLE_BIN.setObjectName("actionRECYCLE_BIN")
+        self.actionPDF_STORAGE = QtWidgets.QAction(Dashboard)
+        self.actionPDF_STORAGE.setObjectName("actionPDF_STORAGE")
+        self.actionLOGOUT = QtWidgets.QAction(Dashboard)
+        self.actionLOGOUT.setObjectName("actionLOGOUT")
+        self.actionTREATMENT_2 = QtWidgets.QAction(Dashboard)
+        self.actionTREATMENT_2.setObjectName("actionTREATMENT_2")
+        self.actionINSPECTION_2 = QtWidgets.QAction(Dashboard)
+        self.actionINSPECTION_2.setObjectName("actionINSPECTION_2")
+        self.PDF_storage_2 = QtWidgets.QAction(Dashboard)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(f"{image_path}/PDF.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.PDF_storage_2.setIcon(icon)
+        self.PDF_storage_2.setObjectName("PDF_storage_2")
+        self.recycle_bin = QtWidgets.QAction(Dashboard)
+        icon1 = QtGui.QIcon()
+        icon1.addPixmap(QtGui.QPixmap(f"{image_path}/Recycle Bin.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.recycle_bin.setIcon(icon1)
+        self.recycle_bin.setObjectName("recycle_bin")
+        self.PDF_storage = QtWidgets.QAction(Dashboard)
+        self.PDF_storage.setIcon(icon)
+        self.PDF_storage.setObjectName("PDF_storage")
+        self.logout = QtWidgets.QAction(Dashboard)
+        icon2 = QtGui.QIcon()
+        icon2.addPixmap(QtGui.QPixmap(f"{image_path}/Logout.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.logout.setIcon(icon2)
+        self.logout.setObjectName("logout")
+        self.treatment = QtWidgets.QAction(Dashboard)
+        icon3 = QtGui.QIcon()
+        icon3.addPixmap(QtGui.QPixmap(f"{image_path}/Treatment.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.treatment.setIcon(icon3)
+        self.treatment.setObjectName("treatment")
+        self.inspection = QtWidgets.QAction(Dashboard)
+        icon4 = QtGui.QIcon()
+        icon4.addPixmap(QtGui.QPixmap(f"{image_path}/Inspection.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.inspection.setIcon(icon4)
+        self.inspection.setObjectName("inspection")
+        self.actions.addAction(self.recycle_bin)
+        self.actions.addAction(self.PDF_storage)
+        self.type_of_treatment.addAction(self.treatment)
+        self.type_of_treatment.addAction(self.inspection)
+        self.menuBar.addAction(self.actions.menuAction())
+        self.menuBar.addAction(self.type_of_treatment.menuAction())
+        self.toolBar_logout.addAction(self.logout)
+        self.toolBar_files.addAction(self.inspection)
+        self.toolBar_files.addAction(self.treatment)
+        self.toolBar_files.addAction(self.recycle_bin)
+        self.toolBar_files.addAction(self.PDF_storage_2)
 
         self.retranslateUi(Dashboard)
         QtCore.QMetaObject.connectSlotsByName(Dashboard)
 
     def retranslateUi(self, Dashboard):
         _translate = QtCore.QCoreApplication.translate
-        Dashboard.setWindowTitle(_translate("Raionn Dashboard", "Raionn Dashboard"))
+        Dashboard.setWindowTitle(_translate("Dashboard", "Dashboard"))
+        self.label_17.setText(_translate("Dashboard", "Treatment"))
+        self.hours.setItemText(0, _translate("Dashboard", "01"))
+        self.hours.setItemText(1, _translate("Dashboard", "02"))
+        self.hours.setItemText(2, _translate("Dashboard", "03"))
+        self.hours.setItemText(3, _translate("Dashboard", "04"))
+        self.hours.setItemText(4, _translate("Dashboard", "05"))
+        self.hours.setItemText(5, _translate("Dashboard", "06"))
+        self.hours.setItemText(6, _translate("Dashboard", "07"))
+        self.hours.setItemText(7, _translate("Dashboard", "08"))
+        self.hours.setItemText(8, _translate("Dashboard", "09"))
+        self.hours.setItemText(9, _translate("Dashboard", "10"))
+        self.hours.setItemText(10, _translate("Dashboard", "11"))
+        self.hours.setItemText(11, _translate("Dashboard", "12"))
+        self.PM_or_AM.setItemText(0, _translate("Dashboard", "PM"))
+        self.PM_or_AM.setItemText(1, _translate("Dashboard", "AM"))
+        self.label_23.setText(_translate("Dashboard", "hour"))
+        self.label_22.setText(_translate("Dashboard", "year"))
+        self.label_19.setText(_translate("Dashboard", "End"))
+        self.time.setItemText(0, _translate("Dashboard", "0"))
+        self.time.setItemText(1, _translate("Dashboard", "1"))
+        self.time.setItemText(2, _translate("Dashboard", "2"))
+        self.time.setItemText(3, _translate("Dashboard", "3"))
+        self.time.setItemText(4, _translate("Dashboard", "4"))
+        self.time.setItemText(5, _translate("Dashboard", "5"))
+        self.time.setItemText(6, _translate("Dashboard", "6"))
+        self.time.setItemText(7, _translate("Dashboard", "7"))
+        self.time.setItemText(8, _translate("Dashboard", "8"))
+        self.time.setItemText(9, _translate("Dashboard", "9"))
+        self.time.setItemText(10, _translate("Dashboard", "10"))
+        self.time.setItemText(11, _translate("Dashboard", "11"))
+        self.time.setItemText(12, _translate("Dashboard", "12"))
+        self.time.setItemText(13, _translate("Dashboard", "13"))
+        self.time.setItemText(14, _translate("Dashboard", "14"))
+        self.time.setItemText(15, _translate("Dashboard", "15"))
+        self.time.setItemText(16, _translate("Dashboard", "16"))
+        self.time.setItemText(17, _translate("Dashboard", "17"))
+        self.time.setItemText(18, _translate("Dashboard", "18"))
+        self.time.setItemText(19, _translate("Dashboard", "19"))
+        self.time.setItemText(20, _translate("Dashboard", "20"))
+        self.time.setItemText(21, _translate("Dashboard", "21"))
+        self.time.setItemText(22, _translate("Dashboard", "22"))
+        self.time.setItemText(23, _translate("Dashboard", "23"))
+        self.time.setItemText(24, _translate("Dashboard", "24"))
+        self.time.setItemText(25, _translate("Dashboard", "25"))
+        self.time.setItemText(26, _translate("Dashboard", "26"))
+        self.time.setItemText(27, _translate("Dashboard", "27"))
+        self.time.setItemText(28, _translate("Dashboard", "28"))
+        self.time.setItemText(29, _translate("Dashboard", "29"))
+        self.time.setItemText(30, _translate("Dashboard", "30"))
+        self.time.setItemText(31, _translate("Dashboard", "31"))
+        self.time.setItemText(32, _translate("Dashboard", "32"))
+        self.time.setItemText(33, _translate("Dashboard", "33"))
+        self.time.setItemText(34, _translate("Dashboard", "34"))
+        self.time.setItemText(35, _translate("Dashboard", "35"))
+        self.time.setItemText(36, _translate("Dashboard", "36"))
+        self.time.setItemText(37, _translate("Dashboard", "37"))
+        self.time.setItemText(38, _translate("Dashboard", "38"))
+        self.time.setItemText(39, _translate("Dashboard", "39"))
+        self.time.setItemText(40, _translate("Dashboard", "40"))
+        self.time.setItemText(41, _translate("Dashboard", "41"))
+        self.time.setItemText(42, _translate("Dashboard", "42"))
+        self.time.setItemText(43, _translate("Dashboard", "43"))
+        self.time.setItemText(44, _translate("Dashboard", "44"))
+        self.time.setItemText(45, _translate("Dashboard", "45"))
+        self.time.setItemText(46, _translate("Dashboard", "46"))
+        self.time.setItemText(47, _translate("Dashboard", "47"))
+        self.time.setItemText(48, _translate("Dashboard", "48"))
+        self.time.setItemText(49, _translate("Dashboard", "49"))
+        self.time.setItemText(50, _translate("Dashboard", "50"))
+        self.time.setItemText(51, _translate("Dashboard", "51"))
+        self.time.setItemText(52, _translate("Dashboard", "52"))
+        self.time.setItemText(53, _translate("Dashboard", "53"))
+        self.time.setItemText(54, _translate("Dashboard", "54"))
+        self.time.setItemText(55, _translate("Dashboard", "55"))
+        self.time.setItemText(56, _translate("Dashboard", "56"))
+        self.time.setItemText(57, _translate("Dashboard", "57"))
+        self.time.setItemText(58, _translate("Dashboard", "58"))
+        self.time.setItemText(59, _translate("Dashboard", "59"))
+        self.time.setItemText(60, _translate("Dashboard", "60"))
+        self.time_2.setItemText(0, _translate("Dashboard", "0"))
+        self.time_2.setItemText(1, _translate("Dashboard", "1"))
+        self.time_2.setItemText(2, _translate("Dashboard", "2"))
+        self.time_2.setItemText(3, _translate("Dashboard", "3"))
+        self.time_2.setItemText(4, _translate("Dashboard", "4"))
+        self.time_2.setItemText(5, _translate("Dashboard", "5"))
+        self.time_2.setItemText(6, _translate("Dashboard", "6"))
+        self.time_2.setItemText(7, _translate("Dashboard", "7"))
+        self.time_2.setItemText(8, _translate("Dashboard", "8"))
+        self.time_2.setItemText(9, _translate("Dashboard", "9"))
+        self.time_2.setItemText(10, _translate("Dashboard", "10"))
+        self.time_2.setItemText(11, _translate("Dashboard", "11"))
+        self.time_2.setItemText(12, _translate("Dashboard", "12"))
+        self.time_2.setItemText(13, _translate("Dashboard", "13"))
+        self.time_2.setItemText(14, _translate("Dashboard", "14"))
+        self.time_2.setItemText(15, _translate("Dashboard", "15"))
+        self.time_2.setItemText(16, _translate("Dashboard", "16"))
+        self.time_2.setItemText(17, _translate("Dashboard", "17"))
+        self.time_2.setItemText(18, _translate("Dashboard", "18"))
+        self.time_2.setItemText(19, _translate("Dashboard", "19"))
+        self.time_2.setItemText(20, _translate("Dashboard", "20"))
+        self.time_2.setItemText(21, _translate("Dashboard", "21"))
+        self.time_2.setItemText(22, _translate("Dashboard", "22"))
+        self.time_2.setItemText(23, _translate("Dashboard", "23"))
+        self.time_2.setItemText(24, _translate("Dashboard", "24"))
+        self.time_2.setItemText(25, _translate("Dashboard", "25"))
+        self.time_2.setItemText(26, _translate("Dashboard", "26"))
+        self.time_2.setItemText(27, _translate("Dashboard", "27"))
+        self.time_2.setItemText(28, _translate("Dashboard", "28"))
+        self.time_2.setItemText(29, _translate("Dashboard", "29"))
+        self.time_2.setItemText(30, _translate("Dashboard", "30"))
+        self.time_2.setItemText(31, _translate("Dashboard", "31"))
+        self.time_2.setItemText(32, _translate("Dashboard", "32"))
+        self.time_2.setItemText(33, _translate("Dashboard", "33"))
+        self.time_2.setItemText(34, _translate("Dashboard", "34"))
+        self.time_2.setItemText(35, _translate("Dashboard", "35"))
+        self.time_2.setItemText(36, _translate("Dashboard", "36"))
+        self.time_2.setItemText(37, _translate("Dashboard", "37"))
+        self.time_2.setItemText(38, _translate("Dashboard", "38"))
+        self.time_2.setItemText(39, _translate("Dashboard", "39"))
+        self.time_2.setItemText(40, _translate("Dashboard", "40"))
+        self.time_2.setItemText(41, _translate("Dashboard", "41"))
+        self.time_2.setItemText(42, _translate("Dashboard", "42"))
+        self.time_2.setItemText(43, _translate("Dashboard", "43"))
+        self.time_2.setItemText(44, _translate("Dashboard", "44"))
+        self.time_2.setItemText(45, _translate("Dashboard", "45"))
+        self.time_2.setItemText(46, _translate("Dashboard", "46"))
+        self.time_2.setItemText(47, _translate("Dashboard", "47"))
+        self.time_2.setItemText(48, _translate("Dashboard", "48"))
+        self.time_2.setItemText(49, _translate("Dashboard", "49"))
+        self.time_2.setItemText(50, _translate("Dashboard", "50"))
+        self.time_2.setItemText(51, _translate("Dashboard", "51"))
+        self.time_2.setItemText(52, _translate("Dashboard", "52"))
+        self.time_2.setItemText(53, _translate("Dashboard", "53"))
+        self.time_2.setItemText(54, _translate("Dashboard", "54"))
+        self.time_2.setItemText(55, _translate("Dashboard", "55"))
+        self.time_2.setItemText(56, _translate("Dashboard", "56"))
+        self.time_2.setItemText(57, _translate("Dashboard", "57"))
+        self.time_2.setItemText(58, _translate("Dashboard", "58"))
+        self.time_2.setItemText(59, _translate("Dashboard", "59"))
+        self.time_2.setItemText(60, _translate("Dashboard", "60"))
+        self.label_4.setText(_translate("Dashboard", "Time of Treatment"))
         self.label_2.setText(_translate("Dashboard", "Name of Client - treatment"))
-        self.label_3.setText(_translate("Dashboard", "Date of treatment"))
-        self.label_4.setText(_translate("Dashboard", "Time of treatment"))
-        self.label_5.setText(_translate("Dashboard", "Chemical/s Used - treatment"))
-        self.label_6.setText(_translate("Dashboard", "Actual Chemical/s Used - treatment"))
-        self.nameofClientinput.setPlaceholderText(_translate("Dashboard", "Ex: Eorico"))
-        item = self.chemicalUsed.verticalHeaderItem(0)
-        item.setText(_translate("Dashboard", "1"))
-        item = self.chemicalUsed.verticalHeaderItem(1)
-        item.setText(_translate("Dashboard", "2"))
-        item = self.chemicalUsed.verticalHeaderItem(2)
-        item.setText(_translate("Dashboard", "3"))
-        item = self.chemicalUsed.verticalHeaderItem(3)
-        item.setText(_translate("Dashboard", "4"))
-        item = self.chemicalUsed.verticalHeaderItem(4)
-        item.setText(_translate("Dashboard", "5"))
-        item = self.chemicalUsed.horizontalHeaderItem(0)
-        item.setText(_translate("Dashboard", "Chemical/s Used"))
-        item = self.chemicalUsed.horizontalHeaderItem(1)
-        item.setText(_translate("Dashboard", "Quantity"))
-        __sortingEnabled = self.chemicalUsed.isSortingEnabled()
-        self.chemicalUsed.setSortingEnabled(False)
-        self.chemicalUsed.setSortingEnabled(__sortingEnabled)
-        item = self.tableListahan.verticalHeaderItem(0)
-        item.setText(_translate("Dashboard", "1"))
-        item = self.tableListahan.horizontalHeaderItem(0)
-        item.setText(_translate("Dashboard", "Admin - User"))
-        item = self.tableListahan.horizontalHeaderItem(1)
-        item.setText(_translate("Dashboard", "Date of Treatment"))
-        item = self.tableListahan.horizontalHeaderItem(2)
-        item.setText(_translate("Dashboard", "Name of Client"))
-        item = self.tableListahan.horizontalHeaderItem(3)
-        item.setText(_translate("Dashboard", "Time of Treatment"))
-        item = self.tableListahan.horizontalHeaderItem(4)
-        item.setText(_translate("Dashboard", "Chemical/s Used"))
-        item = self.tableListahan.horizontalHeaderItem(5)
-        item.setText(_translate("Dashboard", "Actual Chemical/s Used"))
-        __sortingEnabled = self.tableListahan.isSortingEnabled()
-        self.tableListahan.setSortingEnabled(False)
-        self.tableListahan.setSortingEnabled(__sortingEnabled)
-        self.searchDate.setPlaceholderText(_translate("Dashboard", "Search: Ex 01/20/206"))
-        self.confirmButton.setText(_translate("Dashboard", "Submit"))
+        self.label_18.setText(_translate("Dashboard", "Start"))
         item = self.actualchemicalUsed.verticalHeaderItem(0)
         item.setText(_translate("Dashboard", "1"))
         item = self.actualchemicalUsed.verticalHeaderItem(1)
@@ -1559,12 +1578,7 @@ class Ui_Dashboard(object):
         __sortingEnabled = self.actualchemicalUsed.isSortingEnabled()
         self.actualchemicalUsed.setSortingEnabled(False)
         self.actualchemicalUsed.setSortingEnabled(__sortingEnabled)
-        self.label.setText(_translate("Dashboard", "Inspection"))
-        self.label_8.setText(_translate("Dashboard", "Treatment"))
-        self.label_9.setText(_translate("Dashboard", "Recycle Bin"))
-        self.label_10.setText(_translate("Dashboard", "Logout"))
-        self.label_15.setText(_translate("Dashboard", "Mode"))
-        self.label_17.setText(_translate("Dashboard", "treatment"))
+        self.label_5.setText(_translate("Dashboard", "Chemical/s Used - Treatment"))
         self.month.setItemText(0, _translate("Dashboard", "1"))
         self.month.setItemText(1, _translate("Dashboard", "2"))
         self.month.setItemText(2, _translate("Dashboard", "3"))
@@ -1577,6 +1591,82 @@ class Ui_Dashboard(object):
         self.month.setItemText(9, _translate("Dashboard", "10"))
         self.month.setItemText(10, _translate("Dashboard", "11"))
         self.month.setItemText(11, _translate("Dashboard", "12"))
+        self.label_25.setText(_translate("Dashboard", "meridiem"))
+        self.nameofClientinput.setPlaceholderText(_translate("Dashboard", "Ex: Eorico"))
+        self.hours_2.setItemText(0, _translate("Dashboard", "01"))
+        self.hours_2.setItemText(1, _translate("Dashboard", "02"))
+        self.hours_2.setItemText(2, _translate("Dashboard", "03"))
+        self.hours_2.setItemText(3, _translate("Dashboard", "04"))
+        self.hours_2.setItemText(4, _translate("Dashboard", "05"))
+        self.hours_2.setItemText(5, _translate("Dashboard", "06"))
+        self.hours_2.setItemText(6, _translate("Dashboard", "07"))
+        self.hours_2.setItemText(7, _translate("Dashboard", "08"))
+        self.hours_2.setItemText(8, _translate("Dashboard", "09"))
+        self.hours_2.setItemText(9, _translate("Dashboard", "10"))
+        self.hours_2.setItemText(10, _translate("Dashboard", "11"))
+        self.hours_2.setItemText(11, _translate("Dashboard", "12"))
+        self.label_21.setText(_translate("Dashboard", "date"))
+        self.label_20.setText(_translate("Dashboard", "month"))
+        self.year.setItemText(0, _translate("Dashboard", "2015"))
+        self.year.setItemText(1, _translate("Dashboard", "2016"))
+        self.year.setItemText(2, _translate("Dashboard", "2017"))
+        self.year.setItemText(3, _translate("Dashboard", "2018"))
+        self.year.setItemText(4, _translate("Dashboard", "2019"))
+        self.year.setItemText(5, _translate("Dashboard", "2020"))
+        self.year.setItemText(6, _translate("Dashboard", "2021"))
+        self.year.setItemText(7, _translate("Dashboard", "2022"))
+        self.year.setItemText(8, _translate("Dashboard", "2023"))
+        self.year.setItemText(9, _translate("Dashboard", "2024"))
+        self.year.setItemText(10, _translate("Dashboard", "2025"))
+        self.year.setItemText(11, _translate("Dashboard", "2026"))
+        self.year.setItemText(12, _translate("Dashboard", "2027"))
+        self.year.setItemText(13, _translate("Dashboard", "2028"))
+        self.year.setItemText(14, _translate("Dashboard", "2029"))
+        self.year.setItemText(15, _translate("Dashboard", "2030"))
+        self.PM_or_AM_2.setItemText(0, _translate("Dashboard", "PM"))
+        self.PM_or_AM_2.setItemText(1, _translate("Dashboard", "AM"))
+        item = self.chemicalUsed.verticalHeaderItem(0)
+        item.setText(_translate("Dashboard", "1"))
+        item = self.chemicalUsed.verticalHeaderItem(1)
+        item.setText(_translate("Dashboard", "2"))
+        item = self.chemicalUsed.verticalHeaderItem(2)
+        item.setText(_translate("Dashboard", "3"))
+        item = self.chemicalUsed.verticalHeaderItem(3)
+        item.setText(_translate("Dashboard", "4"))
+        item = self.chemicalUsed.verticalHeaderItem(4)
+        item.setText(_translate("Dashboard", "5"))
+        item = self.chemicalUsed.horizontalHeaderItem(0)
+        item.setText(_translate("Dashboard", "Chemical/s Used"))
+        item = self.chemicalUsed.horizontalHeaderItem(1)
+        item.setText(_translate("Dashboard", "Quantity"))
+        __sortingEnabled = self.chemicalUsed.isSortingEnabled()
+        self.chemicalUsed.setSortingEnabled(False)
+        self.chemicalUsed.setSortingEnabled(__sortingEnabled)
+        self.label_3.setText(_translate("Dashboard", "Date of Treatment"))
+        self.label_24.setText(_translate("Dashboard", "minutes"))
+        self.confirmButton.setText(_translate("Dashboard", "SAVE"))
+        self.searchDate.setPlaceholderText(_translate("Dashboard", "Search: Ex - 04/20/26"))
+        item = self.tableListahan.verticalHeaderItem(0)
+        item.setText(_translate("Dashboard", "1"))
+        item = self.tableListahan.horizontalHeaderItem(0)
+        item.setText(_translate("Dashboard", "Name of User"))
+        item = self.tableListahan.horizontalHeaderItem(1)
+        item.setText(_translate("Dashboard", "Date of Treatment"))
+        item = self.tableListahan.horizontalHeaderItem(2)
+        item.setText(_translate("Dashboard", "Name of Client"))
+        item = self.tableListahan.horizontalHeaderItem(3)
+        item.setText(_translate("Dashboard", "Time of Treatment"))
+        item = self.tableListahan.horizontalHeaderItem(4)
+        item.setText(_translate("Dashboard", "Chemical/s Used"))
+        item = self.tableListahan.horizontalHeaderItem(5)
+        item.setText(_translate("Dashboard", "Actual Chemical/s Used"))
+        item = self.tableListahan.horizontalHeaderItem(6)
+        item.setText(_translate("Dashboard", "Edit"))
+        item = self.tableListahan.horizontalHeaderItem(7)
+        item.setText(_translate("Dashboard", "Trash"))
+        __sortingEnabled = self.tableListahan.isSortingEnabled()
+        self.tableListahan.setSortingEnabled(False)
+        self.tableListahan.setSortingEnabled(__sortingEnabled)
         self.date.setItemText(0, _translate("Dashboard", "1"))
         self.date.setItemText(1, _translate("Dashboard", "2"))
         self.date.setItemText(2, _translate("Dashboard", "3"))
@@ -1608,182 +1698,25 @@ class Ui_Dashboard(object):
         self.date.setItemText(28, _translate("Dashboard", "29"))
         self.date.setItemText(29, _translate("Dashboard", "30"))
         self.date.setItemText(30, _translate("Dashboard", "31"))
-        self.year.setItemText(0, _translate("Dashboard", "2015"))
-        self.year.setItemText(1, _translate("Dashboard", "2016"))
-        self.year.setItemText(2, _translate("Dashboard", "2017"))
-        self.year.setItemText(3, _translate("Dashboard", "2018"))
-        self.year.setItemText(4, _translate("Dashboard", "2019"))
-        self.year.setItemText(5, _translate("Dashboard", "2020"))
-        self.year.setItemText(6, _translate("Dashboard", "2021"))
-        self.year.setItemText(7, _translate("Dashboard", "2022"))
-        self.year.setItemText(8, _translate("Dashboard", "2023"))
-        self.year.setItemText(9, _translate("Dashboard", "2024"))
-        self.year.setItemText(10, _translate("Dashboard", "2025"))
-        self.year.setItemText(11, _translate("Dashboard", "2026"))
-        self.year.setItemText(12, _translate("Dashboard", "2027"))
-        self.year.setItemText(13, _translate("Dashboard", "2028"))
-        self.year.setItemText(14, _translate("Dashboard", "2029"))
-        self.year.setItemText(15, _translate("Dashboard", "2030"))
-        self.hours.setItemText(0, _translate("Dashboard", "01"))
-        self.hours.setItemText(1, _translate("Dashboard", "02"))
-        self.hours.setItemText(2, _translate("Dashboard", "03"))
-        self.hours.setItemText(3, _translate("Dashboard", "04"))
-        self.hours.setItemText(4, _translate("Dashboard", "05"))
-        self.hours.setItemText(5, _translate("Dashboard", "06"))
-        self.hours.setItemText(6, _translate("Dashboard", "07"))
-        self.hours.setItemText(7, _translate("Dashboard", "08"))
-        self.hours.setItemText(8, _translate("Dashboard", "09"))
-        self.hours.setItemText(9, _translate("Dashboard", "10"))
-        self.hours.setItemText(10, _translate("Dashboard", "11"))
-        self.hours.setItemText(11, _translate("Dashboard", "12"))
-        self.time.setItemText(0, _translate("Dashboard", "1"))
-        self.time.setItemText(1, _translate("Dashboard", "2"))
-        self.time.setItemText(2, _translate("Dashboard", "3"))
-        self.time.setItemText(3, _translate("Dashboard", "4"))
-        self.time.setItemText(4, _translate("Dashboard", "5"))
-        self.time.setItemText(5, _translate("Dashboard", "6"))
-        self.time.setItemText(6, _translate("Dashboard", "7"))
-        self.time.setItemText(7, _translate("Dashboard", "8"))
-        self.time.setItemText(8, _translate("Dashboard", "9"))
-        self.time.setItemText(9, _translate("Dashboard", "10"))
-        self.time.setItemText(10, _translate("Dashboard", "11"))
-        self.time.setItemText(11, _translate("Dashboard", "12"))
-        self.time.setItemText(12, _translate("Dashboard", "13"))
-        self.time.setItemText(13, _translate("Dashboard", "14"))
-        self.time.setItemText(14, _translate("Dashboard", "15"))
-        self.time.setItemText(15, _translate("Dashboard", "16"))
-        self.time.setItemText(16, _translate("Dashboard", "17"))
-        self.time.setItemText(17, _translate("Dashboard", "18"))
-        self.time.setItemText(18, _translate("Dashboard", "19"))
-        self.time.setItemText(19, _translate("Dashboard", "20"))
-        self.time.setItemText(20, _translate("Dashboard", "21"))
-        self.time.setItemText(21, _translate("Dashboard", "22"))
-        self.time.setItemText(22, _translate("Dashboard", "23"))
-        self.time.setItemText(23, _translate("Dashboard", "24"))
-        self.time.setItemText(24, _translate("Dashboard", "25"))
-        self.time.setItemText(25, _translate("Dashboard", "26"))
-        self.time.setItemText(26, _translate("Dashboard", "27"))
-        self.time.setItemText(27, _translate("Dashboard", "28"))
-        self.time.setItemText(28, _translate("Dashboard", "29"))
-        self.time.setItemText(29, _translate("Dashboard", "30"))
-        self.time.setItemText(30, _translate("Dashboard", "31"))
-        self.time.setItemText(31, _translate("Dashboard", "32"))
-        self.time.setItemText(32, _translate("Dashboard", "33"))
-        self.time.setItemText(33, _translate("Dashboard", "34"))
-        self.time.setItemText(34, _translate("Dashboard", "35"))
-        self.time.setItemText(35, _translate("Dashboard", "36"))
-        self.time.setItemText(36, _translate("Dashboard", "37"))
-        self.time.setItemText(37, _translate("Dashboard", "38"))
-        self.time.setItemText(38, _translate("Dashboard", "39"))
-        self.time.setItemText(39, _translate("Dashboard", "40"))
-        self.time.setItemText(40, _translate("Dashboard", "41"))
-        self.time.setItemText(41, _translate("Dashboard", "42"))
-        self.time.setItemText(42, _translate("Dashboard", "43"))
-        self.time.setItemText(43, _translate("Dashboard", "44"))
-        self.time.setItemText(44, _translate("Dashboard", "45"))
-        self.time.setItemText(45, _translate("Dashboard", "46"))
-        self.time.setItemText(46, _translate("Dashboard", "47"))
-        self.time.setItemText(47, _translate("Dashboard", "48"))
-        self.time.setItemText(48, _translate("Dashboard", "49"))
-        self.time.setItemText(49, _translate("Dashboard", "50"))
-        self.time.setItemText(50, _translate("Dashboard", "51"))
-        self.time.setItemText(51, _translate("Dashboard", "52"))
-        self.time.setItemText(52, _translate("Dashboard", "53"))
-        self.time.setItemText(53, _translate("Dashboard", "54"))
-        self.time.setItemText(54, _translate("Dashboard", "55"))
-        self.time.setItemText(55, _translate("Dashboard", "56"))
-        self.time.setItemText(56, _translate("Dashboard", "57"))
-        self.time.setItemText(57, _translate("Dashboard", "58"))
-        self.time.setItemText(58, _translate("Dashboard", "59"))
-        self.time.setItemText(59, _translate("Dashboard", "60"))
-        # Set the newly added "0" item
-        self.time.setItemText(60, _translate("Dashboard", "0"))
-        self.PM_or_AM.setItemText(0, _translate("Dashboard", "PM"))
-        self.PM_or_AM.setItemText(1, _translate("Dashboard", "AM"))
-        self.time_2.setItemText(0, _translate("Dashboard", "1"))
-        self.time_2.setItemText(1, _translate("Dashboard", "2"))
-        self.time_2.setItemText(2, _translate("Dashboard", "3"))
-        self.time_2.setItemText(3, _translate("Dashboard", "4"))
-        self.time_2.setItemText(4, _translate("Dashboard", "5"))
-        self.time_2.setItemText(5, _translate("Dashboard", "6"))
-        self.time_2.setItemText(6, _translate("Dashboard", "7"))
-        self.time_2.setItemText(7, _translate("Dashboard", "8"))
-        self.time_2.setItemText(8, _translate("Dashboard", "9"))
-        self.time_2.setItemText(9, _translate("Dashboard", "10"))
-        self.time_2.setItemText(10, _translate("Dashboard", "11"))
-        self.time_2.setItemText(11, _translate("Dashboard", "12"))
-        self.time_2.setItemText(12, _translate("Dashboard", "13"))
-        self.time_2.setItemText(13, _translate("Dashboard", "14"))
-        self.time_2.setItemText(14, _translate("Dashboard", "15"))
-        self.time_2.setItemText(15, _translate("Dashboard", "16"))
-        self.time_2.setItemText(16, _translate("Dashboard", "17"))
-        self.time_2.setItemText(17, _translate("Dashboard", "18"))
-        self.time_2.setItemText(18, _translate("Dashboard", "19"))
-        self.time_2.setItemText(19, _translate("Dashboard", "20"))
-        self.time_2.setItemText(20, _translate("Dashboard", "21"))
-        self.time_2.setItemText(21, _translate("Dashboard", "22"))
-        self.time_2.setItemText(22, _translate("Dashboard", "23"))
-        self.time_2.setItemText(23, _translate("Dashboard", "24"))
-        self.time_2.setItemText(24, _translate("Dashboard", "25"))
-        self.time_2.setItemText(25, _translate("Dashboard", "26"))
-        self.time_2.setItemText(26, _translate("Dashboard", "27"))
-        self.time_2.setItemText(27, _translate("Dashboard", "28"))
-        self.time_2.setItemText(28, _translate("Dashboard", "29"))
-        self.time_2.setItemText(29, _translate("Dashboard", "30"))
-        self.time_2.setItemText(30, _translate("Dashboard", "31"))
-        self.time_2.setItemText(31, _translate("Dashboard", "32"))
-        self.time_2.setItemText(32, _translate("Dashboard", "33"))
-        self.time_2.setItemText(33, _translate("Dashboard", "34"))
-        self.time_2.setItemText(34, _translate("Dashboard", "35"))
-        self.time_2.setItemText(35, _translate("Dashboard", "36"))
-        self.time_2.setItemText(36, _translate("Dashboard", "37"))
-        self.time_2.setItemText(37, _translate("Dashboard", "38"))
-        self.time_2.setItemText(38, _translate("Dashboard", "39"))
-        self.time_2.setItemText(39, _translate("Dashboard", "40"))
-        self.time_2.setItemText(40, _translate("Dashboard", "41"))
-        self.time_2.setItemText(41, _translate("Dashboard", "42"))
-        self.time_2.setItemText(42, _translate("Dashboard", "43"))
-        self.time_2.setItemText(43, _translate("Dashboard", "44"))
-        self.time_2.setItemText(44, _translate("Dashboard", "45"))
-        self.time_2.setItemText(45, _translate("Dashboard", "46"))
-        self.time_2.setItemText(46, _translate("Dashboard", "47"))
-        self.time_2.setItemText(47, _translate("Dashboard", "48"))
-        self.time_2.setItemText(48, _translate("Dashboard", "49"))
-        self.time_2.setItemText(49, _translate("Dashboard", "50"))
-        self.time_2.setItemText(50, _translate("Dashboard", "51"))
-        self.time_2.setItemText(51, _translate("Dashboard", "52"))
-        self.time_2.setItemText(52, _translate("Dashboard", "53"))
-        self.time_2.setItemText(53, _translate("Dashboard", "54"))
-        self.time_2.setItemText(54, _translate("Dashboard", "55"))
-        self.time_2.setItemText(55, _translate("Dashboard", "56"))
-        self.time_2.setItemText(56, _translate("Dashboard", "57"))
-        self.time_2.setItemText(57, _translate("Dashboard", "58"))
-        self.time_2.setItemText(58, _translate("Dashboard", "59"))
-        self.time_2.setItemText(59, _translate("Dashboard", "60"))
-        # Set the newly added "0" item
-        self.time_2.setItemText(60, _translate("Dashboard", "0"))
-        self.hours_2.setItemText(0, _translate("Dashboard", "01"))
-        self.hours_2.setItemText(1, _translate("Dashboard", "02"))
-        self.hours_2.setItemText(2, _translate("Dashboard", "03"))
-        self.hours_2.setItemText(3, _translate("Dashboard", "04"))
-        self.hours_2.setItemText(4, _translate("Dashboard", "05"))
-        self.hours_2.setItemText(5, _translate("Dashboard", "06"))
-        self.hours_2.setItemText(6, _translate("Dashboard", "07"))
-        self.hours_2.setItemText(7, _translate("Dashboard", "08"))
-        self.hours_2.setItemText(8, _translate("Dashboard", "09"))
-        self.hours_2.setItemText(9, _translate("Dashboard", "10"))
-        self.hours_2.setItemText(10, _translate("Dashboard", "11"))
-        self.hours_2.setItemText(11, _translate("Dashboard", "12"))
-        self.PM_or_AM_2.setItemText(0, _translate("Dashboard", "PM"))
-        self.PM_or_AM_2.setItemText(1, _translate("Dashboard", "AM"))
-        self.label_18.setText(_translate("Dashboard", "Start"))
-        self.label_19.setText(_translate("Dashboard", "End"))
-        self.label_20.setText(_translate("Dashboard", "month"))
-        self.label_21.setText(_translate("Dashboard", "date"))
-        self.label_22.setText(_translate("Dashboard", "year"))
-        self.label_23.setText(_translate("Dashboard", "hour"))
-        self.label_24.setText(_translate("Dashboard", "minutes"))
-        self.label_25.setText(_translate("Dashboard", "meridiem"))
+        self.label_6.setText(_translate("Dashboard", "Actual Chemical/s Used - Treatment"))
+        self.actions.setTitle(_translate("Dashboard", "ACTIONS"))
+        self.type_of_treatment.setTitle(_translate("Dashboard", "TYPE OF TREATMENT"))
+        self.toolBar_logout.setWindowTitle(_translate("Dashboard", "toolBar"))
+        self.toolBar_files.setWindowTitle(_translate("Dashboard", "toolBar_2"))
+        self.actionTREATMENT.setText(_translate("Dashboard", "TREATMENT"))
+        self.actionINSPECTION.setText(_translate("Dashboard", "INSPECTION"))
+        self.actionRECYCLE_BIN.setText(_translate("Dashboard", "RECYCLE BIN"))
+        self.actionPDF_STORAGE.setText(_translate("Dashboard", "PDF STORAGE"))
+        self.actionLOGOUT.setText(_translate("Dashboard", "LOGOUT"))
+        self.actionTREATMENT_2.setText(_translate("Dashboard", "TREATMENT"))
+        self.actionINSPECTION_2.setText(_translate("Dashboard", "INSPECTION"))
+        self.PDF_storage_2.setText(_translate("Dashboard", "PDF"))
+        self.PDF_storage_2.setShortcut(_translate("Dashboard", "P"))
+        self.recycle_bin.setText(_translate("Dashboard", "RECYCLE BIN"))
+        self.PDF_storage.setText(_translate("Dashboard", "PDF STORAGE"))
+        self.logout.setText(_translate("Dashboard", "LOGOUT"))
+        self.treatment.setText(_translate("Dashboard", "TREATMENT"))
+        self.inspection.setText(_translate("Dashboard", "INSPECTION"))
         
 class DashboardController(QtWidgets.QMainWindow):
     def __init__(self):
@@ -1791,103 +1724,115 @@ class DashboardController(QtWidgets.QMainWindow):
         self.ui = Ui_Dashboard()
         self.ui.setupUi(self)
         
-        self.setMinimumSize(1128, 886)
-        self.resize(1128, 886)
+        self.setMinimumSize(1126, 896)
+        self.resize(1126, 896)
+        
+        # Apply consistent styling to labels
+        self.unify_label_styles()
+
+    def unify_label_styles(self):
+        """Apply consistent styling to labels 2,3,4,5,6,17,18,19,20,21,22,23,24,25"""
+        labels = [self.ui.label_2, self.ui.label_3, self.ui.label_4, self.ui.label_5, 
+                  self.ui.label_6, self.ui.label_17, self.ui.label_18, self.ui.label_19,
+                  self.ui.label_20, self.ui.label_21, self.ui.label_22, self.ui.label_23,
+                  self.ui.label_24, self.ui.label_25]
+        
+        for label in labels:
+            # Remove inconsistent indent
+            label.setIndent(0)
+            # Set consistent alignment (left-aligned, vertically centered)
+            label.setAlignment(QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
+            # Set word wrap to handle longer text
+            label.setWordWrap(True)
+            # Ensure consistent font
+            font = QtGui.QFont()
+            font.setPointSize(12)
+            label.setFont(font)
 
     def resizeEvent(self, event):
-        base_width = 1128
-        base_height = 886
+        base_width = 1126
+        base_height = 896
 
         scale_w = self.width() / base_width
         scale_h = self.height() / base_height
 
-        # Updated scale function with optional min/max for x and y
-        def scale(x, y, w, h, min_x=None, max_x=None, min_y=None, max_y=None):
-            new_x = int(x * scale_w)
-            new_y = int(y * scale_h)
-            new_w = int(w * scale_w)
-            new_h = int(h * scale_h)
+        # Helper function to scale geometry consistently
+        def scale_rect(x, y, w, h):
+                return (
+                int(x * scale_w),
+                int(y * scale_h),
+                int(w * scale_w),
+                int(h * scale_h)
+                )
 
-            if min_x is not None:
-                new_x = max(new_x, min_x)
-            if max_x is not None:
-                new_x = min(new_x, max_x)
-            if min_y is not None:
-                new_y = max(new_y, min_y)
-            if max_y is not None:
-                new_y = min(new_y, max_y)
+        # === DATE SELECTION SECTION ===
+        self.ui.label_20.setGeometry(*scale_rect(14, 29, 46, 19))  # "month"
+        self.ui.label_21.setGeometry(*scale_rect(120, 29, 33, 19))  # "date"
+        self.ui.label_22.setGeometry(*scale_rect(220, 29, 33, 19))  # "year"
+        
+        self.ui.month.setGeometry(*scale_rect(19, 51, 81, 41))
+        self.ui.date.setGeometry(*scale_rect(127, 52, 81, 41))
+        self.ui.year.setGeometry(*scale_rect(230, 52, 81, 41))
 
-            return new_x, new_y, new_w, new_h
+        # === CLIENT NAME ===
+        self.ui.label_2.setGeometry(*scale_rect(8, 106, 189, 19))  # "Name of Client - treatment"
+        self.ui.nameofClientinput.setGeometry(*scale_rect(20, 129, 301, 41))
 
-        # === DATE COMBOBOXES ===
-        self.ui.month.setGeometry(*scale(39, 142, 61, 41))
-        self.ui.year.setGeometry(*scale(210, 143, 81, 41))
-        self.ui.date.setGeometry(*scale(120, 143, 61, 41))
+        # === TIME SELECTION SECTION (START TIME) ===
+        self.ui.label_3.setGeometry(*scale_rect(8, 3, 129, 19))  # "Date of Treatment"
+        self.ui.label_23.setGeometry(*scale_rect(73, 207, 46, 19))  # "hour"
+        self.ui.label_24.setGeometry(*scale_rect(156, 207, 56, 19))  # "minutes"
+        self.ui.label_25.setGeometry(*scale_rect(230, 207, 67, 19))  # "meridiem"
+        self.ui.label_18.setGeometry(*scale_rect(30, 229, 33, 19))  # "Start"
+        
+        self.ui.hours.setGeometry(*scale_rect(80, 226, 71, 41))
+        self.ui.time.setGeometry(*scale_rect(160, 226, 71, 41))
+        self.ui.PM_or_AM.setGeometry(*scale_rect(240, 226, 81, 41))
 
-        # === TIME COMBOBOXES (START & END) ===
-        # Start time
-        self.ui.hours.setGeometry(*scale(90, 317, 61, 41))
-        self.ui.time.setGeometry(*scale(160, 317, 61, 41))
-        self.ui.PM_or_AM.setGeometry(*scale(230, 317, 61, 41, min_x=230, max_x=400))
-        # End time
-        self.ui.hours_2.setGeometry(*scale(90, 367, 61, 41))
-        self.ui.time_2.setGeometry(*scale(160, 367, 61, 41))
-        self.ui.PM_or_AM_2.setGeometry(*scale(230, 367, 61, 41, min_x=230, max_x=400))
+        # === TIME SELECTION SECTION (END TIME) ===
+        self.ui.label_4.setGeometry(*scale_rect(10, 181, 133, 19))  # "Time of Treatment"
+        self.ui.label_19.setGeometry(*scale_rect(30, 279, 33, 19))  # "End"
+        
+        self.ui.hours_2.setGeometry(*scale_rect(80, 276, 71, 41))
+        self.ui.time_2.setGeometry(*scale_rect(160, 276, 71, 41))
+        self.ui.PM_or_AM_2.setGeometry(*scale_rect(240, 276, 81, 41))
 
-        # === OTHER INPUTS & TABLES ===
-        self.ui.nameofClientinput.setGeometry(*scale(40, 220, 251, 41))
-        self.ui.chemicalUsed.setGeometry(*scale(20, 440, 311, 171))
-        self.ui.actualchemicalUsed.setGeometry(*scale(20, 650, 311, 171))
-        self.ui.tableListahan.setGeometry(*scale(340, 150, 791, 741))
-        self.ui.searchDate.setGeometry(*scale(895, 100, 221, 41))
-        self.ui.confirmButton.setGeometry(*scale(70, 837, 211, 41))
+        # === CHEMICAL TABLES ===
+        self.ui.label_5.setGeometry(*scale_rect(10, 329, 206, 19))  # "Chemical/s Used - Treatment"
+        self.ui.chemicalUsed.setGeometry(*scale_rect(18, 349, 311, 171))
+        
+        self.ui.label_6.setGeometry(*scale_rect(10, 530, 255, 19))  # "Actual Chemical/s Used - Treatment"
+        self.ui.actualchemicalUsed.setGeometry(*scale_rect(17, 550, 311, 171))
 
-        # === LABELS ===
-        self.ui.label_2.setGeometry(*scale(20, 197, 189, 19))
-        self.ui.label_3.setGeometry(*scale(20, 94, 129, 19, min_x=20, max_x=50))
-        self.ui.label_4.setGeometry(*scale(20, 272, 133, 19))
-        self.ui.label_5.setGeometry(*scale(21, 420, 206, 19))
-        self.ui.label_6.setGeometry(*scale(22, 630, 255, 19, min_x=-10, max_x=50))
-        self.ui.label_17.setGeometry(*scale(714, 102, 151, 31))
-        self.ui.label_18.setGeometry(*scale(36, 320, 33, 19))
-        self.ui.label_19.setGeometry(*scale(35, 370, 33, 19))
-        self.ui.label_20.setGeometry(*scale(34, 120, 46, 19))
-        self.ui.label_21.setGeometry(*scale(120, 120, 33, 19))
-        self.ui.label_22.setGeometry(*scale(200, 120, 33, 19))
-        self.ui.label_23.setGeometry(*scale(80, 298, 46, 19))
-        self.ui.label_24.setGeometry(*scale(153, 298, 56, 19))
-        self.ui.label_25.setGeometry(*scale(222, 298, 67, 19))
+        # === MAIN DATA TABLE ===
+        self.ui.tableListahan.setGeometry(*scale_rect(338, 60, 791, 721))
 
-        # === HEADER (TOP BAR) ===
-        self.ui.widget.setGeometry(*scale(0,0,1131,91))
-        self.ui.label_7.setGeometry(*scale(-5,4,91,81))
-        self.ui.line_4.setGeometry(*scale(80,0,20,91))
-        self.ui.line_6.setGeometry(*scale(90,21,1041,20))
-        self.ui.label.setGeometry(*scale(100,8,81,19))
-        self.ui.label_8.setGeometry(*scale(198,8,81,19))
-        self.ui.label_9.setGeometry(*scale(292,7,81,19))
-        self.ui.Inspection_btn.setGeometry(*scale(110,36,51,51))
-        self.ui.Treatment_btn.setGeometry(*scale(209,35,51,51))
-        self.ui.RecycleBin_btn.setGeometry(*scale(301,35,51,51))
-        self.ui.Logout_btn.setGeometry(*scale(1059,35,51,51))
-        self.ui.label_11.setGeometry(*scale(106,43,61,41))
-        self.ui.label_12.setGeometry(*scale(210,30,51,61))
-        self.ui.label_13.setGeometry(*scale(300,40,51,41))
-        self.ui.label_14.setGeometry(*scale(1055,40,61,41))
-        self.ui.label_10.setGeometry(*scale(1059,6,49,19))
-        self.ui.label_15.setGeometry(*scale(956,10,38,19))
-        self.ui.RecycleBin_btn_2.setGeometry(*scale(950,35,51,51))
-        self.ui.RecycleBin_btn_3.setGeometry(*scale(710, 100, 161, 41))
-        self.ui.label_16.setGeometry(*scale(955,35,41,51))
+        # === SEARCH AND BUTTONS SECTION ===
+        self.ui.label_17.setGeometry(*scale_rect(715, 13, 151, 31))  # "Treatment" label
+        self.ui.RecycleBin_btn_3.setGeometry(*scale_rect(640, 10, 211, 41))  # Recycle bin button - ADDED THIS
+        self.ui.searchDate.setGeometry(*scale_rect(890, 9, 221, 41))
+        self.ui.confirmButton.setGeometry(*scale_rect(16, 730, 311, 41))
 
-        # === LINES ===
-        self.ui.line.setGeometry(*scale(882,80,241,20))
-        self.ui.line_2.setGeometry(*scale(868,90,31,61))
-        self.ui.line_3.setGeometry(*scale(1120,140,20,61))
-        self.ui.line_5.setGeometry(*scale(0,84,1131,16))
-        self.ui.line_7.setGeometry(*scale(1115,90,31,61))
-        self.ui.line_8.setGeometry(*scale(700, 82, 181, 20))
-        self.ui.line_9.setGeometry(*scale(686, 90, 31, 61))
+        # === DECORATIVE LINES ===
+        self.ui.line.setGeometry(*scale_rect(864, -10, 241, 20))
+        self.ui.line_2.setGeometry(*scale_rect(855, -1, 31, 61))
+        self.ui.line_3.setGeometry(*scale_rect(-5, -9, 1131, 20))
+        self.ui.line_8.setGeometry(*scale_rect(682, -10, 181, 20))
+        self.ui.line_9.setGeometry(*scale_rect(606, -1, 31, 61))
+
+        # === SCROLL AREA ===
+        # Update scroll area size to match window (account for menu bar)
+        self.ui.scrollArea.setGeometry(*scale_rect(0, 0, self.width(), self.height() - 48))
+        
+        # Update scroll area widget contents size
+        scroll_content = self.ui.scrollAreaWidgetContents_2
+        if scroll_content:
+                new_width = int(1129 * scale_w)
+                new_height = int(779 * scale_h)
+                scroll_content.setGeometry(QtCore.QRect(0, 0, new_width, new_height))
+        
+        # Update menu bar position and width
+        self.ui.menuBar.setGeometry(QtCore.QRect(0, 0, self.width(), 48))
 
         super().resizeEvent(event)
 

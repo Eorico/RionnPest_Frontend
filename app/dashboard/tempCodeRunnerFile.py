@@ -1,7 +1,7 @@
 from PyQt5.QtWidgets import QTableWidgetItem, QMessageBox
-from PyQt5.QtGui import QIcon
+from PyQt5.QtGui import QPixmap
 from PyQt5.QtCore import Qt
-from ui.dashboard import DashboardController
+from ui.dashboard import Ui_Dashboard, DashboardController
 from .dashboard_renderer import DashboardTableRenderer
 from util.dashboard_util import DashboardFormatter
 import os
@@ -12,17 +12,19 @@ IMAGE_PATH = os.path.join(os.path.dirname(CURRENT_DIR), "ui", "assets")
 class DashboardWindow(DashboardController):
     def __init__(self, api_service):
         super().__init__()
+        self.ui = Ui_Dashboard()
+        self.ui.setupUi(self)
 
         self.api = api_service
         self.current_category = "treatment"
         self.is_online = False
-        
-        self.setWindowIcon(QIcon(f"{IMAGE_PATH}/Logo.png"))
 
         self.table_renderer = DashboardTableRenderer(
             self.ui.tableListahan,
             self.handle_trash_dashboard
         )
+        
+        
             
         self._setup_table()
         # self.status_mode_internet_dashboard()

@@ -21,7 +21,7 @@ class MainApp:
         
         self.intro.finished.connect(self.show_login)
         self.login.login_success.connect(self.show_dashboard)
-        self.dashboard.ui.RecycleBin_btn.clicked.connect(self.show_recycle_bin)
+        self.dashboard.ui.recycle_bin.triggered.connect(self.show_recycle_bin)
         
         self.intro.show()
         

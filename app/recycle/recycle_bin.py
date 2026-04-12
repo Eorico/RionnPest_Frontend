@@ -1,6 +1,11 @@
 from PyQt5.QtWidgets import QMainWindow, QTableWidgetItem, QMessageBox
 from PyQt5.QtCore import Qt
 from ui.recycle_bin import Ui_RecycleBin
+from PyQt5.QtGui import QIcon
+import os
+
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+IMAGE_PATH = os.path.join(os.path.dirname(CURRENT_DIR), "ui", "assets")
 
 class RecyclBinWindow(QMainWindow):
     def __init__(self, api_service, on_restore_callback=None, parent=None):
@@ -9,6 +14,8 @@ class RecyclBinWindow(QMainWindow):
         self.ui.setupUi(self)
         self.api = api_service
         self.on_restore_callback = on_restore_callback
+        
+        self.setWindowIcon(QIcon(f"{IMAGE_PATH}/Logo.png"))
         
         self.ui.Restore_btn.clicked.connect(self.handle_restore)
         self.ui.Restore_all_btn.clicked.connect(self.handle_restore_all)
