@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1126</width>
-    <height>896</height>
+    <width>1423</width>
+    <height>976</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -50,10 +50,13 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>0</y>
-      <width>1131</width>
-      <height>781</height>
+      <y>69</y>
+      <width>1381</width>
+      <height>911</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QScrollArea { background-color: #D9E9CF; border: none; border-right: 1px solid #DCE3DC; } QWidget { background-color: #D9E9CF; }</string>
     </property>
     <property name="widgetResizable">
      <bool>true</bool>
@@ -63,65 +66,26 @@
       <rect>
        <x>0</x>
        <y>0</y>
-       <width>1129</width>
-       <height>779</height>
+       <width>1379</width>
+       <height>909</height>
       </rect>
      </property>
-     <widget class="QLabel" name="label_17">
-      <property name="geometry">
-       <rect>
-        <x>670</x>
-        <y>13</y>
-        <width>151</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>12</pointsize>
-       </font>
-      </property>
-      <property name="layoutDirection">
-       <enum>Qt::LeftToRight</enum>
-      </property>
-      <property name="text">
-       <string>Treatment</string>
-      </property>
-      <property name="textFormat">
-       <enum>Qt::AutoText</enum>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-      <property name="indent">
-       <number>67</number>
-      </property>
-     </widget>
-     <widget class="Line" name="line_9">
-      <property name="geometry">
-       <rect>
-        <x>606</x>
-        <y>-1</y>
-        <width>31</width>
-        <height>61</height>
-       </rect>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-     </widget>
      <widget class="QComboBox" name="hours">
       <property name="geometry">
        <rect>
-        <x>80</x>
-        <y>226</y>
+        <x>100</x>
+        <y>258</y>
         <width>71</width>
-        <height>41</height>
+        <height>42</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <pointsize>11</pointsize>
+        <family>Segoe UI</family>
+        <pointsize>10</pointsize>
+        <weight>50</weight>
+        <italic>false</italic>
+        <bold>false</bold>
        </font>
       </property>
       <property name="cursor">
@@ -129,41 +93,47 @@
       </property>
       <property name="styleSheet">
        <string notr="true">QComboBox {
-    background-color: #ffffff;        /* now white */
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    padding: 5px 10px;
+    color: #1A3C2A;
+    font: 10pt &quot;Segoe UI&quot;;
+    min-height: 28px;
+
+    /* ✅ GREEN 3D BORDER */
     border-style: solid;
     border-width: 2px;
-    border-top-color: #ffffff;        /* light top */
-    border-left-color: #ffffff;       /* light left */
-    border-bottom-color: #aaaaaa;     /* dark bottom */
-    border-right-color: #aaaaaa;      /* dark right */
-    padding: 6px 10px;
-    color: #333333;
-    border-radius: 4px;               /* optional rounded corners */
+    border-top-color: #C6F6D5;     /* light green highlight */
+    border-left-color: #C6F6D5;
+    border-bottom-color: #2D6A4F;  /* dark green shadow */
+    border-right-color: #2D6A4F;
 }
 
-QLineEdit:focus {
-    border-top-color: #28c770;        /* focus effect top */
-    border-left-color: #28c770;
-    border-bottom-color: #218c57;     /* focus effect bottom */
-    border-right-color: #218c57;
-    background-color: #ffffff;        /* stays white on focus */
+QComboBox:hover {
+    border-top-color: #E9F5EC;
+    border-left-color: #E9F5EC;
+    border-bottom-color: #1B4332;
+    border-right-color: #1B4332;
 }
 
-QLineEdit:hover {
-    border-top-color: #eeeeee;
-    border-left-color: #eeeeee;
-    border-bottom-color: #888888;
-    border-right-color: #888888;
+QComboBox:focus {
+    border-top-color: #E9F5EC;
+    border-left-color: #E9F5EC;
+    border-bottom-color: #1B4332;
+    border-right-color: #1B4332;
 }
 
-QComboBox:disabled {
-    background-color: #eeeeee;        /* muted gray when disabled */
-    color: #aaaaaa;
-    border-top-color: #f5f5f5;
-    border-left-color: #f5f5f5;
-    border-bottom-color: #cccccc;
-    border-right-color: #cccccc;
-}</string>
+/* dropdown list */
+QComboBox QAbstractItemView {
+    background-color: #FFFFFF;
+    border: 1px solid #C6F6D5;
+    border-radius: 6px;
+    selection-background-color: #2D6A4F;
+    selection-color: #ffffff;
+    font: 10pt &quot;Segoe UI&quot;;
+}
+
+</string>
       </property>
       <property name="editable">
        <bool>false</bool>
@@ -232,15 +202,19 @@ QComboBox:disabled {
      <widget class="QComboBox" name="PM_or_AM">
       <property name="geometry">
        <rect>
-        <x>240</x>
-        <y>226</y>
+        <x>300</x>
+        <y>258</y>
         <width>81</width>
-        <height>41</height>
+        <height>42</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <pointsize>11</pointsize>
+        <family>Segoe UI</family>
+        <pointsize>10</pointsize>
+        <weight>50</weight>
+        <italic>false</italic>
+        <bold>false</bold>
        </font>
       </property>
       <property name="cursor">
@@ -248,41 +222,47 @@ QComboBox:disabled {
       </property>
       <property name="styleSheet">
        <string notr="true">QComboBox {
-    background-color: #ffffff;        /* now white */
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    padding: 5px 10px;
+    color: #1A3C2A;
+    font: 10pt &quot;Segoe UI&quot;;
+    min-height: 28px;
+
+    /* ✅ GREEN 3D BORDER */
     border-style: solid;
     border-width: 2px;
-    border-top-color: #ffffff;        /* light top */
-    border-left-color: #ffffff;       /* light left */
-    border-bottom-color: #aaaaaa;     /* dark bottom */
-    border-right-color: #aaaaaa;      /* dark right */
-    padding: 6px 10px;
-    color: #333333;
-    border-radius: 4px;               /* optional rounded corners */
+    border-top-color: #C6F6D5;     /* light green highlight */
+    border-left-color: #C6F6D5;
+    border-bottom-color: #2D6A4F;  /* dark green shadow */
+    border-right-color: #2D6A4F;
 }
 
-QLineEdit:focus {
-    border-top-color: #28c770;        /* focus effect top */
-    border-left-color: #28c770;
-    border-bottom-color: #218c57;     /* focus effect bottom */
-    border-right-color: #218c57;
-    background-color: #ffffff;        /* stays white on focus */
+QComboBox:hover {
+    border-top-color: #E9F5EC;
+    border-left-color: #E9F5EC;
+    border-bottom-color: #1B4332;
+    border-right-color: #1B4332;
 }
 
-QLineEdit:hover {
-    border-top-color: #eeeeee;
-    border-left-color: #eeeeee;
-    border-bottom-color: #888888;
-    border-right-color: #888888;
+QComboBox:focus {
+    border-top-color: #E9F5EC;
+    border-left-color: #E9F5EC;
+    border-bottom-color: #1B4332;
+    border-right-color: #1B4332;
 }
 
-QComboBox:disabled {
-    background-color: #eeeeee;        /* muted gray when disabled */
-    color: #aaaaaa;
-    border-top-color: #f5f5f5;
-    border-left-color: #f5f5f5;
-    border-bottom-color: #cccccc;
-    border-right-color: #cccccc;
-}</string>
+/* dropdown list */
+QComboBox QAbstractItemView {
+    background-color: #FFFFFF;
+    border: 1px solid #C6F6D5;
+    border-radius: 6px;
+    selection-background-color: #2D6A4F;
+    selection-color: #ffffff;
+    font: 10pt &quot;Segoe UI&quot;;
+}
+
+</string>
       </property>
       <property name="editable">
        <bool>false</bool>
@@ -298,55 +278,25 @@ QComboBox:disabled {
        </property>
       </item>
      </widget>
-     <widget class="QLabel" name="label_23">
-      <property name="geometry">
-       <rect>
-        <x>73</x>
-        <y>207</y>
-        <width>46</width>
-        <height>19</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>12</pointsize>
-       </font>
-      </property>
-      <property name="layoutDirection">
-       <enum>Qt::LeftToRight</enum>
-      </property>
-      <property name="text">
-       <string>hour</string>
-      </property>
-      <property name="textFormat">
-       <enum>Qt::AutoText</enum>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-      <property name="indent">
-       <number>67</number>
-      </property>
-     </widget>
      <widget class="QLabel" name="label_22">
       <property name="geometry">
        <rect>
         <x>220</x>
-        <y>29</y>
+        <y>80</y>
         <width>33</width>
         <height>19</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <pointsize>12</pointsize>
+        <pointsize>8</pointsize>
        </font>
       </property>
       <property name="layoutDirection">
        <enum>Qt::LeftToRight</enum>
       </property>
       <property name="text">
-       <string>year</string>
+       <string>YEAR</string>
       </property>
       <property name="textFormat">
        <enum>Qt::AutoText</enum>
@@ -361,22 +311,22 @@ QComboBox:disabled {
      <widget class="QLabel" name="label_19">
       <property name="geometry">
        <rect>
-        <x>30</x>
-        <y>279</y>
+        <x>40</x>
+        <y>311</y>
         <width>33</width>
         <height>19</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <pointsize>12</pointsize>
+        <pointsize>8</pointsize>
        </font>
       </property>
       <property name="layoutDirection">
        <enum>Qt::LeftToRight</enum>
       </property>
       <property name="text">
-       <string>End</string>
+       <string>END</string>
       </property>
       <property name="textFormat">
        <enum>Qt::AutoText</enum>
@@ -391,15 +341,19 @@ QComboBox:disabled {
      <widget class="QComboBox" name="time">
       <property name="geometry">
        <rect>
-        <x>160</x>
-        <y>226</y>
+        <x>200</x>
+        <y>258</y>
         <width>71</width>
-        <height>41</height>
+        <height>42</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <pointsize>11</pointsize>
+        <family>Segoe UI</family>
+        <pointsize>10</pointsize>
+        <weight>50</weight>
+        <italic>false</italic>
+        <bold>false</bold>
        </font>
       </property>
       <property name="cursor">
@@ -407,48 +361,54 @@ QComboBox:disabled {
       </property>
       <property name="styleSheet">
        <string notr="true">QComboBox {
-    background-color: #ffffff;        /* now white */
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    padding: 5px 10px;
+    color: #1A3C2A;
+    font: 10pt &quot;Segoe UI&quot;;
+    min-height: 28px;
+
+    /* ✅ GREEN 3D BORDER */
     border-style: solid;
     border-width: 2px;
-    border-top-color: #ffffff;        /* light top */
-    border-left-color: #ffffff;       /* light left */
-    border-bottom-color: #aaaaaa;     /* dark bottom */
-    border-right-color: #aaaaaa;      /* dark right */
-    padding: 6px 10px;
-    color: #333333;
-    border-radius: 4px;               /* optional rounded corners */
+    border-top-color: #C6F6D5;     /* light green highlight */
+    border-left-color: #C6F6D5;
+    border-bottom-color: #2D6A4F;  /* dark green shadow */
+    border-right-color: #2D6A4F;
 }
 
-QLineEdit:focus {
-    border-top-color: #28c770;        /* focus effect top */
-    border-left-color: #28c770;
-    border-bottom-color: #218c57;     /* focus effect bottom */
-    border-right-color: #218c57;
-    background-color: #ffffff;        /* stays white on focus */
+QComboBox:hover {
+    border-top-color: #E9F5EC;
+    border-left-color: #E9F5EC;
+    border-bottom-color: #1B4332;
+    border-right-color: #1B4332;
 }
 
-QLineEdit:hover {
-    border-top-color: #eeeeee;
-    border-left-color: #eeeeee;
-    border-bottom-color: #888888;
-    border-right-color: #888888;
+QComboBox:focus {
+    border-top-color: #E9F5EC;
+    border-left-color: #E9F5EC;
+    border-bottom-color: #1B4332;
+    border-right-color: #1B4332;
 }
 
-QComboBox:disabled {
-    background-color: #eeeeee;        /* muted gray when disabled */
-    color: #aaaaaa;
-    border-top-color: #f5f5f5;
-    border-left-color: #f5f5f5;
-    border-bottom-color: #cccccc;
-    border-right-color: #cccccc;
-}</string>
+/* dropdown list */
+QComboBox QAbstractItemView {
+    background-color: #FFFFFF;
+    border: 1px solid #C6F6D5;
+    border-radius: 6px;
+    selection-background-color: #2D6A4F;
+    selection-color: #ffffff;
+    font: 10pt &quot;Segoe UI&quot;;
+}
+
+</string>
       </property>
       <property name="editable">
        <bool>false</bool>
       </property>
       <item>
        <property name="text">
-        <string>0</string>
+        <string>00</string>
        </property>
       </item>
       <item>
@@ -755,15 +715,19 @@ QComboBox:disabled {
      <widget class="QComboBox" name="time_2">
       <property name="geometry">
        <rect>
-        <x>160</x>
-        <y>276</y>
+        <x>200</x>
+        <y>308</y>
         <width>71</width>
-        <height>41</height>
+        <height>42</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <pointsize>11</pointsize>
+        <family>Segoe UI</family>
+        <pointsize>10</pointsize>
+        <weight>50</weight>
+        <italic>false</italic>
+        <bold>false</bold>
        </font>
       </property>
       <property name="cursor">
@@ -771,48 +735,54 @@ QComboBox:disabled {
       </property>
       <property name="styleSheet">
        <string notr="true">QComboBox {
-    background-color: #ffffff;        /* now white */
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    padding: 5px 10px;
+    color: #1A3C2A;
+    font: 10pt &quot;Segoe UI&quot;;
+    min-height: 28px;
+
+    /* ✅ GREEN 3D BORDER */
     border-style: solid;
     border-width: 2px;
-    border-top-color: #ffffff;        /* light top */
-    border-left-color: #ffffff;       /* light left */
-    border-bottom-color: #aaaaaa;     /* dark bottom */
-    border-right-color: #aaaaaa;      /* dark right */
-    padding: 6px 10px;
-    color: #333333;
-    border-radius: 4px;               /* optional rounded corners */
+    border-top-color: #C6F6D5;     /* light green highlight */
+    border-left-color: #C6F6D5;
+    border-bottom-color: #2D6A4F;  /* dark green shadow */
+    border-right-color: #2D6A4F;
 }
 
-QLineEdit:focus {
-    border-top-color: #28c770;        /* focus effect top */
-    border-left-color: #28c770;
-    border-bottom-color: #218c57;     /* focus effect bottom */
-    border-right-color: #218c57;
-    background-color: #ffffff;        /* stays white on focus */
+QComboBox:hover {
+    border-top-color: #E9F5EC;
+    border-left-color: #E9F5EC;
+    border-bottom-color: #1B4332;
+    border-right-color: #1B4332;
 }
 
-QLineEdit:hover {
-    border-top-color: #eeeeee;
-    border-left-color: #eeeeee;
-    border-bottom-color: #888888;
-    border-right-color: #888888;
+QComboBox:focus {
+    border-top-color: #E9F5EC;
+    border-left-color: #E9F5EC;
+    border-bottom-color: #1B4332;
+    border-right-color: #1B4332;
 }
 
-QComboBox:disabled {
-    background-color: #eeeeee;        /* muted gray when disabled */
-    color: #aaaaaa;
-    border-top-color: #f5f5f5;
-    border-left-color: #f5f5f5;
-    border-bottom-color: #cccccc;
-    border-right-color: #cccccc;
-}</string>
+/* dropdown list */
+QComboBox QAbstractItemView {
+    background-color: #FFFFFF;
+    border: 1px solid #C6F6D5;
+    border-radius: 6px;
+    selection-background-color: #2D6A4F;
+    selection-color: #ffffff;
+    font: 10pt &quot;Segoe UI&quot;;
+}
+
+</string>
       </property>
       <property name="editable">
        <bool>false</bool>
       </property>
       <item>
        <property name="text">
-        <string>0</string>
+        <string>00</string>
        </property>
       </item>
       <item>
@@ -1120,21 +1090,21 @@ QComboBox:disabled {
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>181</y>
-        <width>133</width>
-        <height>19</height>
+        <y>230</y>
+        <width>177</width>
+        <height>20</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <pointsize>12</pointsize>
+        <pointsize>11</pointsize>
        </font>
       </property>
       <property name="layoutDirection">
        <enum>Qt::LeftToRight</enum>
       </property>
       <property name="text">
-       <string>Time of Treatment</string>
+       <string>🕒 TIME OF TREATMENT</string>
       </property>
       <property name="textFormat">
        <enum>Qt::AutoText</enum>
@@ -1146,52 +1116,25 @@ QComboBox:disabled {
        <number>67</number>
       </property>
      </widget>
-     <widget class="QPushButton" name="RecycleBin_btn_3">
-      <property name="geometry">
-       <rect>
-        <x>640</x>
-        <y>10</y>
-        <width>211</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">QPushButton {
-    background-color: transparent;      /* make background see-through */
-    border-style: solid;
-    border-width: 2px;
-    border-top-color: #ffffff;          /* light top/left edge */
-    border-left-color: #ffffff;
-    border-bottom-color: #555555;       /* dark bottom/right edge */
-    border-right-color: #555555;
-    border-radius: 4px;                  /* optional: rounded corners */
-    padding: 5px;
-}
-</string>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
      <widget class="QLabel" name="label_2">
       <property name="geometry">
        <rect>
-        <x>8</x>
-        <y>106</y>
-        <width>189</width>
+        <x>10</x>
+        <y>150</y>
+        <width>224</width>
         <height>19</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <pointsize>12</pointsize>
+        <pointsize>11</pointsize>
        </font>
       </property>
       <property name="layoutDirection">
        <enum>Qt::LeftToRight</enum>
       </property>
       <property name="text">
-       <string>Name of Client - treatment</string>
+       <string>NAME OF CLIENT - TREATMENT</string>
       </property>
       <property name="textFormat">
        <enum>Qt::AutoText</enum>
@@ -1207,21 +1150,21 @@ QComboBox:disabled {
       <property name="geometry">
        <rect>
         <x>30</x>
-        <y>229</y>
-        <width>33</width>
+        <y>261</y>
+        <width>50</width>
         <height>19</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <pointsize>12</pointsize>
+        <pointsize>8</pointsize>
        </font>
       </property>
       <property name="layoutDirection">
        <enum>Qt::LeftToRight</enum>
       </property>
       <property name="text">
-       <string>Start</string>
+       <string>START</string>
       </property>
       <property name="textFormat">
        <enum>Qt::AutoText</enum>
@@ -1236,63 +1179,93 @@ QComboBox:disabled {
      <widget class="QTableWidget" name="actualchemicalUsed">
       <property name="geometry">
        <rect>
-        <x>17</x>
-        <y>550</y>
-        <width>311</width>
+        <x>10</x>
+        <y>630</y>
+        <width>381</width>
         <height>171</height>
        </rect>
       </property>
       <property name="styleSheet">
        <string notr="true">QTableWidget {
-    background-color: #ffffff;            /* white background */
-    border-style: solid;
-    border-width: 2px;
-    border-top-color: #ffffff;            /* light top */
-    border-left-color: #ffffff;           /* light left */
-    border-bottom-color: #cccccc;         /* dark bottom */
-    border-right-color: #cccccc;          /* dark right */
-    gridline-color: #e6e6e6;
-    font: 13pt &quot;Segoe UI&quot;;
-    selection-background-color: #2ecc71;
-    selection-color: white;
-    alternate-background-color: #f9f9f9;
-}
-
-QTableWidget::item {
-    padding: 6px;
-    border-bottom: 1px solid #e6e6e6;
-}
-
-QTableWidget::item:selected {
-    background-color: #2ecc71;   /* green when selected */
-    color: white;
-}
-
-QTableWidget::item:hover {
-    background-color: #f0f0f0;   /* darker on hover */
-}
-
-QHeaderView::section {
-    background-color: #f3f3f3;
-    color: #333333;
-    padding: 6px;
-    border-style: solid;
-    border-width: 2px;
-    border-top-color: #ffffff;
-    border-left-color: #ffffff;
-    border-bottom-color: #cccccc;
-    border-right-color: #cccccc;
+    background-color: #FFFFFF;
+    alternate-background-color: #F5F5F5;  /* ✅ clean light grey */
+    gridline-color: #D8EDE0;
+    border: none;
     font: 10pt &quot;Segoe UI&quot;;
-}
+    color: #1B4332;
+    selection-background-color: #C6F6D5;
+    selection-color: #1B4332;
 
-QTableCornerButton::section {
-    background-color: #f3f3f3;
+    /* ✅ green 3D frame */
     border-style: solid;
     border-width: 2px;
-    border-top-color: #ffffff;
-    border-left-color: #ffffff;
-    border-bottom-color: #cccccc;
-    border-right-color: #cccccc;
+    border-top-color: #E9F5EC;
+    border-left-color: #E9F5EC;
+    border-bottom-color: #2D6A4F;
+    border-right-color: #2D6A4F;
+}
+
+QTableWidget::item { 
+    padding: 4px 8px; 
+    border: none;
+    background-color: transparent;
+}
+
+QTableWidget::item:selected { 
+    background-color: #C6F6D5; 
+    color: #1B4332; 
+}
+
+/* COLUMN HEADERS */
+QHeaderView::section {
+    background-color: #2F6B3F;
+    color: #ffffff;
+    border: none;
+    border-right: 1px solid #1B4332;
+    padding: 6px 8px;
+    font: bold 9pt &quot;Segoe UI&quot;;
+    text-transform: uppercase;
+}
+
+/* ROW HEADERS */
+QHeaderView::section:vertical {
+    background-color: #F0F0F0;
+    color: #1B4332;
+    border-right: 1px solid #D1D9CC;
+}
+
+/* HEADER AREA CLEANUP */
+QHeaderView { 
+    background-color: transparent; 
+    border: none; 
+}
+
+/* SCROLLBAR */
+QScrollBar:vertical {
+    background: #F0F5F0;
+    width: 8px;
+    border-radius: 4px;
+}
+
+QScrollBar::handle:vertical {
+    background: #2F6B3F;
+    border-radius: 4px;
+    min-height: 20px;
+}
+
+QScrollBar::handle:vertical:hover { 
+    background: #2D6A4F; 
+}
+
+QScrollBar::add-line:vertical, 
+QScrollBar::sub-line:vertical { 
+    height: 0; 
+}
+
+/* CORNER (top-left box) */
+QTableCornerButton::section { 
+    background-color: #2D6A4F;
+    border: none; 
 }</string>
       </property>
       <property name="selectionMode">
@@ -1394,22 +1367,22 @@ QTableCornerButton::section {
      <widget class="QLabel" name="label_5">
       <property name="geometry">
        <rect>
-        <x>10</x>
-        <y>329</y>
-        <width>206</width>
-        <height>19</height>
+        <x>16</x>
+        <y>360</y>
+        <width>255</width>
+        <height>20</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <pointsize>12</pointsize>
+        <pointsize>11</pointsize>
        </font>
       </property>
       <property name="layoutDirection">
        <enum>Qt::LeftToRight</enum>
       </property>
       <property name="text">
-       <string>Chemical/s Used - Treatment</string>
+       <string>⚗️ CHEMICALS USED — TREATMENT</string>
       </property>
       <property name="textFormat">
        <enum>Qt::AutoText</enum>
@@ -1438,14 +1411,18 @@ QTableCornerButton::section {
       <property name="geometry">
        <rect>
         <x>19</x>
-        <y>51</y>
+        <y>100</y>
         <width>81</width>
-        <height>41</height>
+        <height>42</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <pointsize>11</pointsize>
+        <family>Segoe UI</family>
+        <pointsize>10</pointsize>
+        <weight>50</weight>
+        <italic>false</italic>
+        <bold>false</bold>
        </font>
       </property>
       <property name="cursor">
@@ -1453,41 +1430,47 @@ QTableCornerButton::section {
       </property>
       <property name="styleSheet">
        <string notr="true">QComboBox {
-    background-color: #ffffff;        /* now white */
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    padding: 5px 10px;
+    color: #1A3C2A;
+    font: 10pt &quot;Segoe UI&quot;;
+    min-height: 28px;
+
+    /* ✅ GREEN 3D BORDER */
     border-style: solid;
     border-width: 2px;
-    border-top-color: #ffffff;        /* light top */
-    border-left-color: #ffffff;       /* light left */
-    border-bottom-color: #aaaaaa;     /* dark bottom */
-    border-right-color: #aaaaaa;      /* dark right */
-    padding: 6px 10px;
-    color: #333333;
-    border-radius: 4px;               /* optional rounded corners */
+    border-top-color: #C6F6D5;     /* light green highlight */
+    border-left-color: #C6F6D5;
+    border-bottom-color: #2D6A4F;  /* dark green shadow */
+    border-right-color: #2D6A4F;
 }
 
-QLineEdit:focus {
-    border-top-color: #28c770;        /* focus effect top */
-    border-left-color: #28c770;
-    border-bottom-color: #218c57;     /* focus effect bottom */
-    border-right-color: #218c57;
-    background-color: #ffffff;        /* stays white on focus */
+QComboBox:hover {
+    border-top-color: #E9F5EC;
+    border-left-color: #E9F5EC;
+    border-bottom-color: #1B4332;
+    border-right-color: #1B4332;
 }
 
-QLineEdit:hover {
-    border-top-color: #eeeeee;
-    border-left-color: #eeeeee;
-    border-bottom-color: #888888;
-    border-right-color: #888888;
+QComboBox:focus {
+    border-top-color: #E9F5EC;
+    border-left-color: #E9F5EC;
+    border-bottom-color: #1B4332;
+    border-right-color: #1B4332;
 }
 
-QComboBox:disabled {
-    background-color: #eeeeee;        /* muted gray when disabled */
-    color: #aaaaaa;
-    border-top-color: #f5f5f5;
-    border-left-color: #f5f5f5;
-    border-bottom-color: #cccccc;
-    border-right-color: #cccccc;
-}</string>
+/* dropdown list */
+QComboBox QAbstractItemView {
+    background-color: #FFFFFF;
+    border: 1px solid #C6F6D5;
+    border-radius: 6px;
+    selection-background-color: #2D6A4F;
+    selection-color: #ffffff;
+    font: 10pt &quot;Segoe UI&quot;;
+}
+
+</string>
       </property>
       <property name="editable">
        <bool>false</bool>
@@ -1553,82 +1536,37 @@ QComboBox:disabled {
        </property>
       </item>
      </widget>
-     <widget class="QLabel" name="label_25">
-      <property name="geometry">
-       <rect>
-        <x>230</x>
-        <y>207</y>
-        <width>67</width>
-        <height>19</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>12</pointsize>
-       </font>
-      </property>
-      <property name="layoutDirection">
-       <enum>Qt::LeftToRight</enum>
-      </property>
-      <property name="text">
-       <string>meridiem</string>
-      </property>
-      <property name="textFormat">
-       <enum>Qt::AutoText</enum>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-      <property name="indent">
-       <number>67</number>
-      </property>
-     </widget>
      <widget class="QLineEdit" name="nameofClientinput">
       <property name="geometry">
        <rect>
         <x>20</x>
-        <y>129</y>
-        <width>301</width>
+        <y>180</y>
+        <width>361</width>
         <height>41</height>
        </rect>
       </property>
       <property name="styleSheet">
        <string notr="true">QLineEdit {
-    background-color: #ffffff;        /* now white */
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    padding: 8px 16px 8px 36px;
+    font: 10pt &quot;Segoe UI&quot;;
+    color: #374151;
+
+    /* ✅ 3D GREEN BORDER */
     border-style: solid;
     border-width: 2px;
-    border-top-color: #ffffff;        /* light top */
-    border-left-color: #ffffff;       /* light left */
-    border-bottom-color: #aaaaaa;     /* dark bottom */
-    border-right-color: #aaaaaa;      /* dark right */
-    padding: 6px 10px;
-    font: 11pt &quot;Segoe UI&quot;;
-    color: #333333;
-    border-radius: 4px;               /* optional rounded corners */
+    border-top-color: #C6F6D5;     /* light green highlight */
+    border-left-color: #C6F6D5;    /* light green highlight */
+    border-bottom-color: #2D6A4F;  /* dark green shadow */
+    border-right-color: #2D6A4F;   /* dark green shadow */
 }
 
 QLineEdit:focus {
-    border-top-color: #28c770;        /* focus effect top */
-    border-left-color: #28c770;
-    border-bottom-color: #218c57;     /* focus effect bottom */
-    border-right-color: #218c57;
-    background-color: #ffffff;        /* stays white on focus */
-}
-
-QLineEdit:hover {
-    border-top-color: #eeeeee;
-    border-left-color: #eeeeee;
-    border-bottom-color: #888888;
-    border-right-color: #888888;
-}
-
-QLineEdit:disabled {
-    background-color: #eeeeee;        /* muted gray when disabled */
-    color: #aaaaaa;
-    border-top-color: #f5f5f5;
-    border-left-color: #f5f5f5;
-    border-bottom-color: #cccccc;
-    border-right-color: #cccccc;
+    border-top-color: #E9F5EC;
+    border-left-color: #E9F5EC;
+    border-bottom-color: #1B4332;
+    border-right-color: #1B4332;
 }</string>
       </property>
       <property name="placeholderText">
@@ -1638,15 +1576,19 @@ QLineEdit:disabled {
      <widget class="QComboBox" name="hours_2">
       <property name="geometry">
        <rect>
-        <x>80</x>
-        <y>276</y>
+        <x>100</x>
+        <y>308</y>
         <width>71</width>
-        <height>41</height>
+        <height>42</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <pointsize>11</pointsize>
+        <family>Segoe UI</family>
+        <pointsize>10</pointsize>
+        <weight>50</weight>
+        <italic>false</italic>
+        <bold>false</bold>
        </font>
       </property>
       <property name="cursor">
@@ -1654,41 +1596,47 @@ QLineEdit:disabled {
       </property>
       <property name="styleSheet">
        <string notr="true">QComboBox {
-    background-color: #ffffff;        /* now white */
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    padding: 5px 10px;
+    color: #1A3C2A;
+    font: 10pt &quot;Segoe UI&quot;;
+    min-height: 28px;
+
+    /* ✅ GREEN 3D BORDER */
     border-style: solid;
     border-width: 2px;
-    border-top-color: #ffffff;        /* light top */
-    border-left-color: #ffffff;       /* light left */
-    border-bottom-color: #aaaaaa;     /* dark bottom */
-    border-right-color: #aaaaaa;      /* dark right */
-    padding: 6px 10px;
-    color: #333333;
-    border-radius: 4px;               /* optional rounded corners */
+    border-top-color: #C6F6D5;     /* light green highlight */
+    border-left-color: #C6F6D5;
+    border-bottom-color: #2D6A4F;  /* dark green shadow */
+    border-right-color: #2D6A4F;
 }
 
-QLineEdit:focus {
-    border-top-color: #28c770;        /* focus effect top */
-    border-left-color: #28c770;
-    border-bottom-color: #218c57;     /* focus effect bottom */
-    border-right-color: #218c57;
-    background-color: #ffffff;        /* stays white on focus */
+QComboBox:hover {
+    border-top-color: #E9F5EC;
+    border-left-color: #E9F5EC;
+    border-bottom-color: #1B4332;
+    border-right-color: #1B4332;
 }
 
-QLineEdit:hover {
-    border-top-color: #eeeeee;
-    border-left-color: #eeeeee;
-    border-bottom-color: #888888;
-    border-right-color: #888888;
+QComboBox:focus {
+    border-top-color: #E9F5EC;
+    border-left-color: #E9F5EC;
+    border-bottom-color: #1B4332;
+    border-right-color: #1B4332;
 }
 
-QComboBox:disabled {
-    background-color: #eeeeee;        /* muted gray when disabled */
-    color: #aaaaaa;
-    border-top-color: #f5f5f5;
-    border-left-color: #f5f5f5;
-    border-bottom-color: #cccccc;
-    border-right-color: #cccccc;
-}</string>
+/* dropdown list */
+QComboBox QAbstractItemView {
+    background-color: #FFFFFF;
+    border: 1px solid #C6F6D5;
+    border-radius: 6px;
+    selection-background-color: #2D6A4F;
+    selection-color: #ffffff;
+    font: 10pt &quot;Segoe UI&quot;;
+}
+
+</string>
       </property>
       <property name="editable">
        <bool>false</bool>
@@ -1758,21 +1706,21 @@ QComboBox:disabled {
       <property name="geometry">
        <rect>
         <x>120</x>
-        <y>29</y>
+        <y>80</y>
         <width>33</width>
         <height>19</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <pointsize>12</pointsize>
+        <pointsize>8</pointsize>
        </font>
       </property>
       <property name="layoutDirection">
        <enum>Qt::LeftToRight</enum>
       </property>
       <property name="text">
-       <string>date</string>
+       <string>DATE</string>
       </property>
       <property name="textFormat">
        <enum>Qt::AutoText</enum>
@@ -1788,21 +1736,21 @@ QComboBox:disabled {
       <property name="geometry">
        <rect>
         <x>14</x>
-        <y>29</y>
-        <width>46</width>
+        <y>80</y>
+        <width>56</width>
         <height>19</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <pointsize>12</pointsize>
+        <pointsize>8</pointsize>
        </font>
       </property>
       <property name="layoutDirection">
        <enum>Qt::LeftToRight</enum>
       </property>
       <property name="text">
-       <string>month</string>
+       <string>MONTH</string>
       </property>
       <property name="textFormat">
        <enum>Qt::AutoText</enum>
@@ -1818,14 +1766,18 @@ QComboBox:disabled {
       <property name="geometry">
        <rect>
         <x>230</x>
-        <y>52</y>
+        <y>100</y>
         <width>81</width>
-        <height>41</height>
+        <height>42</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <pointsize>11</pointsize>
+        <family>Segoe UI</family>
+        <pointsize>10</pointsize>
+        <weight>50</weight>
+        <italic>false</italic>
+        <bold>false</bold>
        </font>
       </property>
       <property name="cursor">
@@ -1833,41 +1785,47 @@ QComboBox:disabled {
       </property>
       <property name="styleSheet">
        <string notr="true">QComboBox {
-    background-color: #ffffff;        /* now white */
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    padding: 5px 10px;
+    color: #1A3C2A;
+    font: 10pt &quot;Segoe UI&quot;;
+    min-height: 28px;
+
+    /* ✅ GREEN 3D BORDER */
     border-style: solid;
     border-width: 2px;
-    border-top-color: #ffffff;        /* light top */
-    border-left-color: #ffffff;       /* light left */
-    border-bottom-color: #aaaaaa;     /* dark bottom */
-    border-right-color: #aaaaaa;      /* dark right */
-    padding: 6px 10px;
-    color: #333333;
-    border-radius: 4px;               /* optional rounded corners */
+    border-top-color: #C6F6D5;     /* light green highlight */
+    border-left-color: #C6F6D5;
+    border-bottom-color: #2D6A4F;  /* dark green shadow */
+    border-right-color: #2D6A4F;
 }
 
-QLineEdit:focus {
-    border-top-color: #28c770;        /* focus effect top */
-    border-left-color: #28c770;
-    border-bottom-color: #218c57;     /* focus effect bottom */
-    border-right-color: #218c57;
-    background-color: #ffffff;        /* stays white on focus */
+QComboBox:hover {
+    border-top-color: #E9F5EC;
+    border-left-color: #E9F5EC;
+    border-bottom-color: #1B4332;
+    border-right-color: #1B4332;
 }
 
-QLineEdit:hover {
-    border-top-color: #eeeeee;
-    border-left-color: #eeeeee;
-    border-bottom-color: #888888;
-    border-right-color: #888888;
+QComboBox:focus {
+    border-top-color: #E9F5EC;
+    border-left-color: #E9F5EC;
+    border-bottom-color: #1B4332;
+    border-right-color: #1B4332;
 }
 
-QComboBox:disabled {
-    background-color: #eeeeee;        /* muted gray when disabled */
-    color: #aaaaaa;
-    border-top-color: #f5f5f5;
-    border-left-color: #f5f5f5;
-    border-bottom-color: #cccccc;
-    border-right-color: #cccccc;
-}</string>
+/* dropdown list */
+QComboBox QAbstractItemView {
+    background-color: #FFFFFF;
+    border: 1px solid #C6F6D5;
+    border-radius: 6px;
+    selection-background-color: #2D6A4F;
+    selection-color: #ffffff;
+    font: 10pt &quot;Segoe UI&quot;;
+}
+
+</string>
       </property>
       <property name="editable">
        <bool>false</bool>
@@ -1956,15 +1914,19 @@ QComboBox:disabled {
      <widget class="QComboBox" name="PM_or_AM_2">
       <property name="geometry">
        <rect>
-        <x>240</x>
-        <y>276</y>
+        <x>300</x>
+        <y>308</y>
         <width>81</width>
-        <height>41</height>
+        <height>42</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <pointsize>11</pointsize>
+        <family>Segoe UI</family>
+        <pointsize>10</pointsize>
+        <weight>50</weight>
+        <italic>false</italic>
+        <bold>false</bold>
        </font>
       </property>
       <property name="cursor">
@@ -1972,41 +1934,47 @@ QComboBox:disabled {
       </property>
       <property name="styleSheet">
        <string notr="true">QComboBox {
-    background-color: #ffffff;        /* now white */
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    padding: 5px 10px;
+    color: #1A3C2A;
+    font: 10pt &quot;Segoe UI&quot;;
+    min-height: 28px;
+
+    /* ✅ GREEN 3D BORDER */
     border-style: solid;
     border-width: 2px;
-    border-top-color: #ffffff;        /* light top */
-    border-left-color: #ffffff;       /* light left */
-    border-bottom-color: #aaaaaa;     /* dark bottom */
-    border-right-color: #aaaaaa;      /* dark right */
-    padding: 6px 10px;
-    color: #333333;
-    border-radius: 4px;               /* optional rounded corners */
+    border-top-color: #C6F6D5;     /* light green highlight */
+    border-left-color: #C6F6D5;
+    border-bottom-color: #2D6A4F;  /* dark green shadow */
+    border-right-color: #2D6A4F;
 }
 
-QLineEdit:focus {
-    border-top-color: #28c770;        /* focus effect top */
-    border-left-color: #28c770;
-    border-bottom-color: #218c57;     /* focus effect bottom */
-    border-right-color: #218c57;
-    background-color: #ffffff;        /* stays white on focus */
+QComboBox:hover {
+    border-top-color: #E9F5EC;
+    border-left-color: #E9F5EC;
+    border-bottom-color: #1B4332;
+    border-right-color: #1B4332;
 }
 
-QLineEdit:hover {
-    border-top-color: #eeeeee;
-    border-left-color: #eeeeee;
-    border-bottom-color: #888888;
-    border-right-color: #888888;
+QComboBox:focus {
+    border-top-color: #E9F5EC;
+    border-left-color: #E9F5EC;
+    border-bottom-color: #1B4332;
+    border-right-color: #1B4332;
 }
 
-QComboBox:disabled {
-    background-color: #eeeeee;        /* muted gray when disabled */
-    color: #aaaaaa;
-    border-top-color: #f5f5f5;
-    border-left-color: #f5f5f5;
-    border-bottom-color: #cccccc;
-    border-right-color: #cccccc;
-}</string>
+/* dropdown list */
+QComboBox QAbstractItemView {
+    background-color: #FFFFFF;
+    border: 1px solid #C6F6D5;
+    border-radius: 6px;
+    selection-background-color: #2D6A4F;
+    selection-color: #ffffff;
+    font: 10pt &quot;Segoe UI&quot;;
+}
+
+</string>
       </property>
       <property name="editable">
        <bool>false</bool>
@@ -2025,63 +1993,93 @@ QComboBox:disabled {
      <widget class="QTableWidget" name="chemicalUsed">
       <property name="geometry">
        <rect>
-        <x>18</x>
-        <y>349</y>
-        <width>311</width>
+        <x>12</x>
+        <y>380</y>
+        <width>381</width>
         <height>171</height>
        </rect>
       </property>
       <property name="styleSheet">
        <string notr="true">QTableWidget {
-    background-color: #ffffff;            /* white background */
-    border-style: solid;
-    border-width: 2px;
-    border-top-color: #ffffff;            /* light top */
-    border-left-color: #ffffff;           /* light left */
-    border-bottom-color: #cccccc;         /* dark bottom */
-    border-right-color: #cccccc;          /* dark right */
-    gridline-color: #e6e6e6;
-    font: 13pt &quot;Segoe UI&quot;;
-    selection-background-color: #2ecc71;
-    selection-color: white;
-    alternate-background-color: #f9f9f9;
-}
-
-QTableWidget::item {
-    padding: 6px;
-    border-bottom: 1px solid #e6e6e6;
-}
-
-QTableWidget::item:selected {
-    background-color: #2ecc71;   /* green when selected */
-    color: white;
-}
-
-QTableWidget::item:hover {
-    background-color: #f0f0f0;   /* darker on hover */
-}
-
-QHeaderView::section {
-    background-color: #f3f3f3;
-    color: #333333;
-    padding: 6px;
-    border-style: solid;
-    border-width: 2px;
-    border-top-color: #ffffff;
-    border-left-color: #ffffff;
-    border-bottom-color: #cccccc;
-    border-right-color: #cccccc;
+    background-color: #FFFFFF;
+    alternate-background-color: #F5F5F5;  /* ✅ clean light grey */
+    gridline-color: #D8EDE0;
+    border: none;
     font: 10pt &quot;Segoe UI&quot;;
-}
+    color: #1B4332;
+    selection-background-color: #C6F6D5;
+    selection-color: #1B4332;
 
-QTableCornerButton::section {
-    background-color: #f3f3f3;
+    /* ✅ green 3D frame */
     border-style: solid;
     border-width: 2px;
-    border-top-color: #ffffff;
-    border-left-color: #ffffff;
-    border-bottom-color: #cccccc;
-    border-right-color: #cccccc;
+    border-top-color: #E9F5EC;
+    border-left-color: #E9F5EC;
+    border-bottom-color: #2D6A4F;
+    border-right-color: #2D6A4F;
+}
+
+QTableWidget::item { 
+    padding: 4px 8px; 
+    border: none;
+    background-color: transparent;
+}
+
+QTableWidget::item:selected { 
+    background-color: #C6F6D5; 
+    color: #1B4332; 
+}
+
+/* COLUMN HEADERS */
+QHeaderView::section {
+    background-color: #2F6B3F;
+    color: #ffffff;
+    border: none;
+    border-right: 1px solid #1B4332;
+    padding: 6px 8px;
+    font: bold 9pt &quot;Segoe UI&quot;;
+    text-transform: uppercase;
+}
+
+/* ROW HEADERS */
+QHeaderView::section:vertical {
+    background-color: #F0F0F0;
+    color: #1B4332;
+    border-right: 1px solid #D1D9CC;
+}
+
+/* HEADER AREA CLEANUP */
+QHeaderView { 
+    background-color: transparent; 
+    border: none; 
+}
+
+/* SCROLLBAR */
+QScrollBar:vertical {
+    background: #F0F5F0;
+    width: 8px;
+    border-radius: 4px;
+}
+
+QScrollBar::handle:vertical {
+    background: #2F6B3F;
+    border-radius: 4px;
+    min-height: 20px;
+}
+
+QScrollBar::handle:vertical:hover { 
+    background: #2D6A4F; 
+}
+
+QScrollBar::add-line:vertical, 
+QScrollBar::sub-line:vertical { 
+    height: 0; 
+}
+
+/* CORNER (top-left box) */
+QTableCornerButton::section { 
+    background-color: #2D6A4F;
+    border: none; 
 }</string>
       </property>
       <property name="selectionMode">
@@ -2180,68 +2178,25 @@ QTableCornerButton::section {
        </property>
       </item>
      </widget>
-     <widget class="Line" name="line_2">
-      <property name="geometry">
-       <rect>
-        <x>855</x>
-        <y>-1</y>
-        <width>31</width>
-        <height>61</height>
-       </rect>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-     </widget>
      <widget class="QLabel" name="label_3">
       <property name="geometry">
        <rect>
-        <x>8</x>
-        <y>3</y>
-        <width>129</width>
-        <height>19</height>
+        <x>10</x>
+        <y>60</y>
+        <width>178</width>
+        <height>20</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <pointsize>12</pointsize>
+        <pointsize>11</pointsize>
        </font>
       </property>
       <property name="layoutDirection">
        <enum>Qt::LeftToRight</enum>
       </property>
       <property name="text">
-       <string>Date of Treatment</string>
-      </property>
-      <property name="textFormat">
-       <enum>Qt::AutoText</enum>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-      <property name="indent">
-       <number>67</number>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_24">
-      <property name="geometry">
-       <rect>
-        <x>156</x>
-        <y>207</y>
-        <width>56</width>
-        <height>19</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>12</pointsize>
-       </font>
-      </property>
-      <property name="layoutDirection">
-       <enum>Qt::LeftToRight</enum>
-      </property>
-      <property name="text">
-       <string>minutes</string>
+       <string>📅 DATE OF TREATMENT</string>
       </property>
       <property name="textFormat">
        <enum>Qt::AutoText</enum>
@@ -2256,8 +2211,8 @@ QTableCornerButton::section {
      <widget class="QPushButton" name="confirmButton">
       <property name="geometry">
        <rect>
-        <x>16</x>
-        <y>730</y>
+        <x>40</x>
+        <y>857</y>
         <width>311</width>
         <height>41</height>
        </rect>
@@ -2265,300 +2220,42 @@ QTableCornerButton::section {
       <property name="styleSheet">
        <string notr="true">QPushButton {
     background-color: #2F6B3F;
-    color: white;
-    border-style: solid;
-    border-width: 2px;
-    border-top-color: #5cd65c;      /* lighter top */
-    border-left-color: #5cd65c;     /* lighter left */
-    border-bottom-color: #1e7e34;   /* darker bottom */
-    border-right-color: #1e7e34;    /* darker right */
-    padding: 6px 12px;
-    font: 15pt &quot;Segoe UI&quot;;
-    border-radius: 5px;             /* optional: rounded corners */
-}
-
-QPushButton:hover {
-    background-color: #218838;
-    border-top-color: #66c266;
-    border-left-color: #66c266;
-    border-bottom-color: #1a6c2f;
-    border-right-color: #1a6c2f;
-}
-
-QPushButton:pressed {
-    background-color: #1e7e34;
-    border-top-color: #1a6c2f;       /* invert for pressed */
-    border-left-color: #1a6c2f;
-    border-bottom-color: #66c266;
-    border-right-color: #66c266;
-}
-
-QPushButton:disabled {
-    background-color: #a8d5b7;
-    color: #f0f0f0;
-    border-top-color: #c0e0c2;
-    border-left-color: #c0e0c2;
-    border-bottom-color: #8ebf96;
-    border-right-color: #8ebf96;
-}</string>
-      </property>
-      <property name="text">
-       <string>SAVE</string>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="searchDate">
-      <property name="geometry">
-       <rect>
-        <x>890</x>
-        <y>9</y>
-        <width>221</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">QLineEdit {
-    background-color: #ffffff;        /* now white */
-    border-style: solid;
-    border-width: 2px;
-    border-top-color: #ffffff;        /* light top */
-    border-left-color: #ffffff;       /* light left */
-    border-bottom-color: #aaaaaa;     /* dark bottom */
-    border-right-color: #aaaaaa;      /* dark right */
-    padding: 6px 10px;
-    font: 11pt &quot;Segoe UI&quot;;
-    color: #333333;
-    border-radius: 4px;               /* optional rounded corners */
-}
-
-QLineEdit:focus {
-    border-top-color: #28c770;        /* focus effect top */
-    border-left-color: #28c770;
-    border-bottom-color: #218c57;     /* focus effect bottom */
-    border-right-color: #218c57;
-    background-color: #ffffff;        /* stays white on focus */
-}
-
-QLineEdit:hover {
-    border-top-color: #eeeeee;
-    border-left-color: #eeeeee;
-    border-bottom-color: #888888;
-    border-right-color: #888888;
-}
-
-QLineEdit:disabled {
-    background-color: #eeeeee;        /* muted gray when disabled */
-    color: #aaaaaa;
-    border-top-color: #f5f5f5;
-    border-left-color: #f5f5f5;
-    border-bottom-color: #cccccc;
-    border-right-color: #cccccc;
-}</string>
-      </property>
-      <property name="placeholderText">
-       <string>Search: Ex - 04/20/26</string>
-      </property>
-     </widget>
-     <widget class="QTableWidget" name="tableListahan">
-      <property name="geometry">
-       <rect>
-        <x>338</x>
-        <y>60</y>
-        <width>791</width>
-        <height>721</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>Segoe UI</family>
-        <pointsize>13</pointsize>
-        <weight>50</weight>
-        <italic>false</italic>
-        <bold>false</bold>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">QTableWidget {
-    background-color: #ffffff;            /* white background */
+    color: #ffffff;
     border-style: solid;
     border-width: 2px;
     border-top-color: #ffffff;            /* light top */
     border-left-color: #ffffff;           /* light left */
     border-bottom-color: #cccccc;         /* dark bottom */
-    border-right-color: #cccccc;          /* dark right */
-    gridline-color: #e6e6e6;
-    font: 13pt &quot;Segoe UI&quot;;
-    selection-background-color: #2ecc71;
-    selection-color: white;
-    alternate-background-color: #f9f9f9;
+    border-right-color: #cccccc;     
+    border-radius: 20px;
+    padding: 12px 20px;
+    font: bold 11pt &quot;Segoe UI&quot;;
+    letter-spacing: 1px;
 }
-
-QTableWidget::item {
-    padding: 6px;
-    border-bottom: 1px solid #e6e6e6;
-}
-
-QTableWidget::item:selected {
-    background-color: #2ecc71;   /* green when selected */
-    color: white;
-}
-
-QTableWidget::item:hover {
-    background-color: #f0f0f0;   /* darker on hover */
-}
-
-QHeaderView::section {
-    background-color: #f3f3f3;
-    color: #333333;
-    padding: 6px;
-    border-style: solid;
-    border-width: 2px;
-    border-top-color: #ffffff;
-    border-left-color: #ffffff;
-    border-bottom-color: #cccccc;
-    border-right-color: #cccccc;
-    font: 10pt &quot;Segoe UI&quot;;
-}
-
-QTableCornerButton::section {
-    background-color: #f3f3f3;
-    border-style: solid;
-    border-width: 2px;
-    border-top-color: #ffffff;
-    border-left-color: #ffffff;
-    border-bottom-color: #cccccc;
-    border-right-color: #cccccc;
-}</string>
+QPushButton:hover { background-color: #2D6A4F; }
+QPushButton:pressed { background-color: #0d2b1f; }
+</string>
       </property>
-      <property name="editTriggers">
-       <set>QAbstractItemView::NoEditTriggers</set>
+      <property name="text">
+       <string>💾  SAVE RECORD</string>
       </property>
-      <property name="selectionMode">
-       <enum>QAbstractItemView::NoSelection</enum>
-      </property>
-      <attribute name="horizontalHeaderDefaultSectionSize">
-       <number>250</number>
-      </attribute>
-      <attribute name="verticalHeaderDefaultSectionSize">
-       <number>50</number>
-      </attribute>
-      <row>
-       <property name="text">
-        <string>1</string>
-       </property>
-      </row>
-      <column>
-       <property name="text">
-        <string>Name of User</string>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>10</pointsize>
-        </font>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Date of Treatment</string>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>10</pointsize>
-        </font>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Name of Client</string>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>10</pointsize>
-        </font>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Time of Treatment</string>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>10</pointsize>
-        </font>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Chemical/s Used</string>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>10</pointsize>
-        </font>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Actual Chemical/s Used</string>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>10</pointsize>
-        </font>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Edit</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Trash</string>
-       </property>
-      </column>
-      <item row="0" column="0">
-       <property name="text">
-        <string/>
-       </property>
-      </item>
-      <item row="0" column="1">
-       <property name="text">
-        <string/>
-       </property>
-      </item>
-      <item row="0" column="2">
-       <property name="text">
-        <string/>
-       </property>
-      </item>
-      <item row="0" column="3">
-       <property name="text">
-        <string/>
-       </property>
-      </item>
-      <item row="0" column="4">
-       <property name="text">
-        <string/>
-       </property>
-      </item>
-      <item row="0" column="5">
-       <property name="text">
-        <string/>
-       </property>
-      </item>
      </widget>
      <widget class="QComboBox" name="date">
       <property name="geometry">
        <rect>
         <x>127</x>
-        <y>52</y>
+        <y>100</y>
         <width>81</width>
-        <height>41</height>
+        <height>42</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <pointsize>11</pointsize>
+        <family>Segoe UI</family>
+        <pointsize>10</pointsize>
+        <weight>50</weight>
+        <italic>false</italic>
+        <bold>false</bold>
        </font>
       </property>
       <property name="cursor">
@@ -2566,41 +2263,47 @@ QTableCornerButton::section {
       </property>
       <property name="styleSheet">
        <string notr="true">QComboBox {
-    background-color: #ffffff;        /* now white */
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    padding: 5px 10px;
+    color: #1A3C2A;
+    font: 10pt &quot;Segoe UI&quot;;
+    min-height: 28px;
+
+    /* ✅ GREEN 3D BORDER */
     border-style: solid;
     border-width: 2px;
-    border-top-color: #ffffff;        /* light top */
-    border-left-color: #ffffff;       /* light left */
-    border-bottom-color: #aaaaaa;     /* dark bottom */
-    border-right-color: #aaaaaa;      /* dark right */
-    padding: 6px 10px;
-    color: #333333;
-    border-radius: 4px;               /* optional rounded corners */
+    border-top-color: #C6F6D5;     /* light green highlight */
+    border-left-color: #C6F6D5;
+    border-bottom-color: #2D6A4F;  /* dark green shadow */
+    border-right-color: #2D6A4F;
 }
 
-QLineEdit:focus {
-    border-top-color: #28c770;        /* focus effect top */
-    border-left-color: #28c770;
-    border-bottom-color: #218c57;     /* focus effect bottom */
-    border-right-color: #218c57;
-    background-color: #ffffff;        /* stays white on focus */
+QComboBox:hover {
+    border-top-color: #E9F5EC;
+    border-left-color: #E9F5EC;
+    border-bottom-color: #1B4332;
+    border-right-color: #1B4332;
 }
 
-QLineEdit:hover {
-    border-top-color: #eeeeee;
-    border-left-color: #eeeeee;
-    border-bottom-color: #888888;
-    border-right-color: #888888;
+QComboBox:focus {
+    border-top-color: #E9F5EC;
+    border-left-color: #E9F5EC;
+    border-bottom-color: #1B4332;
+    border-right-color: #1B4332;
 }
 
-QComboBox:disabled {
-    background-color: #eeeeee;        /* muted gray when disabled */
-    color: #aaaaaa;
-    border-top-color: #f5f5f5;
-    border-left-color: #f5f5f5;
-    border-bottom-color: #cccccc;
-    border-right-color: #cccccc;
-}</string>
+/* dropdown list */
+QComboBox QAbstractItemView {
+    background-color: #FFFFFF;
+    border: 1px solid #C6F6D5;
+    border-radius: 6px;
+    selection-background-color: #2D6A4F;
+    selection-color: #ffffff;
+    font: 10pt &quot;Segoe UI&quot;;
+}
+
+</string>
       </property>
       <property name="editable">
        <bool>false</bool>
@@ -2765,21 +2468,21 @@ QComboBox:disabled {
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>530</y>
-        <width>255</width>
-        <height>19</height>
+        <y>610</y>
+        <width>334</width>
+        <height>20</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <pointsize>12</pointsize>
+        <pointsize>11</pointsize>
        </font>
       </property>
       <property name="layoutDirection">
        <enum>Qt::LeftToRight</enum>
       </property>
       <property name="text">
-       <string>Actual Chemical/s Used - Treatment</string>
+       <string>⚗️ ACTUAL CHEMICALS ON HAND - TREATMENT</string>
       </property>
       <property name="textFormat">
        <enum>Qt::AutoText</enum>
@@ -2791,161 +2494,623 @@ QComboBox:disabled {
        <number>67</number>
       </property>
      </widget>
+     <widget class="QWidget" name="contentPanel" native="true">
+      <property name="geometry">
+       <rect>
+        <x>400</x>
+        <y>0</y>
+        <width>961</width>
+        <height>911</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QWidget { background-color: #ECFAE5; }</string>
+      </property>
+      <widget class="QTableWidget" name="tableListahan">
+       <property name="geometry">
+        <rect>
+         <x>15</x>
+         <y>164</y>
+         <width>971</width>
+         <height>731</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Segoe UI</family>
+         <pointsize>10</pointsize>
+         <weight>50</weight>
+         <italic>false</italic>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QTableWidget {
+    background-color: #FFFFFF;
+    alternate-background-color: #F5F5F5;  /* ✅ clean light grey */
+    gridline-color: #D8EDE0;
+    border: none;
+    font: 10pt &quot;Segoe UI&quot;;
+    color: #1B4332;
+    selection-background-color: #C6F6D5;
+    selection-color: #1B4332;
+
+    /* ✅ green 3D frame */
+    border-style: solid;
+    border-width: 2px;
+    border-top-color: #E9F5EC;
+    border-left-color: #E9F5EC;
+    border-bottom-color: #2D6A4F;
+    border-right-color: #2D6A4F;
+}
+
+QTableWidget::item { 
+    padding: 4px 8px; 
+    border: none;
+    background-color: transparent;
+}
+
+QTableWidget::item:selected { 
+    background-color: #C6F6D5; 
+    color: #1B4332; 
+}
+
+/* COLUMN HEADERS */
+QHeaderView::section {
+    background-color: #2F6B3F;
+    color: #ffffff;
+    border: none;
+    border-right: 1px solid #1B4332;
+    padding: 6px 8px;
+    font: bold 9pt &quot;Segoe UI&quot;;
+    text-transform: uppercase;
+}
+
+/* ROW HEADERS */
+QHeaderView::section:vertical {
+    background-color: #F0F0F0;
+    color: #1B4332;
+    border-right: 1px solid #D1D9CC;
+}
+
+/* HEADER AREA CLEANUP */
+QHeaderView { 
+    background-color: transparent; 
+    border: none; 
+}
+
+/* SCROLLBAR */
+QScrollBar:vertical {
+    background: #F0F5F0;
+    width: 8px;
+    border-radius: 4px;
+}
+
+QScrollBar::handle:vertical {
+    background: #2F6B3F;
+    border-radius: 4px;
+    min-height: 20px;
+}
+
+QScrollBar::handle:vertical:hover { 
+    background: #2D6A4F; 
+}
+
+QScrollBar::add-line:vertical, 
+QScrollBar::sub-line:vertical { 
+    height: 0; 
+}
+
+/* CORNER (top-left box) */
+QTableCornerButton::section { 
+    background-color: #2D6A4F;
+    border: none; 
+}</string>
+       </property>
+       <property name="editTriggers">
+        <set>QAbstractItemView::NoEditTriggers</set>
+       </property>
+       <property name="selectionMode">
+        <enum>QAbstractItemView::NoSelection</enum>
+       </property>
+       <attribute name="horizontalHeaderDefaultSectionSize">
+        <number>250</number>
+       </attribute>
+       <attribute name="verticalHeaderDefaultSectionSize">
+        <number>50</number>
+       </attribute>
+       <row>
+        <property name="text">
+         <string>1</string>
+        </property>
+       </row>
+       <column>
+        <property name="text">
+         <string>Name of User</string>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Date of Treatment</string>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Name of Client</string>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Time of Treatment</string>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Chemical/s Used</string>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Actual Chemical/s Used</string>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Edit</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Trash</string>
+        </property>
+       </column>
+       <item row="0" column="0">
+        <property name="text">
+         <string/>
+        </property>
+       </item>
+       <item row="0" column="1">
+        <property name="text">
+         <string/>
+        </property>
+       </item>
+       <item row="0" column="2">
+        <property name="text">
+         <string/>
+        </property>
+       </item>
+       <item row="0" column="3">
+        <property name="text">
+         <string/>
+        </property>
+       </item>
+       <item row="0" column="4">
+        <property name="text">
+         <string/>
+        </property>
+       </item>
+       <item row="0" column="5">
+        <property name="text">
+         <string/>
+        </property>
+       </item>
+      </widget>
+      <widget class="QLineEdit" name="searchDate">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>10</y>
+         <width>241</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLineEdit {
+    background-color: #FFFFFF;
+    border-radius: 20px;
+    padding: 8px 16px 8px 36px;
+    font: 10pt &quot;Segoe UI&quot;;
+    color: #374151;
+
+    /* ✅ 3D GREEN BORDER */
+    border-style: solid;
+    border-width: 2px;
+    border-top-color: #C6F6D5;     /* light green highlight */
+    border-left-color: #C6F6D5;    /* light green highlight */
+    border-bottom-color: #2D6A4F;  /* dark green shadow */
+    border-right-color: #2D6A4F;   /* dark green shadow */
+}
+
+QLineEdit:focus {
+    border-top-color: #E9F5EC;
+    border-left-color: #E9F5EC;
+    border-bottom-color: #1B4332;
+    border-right-color: #1B4332;
+}</string>
+       </property>
+       <property name="placeholderText">
+        <string>🔍  Search client or date...</string>
+       </property>
+      </widget>
+      <widget class="QFrame" name="statToday">
+       <property name="geometry">
+        <rect>
+         <x>185</x>
+         <y>70</y>
+         <width>150</width>
+         <height>80</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QFrame {
+    background-color: #FFFFFF;
+    border-radius: 12px;
+
+    /* ✅ green 3D border */
+    border-style: solid;
+    border-width: 2px;
+    border-top-color: #E9F5EC;     /* light green highlight */
+    border-left-color: #E9F5EC;
+    border-bottom-color: #2D6A4F;  /* dark green shadow */
+    border-right-color: #2D6A4F;
+}</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::NoFrame</enum>
+       </property>
+       <widget class="QLabel" name="statTodayNum">
+        <property name="geometry">
+         <rect>
+          <x>12</x>
+          <y>8</y>
+          <width>126</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel { color: #1B4332; font: bold 20pt 'Segoe UI'; background: transparent; }</string>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+       <widget class="QLabel" name="statTodayLabel">
+        <property name="geometry">
+         <rect>
+          <x>24</x>
+          <y>44</y>
+          <width>101</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel { color: #9CA3AF; font: bold 8pt 'Segoe UI'; letter-spacing: 1px; background: transparent; }</string>
+        </property>
+        <property name="text">
+         <string>TODAY</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QFrame" name="statTotal">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>70</y>
+         <width>150</width>
+         <height>80</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QFrame {
+    background-color: #FFFFFF;
+    border-radius: 12px;
+
+    /* ✅ green 3D border */
+    border-style: solid;
+    border-width: 2px;
+    border-top-color: #E9F5EC;     /* light green highlight */
+    border-left-color: #E9F5EC;
+    border-bottom-color: #2D6A4F;  /* dark green shadow */
+    border-right-color: #2D6A4F;
+}</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::NoFrame</enum>
+       </property>
+       <widget class="QLabel" name="statTotalNum">
+        <property name="geometry">
+         <rect>
+          <x>12</x>
+          <y>8</y>
+          <width>121</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel { color: #1B4332; font: bold 20pt 'Segoe UI'; background: transparent; }</string>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+       <widget class="QLabel" name="statTotalLabel">
+        <property name="geometry">
+         <rect>
+          <x>27</x>
+          <y>44</y>
+          <width>91</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel { color: #9CA3AF; font: bold 8pt 'Segoe UI'; letter-spacing: 1px; background: transparent; }</string>
+        </property>
+        <property name="text">
+         <string>TOTAL</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QFrame" name="statMonth">
+       <property name="geometry">
+        <rect>
+         <x>350</x>
+         <y>70</y>
+         <width>150</width>
+         <height>80</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QFrame {
+    background-color: #FFFFFF;
+    border-radius: 12px;
+
+    /* ✅ green 3D border */
+    border-style: solid;
+    border-width: 2px;
+    border-top-color: #E9F5EC;     /* light green highlight */
+    border-left-color: #E9F5EC;
+    border-bottom-color: #2D6A4F;  /* dark green shadow */
+    border-right-color: #2D6A4F;
+}</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::NoFrame</enum>
+       </property>
+       <widget class="QLabel" name="statMonthNum">
+        <property name="geometry">
+         <rect>
+          <x>12</x>
+          <y>8</y>
+          <width>126</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel { color: #1B4332; font: bold 20pt 'Segoe UI'; background: transparent; }</string>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+       <widget class="QLabel" name="statMonthLabel">
+        <property name="geometry">
+         <rect>
+          <x>24</x>
+          <y>45</y>
+          <width>101</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel { color: #9CA3AF; font: bold 8pt 'Segoe UI'; letter-spacing: 1px; background: transparent; }</string>
+        </property>
+        <property name="text">
+         <string>THIS MONTH</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </widget>
+     </widget>
+     <widget class="QPushButton" name="addActualRow">
+      <property name="geometry">
+       <rect>
+        <x>26</x>
+        <y>811</y>
+        <width>351</width>
+        <height>36</height>
+       </rect>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+    background-color: transparent;
+    color: #2D6A4F;
+    border: 1.5px dashed #2D6A4F;
+    border-radius: 8px;
+    padding: 6px 12px;
+    font: 10pt &quot;Segoe UI&quot;;
+}
+QPushButton:hover { background-color: #e8f5e9; }
+</string>
+      </property>
+      <property name="text">
+       <string>+ Add Row</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="addChemRow">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>560</y>
+        <width>361</width>
+        <height>36</height>
+       </rect>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+    background-color: transparent;
+    color: #2D6A4F;
+    border: 1.5px dashed #2D6A4F;
+    border-radius: 8px;
+    padding: 6px 12px;
+    font: 10pt &quot;Segoe UI&quot;;
+}
+QPushButton:hover { background-color: #e8f5e9; }
+</string>
+      </property>
+      <property name="text">
+       <string>+ Add Row</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="sectionHeader">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>20</y>
+        <width>211</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLabel { color: #1B4332; font: bold 13pt 'Segoe UI'; background: transparent; }</string>
+      </property>
+      <property name="text">
+       <string>NEW TREATMENT ENTRY</string>
+      </property>
+     </widget>
     </widget>
    </widget>
-  </widget>
-  <widget class="QMenuBar" name="menuBar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>1126</width>
-     <height>48</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">QMenuBar {
-    background-color: #2F6B3F;
-    border-style: solid;
-    border-width: 2px;
-    border-top-color: #2F6B3F;
-    border-left-color: #2F6B3F;
-    border-bottom-color: #2F6B3F;
-    border-right-color: #2F6B3F;
-    padding: 6px 10px;
-    color: white;
-}
-
-/* THIS is the important part */
-QMenuBar::item {
-    background-color: transparent;
-    color: white;
-    padding: 5px 10px;
-}
-
-/* hover effect */
-QMenuBar::item:selected {
-    background-color: #2F6B3F;   /* SAME as menu bar */
-    color: white;
-}
-
-/* when pressed/open */
-QMenuBar::item:pressed {
-    background-color: #1e8f57;
-}</string>
-   </property>
-   <widget class="QMenu" name="actions">
-    <property name="cursor">
-     <cursorShape>PointingHandCursor</cursorShape>
+   <widget class="QFrame" name="headerBar">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>1361</width>
+      <height>71</height>
+     </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">QMenu {
-    background-color: #2F6B3F;
-    color: white;
-    border: 2px solid #1e8f57;
-    padding: 5px;
-}
-
-/* normal items */
-QMenu::item {
-    padding: 8px 25px;
-    background-color: transparent;
-}
-
-/* hover effect */
-QMenu::item:selected {
-    background-color: #3d8f56;   /* lighter highlight */
-    color: white;
-}
-
-/* pressed/clicked */
-QMenu::item:pressed {
-    background-color: #1e8f57;
-}</string>
+     <string notr="true">QFrame { background-color: #2D6A4F; border: none; }</string>
     </property>
-    <property name="title">
-     <string>ACTIONS</string>
+    <property name="frameShape">
+     <enum>QFrame::NoFrame</enum>
     </property>
-    <addaction name="recycle_bin"/>
-    <addaction name="PDF_storage"/>
+    <widget class="QLabel" name="appTitle_2">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>20</y>
+       <width>201</width>
+       <height>28</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel { color: #ffffff; font: bold 15pt 'Segoe UI'; background: transparent; }</string>
+     </property>
+     <property name="text">
+      <string>👤- RAIONN</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>81</width>
+       <height>71</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="pixmap">
+      <pixmap>Logo.png</pixmap>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="appTitle_3">
+     <property name="geometry">
+      <rect>
+       <x>1230</x>
+       <y>26</y>
+       <width>116</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Segoe UI</family>
+       <pointsize>10</pointsize>
+       <weight>75</weight>
+       <italic>false</italic>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel { color: #ffffff; font: bold 10pt 'Segoe UI'; background: transparent; }</string>
+     </property>
+     <property name="text">
+      <string>ADMIN</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
    </widget>
-   <widget class="QMenu" name="type_of_treatment">
-    <property name="cursor">
-     <cursorShape>PointingHandCursor</cursorShape>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QMenu {
-    background-color: #2F6B3F;
-    color: white;
-    border: 2px solid #1e8f57;
-    padding: 5px;
-}
-
-/* normal items */
-QMenu::item {
-    padding: 8px 25px;
-    background-color: transparent;
-}
-
-/* hover effect */
-QMenu::item:selected {
-    background-color: #3d8f56;   /* lighter highlight */
-    color: white;
-}
-
-/* pressed/clicked */
-QMenu::item:pressed {
-    background-color: #1e8f57;
-}</string>
-    </property>
-    <property name="title">
-     <string>TYPE OF TREATMENT</string>
-    </property>
-    <addaction name="treatment"/>
-    <addaction name="inspection"/>
-   </widget>
-   <addaction name="actions"/>
-   <addaction name="type_of_treatment"/>
-  </widget>
-  <widget class="QToolBar" name="toolBar_logout">
-   <property name="cursor">
-    <cursorShape>PointingHandCursor</cursorShape>
-   </property>
-   <property name="windowTitle">
-    <string>toolBar</string>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">QToolBar {
-      /* make background see-through */
-    border-style: solid;
-    border-width: 2px;
-    border-top-color: #ffffff;          /* light top/left edge */
-    border-left-color: #ffffff;
-      /* dark bottom/right edge */
-
-    border-radius: 4px;                  /* optional: rounded corners */
-    padding: 5px;
-}
-</string>
-   </property>
-   <property name="iconSize">
-    <size>
-     <width>48</width>
-     <height>48</height>
-    </size>
-   </property>
-   <attribute name="toolBarArea">
-    <enum>TopToolBarArea</enum>
-   </attribute>
-   <attribute name="toolBarBreak">
-    <bool>false</bool>
-   </attribute>
-   <addaction name="logout"/>
   </widget>
   <widget class="QToolBar" name="toolBar_files">
    <property name="font">
@@ -2956,21 +3121,21 @@ QMenu::item:pressed {
    <property name="cursor">
     <cursorShape>PointingHandCursor</cursorShape>
    </property>
+   <property name="tabletTracking">
+    <bool>false</bool>
+   </property>
    <property name="windowTitle">
     <string>toolBar_2</string>
    </property>
    <property name="styleSheet">
     <string notr="true">QToolBar {
-      /* make background see-through */
+    background-color: #2D6A4F;  /* ✅ main green */
     border-style: solid;
-    border-width: 2px;
-    border-top-color: #ffffff;          /* light top/left edge */
-    border-left-color: #ffffff;
-         /* dark bottom/right edge */
-    border-radius: 4px;                  /* optional: rounded corners */
     padding: 5px;
-}
-</string>
+}</string>
+   </property>
+   <property name="movable">
+    <bool>false</bool>
    </property>
    <property name="iconSize">
     <size>
@@ -2978,8 +3143,11 @@ QMenu::item:pressed {
      <height>48</height>
     </size>
    </property>
+   <property name="floatable">
+    <bool>false</bool>
+   </property>
    <attribute name="toolBarArea">
-    <enum>TopToolBarArea</enum>
+    <enum>LeftToolBarArea</enum>
    </attribute>
    <attribute name="toolBarBreak">
     <bool>false</bool>
@@ -2988,6 +3156,7 @@ QMenu::item:pressed {
    <addaction name="treatment"/>
    <addaction name="recycle_bin"/>
    <addaction name="actionPDF_STORAGE_3"/>
+   <addaction name="logout"/>
   </widget>
   <action name="actionTREATMENT">
    <property name="text">
