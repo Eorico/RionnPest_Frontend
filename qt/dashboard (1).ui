@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1455</width>
-    <height>967</height>
+    <height>982</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -56,7 +56,8 @@
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">QScrollArea { background-color: #D9E9CF; border: none; border-right: 1px solid #DCE3DC; } QWidget { background-color: #D9E9CF; }</string>
+     <string notr="true">QScrollArea { background-color: #D9E9CF; border: none; border-right: 1px solid #DCE3DC; border-radius: 15px;
+} QWidget { background-color: #D9E9CF; }</string>
     </property>
     <property name="widgetResizable">
      <bool>true</bool>
@@ -285,8 +286,8 @@ QComboBox QAbstractItemView {
      <widget class="QLabel" name="label_22">
       <property name="geometry">
        <rect>
-        <x>220</x>
-        <y>70</y>
+        <x>290</x>
+        <y>140</y>
         <width>91</width>
         <height>19</height>
        </rect>
@@ -1122,8 +1123,8 @@ QComboBox QAbstractItemView {
      <widget class="QLabel" name="label_2">
       <property name="geometry">
        <rect>
-        <x>20</x>
-        <y>140</y>
+        <x>18</x>
+        <y>40</y>
         <width>291</width>
         <height>19</height>
        </rect>
@@ -1183,7 +1184,7 @@ QComboBox QAbstractItemView {
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>620</y>
+        <y>630</y>
         <width>381</width>
         <height>171</height>
        </rect>
@@ -1418,7 +1419,7 @@ QTableCornerButton::section {
       <property name="geometry">
        <rect>
         <x>-30</x>
-        <y>350</y>
+        <y>360</y>
         <width>371</width>
         <height>20</height>
        </rect>
@@ -1460,8 +1461,8 @@ QTableCornerButton::section {
      <widget class="QComboBox" name="month">
       <property name="geometry">
        <rect>
-        <x>19</x>
-        <y>90</y>
+        <x>95</x>
+        <y>160</y>
         <width>81</width>
         <height>42</height>
        </rect>
@@ -1591,8 +1592,8 @@ QComboBox QAbstractItemView {
      <widget class="QLineEdit" name="nameofClientinput">
       <property name="geometry">
        <rect>
-        <x>20</x>
-        <y>170</y>
+        <x>18</x>
+        <y>70</y>
         <width>361</width>
         <height>41</height>
        </rect>
@@ -1774,8 +1775,8 @@ QComboBox QAbstractItemView {
      <widget class="QLabel" name="label_21">
       <property name="geometry">
        <rect>
-        <x>120</x>
-        <y>70</y>
+        <x>190</x>
+        <y>140</y>
         <width>81</width>
         <height>19</height>
        </rect>
@@ -1804,8 +1805,8 @@ QComboBox QAbstractItemView {
      <widget class="QLabel" name="label_20">
       <property name="geometry">
        <rect>
-        <x>14</x>
-        <y>70</y>
+        <x>90</x>
+        <y>140</y>
         <width>81</width>
         <height>19</height>
        </rect>
@@ -1834,9 +1835,9 @@ QComboBox QAbstractItemView {
      <widget class="QComboBox" name="year">
       <property name="geometry">
        <rect>
-        <x>230</x>
-        <y>90</y>
-        <width>81</width>
+        <x>290</x>
+        <y>160</y>
+        <width>91</width>
         <height>42</height>
        </rect>
       </property>
@@ -2067,7 +2068,7 @@ QComboBox QAbstractItemView {
       <property name="geometry">
        <rect>
         <x>12</x>
-        <y>370</y>
+        <y>380</y>
         <width>381</width>
         <height>171</height>
        </rect>
@@ -2302,7 +2303,7 @@ QTableCornerButton::section {
       <property name="geometry">
        <rect>
         <x>-10</x>
-        <y>40</y>
+        <y>110</y>
         <width>241</width>
         <height>31</height>
        </rect>
@@ -2331,9 +2332,9 @@ QTableCornerButton::section {
      <widget class="QPushButton" name="confirmButton">
       <property name="geometry">
        <rect>
-        <x>40</x>
-        <y>847</y>
-        <width>311</width>
+        <x>90</x>
+        <y>855</y>
+        <width>211</width>
         <height>41</height>
        </rect>
       </property>
@@ -2347,7 +2348,7 @@ QTableCornerButton::section {
     border-left-color: #ffffff;
     border-bottom-color: #cccccc;
     border-right-color: #cccccc;
-    border-radius: 20px;
+	border-radius: 15px;
     padding: 12px 20px;
     font: bold 13pt &quot;Segoe UI&quot;;
     letter-spacing: 1px;
@@ -2381,9 +2382,9 @@ QPushButton:pressed {
      <widget class="QComboBox" name="date">
       <property name="geometry">
        <rect>
-        <x>127</x>
-        <y>90</y>
-        <width>81</width>
+        <x>197</x>
+        <y>160</y>
+        <width>71</width>
         <height>42</height>
        </rect>
       </property>
@@ -2608,7 +2609,7 @@ QComboBox QAbstractItemView {
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>600</y>
+        <y>610</y>
         <width>371</width>
         <height>20</height>
        </rect>
@@ -2638,21 +2639,21 @@ QComboBox QAbstractItemView {
       <property name="geometry">
        <rect>
         <x>400</x>
-        <y>0</y>
+        <y>10</y>
         <width>961</width>
-        <height>911</height>
+        <height>891</height>
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">QWidget { background-color: #ECFAE5; }</string>
+       <string notr="true">QWidget { background-color: #ECFAE5; border-radius: 15px;}</string>
       </property>
       <widget class="QTableWidget" name="tableListahan">
        <property name="geometry">
         <rect>
-         <x>15</x>
-         <y>164</y>
-         <width>971</width>
-         <height>731</height>
+         <x>12</x>
+         <y>57</y>
+         <width>941</width>
+         <height>821</height>
         </rect>
        </property>
        <property name="font">
@@ -2724,12 +2725,11 @@ QHeaderView {
 QScrollBar:vertical {
     background: #E2EAE5;   /* darker track for better contrast */
     width: 10px;
-    border-radius: 5px;
 }
 
 QScrollBar::handle:vertical {
     background: #1F4D2C;   /* darker green handle */
-    border-radius: 5px;
+
     min-height: 25px;
 }
 
@@ -2763,7 +2763,6 @@ QScrollBar:horizontal {
 
 QScrollBar::handle:horizontal {
     background: #1F4D2C;
-    border-radius: 5px;
     min-width: 25px;
 }
 
@@ -2799,24 +2798,17 @@ QTableCornerButton::section {
         <enum>QAbstractItemView::NoSelection</enum>
        </property>
        <attribute name="horizontalHeaderDefaultSectionSize">
-        <number>250</number>
+        <number>255</number>
+       </attribute>
+       <attribute name="horizontalHeaderMinimumSectionSize">
+        <number>40</number>
        </attribute>
        <attribute name="verticalHeaderDefaultSectionSize">
-        <number>50</number>
+        <number>60</number>
        </attribute>
        <row>
         <property name="text">
          <string>1</string>
-        </property>
-       </row>
-       <row>
-        <property name="text">
-         <string>2</string>
-        </property>
-       </row>
-       <row>
-        <property name="text">
-         <string>3</string>
         </property>
        </row>
        <column>
@@ -2889,46 +2881,6 @@ QTableCornerButton::section {
          <string>Edit</string>
         </property>
        </column>
-       <column>
-        <property name="text">
-         <string>Convert to PDF</string>
-        </property>
-       </column>
-       <column>
-        <property name="text">
-         <string>Trash</string>
-        </property>
-       </column>
-       <item row="0" column="0">
-        <property name="text">
-         <string/>
-        </property>
-       </item>
-       <item row="0" column="1">
-        <property name="text">
-         <string/>
-        </property>
-       </item>
-       <item row="0" column="2">
-        <property name="text">
-         <string/>
-        </property>
-       </item>
-       <item row="0" column="3">
-        <property name="text">
-         <string/>
-        </property>
-       </item>
-       <item row="0" column="4">
-        <property name="text">
-         <string/>
-        </property>
-       </item>
-       <item row="0" column="5">
-        <property name="text">
-         <string/>
-        </property>
-       </item>
       </widget>
       <widget class="QLineEdit" name="searchDate">
        <property name="geometry">
@@ -2938,6 +2890,15 @@ QTableCornerButton::section {
          <width>241</width>
          <height>41</height>
         </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Segoe UI</family>
+         <pointsize>11</pointsize>
+         <weight>50</weight>
+         <italic>false</italic>
+         <bold>false</bold>
+        </font>
        </property>
        <property name="styleSheet">
         <string notr="true">QLineEdit {
@@ -2982,222 +2943,130 @@ QLineEdit:focus {
         <string>🔍  Search client or date...</string>
        </property>
       </widget>
-      <widget class="QFrame" name="statToday">
+      <widget class="QPushButton" name="confirmButton_2">
        <property name="geometry">
         <rect>
-         <x>185</x>
-         <y>70</y>
-         <width>150</width>
-         <height>80</height>
+         <x>280</x>
+         <y>11</y>
+         <width>161</width>
+         <height>41</height>
         </rect>
        </property>
+       <property name="font">
+        <font>
+         <family>Segoe UI</family>
+         <pointsize>8</pointsize>
+         <weight>75</weight>
+         <italic>false</italic>
+         <bold>true</bold>
+        </font>
+       </property>
        <property name="styleSheet">
-        <string notr="true">QFrame {
-    background-color: #FFFFFF;
-    border-radius: 12px;
-
-    /* ✅ green 3D border */
+        <string notr="true">QPushButton {
+    background-color: #9B0F06;
+    color: #ffffff;
     border-style: solid;
     border-width: 2px;
-    border-top-color: #E9F5EC;     /* light green highlight */
-    border-left-color: #E9F5EC;
-    border-bottom-color: #2D6A4F;  /* dark green shadow */
-    border-right-color: #2D6A4F;
-}</string>
-       </property>
-       <property name="frameShape">
-        <enum>QFrame::NoFrame</enum>
-       </property>
-       <widget class="QLabel" name="statTodayNum">
-        <property name="geometry">
-         <rect>
-          <x>12</x>
-          <y>8</y>
-          <width>126</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QLabel { color: #1B4332; font: bold 20pt 'Segoe UI'; background: transparent; }</string>
-        </property>
-        <property name="text">
-         <string>0</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-       </widget>
-       <widget class="QLabel" name="statTodayLabel">
-        <property name="geometry">
-         <rect>
-          <x>24</x>
-          <y>44</y>
-          <width>101</width>
-          <height>24</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QLabel {
-    color: #1F1F1F;
+    border-top-color: #ffffff;
+    border-left-color: #ffffff;
+    border-bottom-color: #cccccc;
+    border-right-color: #cccccc;
+    padding: 12px 20px;
     font: bold 8pt &quot;Segoe UI&quot;;
     letter-spacing: 1px;
-    background: transparent;
+	border-radius: 15px;
+}
+
+/* HOVER EFFECT */
+QPushButton:hover {
+    background-color: #9B0F06; /* slightly darker green */
+    border-top-color: #E6E6E6;
+    border-left-color: #E6E6E6;
+    border-bottom-color: #B3B3B3;
+    border-right-color: #B3B3B3;
+}
+
+/* CLICK / PRESSED EFFECT */
+QPushButton:pressed {
+    background-color: #9B0F06; /* deep pressed green */
+    border-top-color: #1A1A1A;  /* inverted depth */
+    border-left-color: #1A1A1A;
+    border-bottom-color: #4A4A4A;
+    border-right-color: #4A4A4A;
+
+    padding-top: 14px;   /* press down illusion */
+    padding-left: 22px;
 }</string>
-        </property>
-        <property name="text">
-         <string>TODAY</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-       </widget>
+       </property>
+       <property name="text">
+        <string>💾  CONVERT TO PDF</string>
+       </property>
       </widget>
-      <widget class="QFrame" name="statTotal">
+      <widget class="QPushButton" name="confirmButton_3">
        <property name="geometry">
         <rect>
-         <x>20</x>
-         <y>70</y>
-         <width>150</width>
-         <height>80</height>
+         <x>450</x>
+         <y>11</y>
+         <width>161</width>
+         <height>41</height>
         </rect>
        </property>
-       <property name="styleSheet">
-        <string notr="true">QFrame {
-    background-color: #FFFFFF;
-    border-radius: 12px;
-
-    /* ✅ green 3D border */
-    border-style: solid;
-    border-width: 2px;
-    border-top-color: #E9F5EC;     /* light green highlight */
-    border-left-color: #E9F5EC;
-    border-bottom-color: #2D6A4F;  /* dark green shadow */
-    border-right-color: #2D6A4F;
-}</string>
-       </property>
-       <property name="frameShape">
-        <enum>QFrame::NoFrame</enum>
-       </property>
-       <widget class="QLabel" name="statTotalNum">
-        <property name="geometry">
-         <rect>
-          <x>12</x>
-          <y>8</y>
-          <width>121</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QLabel { color: #1B4332; font: bold 20pt 'Segoe UI'; background: transparent; }</string>
-        </property>
-        <property name="text">
-         <string>0</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-       </widget>
-       <widget class="QLabel" name="statTotalLabel">
-        <property name="geometry">
-         <rect>
-          <x>27</x>
-          <y>44</y>
-          <width>91</width>
-          <height>24</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QLabel {
-    color: #1F1F1F;
-    font: bold 8pt &quot;Segoe UI&quot;;
-    letter-spacing: 1px;
-    background: transparent;
-}</string>
-        </property>
-        <property name="text">
-         <string>TOTAL</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-       </widget>
-      </widget>
-      <widget class="QFrame" name="statMonth">
-       <property name="geometry">
-        <rect>
-         <x>350</x>
-         <y>70</y>
-         <width>150</width>
-         <height>80</height>
-        </rect>
+       <property name="font">
+        <font>
+         <family>Segoe UI</family>
+         <pointsize>8</pointsize>
+         <weight>75</weight>
+         <italic>false</italic>
+         <bold>true</bold>
+        </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">QFrame {
-    background-color: #FFFFFF;
-    border-radius: 12px;
-
-    /* ✅ green 3D border */
+        <string notr="true">QPushButton {
+    background-color: #DA4848;
+    color: #ffffff;
     border-style: solid;
     border-width: 2px;
-    border-top-color: #E9F5EC;     /* light green highlight */
-    border-left-color: #E9F5EC;
-    border-bottom-color: #2D6A4F;  /* dark green shadow */
-    border-right-color: #2D6A4F;
-}</string>
-       </property>
-       <property name="frameShape">
-        <enum>QFrame::NoFrame</enum>
-       </property>
-       <widget class="QLabel" name="statMonthNum">
-        <property name="geometry">
-         <rect>
-          <x>12</x>
-          <y>8</y>
-          <width>126</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QLabel { color: #1B4332; font: bold 20pt 'Segoe UI'; background: transparent; }</string>
-        </property>
-        <property name="text">
-         <string>0</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-       </widget>
-       <widget class="QLabel" name="statMonthLabel">
-        <property name="geometry">
-         <rect>
-          <x>24</x>
-          <y>45</y>
-          <width>101</width>
-          <height>24</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QLabel {
-    color: #1F1F1F;
+    border-top-color: #ffffff;
+    border-left-color: #ffffff;
+    border-bottom-color: #cccccc;
+    border-right-color: #cccccc;
+    padding: 12px 20px;
     font: bold 8pt &quot;Segoe UI&quot;;
     letter-spacing: 1px;
-    background: transparent;
+	border-radius: 15px;
+}
+
+/* HOVER EFFECT */
+QPushButton:hover {
+    background-color: #DA4848; /* slightly darker green */
+    border-top-color: #E6E6E6;
+    border-left-color: #E6E6E6;
+    border-bottom-color: #B3B3B3;
+    border-right-color: #B3B3B3;
+}
+
+/* CLICK / PRESSED EFFECT */
+QPushButton:pressed {
+    background-color: #DA4848; /* deep pressed green */
+    border-top-color: #1A1A1A;  /* inverted depth */
+    border-left-color: #1A1A1A;
+    border-bottom-color: #4A4A4A;
+    border-right-color: #4A4A4A;
+
+    padding-top: 14px;   /* press down illusion */
+    padding-left: 22px;
 }</string>
-        </property>
-        <property name="text">
-         <string>THIS MONTH</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-       </widget>
+       </property>
+       <property name="text">
+        <string>💾  TRASH</string>
+       </property>
       </widget>
      </widget>
      <widget class="QPushButton" name="addActualRow">
       <property name="geometry">
        <rect>
         <x>26</x>
-        <y>801</y>
+        <y>810</y>
         <width>351</width>
         <height>36</height>
        </rect>
@@ -3225,7 +3094,7 @@ QPushButton:hover { background-color: #e8f5e9; }
       <property name="geometry">
        <rect>
         <x>20</x>
-        <y>550</y>
+        <y>560</y>
         <width>361</width>
         <height>36</height>
        </rect>
@@ -3261,8 +3130,8 @@ QPushButton:hover { background-color: #e8f5e9; }
      <widget class="QLabel" name="sectionHeader">
       <property name="geometry">
        <rect>
-        <x>60</x>
-        <y>10</y>
+        <x>71</x>
+        <y>0</y>
         <width>261</width>
         <height>23</height>
        </rect>
