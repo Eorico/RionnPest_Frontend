@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>410</width>
-    <height>559</height>
+    <width>626</width>
+    <height>749</height>
    </rect>
   </property>
   <property name="font">
@@ -83,10 +83,10 @@ QLineEdit#passwordEdit::placeholder {
    <widget class="QWidget" name="containerlogin" native="true">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>10</y>
-      <width>391</width>
-      <height>541</height>
+      <x>-10</x>
+      <y>-10</y>
+      <width>651</width>
+      <height>771</height>
      </rect>
     </property>
     <property name="font">
@@ -114,8 +114,8 @@ QLineEdit#passwordEdit::placeholder {
     <widget class="QLineEdit" name="usernameEdit">
      <property name="geometry">
       <rect>
-       <x>50</x>
-       <y>260</y>
+       <x>180</x>
+       <y>360</y>
        <width>291</width>
        <height>51</height>
       </rect>
@@ -192,8 +192,8 @@ QLineEdit::placeholder {
     <widget class="QLineEdit" name="passwordEdit">
      <property name="geometry">
       <rect>
-       <x>50</x>
-       <y>360</y>
+       <x>180</x>
+       <y>460</y>
        <width>291</width>
        <height>51</height>
       </rect>
@@ -270,8 +270,8 @@ QLineEdit::placeholder {
     <widget class="QPushButton" name="loginbutton">
      <property name="geometry">
       <rect>
-       <x>140</x>
-       <y>460</y>
+       <x>270</x>
+       <y>560</y>
        <width>111</width>
        <height>41</height>
       </rect>
@@ -335,8 +335,8 @@ QPushButton:disabled {
     <widget class="QLabel" name="title">
      <property name="geometry">
       <rect>
-       <x>30</x>
-       <y>150</y>
+       <x>170</x>
+       <y>240</y>
        <width>321</width>
        <height>70</height>
       </rect>
@@ -360,8 +360,8 @@ QPushButton:disabled {
     <widget class="QLabel" name="title_2">
      <property name="geometry">
       <rect>
-       <x>40</x>
-       <y>220</y>
+       <x>170</x>
+       <y>320</y>
        <width>119</width>
        <height>50</height>
       </rect>
@@ -384,8 +384,8 @@ QPushButton:disabled {
     <widget class="QLabel" name="title_3">
      <property name="geometry">
       <rect>
-       <x>40</x>
-       <y>320</y>
+       <x>170</x>
+       <y>420</y>
        <width>122</width>
        <height>50</height>
       </rect>
@@ -408,8 +408,8 @@ QPushButton:disabled {
     <widget class="QLabel" name="Logo">
      <property name="geometry">
       <rect>
-       <x>87</x>
-       <y>-20</y>
+       <x>217</x>
+       <y>50</y>
        <width>221</width>
        <height>211</height>
       </rect>
@@ -433,8 +433,8 @@ border: none;
     <widget class="QLabel" name="title_4">
      <property name="geometry">
       <rect>
-       <x>60</x>
-       <y>190</y>
+       <x>190</x>
+       <y>290</y>
        <width>271</width>
        <height>50</height>
       </rect>

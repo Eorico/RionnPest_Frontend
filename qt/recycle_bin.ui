@@ -34,55 +34,134 @@
     </property>
     <property name="styleSheet">
      <string notr="true">QTableWidget {
-    background-color: #ffffff;            /* white background */
-    border-style: solid;
-    border-width: 2px;
-    border-top-color: #ffffff;            /* light top */
-    border-left-color: #ffffff;           /* light left */
-    border-bottom-color: #cccccc;         /* dark bottom */
-    border-right-color: #cccccc;          /* dark right */
-    gridline-color: #e6e6e6;
+    background-color: #F6FBF8;          /* soft green-tinted white */
+    border: 1px solid #D6E8DD;          /* subtle modern border */
+    gridline-color: #E3EFE8;
     font: 13pt &quot;Segoe UI&quot;;
-    selection-background-color: #2ecc71;
+
+    selection-background-color: #4CAF70;
     selection-color: white;
-    alternate-background-color: #f9f9f9;
+
+    alternate-background-color: #EDF7F1;
 }
 
+/* cells */
 QTableWidget::item {
-    padding: 6px;
-    border-bottom: 1px solid #e6e6e6;
+    padding: 10px;
+    border: none;
+    color: #1F2D23;
 }
 
+/* hover (soft green highlight) */
+QTableWidget::item:hover {
+    background-color: #DFF3E6;
+}
+
+/* selected */
 QTableWidget::item:selected {
-    background-color: #2ecc71;   /* green when selected */
+    background-color: #4CAF70;
     color: white;
 }
 
-QTableWidget::item:hover {
-    background-color: #f0f0f0;   /* darker on hover */
-}
-
+/* header (modern flat style) */
 QHeaderView::section {
-    background-color: #f3f3f3;
-    color: #333333;
-    padding: 6px;
-    border-style: solid;
-    border-width: 2px;
-    border-top-color: #ffffff;
-    border-left-color: #ffffff;
-    border-bottom-color: #cccccc;
-    border-right-color: #cccccc;
+    background-color: #E4F1EA;
+    color: #1F2D23;
+    padding: 10px;
+    border: none;
     font: 10pt &quot;Segoe UI&quot;;
+    font-weight: 600;
 }
 
+/* row header hover (clickable feel) */
+QHeaderView::section:vertical:hover {
+    background-color: #CFE9D8;
+}
+
+/* row header pressed */
+QHeaderView::section:vertical:pressed {
+    background-color: #4CAF70;
+    color: white;
+}
+
+/* corner */
 QTableCornerButton::section {
-    background-color: #f3f3f3;
-    border-style: solid;
-    border-width: 2px;
-    border-top-color: #ffffff;
-    border-left-color: #ffffff;
-    border-bottom-color: #cccccc;
-    border-right-color: #cccccc;
+    background-color: #E4F1EA;
+    border: none;
+}
+
+/* Vertical ScrollBar */
+QScrollBar:vertical {
+    background: transparent;
+    width: 16px;                     /* ⬅ bigger */
+    margin: 6px 2px 6px 2px;
+}
+
+/* handle */
+QScrollBar::handle:vertical {
+    background: #CFE9D8;
+    border-radius: 8px;
+    min-height: 40px;               /* ⬅ bigger handle */
+}
+
+/* hover */
+QScrollBar::handle:vertical:hover {
+    background: #AFCFBB;
+}
+
+/* pressed */
+QScrollBar::handle:vertical:pressed {
+    background: #4CAF70;
+}
+
+/* remove arrows */
+QScrollBar::add-line:vertical,
+QScrollBar::sub-line:vertical {
+    height: 0px;
+    background: none;
+}
+
+/* track */
+QScrollBar::add-page:vertical,
+QScrollBar::sub-page:vertical {
+    background: transparent;
+}
+
+/* Horizontal ScrollBar */
+QScrollBar:horizontal {
+    background: transparent;
+    height: 16px;                   /* ⬅ bigger */
+    margin: 2px 6px 2px 6px;
+}
+
+/* handle */
+QScrollBar::handle:horizontal {
+    background: #CFE9D8;
+    border-radius: 8px;
+    min-width: 40px;                /* ⬅ bigger handle */
+}
+
+/* hover */
+QScrollBar::handle:horizontal:hover {
+    background: #AFCFBB;
+}
+
+/* pressed */
+QScrollBar::handle:horizontal:pressed {
+    background: #4CAF70;
+}
+
+/* remove arrows */
+QScrollBar::add-line:horizontal,
+QScrollBar::sub-line:horizontal {
+    width: 0px;
+    background: none;
+}
+
+/* track */
+QScrollBar::add-page:horizontal,
+QScrollBar::sub-page:horizontal {
+    background: transparent;
 }</string>
     </property>
     <property name="editTriggers">
@@ -164,7 +243,7 @@ QTableCornerButton::section {
     </column>
     <column>
      <property name="text">
-      <string>Acutal chemical used</string>
+      <string>Actual Chemical Used</string>
      </property>
     </column>
     <item row="0" column="0">
@@ -208,9 +287,8 @@ QTableCornerButton::section {
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">/* Main light gray container */
-QWidget{
-    background-color: #DADADA; /* light gray */
+     <string notr="true">QWidget {
+    background-color: #EEF7F2;   /* slightly darker than table */
 }</string>
     </property>
     <widget class="Line" name="line_4">
@@ -304,23 +382,24 @@ QWidget{
      </property>
      <property name="styleSheet">
       <string notr="true">QPushButton {
-    background-color: transparent;      /* make background see-through */
-    border-style: solid;
-    border-width: 2px;
-    border-top-color: #ffffff;          /* light top/left edge */
-    border-left-color: #ffffff;
-    border-bottom-color: #555555;       /* dark bottom/right edge */
-    border-right-color: #555555;
-    border-radius: 4px;                  /* optional: rounded corners */
-    padding: 5px;
+    background-color: transparent;
+    color: #7CFFB2;
+
+    border: 1px solid #2F6B3F;   /* darker, visible green outline */
+    border-radius: 10px;
+    padding: 6px;
 }
 
+/* hover (subtle visible lift, no covering image) */
+QPushButton:hover {
+    background-color: rgba(47, 107, 63, 0.18);  /* soft green tint */
+    border-color: #3A7F52;                      /* brighter border */
+}
+
+/* pressed (stronger feedback but still transparent) */
 QPushButton:pressed {
-    /* invert border for “pressed” effect */
-    border-top-color: #555555;
-    border-left-color: #555555;
-    border-bottom-color: #ffffff;
-    border-right-color: #ffffff;
+    background-color: rgba(47, 107, 63, 0.28);
+    border-color: #1F4D2C;                      /* darker press */
 }</string>
      </property>
      <property name="text">
@@ -338,23 +417,24 @@ QPushButton:pressed {
      </property>
      <property name="styleSheet">
       <string notr="true">QPushButton {
-    background-color: transparent;      /* make background see-through */
-    border-style: solid;
-    border-width: 2px;
-    border-top-color: #ffffff;          /* light top/left edge */
-    border-left-color: #ffffff;
-    border-bottom-color: #555555;       /* dark bottom/right edge */
-    border-right-color: #555555;
-    border-radius: 4px;                  /* optional: rounded corners */
-    padding: 5px;
+    background-color: transparent;
+    color: #7CFFB2;
+
+    border: 1px solid #2F6B3F;   /* darker, visible green outline */
+    border-radius: 10px;
+    padding: 6px;
 }
 
+/* hover (subtle visible lift, no covering image) */
+QPushButton:hover {
+    background-color: rgba(47, 107, 63, 0.18);  /* soft green tint */
+    border-color: #3A7F52;                      /* brighter border */
+}
+
+/* pressed (stronger feedback but still transparent) */
 QPushButton:pressed {
-    /* invert border for “pressed” effect */
-    border-top-color: #555555;
-    border-left-color: #555555;
-    border-bottom-color: #ffffff;
-    border-right-color: #ffffff;
+    background-color: rgba(47, 107, 63, 0.28);
+    border-color: #1F4D2C;                      /* darker press */
 }</string>
      </property>
      <property name="text">
@@ -372,23 +452,24 @@ QPushButton:pressed {
      </property>
      <property name="styleSheet">
       <string notr="true">QPushButton {
-    background-color: transparent;      /* make background see-through */
-    border-style: solid;
-    border-width: 2px;
-    border-top-color: #ffffff;          /* light top/left edge */
-    border-left-color: #ffffff;
-    border-bottom-color: #555555;       /* dark bottom/right edge */
-    border-right-color: #555555;
-    border-radius: 4px;                  /* optional: rounded corners */
-    padding: 5px;
+    background-color: transparent;
+    color: #7CFFB2;
+
+    border: 1px solid #2F6B3F;   /* darker, visible green outline */
+    border-radius: 10px;
+    padding: 6px;
 }
 
+/* hover (subtle visible lift, no covering image) */
+QPushButton:hover {
+    background-color: rgba(47, 107, 63, 0.18);  /* soft green tint */
+    border-color: #3A7F52;                      /* brighter border */
+}
+
+/* pressed (stronger feedback but still transparent) */
 QPushButton:pressed {
-    /* invert border for “pressed” effect */
-    border-top-color: #555555;
-    border-left-color: #555555;
-    border-bottom-color: #ffffff;
-    border-right-color: #ffffff;
+    background-color: rgba(47, 107, 63, 0.28);
+    border-color: #1F4D2C;                      /* darker press */
 }</string>
      </property>
      <property name="text">

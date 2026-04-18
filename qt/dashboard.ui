@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1423</width>
+    <width>1455</width>
     <height>976</height>
    </rect>
   </property>
@@ -82,7 +82,7 @@
       <property name="font">
        <font>
         <family>Segoe UI</family>
-        <pointsize>10</pointsize>
+        <pointsize>11</pointsize>
         <weight>50</weight>
         <italic>false</italic>
         <bold>false</bold>
@@ -97,26 +97,30 @@
     border-radius: 8px;
     padding: 5px 10px;
     color: #1A3C2A;
-    font: 10pt &quot;Segoe UI&quot;;
+    font: 11pt &quot;Segoe UI&quot;;
     min-height: 28px;
 
-    /* ✅ GREEN 3D BORDER */
+    /* GREEN 3D BORDER */
     border-style: solid;
     border-width: 2px;
-    border-top-color: #C6F6D5;     /* light green highlight */
+    border-top-color: #C6F6D5;
     border-left-color: #C6F6D5;
-    border-bottom-color: #2D6A4F;  /* dark green shadow */
+    border-bottom-color: #2D6A4F;
     border-right-color: #2D6A4F;
 }
 
 QComboBox:hover {
-    border-top-color: #E9F5EC;
-    border-left-color: #E9F5EC;
-    border-bottom-color: #1B4332;
-    border-right-color: #1B4332;
+    background-color: #D6EBDD;
+    border-top-color: #C6E6D3;
+    border-left-color: #C6E6D3;
+    border-bottom-color: #0E3B21;
+    border-right-color: #0E3B21;
+    color: #0B2F1B;
 }
 
+/* FOCUS EFFECT */
 QComboBox:focus {
+    background-color: #EAF7EE;
     border-top-color: #E9F5EC;
     border-left-color: #E9F5EC;
     border-bottom-color: #1B4332;
@@ -131,9 +135,7 @@ QComboBox QAbstractItemView {
     selection-background-color: #2D6A4F;
     selection-color: #ffffff;
     font: 10pt &quot;Segoe UI&quot;;
-}
-
-</string>
+}</string>
       </property>
       <property name="editable">
        <bool>false</bool>
@@ -211,7 +213,7 @@ QComboBox QAbstractItemView {
       <property name="font">
        <font>
         <family>Segoe UI</family>
-        <pointsize>10</pointsize>
+        <pointsize>11</pointsize>
         <weight>50</weight>
         <italic>false</italic>
         <bold>false</bold>
@@ -226,26 +228,30 @@ QComboBox QAbstractItemView {
     border-radius: 8px;
     padding: 5px 10px;
     color: #1A3C2A;
-    font: 10pt &quot;Segoe UI&quot;;
+    font: 11pt &quot;Segoe UI&quot;;
     min-height: 28px;
 
-    /* ✅ GREEN 3D BORDER */
+    /* GREEN 3D BORDER */
     border-style: solid;
     border-width: 2px;
-    border-top-color: #C6F6D5;     /* light green highlight */
+    border-top-color: #C6F6D5;
     border-left-color: #C6F6D5;
-    border-bottom-color: #2D6A4F;  /* dark green shadow */
+    border-bottom-color: #2D6A4F;
     border-right-color: #2D6A4F;
 }
 
 QComboBox:hover {
-    border-top-color: #E9F5EC;
-    border-left-color: #E9F5EC;
-    border-bottom-color: #1B4332;
-    border-right-color: #1B4332;
+    background-color: #D6EBDD;
+    border-top-color: #C6E6D3;
+    border-left-color: #C6E6D3;
+    border-bottom-color: #0E3B21;
+    border-right-color: #0E3B21;
+    color: #0B2F1B;
 }
 
+/* FOCUS EFFECT */
 QComboBox:focus {
+    background-color: #EAF7EE;
     border-top-color: #E9F5EC;
     border-left-color: #E9F5EC;
     border-bottom-color: #1B4332;
@@ -260,9 +266,7 @@ QComboBox QAbstractItemView {
     selection-background-color: #2D6A4F;
     selection-color: #ffffff;
     font: 10pt &quot;Segoe UI&quot;;
-}
-
-</string>
+}</string>
       </property>
       <property name="editable">
        <bool>false</bool>
@@ -283,13 +287,13 @@ QComboBox QAbstractItemView {
        <rect>
         <x>220</x>
         <y>80</y>
-        <width>33</width>
+        <width>91</width>
         <height>19</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <pointsize>8</pointsize>
+        <pointsize>11</pointsize>
        </font>
       </property>
       <property name="layoutDirection">
@@ -312,14 +316,14 @@ QComboBox QAbstractItemView {
       <property name="geometry">
        <rect>
         <x>40</x>
-        <y>311</y>
+        <y>320</y>
         <width>33</width>
         <height>19</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <pointsize>8</pointsize>
+        <pointsize>12</pointsize>
        </font>
       </property>
       <property name="layoutDirection">
@@ -350,7 +354,7 @@ QComboBox QAbstractItemView {
       <property name="font">
        <font>
         <family>Segoe UI</family>
-        <pointsize>10</pointsize>
+        <pointsize>11</pointsize>
         <weight>50</weight>
         <italic>false</italic>
         <bold>false</bold>
@@ -365,26 +369,30 @@ QComboBox QAbstractItemView {
     border-radius: 8px;
     padding: 5px 10px;
     color: #1A3C2A;
-    font: 10pt &quot;Segoe UI&quot;;
+    font: 11pt &quot;Segoe UI&quot;;
     min-height: 28px;
 
-    /* ✅ GREEN 3D BORDER */
+    /* GREEN 3D BORDER */
     border-style: solid;
     border-width: 2px;
-    border-top-color: #C6F6D5;     /* light green highlight */
+    border-top-color: #C6F6D5;
     border-left-color: #C6F6D5;
-    border-bottom-color: #2D6A4F;  /* dark green shadow */
+    border-bottom-color: #2D6A4F;
     border-right-color: #2D6A4F;
 }
 
 QComboBox:hover {
-    border-top-color: #E9F5EC;
-    border-left-color: #E9F5EC;
-    border-bottom-color: #1B4332;
-    border-right-color: #1B4332;
+    background-color: #D6EBDD;
+    border-top-color: #C6E6D3;
+    border-left-color: #C6E6D3;
+    border-bottom-color: #0E3B21;
+    border-right-color: #0E3B21;
+    color: #0B2F1B;
 }
 
+/* FOCUS EFFECT */
 QComboBox:focus {
+    background-color: #EAF7EE;
     border-top-color: #E9F5EC;
     border-left-color: #E9F5EC;
     border-bottom-color: #1B4332;
@@ -399,9 +407,7 @@ QComboBox QAbstractItemView {
     selection-background-color: #2D6A4F;
     selection-color: #ffffff;
     font: 10pt &quot;Segoe UI&quot;;
-}
-
-</string>
+}</string>
       </property>
       <property name="editable">
        <bool>false</bool>
@@ -706,11 +712,6 @@ QComboBox QAbstractItemView {
         <string>59</string>
        </property>
       </item>
-      <item>
-       <property name="text">
-        <string>60</string>
-       </property>
-      </item>
      </widget>
      <widget class="QComboBox" name="time_2">
       <property name="geometry">
@@ -724,7 +725,7 @@ QComboBox QAbstractItemView {
       <property name="font">
        <font>
         <family>Segoe UI</family>
-        <pointsize>10</pointsize>
+        <pointsize>11</pointsize>
         <weight>50</weight>
         <italic>false</italic>
         <bold>false</bold>
@@ -739,26 +740,30 @@ QComboBox QAbstractItemView {
     border-radius: 8px;
     padding: 5px 10px;
     color: #1A3C2A;
-    font: 10pt &quot;Segoe UI&quot;;
+    font: 11pt &quot;Segoe UI&quot;;
     min-height: 28px;
 
-    /* ✅ GREEN 3D BORDER */
+    /* GREEN 3D BORDER */
     border-style: solid;
     border-width: 2px;
-    border-top-color: #C6F6D5;     /* light green highlight */
+    border-top-color: #C6F6D5;
     border-left-color: #C6F6D5;
-    border-bottom-color: #2D6A4F;  /* dark green shadow */
+    border-bottom-color: #2D6A4F;
     border-right-color: #2D6A4F;
 }
 
 QComboBox:hover {
-    border-top-color: #E9F5EC;
-    border-left-color: #E9F5EC;
-    border-bottom-color: #1B4332;
-    border-right-color: #1B4332;
+    background-color: #D6EBDD;
+    border-top-color: #C6E6D3;
+    border-left-color: #C6E6D3;
+    border-bottom-color: #0E3B21;
+    border-right-color: #0E3B21;
+    color: #0B2F1B;
 }
 
+/* FOCUS EFFECT */
 QComboBox:focus {
+    background-color: #EAF7EE;
     border-top-color: #E9F5EC;
     border-left-color: #E9F5EC;
     border-bottom-color: #1B4332;
@@ -773,9 +778,7 @@ QComboBox QAbstractItemView {
     selection-background-color: #2D6A4F;
     selection-color: #ffffff;
     font: 10pt &quot;Segoe UI&quot;;
-}
-
-</string>
+}</string>
       </property>
       <property name="editable">
        <bool>false</bool>
@@ -1089,15 +1092,15 @@ QComboBox QAbstractItemView {
      <widget class="QLabel" name="label_4">
       <property name="geometry">
        <rect>
-        <x>10</x>
-        <y>230</y>
-        <width>177</width>
-        <height>20</height>
+        <x>-20</x>
+        <y>220</y>
+        <width>261</width>
+        <height>31</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <pointsize>11</pointsize>
+        <pointsize>12</pointsize>
        </font>
       </property>
       <property name="layoutDirection">
@@ -1119,15 +1122,15 @@ QComboBox QAbstractItemView {
      <widget class="QLabel" name="label_2">
       <property name="geometry">
        <rect>
-        <x>10</x>
+        <x>20</x>
         <y>150</y>
-        <width>224</width>
+        <width>291</width>
         <height>19</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <pointsize>11</pointsize>
+        <pointsize>12</pointsize>
        </font>
       </property>
       <property name="layoutDirection">
@@ -1150,14 +1153,14 @@ QComboBox QAbstractItemView {
       <property name="geometry">
        <rect>
         <x>30</x>
-        <y>261</y>
-        <width>50</width>
+        <y>270</y>
+        <width>61</width>
         <height>19</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <pointsize>8</pointsize>
+        <pointsize>12</pointsize>
        </font>
       </property>
       <property name="layoutDirection">
@@ -1191,7 +1194,7 @@ QComboBox QAbstractItemView {
     alternate-background-color: #F5F5F5;  /* ✅ clean light grey */
     gridline-color: #D8EDE0;
     border: none;
-    font: 10pt &quot;Segoe UI&quot;;
+    font: 11pt &quot;Segoe UI&quot;;
     color: #1B4332;
     selection-background-color: #C6F6D5;
     selection-color: #1B4332;
@@ -1223,7 +1226,7 @@ QHeaderView::section {
     border: none;
     border-right: 1px solid #1B4332;
     padding: 6px 8px;
-    font: bold 9pt &quot;Segoe UI&quot;;
+    font: bold 11pt &quot;Segoe UI&quot;;
     text-transform: uppercase;
 }
 
@@ -1241,25 +1244,72 @@ QHeaderView {
 }
 
 /* SCROLLBAR */
+
+/* SCROLLBAR */
 QScrollBar:vertical {
-    background: #F0F5F0;
-    width: 8px;
-    border-radius: 4px;
+    background: #E8F0EC;   /* lighter track for contrast */
+    width: 11px;
+    border-radius: 5px;
 }
 
 QScrollBar::handle:vertical {
-    background: #2F6B3F;
-    border-radius: 4px;
-    min-height: 20px;
+    background: #1B4332;   /* DARKER than header (#2F6B3F) */
+    border-radius: 5px;
+    min-height: 25px;
 }
 
 QScrollBar::handle:vertical:hover { 
-    background: #2D6A4F; 
+    background: #0F2A20;   /* very dark hover for clarity */
 }
 
+QScrollBar::handle:vertical:pressed { 
+    background: #081A13;   /* deepest press */
+}
+
+/* remove arrows */
 QScrollBar::add-line:vertical, 
 QScrollBar::sub-line:vertical { 
     height: 0; 
+}
+
+/* clean track */
+QScrollBar::add-page:vertical, 
+QScrollBar::sub-page:vertical { 
+    background: transparent; 
+}
+
+
+/* HORIZONTAL SCROLLBAR */
+QScrollBar:horizontal {
+    background: #E8F0EC;
+    height: 11px;
+    border-radius: 5px;
+}
+
+QScrollBar::handle:horizontal {
+    background: #1B4332;   /* darker than header */
+    border-radius: 5px;
+    min-width: 25px;
+}
+
+QScrollBar::handle:horizontal:hover { 
+    background: #0F2A20;
+}
+
+QScrollBar::handle:horizontal:pressed { 
+    background: #081A13;
+}
+
+/* remove arrows */
+QScrollBar::add-line:horizontal, 
+QScrollBar::sub-line:horizontal { 
+    width: 0; 
+}
+
+/* clean track */
+QScrollBar::add-page:horizontal, 
+QScrollBar::sub-page:horizontal { 
+    background: transparent; 
 }
 
 /* CORNER (top-left box) */
@@ -1367,15 +1417,15 @@ QTableCornerButton::section {
      <widget class="QLabel" name="label_5">
       <property name="geometry">
        <rect>
-        <x>16</x>
+        <x>-30</x>
         <y>360</y>
-        <width>255</width>
+        <width>371</width>
         <height>20</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <pointsize>11</pointsize>
+        <pointsize>12</pointsize>
        </font>
       </property>
       <property name="layoutDirection">
@@ -1419,7 +1469,7 @@ QTableCornerButton::section {
       <property name="font">
        <font>
         <family>Segoe UI</family>
-        <pointsize>10</pointsize>
+        <pointsize>11</pointsize>
         <weight>50</weight>
         <italic>false</italic>
         <bold>false</bold>
@@ -1434,26 +1484,30 @@ QTableCornerButton::section {
     border-radius: 8px;
     padding: 5px 10px;
     color: #1A3C2A;
-    font: 10pt &quot;Segoe UI&quot;;
+    font: 11pt &quot;Segoe UI&quot;;
     min-height: 28px;
 
-    /* ✅ GREEN 3D BORDER */
+    /* GREEN 3D BORDER */
     border-style: solid;
     border-width: 2px;
-    border-top-color: #C6F6D5;     /* light green highlight */
+    border-top-color: #C6F6D5;
     border-left-color: #C6F6D5;
-    border-bottom-color: #2D6A4F;  /* dark green shadow */
+    border-bottom-color: #2D6A4F;
     border-right-color: #2D6A4F;
 }
 
 QComboBox:hover {
-    border-top-color: #E9F5EC;
-    border-left-color: #E9F5EC;
-    border-bottom-color: #1B4332;
-    border-right-color: #1B4332;
+    background-color: #D6EBDD;
+    border-top-color: #C6E6D3;
+    border-left-color: #C6E6D3;
+    border-bottom-color: #0E3B21;
+    border-right-color: #0E3B21;
+    color: #0B2F1B;
 }
 
+/* FOCUS EFFECT */
 QComboBox:focus {
+    background-color: #EAF7EE;
     border-top-color: #E9F5EC;
     border-left-color: #E9F5EC;
     border-bottom-color: #1B4332;
@@ -1468,9 +1522,7 @@ QComboBox QAbstractItemView {
     selection-background-color: #2D6A4F;
     selection-color: #ffffff;
     font: 10pt &quot;Segoe UI&quot;;
-}
-
-</string>
+}</string>
       </property>
       <property name="editable">
        <bool>false</bool>
@@ -1550,23 +1602,38 @@ QComboBox QAbstractItemView {
     background-color: #FFFFFF;
     border-radius: 10px;
     padding: 8px 16px 8px 36px;
-    font: 10pt &quot;Segoe UI&quot;;
+    font: 11pt &quot;Segoe UI&quot;;
     color: #374151;
 
-    /* ✅ 3D GREEN BORDER */
+    /* 3D GREEN BORDER */
     border-style: solid;
     border-width: 2px;
-    border-top-color: #C6F6D5;     /* light green highlight */
-    border-left-color: #C6F6D5;    /* light green highlight */
-    border-bottom-color: #2D6A4F;  /* dark green shadow */
-    border-right-color: #2D6A4F;   /* dark green shadow */
+    border-top-color: #C6F6D5;
+    border-left-color: #C6F6D5;
+    border-bottom-color: #2D6A4F;
+    border-right-color: #2D6A4F;
 }
 
-QLineEdit:focus {
-    border-top-color: #E9F5EC;
-    border-left-color: #E9F5EC;
-    border-bottom-color: #1B4332;
+/* HOVER EFFECT */
+QLineEdit:hover {
+    background-color: #F0FAF4;   /* soft green hover tint */
+    border-top-color: #D7F2DE;
+    border-left-color: #D7F2DE;
+    border-bottom-color: #1B4332; /* darker shadow for depth */
     border-right-color: #1B4332;
+
+    color: #2F3A34;
+}
+
+/* CLICKED / ACTIVE (FOCUS) EFFECT */
+QLineEdit:focus {
+    background-color: #E3F3EA;   /* stronger active tint */
+    border-top-color: #BFE8CC;
+    border-left-color: #BFE8CC;
+    border-bottom-color: #0F3D24; /* deep pressed effect */
+    border-right-color: #0F3D24;
+
+    color: #10261C;
 }</string>
       </property>
       <property name="placeholderText">
@@ -1585,7 +1652,7 @@ QLineEdit:focus {
       <property name="font">
        <font>
         <family>Segoe UI</family>
-        <pointsize>10</pointsize>
+        <pointsize>11</pointsize>
         <weight>50</weight>
         <italic>false</italic>
         <bold>false</bold>
@@ -1600,26 +1667,30 @@ QLineEdit:focus {
     border-radius: 8px;
     padding: 5px 10px;
     color: #1A3C2A;
-    font: 10pt &quot;Segoe UI&quot;;
+    font: 11pt &quot;Segoe UI&quot;;
     min-height: 28px;
 
-    /* ✅ GREEN 3D BORDER */
+    /* GREEN 3D BORDER */
     border-style: solid;
     border-width: 2px;
-    border-top-color: #C6F6D5;     /* light green highlight */
+    border-top-color: #C6F6D5;
     border-left-color: #C6F6D5;
-    border-bottom-color: #2D6A4F;  /* dark green shadow */
+    border-bottom-color: #2D6A4F;
     border-right-color: #2D6A4F;
 }
 
 QComboBox:hover {
-    border-top-color: #E9F5EC;
-    border-left-color: #E9F5EC;
-    border-bottom-color: #1B4332;
-    border-right-color: #1B4332;
+    background-color: #D6EBDD;
+    border-top-color: #C6E6D3;
+    border-left-color: #C6E6D3;
+    border-bottom-color: #0E3B21;
+    border-right-color: #0E3B21;
+    color: #0B2F1B;
 }
 
+/* FOCUS EFFECT */
 QComboBox:focus {
+    background-color: #EAF7EE;
     border-top-color: #E9F5EC;
     border-left-color: #E9F5EC;
     border-bottom-color: #1B4332;
@@ -1634,9 +1705,7 @@ QComboBox QAbstractItemView {
     selection-background-color: #2D6A4F;
     selection-color: #ffffff;
     font: 10pt &quot;Segoe UI&quot;;
-}
-
-</string>
+}</string>
       </property>
       <property name="editable">
        <bool>false</bool>
@@ -1707,13 +1776,13 @@ QComboBox QAbstractItemView {
        <rect>
         <x>120</x>
         <y>80</y>
-        <width>33</width>
+        <width>81</width>
         <height>19</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <pointsize>8</pointsize>
+        <pointsize>11</pointsize>
        </font>
       </property>
       <property name="layoutDirection">
@@ -1737,13 +1806,13 @@ QComboBox QAbstractItemView {
        <rect>
         <x>14</x>
         <y>80</y>
-        <width>56</width>
+        <width>81</width>
         <height>19</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <pointsize>8</pointsize>
+        <pointsize>11</pointsize>
        </font>
       </property>
       <property name="layoutDirection">
@@ -1774,7 +1843,7 @@ QComboBox QAbstractItemView {
       <property name="font">
        <font>
         <family>Segoe UI</family>
-        <pointsize>10</pointsize>
+        <pointsize>11</pointsize>
         <weight>50</weight>
         <italic>false</italic>
         <bold>false</bold>
@@ -1789,26 +1858,30 @@ QComboBox QAbstractItemView {
     border-radius: 8px;
     padding: 5px 10px;
     color: #1A3C2A;
-    font: 10pt &quot;Segoe UI&quot;;
+    font: 11pt &quot;Segoe UI&quot;;
     min-height: 28px;
 
-    /* ✅ GREEN 3D BORDER */
+    /* GREEN 3D BORDER */
     border-style: solid;
     border-width: 2px;
-    border-top-color: #C6F6D5;     /* light green highlight */
+    border-top-color: #C6F6D5;
     border-left-color: #C6F6D5;
-    border-bottom-color: #2D6A4F;  /* dark green shadow */
+    border-bottom-color: #2D6A4F;
     border-right-color: #2D6A4F;
 }
 
 QComboBox:hover {
-    border-top-color: #E9F5EC;
-    border-left-color: #E9F5EC;
-    border-bottom-color: #1B4332;
-    border-right-color: #1B4332;
+    background-color: #D6EBDD;
+    border-top-color: #C6E6D3;
+    border-left-color: #C6E6D3;
+    border-bottom-color: #0E3B21;
+    border-right-color: #0E3B21;
+    color: #0B2F1B;
 }
 
+/* FOCUS EFFECT */
 QComboBox:focus {
+    background-color: #EAF7EE;
     border-top-color: #E9F5EC;
     border-left-color: #E9F5EC;
     border-bottom-color: #1B4332;
@@ -1823,9 +1896,7 @@ QComboBox QAbstractItemView {
     selection-background-color: #2D6A4F;
     selection-color: #ffffff;
     font: 10pt &quot;Segoe UI&quot;;
-}
-
-</string>
+}</string>
       </property>
       <property name="editable">
        <bool>false</bool>
@@ -1923,7 +1994,7 @@ QComboBox QAbstractItemView {
       <property name="font">
        <font>
         <family>Segoe UI</family>
-        <pointsize>10</pointsize>
+        <pointsize>11</pointsize>
         <weight>50</weight>
         <italic>false</italic>
         <bold>false</bold>
@@ -1938,26 +2009,30 @@ QComboBox QAbstractItemView {
     border-radius: 8px;
     padding: 5px 10px;
     color: #1A3C2A;
-    font: 10pt &quot;Segoe UI&quot;;
+    font: 11pt &quot;Segoe UI&quot;;
     min-height: 28px;
 
-    /* ✅ GREEN 3D BORDER */
+    /* GREEN 3D BORDER */
     border-style: solid;
     border-width: 2px;
-    border-top-color: #C6F6D5;     /* light green highlight */
+    border-top-color: #C6F6D5;
     border-left-color: #C6F6D5;
-    border-bottom-color: #2D6A4F;  /* dark green shadow */
+    border-bottom-color: #2D6A4F;
     border-right-color: #2D6A4F;
 }
 
 QComboBox:hover {
-    border-top-color: #E9F5EC;
-    border-left-color: #E9F5EC;
-    border-bottom-color: #1B4332;
-    border-right-color: #1B4332;
+    background-color: #D6EBDD;
+    border-top-color: #C6E6D3;
+    border-left-color: #C6E6D3;
+    border-bottom-color: #0E3B21;
+    border-right-color: #0E3B21;
+    color: #0B2F1B;
 }
 
+/* FOCUS EFFECT */
 QComboBox:focus {
+    background-color: #EAF7EE;
     border-top-color: #E9F5EC;
     border-left-color: #E9F5EC;
     border-bottom-color: #1B4332;
@@ -1972,9 +2047,7 @@ QComboBox QAbstractItemView {
     selection-background-color: #2D6A4F;
     selection-color: #ffffff;
     font: 10pt &quot;Segoe UI&quot;;
-}
-
-</string>
+}</string>
       </property>
       <property name="editable">
        <bool>false</bool>
@@ -2005,7 +2078,7 @@ QComboBox QAbstractItemView {
     alternate-background-color: #F5F5F5;  /* ✅ clean light grey */
     gridline-color: #D8EDE0;
     border: none;
-    font: 10pt &quot;Segoe UI&quot;;
+    font: 11pt &quot;Segoe UI&quot;;
     color: #1B4332;
     selection-background-color: #C6F6D5;
     selection-color: #1B4332;
@@ -2037,7 +2110,7 @@ QHeaderView::section {
     border: none;
     border-right: 1px solid #1B4332;
     padding: 6px 8px;
-    font: bold 9pt &quot;Segoe UI&quot;;
+    font: bold 11pt &quot;Segoe UI&quot;;
     text-transform: uppercase;
 }
 
@@ -2055,25 +2128,72 @@ QHeaderView {
 }
 
 /* SCROLLBAR */
+
+/* SCROLLBAR */
 QScrollBar:vertical {
-    background: #F0F5F0;
-    width: 8px;
-    border-radius: 4px;
+    background: #E8F0EC;   /* lighter track for contrast */
+    width: 11px;
+    border-radius: 5px;
 }
 
 QScrollBar::handle:vertical {
-    background: #2F6B3F;
-    border-radius: 4px;
-    min-height: 20px;
+    background: #1B4332;   /* DARKER than header (#2F6B3F) */
+    border-radius: 5px;
+    min-height: 25px;
 }
 
 QScrollBar::handle:vertical:hover { 
-    background: #2D6A4F; 
+    background: #0F2A20;   /* very dark hover for clarity */
 }
 
+QScrollBar::handle:vertical:pressed { 
+    background: #081A13;   /* deepest press */
+}
+
+/* remove arrows */
 QScrollBar::add-line:vertical, 
 QScrollBar::sub-line:vertical { 
     height: 0; 
+}
+
+/* clean track */
+QScrollBar::add-page:vertical, 
+QScrollBar::sub-page:vertical { 
+    background: transparent; 
+}
+
+
+/* HORIZONTAL SCROLLBAR */
+QScrollBar:horizontal {
+    background: #E8F0EC;
+    height: 11px;
+    border-radius: 5px;
+}
+
+QScrollBar::handle:horizontal {
+    background: #1B4332;   /* darker than header */
+    border-radius: 5px;
+    min-width: 25px;
+}
+
+QScrollBar::handle:horizontal:hover { 
+    background: #0F2A20;
+}
+
+QScrollBar::handle:horizontal:pressed { 
+    background: #081A13;
+}
+
+/* remove arrows */
+QScrollBar::add-line:horizontal, 
+QScrollBar::sub-line:horizontal { 
+    width: 0; 
+}
+
+/* clean track */
+QScrollBar::add-page:horizontal, 
+QScrollBar::sub-page:horizontal { 
+    background: transparent; 
 }
 
 /* CORNER (top-left box) */
@@ -2181,15 +2301,15 @@ QTableCornerButton::section {
      <widget class="QLabel" name="label_3">
       <property name="geometry">
        <rect>
-        <x>10</x>
-        <y>60</y>
-        <width>178</width>
-        <height>20</height>
+        <x>-10</x>
+        <y>50</y>
+        <width>241</width>
+        <height>31</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <pointsize>11</pointsize>
+        <pointsize>12</pointsize>
        </font>
       </property>
       <property name="layoutDirection">
@@ -2223,18 +2343,36 @@ QTableCornerButton::section {
     color: #ffffff;
     border-style: solid;
     border-width: 2px;
-    border-top-color: #ffffff;            /* light top */
-    border-left-color: #ffffff;           /* light left */
-    border-bottom-color: #cccccc;         /* dark bottom */
-    border-right-color: #cccccc;     
+    border-top-color: #ffffff;
+    border-left-color: #ffffff;
+    border-bottom-color: #cccccc;
+    border-right-color: #cccccc;
     border-radius: 20px;
     padding: 12px 20px;
-    font: bold 11pt &quot;Segoe UI&quot;;
+    font: bold 13pt &quot;Segoe UI&quot;;
     letter-spacing: 1px;
 }
-QPushButton:hover { background-color: #2D6A4F; }
-QPushButton:pressed { background-color: #0d2b1f; }
-</string>
+
+/* HOVER EFFECT */
+QPushButton:hover {
+    background-color: #285C36; /* slightly darker green */
+    border-top-color: #E6E6E6;
+    border-left-color: #E6E6E6;
+    border-bottom-color: #B3B3B3;
+    border-right-color: #B3B3B3;
+}
+
+/* CLICK / PRESSED EFFECT */
+QPushButton:pressed {
+    background-color: #0D2B1F; /* deep pressed green */
+    border-top-color: #1A1A1A;  /* inverted depth */
+    border-left-color: #1A1A1A;
+    border-bottom-color: #4A4A4A;
+    border-right-color: #4A4A4A;
+
+    padding-top: 14px;   /* press down illusion */
+    padding-left: 22px;
+}</string>
       </property>
       <property name="text">
        <string>💾  SAVE RECORD</string>
@@ -2252,7 +2390,7 @@ QPushButton:pressed { background-color: #0d2b1f; }
       <property name="font">
        <font>
         <family>Segoe UI</family>
-        <pointsize>10</pointsize>
+        <pointsize>11</pointsize>
         <weight>50</weight>
         <italic>false</italic>
         <bold>false</bold>
@@ -2267,26 +2405,30 @@ QPushButton:pressed { background-color: #0d2b1f; }
     border-radius: 8px;
     padding: 5px 10px;
     color: #1A3C2A;
-    font: 10pt &quot;Segoe UI&quot;;
+    font: 11pt &quot;Segoe UI&quot;;
     min-height: 28px;
 
-    /* ✅ GREEN 3D BORDER */
+    /* GREEN 3D BORDER */
     border-style: solid;
     border-width: 2px;
-    border-top-color: #C6F6D5;     /* light green highlight */
+    border-top-color: #C6F6D5;
     border-left-color: #C6F6D5;
-    border-bottom-color: #2D6A4F;  /* dark green shadow */
+    border-bottom-color: #2D6A4F;
     border-right-color: #2D6A4F;
 }
 
 QComboBox:hover {
-    border-top-color: #E9F5EC;
-    border-left-color: #E9F5EC;
-    border-bottom-color: #1B4332;
-    border-right-color: #1B4332;
+    background-color: #D6EBDD;
+    border-top-color: #C6E6D3;
+    border-left-color: #C6E6D3;
+    border-bottom-color: #0E3B21;
+    border-right-color: #0E3B21;
+    color: #0B2F1B;
 }
 
+/* FOCUS EFFECT */
 QComboBox:focus {
+    background-color: #EAF7EE;
     border-top-color: #E9F5EC;
     border-left-color: #E9F5EC;
     border-bottom-color: #1B4332;
@@ -2301,9 +2443,7 @@ QComboBox QAbstractItemView {
     selection-background-color: #2D6A4F;
     selection-color: #ffffff;
     font: 10pt &quot;Segoe UI&quot;;
-}
-
-</string>
+}</string>
       </property>
       <property name="editable">
        <bool>false</bool>
@@ -2469,13 +2609,13 @@ QComboBox QAbstractItemView {
        <rect>
         <x>10</x>
         <y>610</y>
-        <width>334</width>
+        <width>371</width>
         <height>20</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <pointsize>11</pointsize>
+        <pointsize>12</pointsize>
        </font>
       </property>
       <property name="layoutDirection">
@@ -2518,7 +2658,7 @@ QComboBox QAbstractItemView {
        <property name="font">
         <font>
          <family>Segoe UI</family>
-         <pointsize>10</pointsize>
+         <pointsize>11</pointsize>
          <weight>50</weight>
          <italic>false</italic>
          <bold>false</bold>
@@ -2530,7 +2670,7 @@ QComboBox QAbstractItemView {
     alternate-background-color: #F5F5F5;  /* ✅ clean light grey */
     gridline-color: #D8EDE0;
     border: none;
-    font: 10pt &quot;Segoe UI&quot;;
+    font: 11pt &quot;Segoe UI&quot;;
     color: #1B4332;
     selection-background-color: #C6F6D5;
     selection-color: #1B4332;
@@ -2562,7 +2702,7 @@ QHeaderView::section {
     border: none;
     border-right: 1px solid #1B4332;
     padding: 6px 8px;
-    font: bold 9pt &quot;Segoe UI&quot;;
+    font: bold 12pt &quot;Segoe UI&quot;;
     text-transform: uppercase;
 }
 
@@ -2579,28 +2719,73 @@ QHeaderView {
     border: none; 
 }
 
+
 /* SCROLLBAR */
 QScrollBar:vertical {
-    background: #F0F5F0;
-    width: 8px;
-    border-radius: 4px;
+    background: #E2EAE5;   /* darker track for better contrast */
+    width: 10px;
+    border-radius: 5px;
 }
 
 QScrollBar::handle:vertical {
-    background: #2F6B3F;
-    border-radius: 4px;
-    min-height: 20px;
+    background: #1F4D2C;   /* darker green handle */
+    border-radius: 5px;
+    min-height: 25px;
 }
 
 QScrollBar::handle:vertical:hover { 
-    background: #2D6A4F; 
+    background: #163A22;   /* even darker hover */
 }
 
+QScrollBar::handle:vertical:pressed { 
+    background: #0F2A18;   /* deep press effect */
+}
+
+/* remove arrows */
 QScrollBar::add-line:vertical, 
 QScrollBar::sub-line:vertical { 
     height: 0; 
 }
 
+/* clean page area */
+QScrollBar::add-page:vertical, 
+QScrollBar::sub-page:vertical { 
+    background: transparent; 
+}
+
+
+/* HORIZONTAL SCROLLBAR */
+QScrollBar:horizontal {
+    background: #E2EAE5;
+    height: 10px;
+    border-radius: 5px;
+}
+
+QScrollBar::handle:horizontal {
+    background: #1F4D2C;
+    border-radius: 5px;
+    min-width: 25px;
+}
+
+QScrollBar::handle:horizontal:hover { 
+    background: #163A22;
+}
+
+QScrollBar::handle:horizontal:pressed { 
+    background: #0F2A18;
+}
+
+/* remove arrows */
+QScrollBar::add-line:horizontal, 
+QScrollBar::sub-line:horizontal { 
+    width: 0; 
+}
+
+/* clean page area */
+QScrollBar::add-page:horizontal, 
+QScrollBar::sub-page:horizontal { 
+    background: transparent; 
+}
 /* CORNER (top-left box) */
 QTableCornerButton::section { 
     background-color: #2D6A4F;
@@ -2686,6 +2871,11 @@ QTableCornerButton::section {
        </column>
        <column>
         <property name="text">
+         <string>Remarks</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
          <string>Edit</string>
         </property>
        </column>
@@ -2739,23 +2929,38 @@ QTableCornerButton::section {
     background-color: #FFFFFF;
     border-radius: 20px;
     padding: 8px 16px 8px 36px;
-    font: 10pt &quot;Segoe UI&quot;;
-    color: #374151;
+    font: 11pt &quot;Segoe UI&quot;;
+    color: #2F3A34;  /* slightly darker for better contrast */
 
-    /* ✅ 3D GREEN BORDER */
+    /* 3D GREEN BORDER */
     border-style: solid;
     border-width: 2px;
-    border-top-color: #C6F6D5;     /* light green highlight */
-    border-left-color: #C6F6D5;    /* light green highlight */
-    border-bottom-color: #2D6A4F;  /* dark green shadow */
-    border-right-color: #2D6A4F;   /* dark green shadow */
+    border-top-color: #C6F6D5;
+    border-left-color: #C6F6D5;
+    border-bottom-color: #2D6A4F;
+    border-right-color: #2D6A4F;
 }
 
-QLineEdit:focus {
-    border-top-color: #E9F5EC;
-    border-left-color: #E9F5EC;
-    border-bottom-color: #1B4332;
+/* HOVER EFFECT (darker but still soft) */
+QLineEdit:hover {
+    background-color: #E3F2E9;   /* darker green tint */
+    border-top-color: #BFE8CC;
+    border-left-color: #BFE8CC;
+    border-bottom-color: #1B4332; /* stronger shadow */
     border-right-color: #1B4332;
+
+    color: #1F2E27; /* keep readable */
+}
+
+/* CLICKED / ACTIVE (FOCUS) EFFECT */
+QLineEdit:focus {
+    background-color: #D6EDE1;   /* noticeably darker active state */
+    border-top-color: #A9D8BA;
+    border-left-color: #A9D8BA;
+    border-bottom-color: #0E3B21; /* deep pressed look */
+    border-right-color: #0E3B21;
+
+    color: #10261C; /* very readable dark green-black */
 }</string>
        </property>
        <property name="placeholderText">
@@ -2817,7 +3022,12 @@ QLineEdit:focus {
          </rect>
         </property>
         <property name="styleSheet">
-         <string notr="true">QLabel { color: #9CA3AF; font: bold 8pt 'Segoe UI'; letter-spacing: 1px; background: transparent; }</string>
+         <string notr="true">QLabel {
+    color: #1F1F1F;
+    font: bold 8pt &quot;Segoe UI&quot;;
+    letter-spacing: 1px;
+    background: transparent;
+}</string>
         </property>
         <property name="text">
          <string>TODAY</string>
@@ -2882,7 +3092,12 @@ QLineEdit:focus {
          </rect>
         </property>
         <property name="styleSheet">
-         <string notr="true">QLabel { color: #9CA3AF; font: bold 8pt 'Segoe UI'; letter-spacing: 1px; background: transparent; }</string>
+         <string notr="true">QLabel {
+    color: #1F1F1F;
+    font: bold 8pt &quot;Segoe UI&quot;;
+    letter-spacing: 1px;
+    background: transparent;
+}</string>
         </property>
         <property name="text">
          <string>TOTAL</string>
@@ -2947,7 +3162,12 @@ QLineEdit:focus {
          </rect>
         </property>
         <property name="styleSheet">
-         <string notr="true">QLabel { color: #9CA3AF; font: bold 8pt 'Segoe UI'; letter-spacing: 1px; background: transparent; }</string>
+         <string notr="true">QLabel {
+    color: #1F1F1F;
+    font: bold 8pt &quot;Segoe UI&quot;;
+    letter-spacing: 1px;
+    background: transparent;
+}</string>
         </property>
         <property name="text">
          <string>THIS MONTH</string>
@@ -2977,7 +3197,7 @@ QLineEdit:focus {
     border: 1.5px dashed #2D6A4F;
     border-radius: 8px;
     padding: 6px 12px;
-    font: 10pt &quot;Segoe UI&quot;;
+    font: 11pt &quot;Segoe UI&quot;;
 }
 QPushButton:hover { background-color: #e8f5e9; }
 </string>
@@ -2995,6 +3215,15 @@ QPushButton:hover { background-color: #e8f5e9; }
         <height>36</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <family>Segoe UI</family>
+        <pointsize>11</pointsize>
+        <weight>50</weight>
+        <italic>false</italic>
+        <bold>false</bold>
+       </font>
+      </property>
       <property name="cursor">
        <cursorShape>PointingHandCursor</cursorShape>
       </property>
@@ -3005,7 +3234,7 @@ QPushButton:hover { background-color: #e8f5e9; }
     border: 1.5px dashed #2D6A4F;
     border-radius: 8px;
     padding: 6px 12px;
-    font: 10pt &quot;Segoe UI&quot;;
+    font: 11pt &quot;Segoe UI&quot;;
 }
 QPushButton:hover { background-color: #e8f5e9; }
 </string>
@@ -3017,14 +3246,23 @@ QPushButton:hover { background-color: #e8f5e9; }
      <widget class="QLabel" name="sectionHeader">
       <property name="geometry">
        <rect>
-        <x>90</x>
+        <x>60</x>
         <y>20</y>
-        <width>211</width>
+        <width>261</width>
         <height>23</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <family>Segoe UI</family>
+        <pointsize>16</pointsize>
+        <weight>75</weight>
+        <italic>false</italic>
+        <bold>true</bold>
+       </font>
+      </property>
       <property name="styleSheet">
-       <string notr="true">QLabel { color: #1B4332; font: bold 13pt 'Segoe UI'; background: transparent; }</string>
+       <string notr="true">QLabel { color: #1B4332; font: bold 16pt 'Segoe UI'; background: transparent; }</string>
       </property>
       <property name="text">
        <string>NEW TREATMENT ENTRY</string>
@@ -3035,14 +3273,19 @@ QPushButton:hover { background-color: #e8f5e9; }
    <widget class="QFrame" name="headerBar">
     <property name="geometry">
      <rect>
-      <x>0</x>
+      <x>-10</x>
       <y>0</y>
-      <width>1361</width>
+      <width>1381</width>
       <height>71</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">QFrame { background-color: #2D6A4F; border: none; }</string>
+     <string notr="true">QFrame {
+    background-color: #2D6A4F;
+    padding: 8px;
+    border-radius: 10px;
+    margin: 6px;
+}</string>
     </property>
     <property name="frameShape">
      <enum>QFrame::NoFrame</enum>
@@ -3050,10 +3293,10 @@ QPushButton:hover { background-color: #e8f5e9; }
     <widget class="QLabel" name="appTitle_2">
      <property name="geometry">
       <rect>
-       <x>90</x>
-       <y>20</y>
+       <x>70</x>
+       <y>10</y>
        <width>201</width>
-       <height>28</height>
+       <height>51</height>
       </rect>
      </property>
      <property name="styleSheet">
@@ -3129,9 +3372,32 @@ QPushButton:hover { background-color: #e8f5e9; }
    </property>
    <property name="styleSheet">
     <string notr="true">QToolBar {
-    background-color: #2D6A4F;  /* ✅ main green */
-    border-style: solid;
+    background-color: #2D6A4F;
+    border: 1px solid #1F4D2C;
+    padding: 8px;
+    spacing: 6px;
+    border-radius: 10px;
+    margin: 6px;
+}
+
+/* Toolbar buttons */
+QToolButton {
+    background-color: transparent;
+    color: white;
+    border-radius: 6px;
     padding: 5px;
+}
+
+/* Hover effect */
+QToolButton:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Click / pressed effect */
+QToolButton:pressed {
+    background-color: rgba(255, 255, 255, 0.25);
+    padding-top: 7px;   /* slight “press down” illusion */
+    padding-left: 6px;
 }</string>
    </property>
    <property name="movable">

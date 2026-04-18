@@ -514,10 +514,67 @@
      <x>0</x>
      <y>0</y>
      <width>1600</width>
-     <height>30</height>
+     <height>40</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">QMenuBar {
+    background-color: #2D6A4F;   /* main green */
+    border-bottom: 1px solid #1F4D2C;
+    padding: 4px;
+    font: 10.5pt &quot;Segoe UI&quot;;
+    color: #FFFFFF;
+}
+
+/* Top menu items */
+QMenuBar::item {
+    background-color: transparent;
+    padding: 6px 12px;
+    border-radius: 4px;
+    color: #FFFFFF;
+}
+
+/* Hover effect */
+QMenuBar::item:selected {
+    background-color: #3A7D5A;   /* lighter green hover */
+}
+
+/* Click / pressed */
+QMenuBar::item:pressed {
+    background-color: #1F4D2C;   /* darker pressed green */
+}
+
+/* Active/open item */
+QMenuBar::item:checked {
+    background-color: #245C40;
+}</string>
+   </property>
    <widget class="QMenu" name="menuFile">
+    <property name="styleSheet">
+     <string notr="true">QMenu {
+    background-color: #FFFFFF;
+    border: 1px solid #C6F6D5;
+    padding: 4px;
+    font: 10pt &quot;Segoe UI&quot;;
+}
+
+/* Menu items */
+QMenu::item {
+    padding: 6px 24px;
+    color: #1F3D2B;
+}
+
+/* Hover inside dropdown */
+QMenu::item:selected {
+    background-color: #2D6A4F;
+    color: #FFFFFF;
+}
+
+/* Disabled items */
+QMenu::item:disabled {
+    color: #A0A0A0;
+}</string>
+    </property>
     <property name="title">
      <string>File</string>
     </property>
@@ -533,6 +590,31 @@
     <addaction name="actionExit"/>
    </widget>
    <widget class="QMenu" name="menuHome">
+    <property name="styleSheet">
+     <string notr="true">QMenu {
+    background-color: #FFFFFF;
+    border: 1px solid #C6F6D5;
+    padding: 4px;
+    font: 10pt &quot;Segoe UI&quot;;
+}
+
+/* Menu items */
+QMenu::item {
+    padding: 6px 24px;
+    color: #1F3D2B;
+}
+
+/* Hover inside dropdown */
+QMenu::item:selected {
+    background-color: #2D6A4F;
+    color: #FFFFFF;
+}
+
+/* Disabled items */
+QMenu::item:disabled {
+    color: #A0A0A0;
+}</string>
+    </property>
     <property name="title">
      <string>Home</string>
     </property>
@@ -546,6 +628,31 @@
      <addaction name="actionFormat_Painter"/>
     </widget>
     <widget class="QMenu" name="menuFont">
+     <property name="styleSheet">
+      <string notr="true">QMenu {
+    background-color: #FFFFFF;
+    border: 1px solid #C6F6D5;
+    padding: 4px;
+    font: 10pt &quot;Segoe UI&quot;;
+}
+
+/* Menu items */
+QMenu::item {
+    padding: 6px 24px;
+    color: #1F3D2B;
+}
+
+/* Hover inside dropdown */
+QMenu::item:selected {
+    background-color: #2D6A4F;
+    color: #FFFFFF;
+}
+
+/* Disabled items */
+QMenu::item:disabled {
+    color: #A0A0A0;
+}</string>
+     </property>
      <property name="title">
       <string>Font</string>
      </property>
@@ -559,6 +666,31 @@
      <addaction name="actionTimesNewRoman"/>
     </widget>
     <widget class="QMenu" name="menuParagraph">
+     <property name="styleSheet">
+      <string notr="true">QMenu {
+    background-color: #FFFFFF;
+    border: 1px solid #C6F6D5;
+    padding: 4px;
+    font: 10pt &quot;Segoe UI&quot;;
+}
+
+/* Menu items */
+QMenu::item {
+    padding: 6px 24px;
+    color: #1F3D2B;
+}
+
+/* Hover inside dropdown */
+QMenu::item:selected {
+    background-color: #2D6A4F;
+    color: #FFFFFF;
+}
+
+/* Disabled items */
+QMenu::item:disabled {
+    color: #A0A0A0;
+}</string>
+     </property>
      <property name="title">
       <string>Paragraph</string>
      </property>
@@ -581,6 +713,31 @@
     <addaction name="actionExit"/>
    </widget>
    <widget class="QMenu" name="menuInsert">
+    <property name="styleSheet">
+     <string notr="true">QMenu {
+    background-color: #FFFFFF;
+    border: 1px solid #C6F6D5;
+    padding: 4px;
+    font: 10pt &quot;Segoe UI&quot;;
+}
+
+/* Menu items */
+QMenu::item {
+    padding: 6px 24px;
+    color: #1F3D2B;
+}
+
+/* Hover inside dropdown */
+QMenu::item:selected {
+    background-color: #2D6A4F;
+    color: #FFFFFF;
+}
+
+/* Disabled items */
+QMenu::item:disabled {
+    color: #A0A0A0;
+}</string>
+    </property>
     <property name="title">
      <string>Insert</string>
     </property>
@@ -593,6 +750,31 @@
     <addaction name="actionPageNumber"/>
    </widget>
    <widget class="QMenu" name="menuDesign">
+    <property name="styleSheet">
+     <string notr="true">QMenu {
+    background-color: #FFFFFF;
+    border: 1px solid #C6F6D5;
+    padding: 4px;
+    font: 10pt &quot;Segoe UI&quot;;
+}
+
+/* Menu items */
+QMenu::item {
+    padding: 6px 24px;
+    color: #1F3D2B;
+}
+
+/* Hover inside dropdown */
+QMenu::item:selected {
+    background-color: #2D6A4F;
+    color: #FFFFFF;
+}
+
+/* Disabled items */
+QMenu::item:disabled {
+    color: #A0A0A0;
+}</string>
+    </property>
     <property name="title">
      <string>Design</string>
     </property>
@@ -601,6 +783,31 @@
     <addaction name="actionPageBorders"/>
    </widget>
    <widget class="QMenu" name="menuLayout">
+    <property name="styleSheet">
+     <string notr="true">QMenu {
+    background-color: #FFFFFF;
+    border: 1px solid #C6F6D5;
+    padding: 4px;
+    font: 10pt &quot;Segoe UI&quot;;
+}
+
+/* Menu items */
+QMenu::item {
+    padding: 6px 24px;
+    color: #1F3D2B;
+}
+
+/* Hover inside dropdown */
+QMenu::item:selected {
+    background-color: #2D6A4F;
+    color: #FFFFFF;
+}
+
+/* Disabled items */
+QMenu::item:disabled {
+    color: #A0A0A0;
+}</string>
+    </property>
     <property name="title">
      <string>Layout</string>
     </property>
@@ -612,6 +819,31 @@
     <addaction name="actionLineNumbers"/>
    </widget>
    <widget class="QMenu" name="menuReferences">
+    <property name="styleSheet">
+     <string notr="true">QMenu {
+    background-color: #FFFFFF;
+    border: 1px solid #C6F6D5;
+    padding: 4px;
+    font: 10pt &quot;Segoe UI&quot;;
+}
+
+/* Menu items */
+QMenu::item {
+    padding: 6px 24px;
+    color: #1F3D2B;
+}
+
+/* Hover inside dropdown */
+QMenu::item:selected {
+    background-color: #2D6A4F;
+    color: #FFFFFF;
+}
+
+/* Disabled items */
+QMenu::item:disabled {
+    color: #A0A0A0;
+}</string>
+    </property>
     <property name="title">
      <string>References</string>
     </property>
@@ -623,6 +855,31 @@
     <addaction name="actionBibliography"/>
    </widget>
    <widget class="QMenu" name="menuView">
+    <property name="styleSheet">
+     <string notr="true">QMenu {
+    background-color: #FFFFFF;
+    border: 1px solid #C6F6D5;
+    padding: 4px;
+    font: 10pt &quot;Segoe UI&quot;;
+}
+
+/* Menu items */
+QMenu::item {
+    padding: 6px 24px;
+    color: #1F3D2B;
+}
+
+/* Hover inside dropdown */
+QMenu::item:selected {
+    background-color: #2D6A4F;
+    color: #FFFFFF;
+}
+
+/* Disabled items */
+QMenu::item:disabled {
+    color: #A0A0A0;
+}</string>
+    </property>
     <property name="title">
      <string>View</string>
     </property>
@@ -635,6 +892,31 @@
     <addaction name="actionGridLines"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
+    <property name="styleSheet">
+     <string notr="true">QMenu {
+    background-color: #FFFFFF;
+    border: 1px solid #C6F6D5;
+    padding: 4px;
+    font: 10pt &quot;Segoe UI&quot;;
+}
+
+/* Menu items */
+QMenu::item {
+    padding: 6px 24px;
+    color: #1F3D2B;
+}
+
+/* Hover inside dropdown */
+QMenu::item:selected {
+    background-color: #2D6A4F;
+    color: #FFFFFF;
+}
+
+/* Disabled items */
+QMenu::item:disabled {
+    color: #A0A0A0;
+}</string>
+    </property>
     <property name="title">
      <string>Help</string>
     </property>
@@ -695,10 +977,6 @@
    <addaction name="actionAlign_Right"/>
    <addaction name="actionJustify"/>
    <addaction name="actionLine_Spacing"/>
-   <addaction name="separator"/>
-   <addaction name="actionFind"/>
-   <addaction name="actionReplace"/>
-   <addaction name="actionSelect_All"/>
   </widget>
   <widget class="QToolBar" name="quickAccessToolBar">
    <property name="windowTitle">
@@ -725,6 +1003,10 @@
    <addaction name="actionRedo"/>
    <addaction name="separator"/>
    <addaction name="actionExport_PDF"/>
+   <addaction name="separator"/>
+   <addaction name="actionFind"/>
+   <addaction name="actionReplace"/>
+   <addaction name="actionSelect_All"/>
   </widget>
   <widget class="QStatusBar" name="statusbar">
    <property name="styleSheet">
