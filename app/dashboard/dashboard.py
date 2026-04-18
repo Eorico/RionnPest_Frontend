@@ -60,23 +60,23 @@ class DashboardWindow(DashboardController):
 
     def switch_mode_category_dashboard(self, mode):
         self.current_category = mode
+        
+        mode_capital = mode.upper()
 
-        self.ui.label_2.setText(f"Client - {mode}")
-        self.ui.label_3.setText(f"Date of {mode}")
-        self.ui.label_4.setText(f"Time of {mode}")
-        self.ui.label_5.setText(f"Chemical/s Used - {mode}")
-        self.ui.label_6.setText(f"Actual Chemical/s Used - {mode}")
-        self.ui.label_17.setText(f"({mode})")
+        self.ui.label_2.setText(f"CLIENT - {mode_capital}")
+        self.ui.label_3.setText(f"DATE OF {mode_capital}")
+        self.ui.label_4.setText(f"TIME OF {mode_capital}")
+        self.ui.label_5.setText(f"CHEMICAL/S USED - {mode_capital}")
+        self.ui.label_6.setText(f"ACTUAL CHEMICAL/S USED - {mode_capital}")
 
         headers = [
-            (0, "Admin"),
-            (1, f"Date of ({mode})"),
-            (2, f"Name of Client - ({mode})"),
-            (3, f"Time of ({mode})"),
-            (4, f"Chemical/s Used - ({mode})"),
-            (5, f"Actual Chemical/s Used - ({mode})"),
+            (0, "Admin User"),
+            (1, f"Date of ({mode_capital})"),
+            (2, f"Name of Client - ({mode_capital})"),
+            (3, f"Time of ({mode_capital})"),
+            (4, f"Chemical/s Used - ({mode_capital})"),
+            (5, f"Actual Chemical/s Used - ({mode_capital})"),
             (6, "Edit"),
-            (7, "Trash"),
         ]
 
         for col, text in headers:

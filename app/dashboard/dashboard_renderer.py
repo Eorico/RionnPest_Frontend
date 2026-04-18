@@ -57,4 +57,4 @@ class DashboardTableRenderer:
             self._set_cell(row_idx, 4, DashboardFormatter.format_chemicals(r.get('chemicals_use')))
             self._set_cell(row_idx, 5, DashboardFormatter.format_chemicals(r.get('actual_chemicals_used'), True))
             self._set_cell(row_idx, 6, btn_edit)
-            self._set_cell(row_idx, 7, btn_trash)
+            self._set_cell(row_idx, 7, btn_edit)
