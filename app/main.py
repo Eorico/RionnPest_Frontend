@@ -19,7 +19,7 @@ class MainApp:
         self.dashboard = DashboardWindow(self.api)
         self.recycle_bin = RecyclBinWindow(self.api, self.dashboard.load_table_data_dashboard, parent=self.dashboard)
         
-        self.intro.finished.connect(self.show_login)
+        self.intro.intro_service.finished.connect(self.show_login)
         self.login.login_success.connect(self.show_dashboard)
         self.dashboard.ui.recycle_bin.triggered.connect(self.show_recycle_bin)
         

@@ -192,7 +192,7 @@ class Ui_Dashboard(object):
         # ══════════════════════════════════════════════════════════════════════
         #  DATE OF TREATMENT  (label_3)
         # ══════════════════════════════════════════════════════════════════════
-        self.label_3 = QtWidgets.QLabel("📅 DATE OF TREATMENT", sa)
+        self.label_3 = QtWidgets.QLabel("DATE OF TREATMENT", sa)
         self.label_3.setGeometry(QtCore.QRect(_LBL_X, 110, _LBL_W, _LBL_H))
         self.label_3.setFont(self._font(12))
         self.label_3.setAlignment(QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
@@ -227,7 +227,7 @@ class Ui_Dashboard(object):
         # ══════════════════════════════════════════════════════════════════════
         #  TIME OF TREATMENT  (label_4)
         # ══════════════════════════════════════════════════════════════════════
-        self.label_4 = QtWidgets.QLabel("🕒 TIME OF TREATMENT", sa)
+        self.label_4 = QtWidgets.QLabel("TIME OF TREATMENT", sa)
         self.label_4.setGeometry(QtCore.QRect(_LBL_X, 210, _LBL_W, _LBL_H))
         self.label_4.setFont(self._font(12))
         self.label_4.setAlignment(QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
@@ -263,7 +263,7 @@ class Ui_Dashboard(object):
         # ══════════════════════════════════════════════════════════════════════
         #  CHEMICALS USED  (label_5)
         # ══════════════════════════════════════════════════════════════════════
-        self.label_5 = QtWidgets.QLabel("⚗️ CHEMICALS USED — TREATMENT", sa)
+        self.label_5 = QtWidgets.QLabel("CHEMICALS USED — TREATMENT", sa)
         self.label_5.setGeometry(QtCore.QRect(_LBL_X, 357, _LBL_W, _LBL_H))
         self.label_5.setFont(self._font(12))
         self.label_5.setAlignment(QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
@@ -279,7 +279,7 @@ class Ui_Dashboard(object):
         # ══════════════════════════════════════════════════════════════════════
         #  ACTUAL CHEMICALS ON HAND  (label_6)
         # ══════════════════════════════════════════════════════════════════════
-        self.label_6 = QtWidgets.QLabel("⚗️ ACTUAL CHEMICALS ON HAND - TREATMENT", sa)
+        self.label_6 = QtWidgets.QLabel("ACTUAL CHEMICALS ON HAND - TREATMENT", sa)
         self.label_6.setGeometry(QtCore.QRect(_LBL_X, 607, _LBL_W, _LBL_H))
         self.label_6.setFont(self._font(12))
         self.label_6.setAlignment(QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
@@ -374,7 +374,7 @@ class Ui_Dashboard(object):
         self.confirmButton_2.setStyleSheet(_action_ss.format(bg="#9B0F06"))
         self.confirmButton_2.setObjectName("confirmButton_2")
 
-        self.confirmButton_3 = QtWidgets.QPushButton("💾  TRASH", self.contentPanel)
+        self.confirmButton_3 = QtWidgets.QPushButton("TRASH", self.contentPanel)
         self.confirmButton_3.setGeometry(QtCore.QRect(450, 11, 161, 41))
         self.confirmButton_3.setFont(self._font(8, bold=True, family="Segoe UI"))
         self.confirmButton_3.setStyleSheet(_action_ss.format(bg="#DA4848"))

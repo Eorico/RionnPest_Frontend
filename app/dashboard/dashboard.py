@@ -63,6 +63,7 @@ class DashboardWindow(DashboardController):
         
         mode_capital = mode.upper()
 
+        self.ui.sectionHeader.setText(f"NEW {mode_capital} ENTRY")
         self.ui.label_2.setText(f"CLIENT - {mode_capital}")
         self.ui.label_3.setText(f"DATE OF {mode_capital}")
         self.ui.label_4.setText(f"TIME OF {mode_capital}")
