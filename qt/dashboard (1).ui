@@ -294,7 +294,7 @@ QComboBox QAbstractItemView {
       </property>
       <property name="font">
        <font>
-        <pointsize>11</pointsize>
+        <pointsize>12</pointsize>
        </font>
       </property>
       <property name="layoutDirection">
@@ -324,7 +324,7 @@ QComboBox QAbstractItemView {
       </property>
       <property name="font">
        <font>
-        <pointsize>12</pointsize>
+        <pointsize>13</pointsize>
        </font>
       </property>
       <property name="layoutDirection">
@@ -1101,14 +1101,14 @@ QComboBox QAbstractItemView {
       </property>
       <property name="font">
        <font>
-        <pointsize>12</pointsize>
+        <pointsize>13</pointsize>
        </font>
       </property>
       <property name="layoutDirection">
        <enum>Qt::LeftToRight</enum>
       </property>
       <property name="text">
-       <string>🕒 TIME OF TREATMENT</string>
+       <string>TIME OF TREATMENT</string>
       </property>
       <property name="textFormat">
        <enum>Qt::AutoText</enum>
@@ -1131,7 +1131,7 @@ QComboBox QAbstractItemView {
       </property>
       <property name="font">
        <font>
-        <pointsize>12</pointsize>
+        <pointsize>13</pointsize>
        </font>
       </property>
       <property name="layoutDirection">
@@ -1161,7 +1161,7 @@ QComboBox QAbstractItemView {
       </property>
       <property name="font">
        <font>
-        <pointsize>12</pointsize>
+        <pointsize>13</pointsize>
        </font>
       </property>
       <property name="layoutDirection">
@@ -1426,14 +1426,14 @@ QTableCornerButton::section {
       </property>
       <property name="font">
        <font>
-        <pointsize>12</pointsize>
+        <pointsize>13</pointsize>
        </font>
       </property>
       <property name="layoutDirection">
        <enum>Qt::LeftToRight</enum>
       </property>
       <property name="text">
-       <string>⚗️ CHEMICALS USED — TREATMENT</string>
+       <string>CHEMICALS USED — TREATMENT</string>
       </property>
       <property name="textFormat">
        <enum>Qt::AutoText</enum>
@@ -1783,7 +1783,7 @@ QComboBox QAbstractItemView {
       </property>
       <property name="font">
        <font>
-        <pointsize>11</pointsize>
+        <pointsize>12</pointsize>
        </font>
       </property>
       <property name="layoutDirection">
@@ -1813,7 +1813,7 @@ QComboBox QAbstractItemView {
       </property>
       <property name="font">
        <font>
-        <pointsize>11</pointsize>
+        <pointsize>12</pointsize>
        </font>
       </property>
       <property name="layoutDirection">
@@ -2310,14 +2310,14 @@ QTableCornerButton::section {
       </property>
       <property name="font">
        <font>
-        <pointsize>12</pointsize>
+        <pointsize>13</pointsize>
        </font>
       </property>
       <property name="layoutDirection">
        <enum>Qt::LeftToRight</enum>
       </property>
       <property name="text">
-       <string>📅 DATE OF TREATMENT</string>
+       <string>DATE OF TREATMENT</string>
       </property>
       <property name="textFormat">
        <enum>Qt::AutoText</enum>
@@ -2608,8 +2608,13 @@ QComboBox QAbstractItemView {
      <widget class="QLabel" name="label_6">
       <property name="geometry">
        <rect>
+<<<<<<< HEAD
         <x>10</x>
         <y>610</y>
+=======
+        <x>0</x>
+        <y>600</y>
+>>>>>>> 0d8d8c7 (dashboard (1) final design dashboard, Actual and Chemical used ui are modals. docx_viewer are used only for DOCX TYPE!)
         <width>371</width>
         <height>20</height>
        </rect>
@@ -2623,7 +2628,7 @@ QComboBox QAbstractItemView {
        <enum>Qt::LeftToRight</enum>
       </property>
       <property name="text">
-       <string>⚗️ ACTUAL CHEMICALS ON HAND - TREATMENT</string>
+       <string> ACTUAL CHEMICALS ON HAND - TREATMENT</string>
       </property>
       <property name="textFormat">
        <enum>Qt::AutoText</enum>
@@ -2650,10 +2655,10 @@ QComboBox QAbstractItemView {
       <widget class="QTableWidget" name="tableListahan">
        <property name="geometry">
         <rect>
-         <x>12</x>
-         <y>57</y>
-         <width>941</width>
-         <height>821</height>
+         <x>15</x>
+         <y>84</y>
+         <width>971</width>
+         <height>811</height>
         </rect>
        </property>
        <property name="font">
@@ -2881,12 +2886,45 @@ QTableCornerButton::section {
          <string>Edit</string>
         </property>
        </column>
+<<<<<<< HEAD
+=======
+       <item row="0" column="0">
+        <property name="text">
+         <string/>
+        </property>
+       </item>
+       <item row="0" column="1">
+        <property name="text">
+         <string/>
+        </property>
+       </item>
+       <item row="0" column="2">
+        <property name="text">
+         <string/>
+        </property>
+       </item>
+       <item row="0" column="3">
+        <property name="text">
+         <string/>
+        </property>
+       </item>
+       <item row="0" column="4">
+        <property name="text">
+         <string/>
+        </property>
+       </item>
+       <item row="0" column="5">
+        <property name="text">
+         <string/>
+        </property>
+       </item>
+>>>>>>> 0d8d8c7 (dashboard (1) final design dashboard, Actual and Chemical used ui are modals. docx_viewer are used only for DOCX TYPE!)
       </widget>
       <widget class="QLineEdit" name="searchDate">
        <property name="geometry">
         <rect>
-         <x>20</x>
-         <y>10</y>
+         <x>50</x>
+         <y>30</y>
          <width>241</width>
          <height>41</height>
         </rect>
@@ -2940,15 +2978,24 @@ QLineEdit:focus {
 }</string>
        </property>
        <property name="placeholderText">
-        <string>🔍  Search client or date...</string>
+        <string>Search client or date...</string>
        </property>
       </widget>
+<<<<<<< HEAD
       <widget class="QPushButton" name="confirmButton_2">
        <property name="geometry">
         <rect>
          <x>280</x>
          <y>11</y>
          <width>161</width>
+=======
+      <widget class="QPushButton" name="Trashbutton">
+       <property name="geometry">
+        <rect>
+         <x>510</x>
+         <y>30</y>
+         <width>211</width>
+>>>>>>> 0d8d8c7 (dashboard (1) final design dashboard, Actual and Chemical used ui are modals. docx_viewer are used only for DOCX TYPE!)
          <height>41</height>
         </rect>
        </property>
@@ -2963,7 +3010,11 @@ QLineEdit:focus {
        </property>
        <property name="styleSheet">
         <string notr="true">QPushButton {
+<<<<<<< HEAD
     background-color: #9B0F06;
+=======
+    background-color: #8B0000;  /* dark red */
+>>>>>>> 0d8d8c7 (dashboard (1) final design dashboard, Actual and Chemical used ui are modals. docx_viewer are used only for DOCX TYPE!)
     color: #ffffff;
     border-style: solid;
     border-width: 2px;
@@ -2971,15 +3022,26 @@ QLineEdit:focus {
     border-left-color: #ffffff;
     border-bottom-color: #cccccc;
     border-right-color: #cccccc;
+<<<<<<< HEAD
     padding: 12px 20px;
     font: bold 8pt &quot;Segoe UI&quot;;
     letter-spacing: 1px;
 	border-radius: 15px;
+=======
+    border-radius: 20px;
+    padding: 12px 20px;
+    font: bold 13pt &quot;Segoe UI&quot;;
+    letter-spacing: 1px;
+>>>>>>> 0d8d8c7 (dashboard (1) final design dashboard, Actual and Chemical used ui are modals. docx_viewer are used only for DOCX TYPE!)
 }
 
 /* HOVER EFFECT */
 QPushButton:hover {
+<<<<<<< HEAD
     background-color: #9B0F06; /* slightly darker green */
+=======
+    background-color: #6E0000; /* darker red */
+>>>>>>> 0d8d8c7 (dashboard (1) final design dashboard, Actual and Chemical used ui are modals. docx_viewer are used only for DOCX TYPE!)
     border-top-color: #E6E6E6;
     border-left-color: #E6E6E6;
     border-bottom-color: #B3B3B3;
@@ -2988,17 +3050,27 @@ QPushButton:hover {
 
 /* CLICK / PRESSED EFFECT */
 QPushButton:pressed {
+<<<<<<< HEAD
     background-color: #9B0F06; /* deep pressed green */
     border-top-color: #1A1A1A;  /* inverted depth */
+=======
+    background-color: #3B0000; /* very deep red */
+    border-top-color: #1A1A1A;
+>>>>>>> 0d8d8c7 (dashboard (1) final design dashboard, Actual and Chemical used ui are modals. docx_viewer are used only for DOCX TYPE!)
     border-left-color: #1A1A1A;
     border-bottom-color: #4A4A4A;
     border-right-color: #4A4A4A;
 
+<<<<<<< HEAD
     padding-top: 14px;   /* press down illusion */
+=======
+    padding-top: 14px;
+>>>>>>> 0d8d8c7 (dashboard (1) final design dashboard, Actual and Chemical used ui are modals. docx_viewer are used only for DOCX TYPE!)
     padding-left: 22px;
 }</string>
        </property>
        <property name="text">
+<<<<<<< HEAD
         <string>💾  CONVERT TO PDF</string>
        </property>
       </widget>
@@ -3023,6 +3095,23 @@ QPushButton:pressed {
        <property name="styleSheet">
         <string notr="true">QPushButton {
     background-color: #DA4848;
+=======
+        <string>TRASH</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="ConvertPdf">
+       <property name="geometry">
+        <rect>
+         <x>730</x>
+         <y>30</y>
+         <width>211</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+    background-color: #C0392B;  /* main red */
+>>>>>>> 0d8d8c7 (dashboard (1) final design dashboard, Actual and Chemical used ui are modals. docx_viewer are used only for DOCX TYPE!)
     color: #ffffff;
     border-style: solid;
     border-width: 2px;
@@ -3030,15 +3119,26 @@ QPushButton:pressed {
     border-left-color: #ffffff;
     border-bottom-color: #cccccc;
     border-right-color: #cccccc;
+<<<<<<< HEAD
     padding: 12px 20px;
     font: bold 8pt &quot;Segoe UI&quot;;
     letter-spacing: 1px;
 	border-radius: 15px;
+=======
+    border-radius: 20px;
+    padding: 12px 20px;
+    font: bold 13pt &quot;Segoe UI&quot;;
+    letter-spacing: 1px;
+>>>>>>> 0d8d8c7 (dashboard (1) final design dashboard, Actual and Chemical used ui are modals. docx_viewer are used only for DOCX TYPE!)
 }
 
 /* HOVER EFFECT */
 QPushButton:hover {
+<<<<<<< HEAD
     background-color: #DA4848; /* slightly darker green */
+=======
+    background-color: #A93226; /* darker red */
+>>>>>>> 0d8d8c7 (dashboard (1) final design dashboard, Actual and Chemical used ui are modals. docx_viewer are used only for DOCX TYPE!)
     border-top-color: #E6E6E6;
     border-left-color: #E6E6E6;
     border-bottom-color: #B3B3B3;
@@ -3047,22 +3147,35 @@ QPushButton:hover {
 
 /* CLICK / PRESSED EFFECT */
 QPushButton:pressed {
+<<<<<<< HEAD
     background-color: #DA4848; /* deep pressed green */
     border-top-color: #1A1A1A;  /* inverted depth */
+=======
+    background-color: #641E16; /* deep pressed red */
+    border-top-color: #1A1A1A;
+>>>>>>> 0d8d8c7 (dashboard (1) final design dashboard, Actual and Chemical used ui are modals. docx_viewer are used only for DOCX TYPE!)
     border-left-color: #1A1A1A;
     border-bottom-color: #4A4A4A;
     border-right-color: #4A4A4A;
 
+<<<<<<< HEAD
     padding-top: 14px;   /* press down illusion */
+=======
+    padding-top: 14px;
+>>>>>>> 0d8d8c7 (dashboard (1) final design dashboard, Actual and Chemical used ui are modals. docx_viewer are used only for DOCX TYPE!)
     padding-left: 22px;
 }</string>
        </property>
        <property name="text">
+<<<<<<< HEAD
         <string>💾  TRASH</string>
+=======
+        <string>CONVERT TO PDF -&gt;</string>
+>>>>>>> 0d8d8c7 (dashboard (1) final design dashboard, Actual and Chemical used ui are modals. docx_viewer are used only for DOCX TYPE!)
        </property>
       </widget>
      </widget>
-     <widget class="QPushButton" name="addActualRow">
+     <widget class="QPushButton" name="ViewActChem">
       <property name="geometry">
        <rect>
         <x>26</x>
@@ -3076,21 +3189,22 @@ QPushButton:pressed {
       </property>
       <property name="styleSheet">
        <string notr="true">QPushButton {
-    background-color: transparent;
-    color: #2D6A4F;
-    border: 1.5px dashed #2D6A4F;
-    border-radius: 8px;
-    padding: 6px 12px;
-    font: 11pt &quot;Segoe UI&quot;;
+    background-color: #2F6B3F;
+    color: #ffffff;
+    border: none;
+    border-radius: 0px;
+    font: bold 10pt &quot;Segoe UI&quot;;
+    letter-spacing: 1px;
+	border-radius: 10px;
 }
-QPushButton:hover { background-color: #e8f5e9; }
-</string>
+QPushButton:hover { background-color: #1B4332; }
+QPushButton:pressed { background-color: #081A13; }</string>
       </property>
       <property name="text">
-       <string>+ Add Row</string>
+       <string>View</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="addChemRow">
+     <widget class="QPushButton" name="ViewChem">
       <property name="geometry">
        <rect>
         <x>20</x>
@@ -3102,10 +3216,10 @@ QPushButton:hover { background-color: #e8f5e9; }
       <property name="font">
        <font>
         <family>Segoe UI</family>
-        <pointsize>11</pointsize>
-        <weight>50</weight>
+        <pointsize>10</pointsize>
+        <weight>75</weight>
         <italic>false</italic>
-        <bold>false</bold>
+        <bold>true</bold>
        </font>
       </property>
       <property name="cursor">
@@ -3113,21 +3227,22 @@ QPushButton:hover { background-color: #e8f5e9; }
       </property>
       <property name="styleSheet">
        <string notr="true">QPushButton {
-    background-color: transparent;
-    color: #2D6A4F;
-    border: 1.5px dashed #2D6A4F;
-    border-radius: 8px;
-    padding: 6px 12px;
-    font: 11pt &quot;Segoe UI&quot;;
+    background-color: #2F6B3F;
+    color: #ffffff;
+    border: none;
+    border-radius: 0px;
+    font: bold 10pt &quot;Segoe UI&quot;;
+    letter-spacing: 1px;
+	border-radius: 10px;
 }
-QPushButton:hover { background-color: #e8f5e9; }
-</string>
+QPushButton:hover { background-color: #1B4332; }
+QPushButton:pressed { background-color: #081A13; }</string>
       </property>
       <property name="text">
-       <string>+ Add Row</string>
+       <string>View</string>
       </property>
      </widget>
-     <widget class="QLabel" name="sectionHeader">
+     <widget class="QLabel" name="HeaderTreatment">
       <property name="geometry">
        <rect>
         <x>71</x>
@@ -3209,7 +3324,7 @@ QPushButton:hover { background-color: #e8f5e9; }
       <bool>true</bool>
      </property>
     </widget>
-    <widget class="QLabel" name="appTitle_3">
+    <widget class="QLabel" name="AdminName">
      <property name="geometry">
       <rect>
        <x>1230</x>

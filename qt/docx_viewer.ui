@@ -1,0 +1,1106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>DocxViewer</class>
+ <widget class="QMainWindow" name="DocxViewer">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1416</width>
+    <height>988</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Raionn Pest Solutions — Document Viewer</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">
+
+QMainWindow, QWidget#centralwidget { background-color: #EBEBEB; }
+
+QMenuBar {
+    background-color: #2D6A4F; color: #FFFFFF;
+    font: 11pt &quot;Segoe UI&quot;; padding: 2px 4px; border: none;
+}
+QMenuBar::item { padding: 4px 12px; border-radius: 4px; }
+QMenuBar::item:selected { background-color: rgba(255,255,255,0.20); }
+QMenu {
+    background-color: #FFFFFF; color: #1A3C2A;
+    border: 1px solid #C6F6D5; border-radius: 6px; font: 10pt &quot;Segoe UI&quot;;
+}
+QMenu::item { padding: 6px 20px; }
+QMenu::item:selected { background-color: #2D6A4F; color: #FFFFFF; }
+QMenu::separator { height: 1px; background-color: #C6F6D5; margin: 4px 10px; }
+
+QToolBar {
+    background-color: #2D6A4F; border: none; spacing: 4px; padding: 4px 8px;
+}
+QToolBar::separator { background-color: rgba(255,255,255,0.30); width: 1px; margin: 4px 6px; }
+QToolBar QToolButton {
+    background-color: transparent; color: #FFFFFF;
+    border: 1px solid transparent; border-radius: 6px;
+    padding: 5px 10px; font: 10pt &quot;Segoe UI&quot;;
+}
+QToolBar QToolButton:hover { background-color: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.35); }
+QToolBar QToolButton:pressed { background-color: rgba(255,255,255,0.28); }
+
+QStatusBar {
+    background-color: #2D6A4F; color: #C6F6D5;
+    font: 9pt &quot;Segoe UI&quot;; border-top: 1px solid #1F4D2C; padding: 2px 8px;
+}
+QStatusBar::item { border: none; }
+
+QWidget#filesPanel, QWidget#tocPanel { background-color: #D9E9CF; }
+
+QLabel#filesPanelHeader, QLabel#tocPanelHeader {
+    background-color: #2D6A4F; color: #FFFFFF;
+    font: bold 10pt &quot;Segoe UI&quot;; padding: 8px 12px;
+}
+
+QSplitter#leftSplitter::handle { background-color: #2D6A4F; }
+QSplitter#leftSplitter::handle:hover { background-color: #52b788; }
+
+QListWidget#filesList, QListWidget#tocList {
+    background-color: #D9E9CF; color: #1A3C2A;
+    border: none; font: 10pt &quot;Segoe UI&quot;; outline: none;
+}
+QListWidget#filesList::item, QListWidget#tocList::item {
+    padding: 7px 12px; border-bottom: 1px solid #C2D9BA;
+}
+QListWidget#filesList::item:hover, QListWidget#tocList::item:hover {
+    background-color: #C6E6D3; color: #0E3B21;
+}
+QListWidget#filesList::item:selected, QListWidget#tocList::item:selected {
+    background-color: #2D6A4F; color: #FFFFFF; border-left: 3px solid #C6F6D5;
+}
+
+QScrollBar:vertical { background: #D9E9CF; width: 8px; margin: 0; border-radius: 4px; }
+QScrollBar::handle:vertical { background: #7AB99A; border-radius: 4px; min-height: 28px; }
+QScrollBar::handle:vertical:hover { background: #2D6A4F; }
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical { height: 0; }
+QScrollBar:horizontal { background: #D9E9CF; height: 8px; border-radius: 4px; }
+QScrollBar::handle:horizontal { background: #7AB99A; border-radius: 4px; min-width: 28px; }
+QScrollBar::handle:horizontal:hover { background: #2D6A4F; }
+QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal { width: 0; }
+
+QScrollArea#pageScrollArea { background-color: #D9E9CF; border: none; }
+QWidget#scrollAreaContent { background-color: #D9E9CF; }
+
+QFrame#paperPage1, QFrame#paperPage2 {
+    background-color: #FFFFFF; border: none;
+}
+
+QLabel#companyName {
+    color: #1A3C2A; font: bold 18pt &quot;Segoe UI&quot;;
+}
+QLabel#companyName2 {
+    color: #1A3C2A; font: bold 14pt &quot;Segoe UI&quot;;
+}
+QLabel#companyTagline {
+    color: #2D6A4F; font: 10pt &quot;Segoe UI&quot;;
+}
+QFrame#headerDivider, QFrame#headerDivider2 {
+    background-color: #2D6A4F; max-height: 2px; border: none;
+}
+QLabel#docTitleLabel {
+    color: #1A3C2A; font: bold 13pt &quot;Segoe UI&quot;; padding: 6px 0 2px 0;
+}
+QLabel#metaLabel { color: #4A7A5A; font: 9pt &quot;Segoe UI&quot;; }
+QFrame#innerDivider { background-color: #C6F6D5; max-height: 1px; border: none; }
+QLabel#sectionLabel {
+    color: #2D6A4F; font: bold 11pt &quot;Segoe UI&quot;; padding: 10px 0 4px 0;
+}
+QLabel#continuedLabel2 {
+    color: #2D6A4F; font: italic 9pt &quot;Segoe UI&quot;; padding: 4px 0 8px 0;
+}
+QLabel#notesLabel {
+    color: #2D6A4F; font: bold 11pt &quot;Segoe UI&quot;; padding: 10px 0 4px 0;
+}
+QLabel#pageFooter1, QLabel#pageFooter2 {
+    color: #7AB99A; font: 8pt &quot;Segoe UI&quot;;
+    padding: 6px 0 0 0; border-top: 1px solid #C6F6D5;
+}
+
+QTableWidget#inventoryTable1,
+QTableWidget#inventoryTable2 {
+    background-color: #FFFFFF;
+    alternate-background-color: #F4FBF6;
+    gridline-color: #C6F6D5;
+    color: #1A3C2A; font: 10pt &quot;Segoe UI&quot;;
+    border: 1px solid #C6F6D5;
+    selection-background-color: #D6EBDD;
+    selection-color: #0E3B21;
+}
+QTableWidget#inventoryTable1::item,
+QTableWidget#inventoryTable2::item {
+    padding: 5px 8px; border: none;
+}
+QTableWidget#inventoryTable1::item:hover,
+QTableWidget#inventoryTable2::item:hover {
+    background-color: #EAF7EE;
+}
+QTableWidget#inventoryTable1 QHeaderView::section,
+QTableWidget#inventoryTable2 QHeaderView::section {
+    background-color: #2D6A4F; color: #FFFFFF;
+    font: bold 10pt &quot;Segoe UI&quot;; padding: 7px 8px;
+    border: none; border-right: 1px solid #3A7A5A;
+    border-bottom: 2px solid #C6F6D5;
+}
+QTableWidget#inventoryTable1 QHeaderView::section:hover,
+QTableWidget#inventoryTable2 QHeaderView::section:hover {
+    background-color: #1F4D2C;
+}
+
+QTextEdit#notesEdit {
+    background-color: #FAFFFE; color: #1A3C2A;
+    font: 10pt &quot;Segoe UI&quot;; border: 1px solid #C6F6D5;
+    border-radius: 4px; padding: 8px;
+    selection-background-color: #D6EBDD;
+}
+QTextEdit#notesEdit:focus {
+    border: 1px solid #2D6A4F; background-color: #EAF7EE;
+}
+
+   </string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QHBoxLayout" name="mainHLayout">
+    <property name="spacing">
+     <number>0</number>
+    </property>
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
+    <item>
+     <layout class="QVBoxLayout" name="leftPanelVLayout">
+      <property name="spacing">
+       <number>0</number>
+      </property>
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="QSplitter" name="leftSplitter">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="handleWidth">
+         <number>3</number>
+        </property>
+        <property name="childrenCollapsible">
+         <bool>false</bool>
+        </property>
+        <widget class="QWidget" name="filesPanel">
+         <property name="minimumSize">
+          <size>
+           <width>220</width>
+           <height>180</height>
+          </size>
+         </property>
+         <layout class="QVBoxLayout" name="filesPanelVLayout">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="filesPanelHeader">
+            <property name="text">
+             <string>📁  Available Files</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QListWidget" name="filesList">
+            <property name="verticalScrollBarPolicy">
+             <enum>Qt::ScrollBarAsNeeded</enum>
+            </property>
+            <property name="horizontalScrollBarPolicy">
+             <enum>Qt::ScrollBarAlwaysOff</enum>
+            </property>
+            <item>
+             <property name="text">
+              <string>Sample Sir Dong</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="tocPanel">
+         <property name="minimumSize">
+          <size>
+           <width>220</width>
+           <height>150</height>
+          </size>
+         </property>
+         <layout class="QVBoxLayout" name="tocPanelVLayout">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="tocPanelHeader">
+            <property name="text">
+             <string>📑  Table of Contents</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QListWidget" name="tocList">
+            <property name="verticalScrollBarPolicy">
+             <enum>Qt::ScrollBarAsNeeded</enum>
+            </property>
+            <property name="horizontalScrollBarPolicy">
+             <enum>Qt::ScrollBarAlwaysOff</enum>
+            </property>
+            <item>
+             <property name="text">
+              <string>1. Bakit Panot si sir Dong?</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QScrollArea" name="pageScrollArea">
+      <property name="verticalScrollBarPolicy">
+       <enum>Qt::ScrollBarAsNeeded</enum>
+      </property>
+      <property name="horizontalScrollBarPolicy">
+       <enum>Qt::ScrollBarAsNeeded</enum>
+      </property>
+      <property name="widgetResizable">
+       <bool>true</bool>
+      </property>
+      <widget class="QWidget" name="scrollAreaContent">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>1148</width>
+         <height>1105</height>
+        </rect>
+       </property>
+       <layout class="QVBoxLayout" name="scrollContentVLayout">
+        <property name="spacing">
+         <number>24</number>
+        </property>
+        <property name="leftMargin">
+         <number>36</number>
+        </property>
+        <property name="topMargin">
+         <number>28</number>
+        </property>
+        <property name="rightMargin">
+         <number>36</number>
+        </property>
+        <property name="bottomMargin">
+         <number>36</number>
+        </property>
+        <item>
+         <widget class="QFrame" name="paperPage1">
+          <property name="frameShape">
+           <enum>QFrame::Box</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Plain</enum>
+          </property>
+          <property name="lineWidth">
+           <number>0</number>
+          </property>
+          <layout class="QVBoxLayout" name="paperLayout1">
+           <property name="spacing">
+            <number>8</number>
+           </property>
+           <property name="leftMargin">
+            <number>52</number>
+           </property>
+           <property name="topMargin">
+            <number>44</number>
+           </property>
+           <property name="rightMargin">
+            <number>52</number>
+           </property>
+           <property name="bottomMargin">
+            <number>44</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="companyName">
+             <property name="text">
+              <string>Raionn Pest Solutions</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="companyTagline">
+             <property name="text">
+              <string>Professional Pest Control and Inventory Management  |  raionnpest@gmail.com</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QFrame" name="headerDivider">
+             <property name="frameShape">
+              <enum>QFrame::HLine</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Plain</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="docTitleLabel">
+             <property name="text">
+              <string>Inventory Report — Q1 2025</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="metaLabel">
+             <property name="text">
+              <string>Generated: January 31, 2025  |  Prepared by: Admin  |  Status: Active</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QFrame" name="innerDivider">
+             <property name="frameShape">
+              <enum>QFrame::HLine</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Plain</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="sectionLabel">
+             <property name="text">
+              <string>Inventory Table</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QTableWidget" name="inventoryTable1">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="verticalScrollBarPolicy">
+              <enum>Qt::ScrollBarAlwaysOff</enum>
+             </property>
+             <property name="horizontalScrollBarPolicy">
+              <enum>Qt::ScrollBarAlwaysOff</enum>
+             </property>
+             <property name="sizeAdjustPolicy">
+              <enum>QAbstractScrollArea::AdjustToContents</enum>
+             </property>
+             <property name="editTriggers">
+              <set>QAbstractItemView::AnyKeyPressed|QAbstractItemView::DoubleClicked|QAbstractItemView::EditKeyPressed</set>
+             </property>
+             <property name="tabKeyNavigation">
+              <bool>true</bool>
+             </property>
+             <property name="alternatingRowColors">
+              <bool>true</bool>
+             </property>
+             <property name="selectionMode">
+              <enum>QAbstractItemView::SingleSelection</enum>
+             </property>
+             <property name="selectionBehavior">
+              <enum>QAbstractItemView::SelectRows</enum>
+             </property>
+             <property name="showGrid">
+              <bool>true</bool>
+             </property>
+             <property name="gridStyle">
+              <enum>Qt::SolidLine</enum>
+             </property>
+             <property name="sortingEnabled">
+              <bool>true</bool>
+             </property>
+             <property name="rowCount">
+              <number>10</number>
+             </property>
+             <property name="columnCount">
+              <number>6</number>
+             </property>
+             <attribute name="horizontalHeaderDefaultSectionSize">
+              <number>157</number>
+             </attribute>
+             <row/>
+             <row/>
+             <row/>
+             <row/>
+             <row/>
+             <row/>
+             <row/>
+             <row/>
+             <row/>
+             <row/>
+             <column>
+              <property name="text">
+               <string>Date of Treatment</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Name of Client</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Time of Treatment</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Chemical/s Used</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Actual Chemical/s Used</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Remarks</string>
+              </property>
+             </column>
+             <item row="0" column="0">
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item row="0" column="1">
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item row="0" column="2">
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item row="0" column="3">
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item row="0" column="4">
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item row="0" column="5">
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item row="1" column="0">
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item row="1" column="1">
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item row="1" column="2">
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item row="1" column="3">
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item row="1" column="4">
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item row="1" column="5">
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item row="2" column="0">
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item row="2" column="1">
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item row="2" column="2">
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item row="2" column="3">
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item row="2" column="4">
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item row="2" column="5">
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item row="3" column="0">
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item row="3" column="1">
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item row="3" column="2">
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item row="3" column="3">
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item row="3" column="4">
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item row="3" column="5">
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item row="4" column="0">
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item row="4" column="1">
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item row="4" column="2">
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item row="4" column="3">
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item row="4" column="4">
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item row="4" column="5">
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item row="5" column="0">
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item row="5" column="1">
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item row="5" column="2">
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item row="5" column="3">
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item row="5" column="4">
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item row="5" column="5">
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item row="6" column="0">
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item row="6" column="1">
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item row="6" column="2">
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item row="6" column="3">
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item row="6" column="4">
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item row="6" column="5">
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item row="7" column="0">
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item row="7" column="1">
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item row="7" column="2">
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item row="7" column="3">
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item row="7" column="4">
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item row="7" column="5">
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item row="8" column="0">
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item row="8" column="1">
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item row="8" column="2">
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item row="8" column="3">
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item row="8" column="4">
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item row="8" column="5">
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item row="9" column="0">
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item row="9" column="1">
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item row="9" column="2">
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item row="9" column="3">
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item row="9" column="4">
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item row="9" column="5">
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="pageFooter1">
+             <property name="text">
+              <string>Raionn Pest Solutions © 2026 — Confidential                                                                    Page 1 of 2</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QFrame" name="paperPage2">
+          <property name="frameShape">
+           <enum>QFrame::Box</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Plain</enum>
+          </property>
+          <property name="lineWidth">
+           <number>0</number>
+          </property>
+          <layout class="QVBoxLayout" name="paperLayout2">
+           <property name="spacing">
+            <number>8</number>
+           </property>
+           <property name="leftMargin">
+            <number>52</number>
+           </property>
+           <property name="topMargin">
+            <number>44</number>
+           </property>
+           <property name="rightMargin">
+            <number>52</number>
+           </property>
+           <property name="bottomMargin">
+            <number>44</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="companyName2">
+             <property name="text">
+              <string>Raionn Pest Solutions</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QFrame" name="headerDivider2">
+             <property name="frameShape">
+              <enum>QFrame::HLine</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Plain</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="notesLabel">
+             <property name="text">
+              <string>Statement (click to edit)</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QTextEdit" name="notesEdit">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>120</height>
+              </size>
+             </property>
+             <property name="acceptRichText">
+              <bool>false</bool>
+             </property>
+             <property name="placeholderText">
+              <string>Click here to type your notes, observations, or remarks for this report...</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="pageFooter2">
+             <property name="text">
+              <string>Raionn Pest Solutions © 2025 — Confidential                                                                    Page 2 of 2</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <spacer name="pageBottomSpacer">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Expanding</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QToolBar" name="mainToolBar">
+   <property name="movable">
+    <bool>false</bool>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>16</width>
+     <height>16</height>
+    </size>
+   </property>
+   <property name="floatable">
+    <bool>false</bool>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionOpen"/>
+   <addaction name="actionRefresh"/>
+   <addaction name="actionExport"/>
+   <addaction name="actionPrint"/>
+   <addaction name="actionZoomIn"/>
+   <addaction name="actionZoomOut"/>
+   <addaction name="actionFind"/>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1416</width>
+     <height>33</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionOpen"/>
+    <addaction name="separator"/>
+    <addaction name="actionExport"/>
+    <addaction name="actionPrint"/>
+    <addaction name="separator"/>
+    <addaction name="actionClose"/>
+   </widget>
+   <widget class="QMenu" name="menuView">
+    <property name="title">
+     <string>View</string>
+    </property>
+    <addaction name="actionZoomIn"/>
+    <addaction name="actionZoomOut"/>
+    <addaction name="actionZoomReset"/>
+   </widget>
+   <widget class="QMenu" name="menuEdit">
+    <property name="title">
+     <string>Edit</string>
+    </property>
+    <addaction name="actionFind"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionAbout"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuView"/>
+   <addaction name="menuEdit"/>
+   <addaction name="menuHelp"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar">
+   <property name="sizeGripEnabled">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <action name="actionOpen">
+   <property name="text">
+    <string>Open</string>
+   </property>
+   <property name="toolTip">
+    <string>Open a document  (Ctrl+O)</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
+   </property>
+  </action>
+  <action name="actionRefresh">
+   <property name="text">
+    <string>Refresh</string>
+   </property>
+   <property name="toolTip">
+    <string>Refresh file list  (F5)</string>
+   </property>
+   <property name="shortcut">
+    <string>F5</string>
+   </property>
+  </action>
+  <action name="actionExport">
+   <property name="text">
+    <string>Export</string>
+   </property>
+   <property name="toolTip">
+    <string>Export document  (Ctrl+E)</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+E</string>
+   </property>
+  </action>
+  <action name="actionPrint">
+   <property name="text">
+    <string>Print</string>
+   </property>
+   <property name="toolTip">
+    <string>Print document  (Ctrl+P)</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+P</string>
+   </property>
+  </action>
+  <action name="actionZoomIn">
+   <property name="text">
+    <string>Zoom In</string>
+   </property>
+   <property name="toolTip">
+    <string>Zoom in  (Ctrl++)</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+=</string>
+   </property>
+  </action>
+  <action name="actionZoomOut">
+   <property name="text">
+    <string>Zoom Out</string>
+   </property>
+   <property name="toolTip">
+    <string>Zoom out  (Ctrl+-)</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+-</string>
+   </property>
+  </action>
+  <action name="actionZoomReset">
+   <property name="text">
+    <string>Reset Zoom</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+0</string>
+   </property>
+  </action>
+  <action name="actionFind">
+   <property name="text">
+    <string>Find</string>
+   </property>
+   <property name="toolTip">
+    <string>Find in document  (Ctrl+F)</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+F</string>
+   </property>
+  </action>
+  <action name="actionClose">
+   <property name="text">
+    <string>Close</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+W</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>About</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

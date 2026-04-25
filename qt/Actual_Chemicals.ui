@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>557</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QMainWindow { background-color: #D9E9CF; }</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true">QWidget#centralwidget { background-color: #D9E9CF; margin: 0px; padding: 0px; }</string>
+   </property>
+   <widget class="QTableWidget" name="chemicalUsed">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>801</width>
+      <height>501</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QTableWidget {
+    background-color: #FFFFFF;
+    alternate-background-color: #F5F5F5;
+    gridline-color: #D8EDE0;
+    border: none;
+    font: 11pt &quot;Segoe UI&quot;;
+    color: #1B4332;
+    selection-background-color: #C6F6D5;
+    selection-color: #1B4332;
+    border-style: solid;
+    border-width: 2px;
+    border-top-color: #E9F5EC;
+    border-left-color: #E9F5EC;
+    border-bottom-color: #2D6A4F;
+    border-right-color: #2D6A4F;
+}
+QTableWidget::item {
+    padding: 4px 8px;
+    border: none;
+    background-color: transparent;
+}
+QTableWidget::item:selected {
+    background-color: #C6F6D5;
+    color: #1B4332;
+}
+QHeaderView::section {
+    background-color: #2F6B3F;
+    color: #ffffff;
+    border: none;
+    border-right: 1px solid #1B4332;
+    padding: 6px 8px;
+    font: bold 11pt &quot;Segoe UI&quot;;
+    text-transform: uppercase;
+}
+QHeaderView::section:vertical {
+    background-color: #F0F0F0;
+    color: #1B4332;
+    border-right: 1px solid #D1D9CC;
+}
+QHeaderView { background-color: transparent; border: none; }
+QTableCornerButton::section { background-color: #2D6A4F; border: none; }
+QScrollBar:vertical { background: #E8F0EC; width: 11px; border-radius: 5px; }
+QScrollBar::handle:vertical { background: #1B4332; border-radius: 5px; min-height: 25px; }
+QScrollBar::handle:vertical:hover { background: #0F2A20; }
+QScrollBar::handle:vertical:pressed { background: #081A13; }
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical { height: 0; }
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical { background: transparent; }
+QScrollBar:horizontal { background: #E8F0EC; height: 11px; border-radius: 5px; }
+QScrollBar::handle:horizontal { background: #1B4332; border-radius: 5px; min-width: 25px; }
+QScrollBar::handle:horizontal:hover { background: #0F2A20; }
+QScrollBar::handle:horizontal:pressed { background: #081A13; }
+QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal { width: 0; }
+QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal { background: transparent; }</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::NoFrame</enum>
+    </property>
+    <property name="selectionMode">
+     <enum>QAbstractItemView::SingleSelection</enum>
+    </property>
+    <attribute name="horizontalHeaderDefaultSectionSize">
+     <number>250</number>
+    </attribute>
+    <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+     <bool>false</bool>
+    </attribute>
+    <attribute name="horizontalHeaderStretchLastSection">
+     <bool>true</bool>
+    </attribute>
+    <attribute name="verticalHeaderDefaultSectionSize">
+     <number>40</number>
+    </attribute>
+    <row>
+     <property name="text">
+      <string>1</string>
+     </property>
+    </row>
+    <row>
+     <property name="text">
+      <string>2</string>
+     </property>
+    </row>
+    <row>
+     <property name="text">
+      <string>3</string>
+     </property>
+    </row>
+    <row>
+     <property name="text">
+      <string>4</string>
+     </property>
+    </row>
+    <row>
+     <property name="text">
+      <string>5</string>
+     </property>
+    </row>
+    <column>
+     <property name="text">
+      <string>Chemical/s Used</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Quantity</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Remarks</string>
+     </property>
+    </column>
+    <item row="0" column="0">
+     <property name="text">
+      <string/>
+     </property>
+     <property name="textAlignment">
+      <set>AlignCenter</set>
+     </property>
+    </item>
+    <item row="1" column="0">
+     <property name="text">
+      <string/>
+     </property>
+     <property name="textAlignment">
+      <set>AlignCenter</set>
+     </property>
+    </item>
+    <item row="2" column="0">
+     <property name="text">
+      <string/>
+     </property>
+     <property name="textAlignment">
+      <set>AlignCenter</set>
+     </property>
+    </item>
+    <item row="3" column="0">
+     <property name="text">
+      <string/>
+     </property>
+     <property name="textAlignment">
+      <set>AlignCenter</set>
+     </property>
+    </item>
+    <item row="4" column="0">
+     <property name="text">
+      <string/>
+     </property>
+     <property name="textAlignment">
+      <set>AlignCenter</set>
+     </property>
+    </item>
+   </widget>
+   <widget class="QPushButton" name="addRowBtn_chem">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>510</y>
+      <width>800</width>
+      <height>44</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton { background-color: transparent; color: #2D6A4F; border: 1.5px dashed #2D6A4F; border-radius: 8px; padding: 6px 12px; font: 12pt &quot;Segoe UI&quot;; } QPushButton:hover { background-color: #e8f5e9; }</string>
+    </property>
+    <property name="text">
+     <string>+ Add a Row</string>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
