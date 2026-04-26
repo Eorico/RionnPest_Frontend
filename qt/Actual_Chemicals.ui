@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>chem modal</string>
   </property>
   <property name="styleSheet">
    <string notr="true">QMainWindow { background-color: #D9E9CF; }</string>
@@ -129,7 +129,7 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal { background: t
     </row>
     <column>
      <property name="text">
-      <string>Chemical/s Used</string>
+      <string>Actual Chemical/s On Hand</string>
      </property>
     </column>
     <column>
@@ -186,9 +186,9 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal { background: t
    <widget class="QPushButton" name="addRowBtn_chem">
     <property name="geometry">
      <rect>
-      <x>0</x>
-      <y>510</y>
-      <width>800</width>
+      <x>30</x>
+      <y>507</y>
+      <width>741</width>
       <height>44</height>
      </rect>
     </property>

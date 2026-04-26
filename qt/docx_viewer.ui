@@ -234,7 +234,7 @@ QTextEdit#notesEdit:focus {
           <item>
            <widget class="QLabel" name="filesPanelHeader">
             <property name="text">
-             <string>📁  Available Files</string>
+             <string> Available Files</string>
             </property>
            </widget>
           </item>
@@ -281,7 +281,7 @@ QTextEdit#notesEdit:focus {
           <item>
            <widget class="QLabel" name="tocPanelHeader">
             <property name="text">
-             <string>📑  Table of Contents</string>
+             <string>Table of Contents</string>
             </property>
            </widget>
           </item>
