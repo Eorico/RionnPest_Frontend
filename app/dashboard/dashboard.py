@@ -25,7 +25,6 @@ class DashboardWindow(DashboardController):
         )
             
         self._setup_table()
-        # self.status_mode_internet_dashboard()
         self.bind_event_dashboard()
         self.load_table_data_dashboard()
 
@@ -46,29 +45,17 @@ class DashboardWindow(DashboardController):
         self.ui.logout.triggered.connect(self.handle_logout_dashboard)
         self.ui.searchDate.textChanged.connect(self.handle_search_input_dashboard)
 
-    # def status_mode_internet_dashboard(self):
-    #     if self.api:
-    #         self.is_online = self.api.check_connection_service()
-
-    #     img = "online.png" if self.is_online else "offline.png"
-    #     pixmap = QPixmap(os.path.join(IMAGE_PATH, img))
-
-    #     if not pixmap.isNull():
-    #         lbl = self.ui.label_16
-    #         w, h = (lbl.width() or 40), (lbl.height() or 40)
-    #         lbl.setPixmap(pixmap.scaled(w, h, Qt.KeepAspectRatio, Qt.SmoothTransformation))
-
     def switch_mode_category_dashboard(self, mode):
         self.current_category = mode
         
         mode_capital = mode.upper()
 
-        self.ui.sectionHeader.setText(f"NEW {mode_capital} ENTRY")
-        self.ui.label_2.setText(f"CLIENT - {mode_capital}")
-        self.ui.label_3.setText(f"DATE OF {mode_capital}")
-        self.ui.label_4.setText(f"TIME OF {mode_capital}")
-        self.ui.label_5.setText(f"CHEMICAL/S USED - {mode_capital}")
-        self.ui.label_6.setText(f"ACTUAL CHEMICAL/S USED - {mode_capital}")
+        self.ui.HeaderTreatment.setText(f"NEW {mode_capital} ENTRY")
+        self.ui.nameLabel.setText(f"CLIENT - {mode_capital}")
+        self.ui.dateLabel.setText(f"DATE OF {mode_capital}")
+        self.ui.timeLabel.setText(f"TIME OF {mode_capital}")
+        self.ui.chemLabel.setText(f"CHEMICAL/S USED - {mode_capital}")
+        self.ui.actualChemLabel.setText(f"ACTUAL CHEMICAL/S USED - {mode_capital}")
 
         headers = [
             (0, "Admin User"),
@@ -77,7 +64,8 @@ class DashboardWindow(DashboardController):
             (3, f"Time of ({mode_capital})"),
             (4, f"Chemical/s Used - ({mode_capital})"),
             (5, f"Actual Chemical/s Used - ({mode_capital})"),
-            (6, "Edit"),
+            (6, "Remarks"),
+            (7, "Edit")
         ]
 
         for col, text in headers:
@@ -221,3 +209,25 @@ class DashboardWindow(DashboardController):
 
         self.ui.chemicalUsed.clearContents()
         self.ui.actualchemicalUsed.clearContents()
+        
+    def update_table_inputs_dashboard(self, table_widget, data):
+        table_widget.blockSignals(True)
+        table_widget.setUpdatesEnabled(False)
+        
+        for row in range(table_widget.rowCount()):
+            entry = data[row] if row < len(data) else {}
+
+            name = entry.get('name', '')
+            qty = entry.get('qty', '')
+            remarks = entry.get('remarks', '')
+
+            table_widget.setItem(row, 0, QTableWidgetItem(name))
+            table_widget.setItem(row, 1, QTableWidgetItem(qty))
+
+            if table_widget.columnCount() > 2:
+                table_widget.setItem(row, 2, QTableWidgetItem(remarks))
+
+        table_widget.setUpdatesEnabled(True)
+        table_widget.blockSignals(False)
+            
+    

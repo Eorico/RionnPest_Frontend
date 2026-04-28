@@ -16,8 +16,8 @@ image_path = os.path.join(base_dir, "assets")
 
 class Ui_Login(object):
     def setupUi(self, Login):
-        Login.setObjectName("Raion Admin")
-        Login.setFixedSize(410, 559)
+        Login.setObjectName("Login")
+        Login.setFixedSize(626, 749)
         font = QtGui.QFont()
         font.setFamily("Arial")
         font.setPointSize(10)
@@ -83,7 +83,7 @@ class Ui_Login(object):
         self.centralwidget = QtWidgets.QWidget(Login)
         self.centralwidget.setObjectName("centralwidget")
         self.containerlogin = QtWidgets.QWidget(self.centralwidget)
-        self.containerlogin.setGeometry(QtCore.QRect(10, 10, 391, 541))
+        self.containerlogin.setGeometry(QtCore.QRect(-10, -10, 651, 771))
         font = QtGui.QFont()
         font.setFamily("Tahoma")
         font.setPointSize(12)
@@ -102,7 +102,7 @@ class Ui_Login(object):
 "}")
         self.containerlogin.setObjectName("containerlogin")
         self.usernameEdit = QtWidgets.QLineEdit(self.containerlogin)
-        self.usernameEdit.setGeometry(QtCore.QRect(50, 260, 291, 51))
+        self.usernameEdit.setGeometry(QtCore.QRect(180, 360, 291, 51))
         font = QtGui.QFont()
         font.setPointSize(-1)
         self.usernameEdit.setFont(font)
@@ -152,7 +152,7 @@ class Ui_Login(object):
         self.usernameEdit.setCursorMoveStyle(QtCore.Qt.LogicalMoveStyle)
         self.usernameEdit.setObjectName("usernameEdit")
         self.passwordEdit = QtWidgets.QLineEdit(self.containerlogin)
-        self.passwordEdit.setGeometry(QtCore.QRect(50, 360, 291, 51))
+        self.passwordEdit.setGeometry(QtCore.QRect(180, 460, 291, 51))
         font = QtGui.QFont()
         font.setPointSize(-1)
         self.passwordEdit.setFont(font)
@@ -202,7 +202,7 @@ class Ui_Login(object):
         self.passwordEdit.setReadOnly(False)
         self.passwordEdit.setObjectName("passwordEdit")
         self.loginbutton = QtWidgets.QPushButton(self.containerlogin)
-        self.loginbutton.setGeometry(QtCore.QRect(140, 460, 111, 41))
+        self.loginbutton.setGeometry(QtCore.QRect(270, 560, 111, 41))
         font = QtGui.QFont()
         font.setFamily("Segoe UI")
         font.setPointSize(15)
@@ -251,7 +251,7 @@ class Ui_Login(object):
 "}")
         self.loginbutton.setObjectName("loginbutton")
         self.title = QtWidgets.QLabel(self.containerlogin)
-        self.title.setGeometry(QtCore.QRect(30, 150, 321, 70))
+        self.title.setGeometry(QtCore.QRect(170, 240, 321, 70))
         font = QtGui.QFont()
         font.setFamily("Modern No. 20")
         font.setPointSize(28)
@@ -262,7 +262,7 @@ class Ui_Login(object):
 "}")
         self.title.setObjectName("title")
         self.title_2 = QtWidgets.QLabel(self.containerlogin)
-        self.title_2.setGeometry(QtCore.QRect(40, 220, 119, 50))
+        self.title_2.setGeometry(QtCore.QRect(170, 320, 119, 50))
         font = QtGui.QFont()
         font.setPointSize(11)
         self.title_2.setFont(font)
@@ -272,7 +272,7 @@ class Ui_Login(object):
 "}")
         self.title_2.setObjectName("title_2")
         self.title_3 = QtWidgets.QLabel(self.containerlogin)
-        self.title_3.setGeometry(QtCore.QRect(40, 320, 122, 50))
+        self.title_3.setGeometry(QtCore.QRect(170, 420, 122, 50))
         font = QtGui.QFont()
         font.setPointSize(11)
         self.title_3.setFont(font)
@@ -282,7 +282,7 @@ class Ui_Login(object):
 "}")
         self.title_3.setObjectName("title_3")
         self.Logo = QtWidgets.QLabel(self.containerlogin)
-        self.Logo.setGeometry(QtCore.QRect(87, -20, 221, 211))
+        self.Logo.setGeometry(QtCore.QRect(217, 50, 221, 211))
         self.Logo.setStyleSheet("QLabel {\n"
 "background: transparent;\n"
 "border: none;\n"
@@ -291,6 +291,17 @@ class Ui_Login(object):
         self.Logo.setPixmap(QtGui.QPixmap(f"{image_path}/Logo.png"))
         self.Logo.setScaledContents(True)
         self.Logo.setObjectName("Logo")
+        self.title_4 = QtWidgets.QLabel(self.containerlogin)
+        self.title_4.setGeometry(QtCore.QRect(190, 290, 271, 50))
+        font = QtGui.QFont()
+        font.setPointSize(11)
+        self.title_4.setFont(font)
+        self.title_4.setStyleSheet("QLabel {\n"
+"    background: transparent;\n"
+"    border: none\n"
+"}")
+        self.title_4.setAlignment(QtCore.Qt.AlignCenter)
+        self.title_4.setObjectName("title_4")
         Login.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(Login)
@@ -298,13 +309,14 @@ class Ui_Login(object):
 
     def retranslateUi(self, Login):
         _translate = QtCore.QCoreApplication.translate
-        Login.setWindowTitle(_translate("Raionn Admin", "Raionn Admin"))
+        Login.setWindowTitle(_translate("Login", "Login"))
         self.usernameEdit.setPlaceholderText(_translate("Login", "Username"))
         self.passwordEdit.setPlaceholderText(_translate("Login", "Password"))
         self.loginbutton.setText(_translate("Login", "LOGIN"))
         self.title.setText(_translate("Login", "RAIONN ADMIN"))
         self.title_2.setText(_translate("Login", "USERNAME:"))
         self.title_3.setText(_translate("Login", "PASSWORD:"))
+        self.title_4.setText(_translate("Login", "VALIDATOR"))
 
 if __name__ == "__main__":
     import sys

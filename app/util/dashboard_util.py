@@ -9,7 +9,6 @@ class DashboardFormatter:
     def format_time_range(start, end, meridiem):
         return f"[S]: {start} - [E]: {end} | {meridiem}"
     @staticmethod
-    @staticmethod
     def format_chemicals(data_list, is_actual=False):
         if not isinstance(data_list, list):
             return "n/a"

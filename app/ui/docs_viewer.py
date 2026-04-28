@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_DocxViewer(object):
     def setupUi(self, DocxViewer):
         DocxViewer.setObjectName("DocxViewer")
-        DocxViewer.resize(1416, 988)
+        DocxViewer.setMinimumSize(1416, 988)
         DocxViewer.setStyleSheet("\n"
 "\n"
 "QMainWindow, QWidget#centralwidget { background-color: #EBEBEB; }\n"
@@ -555,7 +555,7 @@ class Ui_DocxViewer(object):
         __sortingEnabled = self.inventoryTable1.isSortingEnabled()
         self.inventoryTable1.setSortingEnabled(False)
         self.inventoryTable1.setSortingEnabled(__sortingEnabled)
-        self.pageFooter1.setText(_translate("DocxViewer", "Raionn Pest Solutions © 2026 — Confidential                                                                    Page 1 of 2"))
+        self.pageFooter1.setText(_translate("DocxViewer", "Raionn Pest Solutions — Confidential                                                                    Page 1 of 2"))
         self.companyName2.setText(_translate("DocxViewer", "Raionn Pest Solutions"))
         self.notesLabel.setText(_translate("DocxViewer", "Statement (click to edit)"))
         self.notesEdit.setPlaceholderText(_translate("DocxViewer", "Click here to type your notes, observations, or remarks for this report..."))
