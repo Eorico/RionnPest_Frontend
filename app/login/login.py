@@ -25,7 +25,6 @@ class LoginService:
         success, msg = self.api.login_service(user, password)
         if success:
             self.api.admin_under = user
-            print(f"Login successful for user: {user}")
             self.parent_window.login_success.emit()
         else:
             if "429" in str(msg) or "Too Many Request" in str(msg):

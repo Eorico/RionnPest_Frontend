@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QTableWidgetItem, QMessageBox
+from PyQt5.QtWidgets import QTableWidgetItem, QMessageBox,  QTableWidget, QAbstractItemView
 from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import Qt
 from ui.dashboard import DashboardController
@@ -18,26 +18,44 @@ class DashboardWindow(DashboardController):
         self.is_online = False
         
         self.setWindowIcon(QIcon(f"{IMAGE_PATH}/Logo.png"))
+        
+        self._setup_table()
 
         self.table_renderer = DashboardTableRenderer(
             self.ui.tableListahan,
-            self.handle_trash_dashboard
+            on_trash_callback=self.handle_trash_dashboard,
+            on_edit_callback=self.handle_edit_dashboard
         )
             
-        self._setup_table()
         self.bind_event_dashboard()
         self.load_table_data_dashboard()
+        
+        self.ui.confirmButton_3.clicked.connect(self.handle_trash_selected)
+        self.ui.confirmButton_2.clicked.connect(self.handle_pdf_selected)
 
     def _setup_table(self):
-        self.ui.tableListahan.setWordWrap(True)
-        self.ui.tableListahan.verticalHeader().setSectionResizeMode(
-            self.ui.tableListahan.verticalHeader().ResizeToContents
+        table = self.ui.tableListahan
+
+        table.setSelectionMode(QAbstractItemView.NoSelection)
+        table.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        table.setMouseTracking(True)
+        table.viewport().setMouseTracking(True)
+        table.setWordWrap(True)
+        table.verticalHeader().setDefaultSectionSize(60)
+        table.verticalHeader().setSectionResizeMode(
+            table.verticalHeader().Fixed
         )
+        table.setColumnWidth(3, 350)
+        table.setColumnWidth(4, 350)
+        table.setColumnWidth(5, 350)
+        table.setColumnWidth(7, 100)
 
-        self.ui.tableListahan.setColumnWidth(3, 350)
-        self.ui.tableListahan.setColumnWidth(4, 350)
-        self.ui.tableListahan.setColumnWidth(5, 350)
-
+        # ✅ Strip the transparent background rule so setBackground() is visible
+        fixed_ss = table.styleSheet().replace(
+            "background-color: transparent;", ""
+        )
+        table.setStyleSheet(fixed_ss)
+        
     def bind_event_dashboard(self):
         self.ui.confirmButton.clicked.connect(self.handle_submit_dashboard)
         self.ui.inspection.triggered.connect(lambda: self.switch_mode_category_dashboard('inspection'))
@@ -229,5 +247,39 @@ class DashboardWindow(DashboardController):
 
         table_widget.setUpdatesEnabled(True)
         table_widget.blockSignals(False)
-            
-    
+
+    def _require_selection(self, action: str):
+        rec = self.table_renderer.selected_record
+        if rec is None:
+            from PyQt5.QtWidgets import QMessageBox
+            QMessageBox.information(
+                self, "No Row Selected",
+                f"Hold-click a row first, then press {action}."
+            )
+        return rec
+
+    def handle_trash_selected(self):
+        rec = self._require_selection("TRASH")
+        if rec:
+            self.handle_trash_dashboard(rec.get("id"))
+            self.table_renderer._clear_selection()
+
+    def handle_pdf_selected(self):
+        rec = self._require_selection("CONVERT TO PDF")
+        if rec:
+            # Replace with your actual PDF generation call
+            self.handle_generate_pdf(rec)
+
+    def handle_edit_dashboard(self, updated_record: dict):
+        success, msg = self.api.update_inventory_record(
+            updated_record["id"],
+            updated_record
+        )
+        if success:
+            from PyQt5.QtWidgets import QMessageBox
+            QMessageBox.information(self, "Success", "Record updated.")
+            self.load_table_data_dashboard()
+        else:
+            from PyQt5.QtWidgets import QMessageBox
+            QMessageBox.critical(self, "Error", f"Failed to update: {msg}")
+        

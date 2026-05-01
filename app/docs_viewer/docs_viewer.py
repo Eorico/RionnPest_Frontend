@@ -4,6 +4,7 @@ from ui.docs_viewer import Ui_DocxViewer
 class DocsViewerWindow(QMainWindow):
     def __init__(self, api_service):
         super().__init__()
-        self.ui = Ui_DocxViewer
+        self.ui = Ui_DocxViewer()
+        self.ui.setupUi(self)
         self.api = api_service
         
