@@ -1,6 +1,6 @@
 from PyQt5.QtWidgets import QMainWindow, QTableWidgetItem
 from ui.actual_chem_view import Ui_MainWindow
-from util.live_update_delgate_viewer import LiveUpdateDelgate
+from util.live_update_delgate_viewer_util import LiveUpdateDelgate
 from PyQt5.QtCore import pyqtSignal
 
 class ActualChemViewerWindow(QMainWindow):

@@ -1,2 +1,19 @@
+# Ignore the .env file containing environment variables
 .env
+
+# Ignore the hash_pass.py file containing the password hashing function
 hash_pass/hash_pass.py
+
+# python cache files
+__pycache__/
+*.pyc
+*.pyo
+
+# vs code temporary files
+tempCodeRunnerFile.py
+# pytest cache files
+.pytest_cache/
+
+# os junk
+.DS_Store
+Thumbs.db

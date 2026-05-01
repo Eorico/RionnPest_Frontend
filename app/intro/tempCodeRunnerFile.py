@@ -1,1 +1,0 @@
-Offline: Skiping Cloud Sync
