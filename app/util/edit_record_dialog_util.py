@@ -2,9 +2,26 @@ from PyQt5.QtWidgets import (
     QTableWidgetItem, QWidget, QDialog,
     QHBoxLayout, QFormLayout, QLineEdit, QComboBox,
     QDialogButtonBox, QMessageBox, QLabel, QTableWidget,
-    QVBoxLayout, QHeaderView, QAbstractItemView
+    QVBoxLayout, QHeaderView, QAbstractItemView, QStyledItemDelegate
 )
 from ui.style import edit_style
+from PyQt5.QtCore import Qt
+
+class _TallEditor(QStyledItemDelegate):
+    def createEditor(self, parent, option, index):
+        editor = QLineEdit(parent)
+        editor.setMinimumHeight(45)
+        editor.setStyleSheet("""
+            QLineEdit {
+                font: 11pt 'Segoe UI';
+                padding: 6px 8px;
+                border: 2px solid #2D6A4F;
+                border-radius: 4px;
+                background: #fff;
+                color: #1B4332;
+            }
+        """)
+        return editor
 
 class EditRecordDialog(QDialog):
     
@@ -45,20 +62,24 @@ class EditRecordDialog(QDialog):
 
         # Time row
         time_row = QWidget(); tl = QHBoxLayout(time_row); tl.setContentsMargins(0,0,0,0)
-        self.start_h   = self._combo(self.HOURS)
-        self.start_m   = self._combo(self.MINUTES)
-        self.end_h     = self._combo(self.HOURS)
-        self.end_m     = self._combo(self.MINUTES)
-        self.meridiem  = self._combo(self.MERIDIEM)
-        for w, lbl in [(self.start_h,"Start H"),(self.start_m,"M"),
-                       (self.end_h,"  End H"),(self.end_m,"M"),(self.meridiem,"")]:
-            if lbl: tl.addWidget(QLabel(lbl))
-            tl.addWidget(w)
-        form.addRow("Time:", time_row)
+        self.start_h        = self._combo(self.HOURS)
+        self.start_m        = self._combo(self.MINUTES)
+        self.start_meridiem = self._combo(self.MERIDIEM)
+        self.end_h          = self._combo(self.HOURS)
+        self.end_m          = self._combo(self.MINUTES)
+        self.end_meridiem   = self._combo(self.MERIDIEM)
 
-        # Remarks
-        self.remarks_input = QLineEdit()
-        form.addRow("Remarks:", self.remarks_input)
+        tl.addWidget(QLabel("[S]:"))
+        tl.addWidget(self.start_h)
+        tl.addWidget(self.start_m)
+        tl.addWidget(QLabel("|"))
+        tl.addWidget(self.start_meridiem)
+        tl.addWidget(QLabel("- [E]:"))
+        tl.addWidget(self.end_h)
+        tl.addWidget(self.end_m)
+        tl.addWidget(QLabel("|"))
+        tl.addWidget(self.end_meridiem)
+        form.addRow("Time:", time_row)
 
         # Chemical tables
         root.addWidget(QLabel("Chemicals Used:"))
@@ -83,18 +104,29 @@ class EditRecordDialog(QDialog):
     def _build_chem_table(self):
         t = QTableWidget(5, 3)
         t.setHorizontalHeaderLabels(["Chemical Name", "Quantity", "Remarks"])
+
         t.horizontalHeader().setSectionResizeMode(0, QHeaderView.Stretch)
+        t.horizontalHeader().setSectionResizeMode(1, QHeaderView.ResizeToContents)
+        t.horizontalHeader().setSectionResizeMode(2, QHeaderView.Stretch)
+
         t.setSelectionMode(QAbstractItemView.SingleSelection)
-        t.verticalHeader().setDefaultSectionSize(32)
-        t.setFixedHeight(190)
+        t.setWordWrap(True)
+
+        t.verticalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)
+        t.verticalHeader().setDefaultSectionSize(55)
+
+        t.setItemDelegate(_TallEditor(t))  # apply tall editor to all cells
+        t.setFixedHeight(310)
         return t
 
     # ── Populate ──────────────────────────────────────────────────────────────
 
     def _populate(self):
         r = self.record
+        chemicals_use        = r.get("chemicals_use")        or r.get("chemical_use")         or []
+        actual_chemicals     = r.get("actual_chemicals_used") or r.get("actual_chemical_used") or []
+        
         self.client_input.setText(r.get("client_name", ""))
-        self.remarks_input.setText(r.get("remarks", "") or "")
 
         self._set_combo(self.month_cb,  str(r.get("month", "")))
         self._set_combo(self.date_cb,   str(r.get("date",  "")))
@@ -109,10 +141,11 @@ class EditRecordDialog(QDialog):
         self._set_combo(self.start_m,  sm.zfill(2))
         self._set_combo(self.end_h,    eh.zfill(2))
         self._set_combo(self.end_m,    em.zfill(2))
-        self._set_combo(self.meridiem, r.get("meridiem", "AM"))
+        self._set_combo(self.start_meridiem, r.get("start_meridiem", "AM"))
+        self._set_combo(self.end_meridiem,   r.get("end_meridiem",   "AM"))
 
-        self._fill_chem_table(self.chem_table,   r.get("chemicals_use", []))
-        self._fill_chem_table(self.actual_table, r.get("actual_chemicals_used", []))
+        self._fill_chem_table(self.chem_table,   chemicals_use)
+        self._fill_chem_table(self.actual_table, actual_chemicals)
 
     def _set_combo(self, cb: QComboBox, value: str):
         idx = cb.findText(value.lstrip("0") or "0")
@@ -123,10 +156,26 @@ class EditRecordDialog(QDialog):
 
     def _fill_chem_table(self, table: QTableWidget, chemicals: list):
         for row, entry in enumerate(chemicals[:5]):
-            key = "chemical_name" if "chemical_name" in entry else "name"
-            table.setItem(row, 0, QTableWidgetItem(entry.get(key, "")))
-            table.setItem(row, 1, QTableWidgetItem(entry.get("quantity", entry.get("qty", ""))))
-            table.setItem(row, 2, QTableWidgetItem(entry.get("remarks", "")))
+            name = (
+                entry.get("chemical_name") or
+                entry.get("actual_chemicals_name") or
+                entry.get("name") or
+                ""
+            )
+            qty     = entry.get("quantity") or entry.get("qty") or ""
+            remarks = entry.get("remarks") or ""
+
+            name_item    = QTableWidgetItem(name)
+            qty_item     = QTableWidgetItem(qty)
+            remarks_item = QTableWidgetItem(remarks)
+
+            # top-left alignment for all cells so wrapped text starts at top
+            for item in (name_item, qty_item, remarks_item):
+                item.setTextAlignment(Qt.AlignLeft | Qt.AlignTop)
+
+            table.setItem(row, 0, name_item)
+            table.setItem(row, 1, qty_item)
+            table.setItem(row, 2, remarks_item)
 
     # ── Save ──────────────────────────────────────────────────────────────────
 
@@ -137,16 +186,17 @@ class EditRecordDialog(QDialog):
             return
 
         self.record["client_name"] = client
-        self.record["remarks"]     = self.remarks_input.text().strip()
         self.record["month"]       = int(self.month_cb.currentText())
         self.record["date"]        = int(self.date_cb.currentText())
         self.record["year"]        = int(self.year_cb.currentText())
-        self.record["start_time"]  = f"{self.start_h.currentText()}:{self.start_m.currentText()}"
-        self.record["end_time"]    = f"{self.end_h.currentText()}:{self.end_m.currentText()}"
-        self.record["meridiem"]    = self.meridiem.currentText()
+        self.record["start_time"] = f"{int(self.start_h.currentText()):02d}:{int(self.start_m.currentText()):02d}"
+        self.record["end_time"]   = f"{int(self.end_h.currentText()):02d}:{int(self.end_m.currentText()):02d}"
+        self.record["start_meridiem"] = self.start_meridiem.currentText()
+        self.record["end_meridiem"]   = self.end_meridiem.currentText()
         self.record["chemicals_use"]          = self._read_chem_table(self.chem_table,   "chemical_name")
-        self.record["actual_chemicals_used"]  = self._read_chem_table(self.actual_table, "chemical_name")
+        self.record["actual_chemicals_used"]  = self._read_chem_table(self.actual_table, "actual_chemicals_name")
 
+        print(f"Record Debugger: {self.record}")
         self.accept()
 
     def _read_chem_table(self, table: QTableWidget, name_key: str) -> list:

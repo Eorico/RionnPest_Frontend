@@ -20,6 +20,17 @@ class DashboardWindow(DashboardController):
         self.setWindowIcon(QIcon(f"{IMAGE_PATH}/Logo.png"))
         
         self._setup_table()
+        
+        self.ui.tableListahan.setColumnCount(9)
+        self.ui.tableListahan.setHorizontalHeaderItem(0, QTableWidgetItem(""))
+        self.ui.tableListahan.setHorizontalHeaderItem(1, QTableWidgetItem("Admin User"))
+        self.ui.tableListahan.setHorizontalHeaderItem(2, QTableWidgetItem("Date of | (Treatment)"))
+        self.ui.tableListahan.setHorizontalHeaderItem(3, QTableWidgetItem("Name of Client | (Treatment)"))
+        self.ui.tableListahan.setHorizontalHeaderItem(4, QTableWidgetItem("Time of | (Treatment)"))
+        self.ui.tableListahan.setHorizontalHeaderItem(5, QTableWidgetItem("Chemical/s Used | (Treatment)"))
+        self.ui.tableListahan.setHorizontalHeaderItem(6, QTableWidgetItem("Actual Chemical/s Used | (Treatment)"))
+        self.ui.tableListahan.setHorizontalHeaderItem(7, QTableWidgetItem("Remarks"))
+        self.ui.tableListahan.setHorizontalHeaderItem(8, QTableWidgetItem("Edit"))
 
         self.table_renderer = DashboardTableRenderer(
             self.ui.tableListahan,
@@ -45,17 +56,21 @@ class DashboardWindow(DashboardController):
         table.verticalHeader().setSectionResizeMode(
             table.verticalHeader().Fixed
         )
+       
+        table.setColumnCount(9)
+        table.horizontalHeader().setSectionResizeMode(0, table.horizontalHeader().Interactive)
+        table.setColumnWidth(0, 50)
         table.setColumnWidth(3, 350)
-        table.setColumnWidth(4, 350)
-        table.setColumnWidth(5, 350)
-        table.setColumnWidth(7, 100)
+        table.setColumnWidth(4, 350)  
+        table.setColumnWidth(5, 350) 
+        table.setColumnWidth(6, 350)   
+        table.setColumnWidth(8, 100)  
 
-        # ✅ Strip the transparent background rule so setBackground() is visible
-        fixed_ss = table.styleSheet().replace(
-            "background-color: transparent;", ""
-        )
+        fixed_ss = table.styleSheet().replace("background-color: transparent;", "")
         table.setStyleSheet(fixed_ss)
         
+        table.setColumnHidden(0, True)
+            
     def bind_event_dashboard(self):
         self.ui.confirmButton.clicked.connect(self.handle_submit_dashboard)
         self.ui.inspection.triggered.connect(lambda: self.switch_mode_category_dashboard('inspection'))
@@ -76,14 +91,15 @@ class DashboardWindow(DashboardController):
         self.ui.actualChemLabel.setText(f"ACTUAL CHEMICAL/S USED - {mode_capital}")
 
         headers = [
-            (0, "Admin User"),
-            (1, f"Date of ({mode_capital})"),
-            (2, f"Name of Client - ({mode_capital})"),
-            (3, f"Time of ({mode_capital})"),
-            (4, f"Chemical/s Used - ({mode_capital})"),
-            (5, f"Actual Chemical/s Used - ({mode_capital})"),
-            (6, "Remarks"),
-            (7, "Edit")
+            (0, ""),  
+            (1, "Admin User"),
+            (2, f"Date of | ({mode_capital})"),
+            (3, f"Name of Client | ({mode_capital})"),
+            (4, f"Time of | ({mode_capital})"),
+            (5, f"Chemical/s Used | ({mode_capital})"),
+            (6, f"Actual Chemical/s Used | ({mode_capital})"),
+            (7, "Remarks"),
+            (8, "Edit")
         ]
 
         for col, text in headers:
@@ -98,11 +114,13 @@ class DashboardWindow(DashboardController):
             for row in range(table.rowCount()):
                 name_item = table.item(row, 0)
                 qty_item = table.item(row, 1)
+                remarks_item = table.item(row, 2)
 
                 if name_item and name_item.text().strip():
                     results.append({
                         key: name_item.text().strip(),
-                        "quantity": qty_item.text().strip() if qty_item else "0"
+                        "quantity": qty_item.text().strip() if qty_item else "0",
+                        "remarks": remarks_item.text().strip() if remarks_item else "",
                     })
             return results
 
@@ -122,7 +140,8 @@ class DashboardWindow(DashboardController):
                     self.ui.hours_2.currentText(),
                     self.ui.time_2.currentText()
                 ),
-                "meridiem": self.ui.PM_or_AM.currentText(),
+                "start_meridiem": self.ui.PM_or_AM.currentText(),
+                "end_meridiem":   self.ui.PM_or_AM_2.currentText(),     
                 "chemical_use": extract(self.ui.chemicalUsed, "chemical_name"),
                 "actual_chemical_used": extract(self.ui.actualchemicalUsed, "chemical_name"),
             }
@@ -249,26 +268,28 @@ class DashboardWindow(DashboardController):
         table_widget.blockSignals(False)
 
     def _require_selection(self, action: str):
-        rec = self.table_renderer.selected_record
-        if rec is None:
+        records = self.table_renderer.get_checked_records()
+        if not records:
             from PyQt5.QtWidgets import QMessageBox
             QMessageBox.information(
                 self, "No Row Selected",
-                f"Hold-click a row first, then press {action}."
+                f"Check at least one row first, then press {action}."
             )
-        return rec
+        return records  # now returns a list
 
     def handle_trash_selected(self):
-        rec = self._require_selection("TRASH")
-        if rec:
-            self.handle_trash_dashboard(rec.get("id"))
-            self.table_renderer._clear_selection()
+        records = self._require_selection("TRASH")
+        if records:
+            for rec in records:
+                self.handle_trash_dashboard(rec.get("id"))
+            self.table_renderer.clear_all_checks()
 
     def handle_pdf_selected(self):
-        rec = self._require_selection("CONVERT TO PDF")
-        if rec:
-            # Replace with your actual PDF generation call
-            self.handle_generate_pdf(rec)
+        records = self._require_selection("CONVERT TO PDF")
+        if records:
+            for rec in records:
+                self.handle_generate_pdf(rec)
+            self.table_renderer.clear_all_checks()
 
     def handle_edit_dashboard(self, updated_record: dict):
         success, msg = self.api.update_inventory_record(

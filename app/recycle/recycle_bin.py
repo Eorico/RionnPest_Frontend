@@ -33,6 +33,10 @@ class RecyclBinWindow(QMainWindow):
         
         self.load_bin_data_restore()
         
+    def showEvent(self, event):
+        super().showEvent(event)
+        self.load_bin_data_restore()
+        
     def load_bin_data_restore(self):
         records = self.api.get_recycle_bin()
         self.ui.recycle_table.setRowCount(0)
@@ -54,8 +58,14 @@ class RecyclBinWindow(QMainWindow):
             category_display = r.get('category', 'Unknown')
             admin_name = r.get('admin_under') or "n/a"
             
-            chem_data = r.get('chemical_use') or r.get('chemicals_use') or r.get('chemicals')
-            actual_data = r.get('actual_chemical_used') or r.get('actual_chemicals_used') 
+            chem_data = (r.get('chemicals_use') 
+             or r.get('chemical_use') 
+             or r.get('chemicals') 
+             or [])
+
+            actual_data = (r.get('actual_chemicals_used') 
+               or r.get('actual_chemical_used') 
+               or [])
             
             chem_output = frm_chemicals(chem_data)
             actual_chem_output = frm_chemicals(actual_data, is_actual=True)

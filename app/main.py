@@ -62,9 +62,9 @@ class MainApp:
     def _sync_table_to_viewer(self, source_table, viewer):
         data = []
         for row in range(source_table.rowCount()):
-            name = source_table.item(row, 0).text().strip() if source_table(row, 0) else ""
-            qty = source_table.item(row, 1).text().strip() if source_table(row, 1) else ""
-            remarks = source_table.item(row, 2).text().strip() if source_table(row, 2) else ""
+            name = source_table.item(row, 0).text().strip() if source_table.item(row, 0) else ""
+            qty = source_table.item(row, 1).text().strip() if source_table.item(row, 1) else ""
+            remarks = source_table.item(row, 2).text().strip() if source_table.item(row, 2) else ""
             
             if name or qty or remarks:
                 data.append({

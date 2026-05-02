@@ -38,7 +38,7 @@ QPushButton:pressed {
 
 edit_style = """
 QDialog { background-color: #F0FAF4; }
-QLabel  { font: 11pt 'Segoe UI'; color: #1B4332; }
+QLabel  { font: 11pt 'Segoe UI'; color: #1B4332; background: transparent; }
 QLineEdit, QComboBox {
     background: #fff; border-radius: 6px; padding: 4px 8px;
     font: 11pt 'Segoe UI'; color: #1B4332;

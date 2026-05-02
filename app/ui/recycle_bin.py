@@ -17,7 +17,7 @@ image_path = os.path.join(base_dir, "assets")
 class Ui_RecycleBin(object):
     def setupUi(self, RecycleBin):
         RecycleBin.setObjectName("RecycleBin")
-        RecycleBin.resize(931, 717)
+        RecycleBin.setFixedSize(931, 717)
         self.centralwidget = QtWidgets.QWidget(RecycleBin)
         self.centralwidget.setObjectName("centralwidget")
         self.recycle_table = QtWidgets.QTableWidget(self.centralwidget)

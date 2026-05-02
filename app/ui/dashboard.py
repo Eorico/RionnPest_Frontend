@@ -6,103 +6,6 @@ import os
 base_dir = os.path.dirname(__file__)
 image_path = os.path.join(base_dir, "assets")
 
-# ── Shared stylesheet constants ───────────────────────────────────────────────
-_COMBO_SS = """
-QComboBox {
-    background-color: #FFFFFF;
-    border-radius: 8px;
-    padding: 5px 10px;
-    color: #1A3C2A;
-    font: 11pt "Segoe UI";
-    min-height: 28px;
-    border-style: solid;
-    border-width: 2px;
-    border-top-color: #C6F6D5;
-    border-left-color: #C6F6D5;
-    border-bottom-color: #2D6A4F;
-    border-right-color: #2D6A4F;
-}
-QComboBox:hover {
-    background-color: #D6EBDD;
-    border-top-color: #C6E6D3;
-    border-left-color: #C6E6D3;
-    border-bottom-color: #0E3B21;
-    border-right-color: #0E3B21;
-    color: #0B2F1B;
-}
-QComboBox:focus {
-    background-color: #EAF7EE;
-    border-top-color: #E9F5EC;
-    border-left-color: #E9F5EC;
-    border-bottom-color: #1B4332;
-    border-right-color: #1B4332;
-}
-QComboBox QAbstractItemView {
-    background-color: #FFFFFF;
-    border: 1px solid #C6F6D5;
-    border-radius: 6px;
-    selection-background-color: #2D6A4F;
-    selection-color: #ffffff;
-    font: 10pt "Segoe UI";
-}
-"""
-
-_TABLE_SS = """
-QTableWidget {
-    background-color: #FFFFFF;
-    alternate-background-color: #F5F5F5;
-    gridline-color: #D8EDE0;
-    border: none;
-    font: 11pt "Segoe UI";
-    color: #1B4332;
-    selection-background-color: #C6F6D5;
-    selection-color: #1B4332;
-    border-style: solid;
-    border-width: 2px;
-    border-top-color: #E9F5EC;
-    border-left-color: #E9F5EC;
-    border-bottom-color: #2D6A4F;
-    border-right-color: #2D6A4F;
-}
-QTableWidget::item { padding: 4px 8px; border: none; background-color: transparent; }
-QTableWidget::item:selected { background-color: #C6F6D5; color: #1B4332; }
-QHeaderView::section {
-    background-color: #2F6B3F;
-    color: #ffffff;
-    border: none;
-    border-right: 1px solid #1B4332;
-    padding: 6px 8px;
-    font: bold 11pt "Segoe UI";
-    text-transform: uppercase;
-}
-QHeaderView::section:vertical {
-    background-color: #F0F0F0;
-    color: #1B4332;
-    border-right: 1px solid #D1D9CC;
-}
-QHeaderView { background-color: transparent; border: none; }
-QScrollBar:vertical { background: #E8F0EC; width: 11px; border-radius: 5px; }
-QScrollBar::handle:vertical { background: #1B4332; border-radius: 5px; min-height: 25px; }
-QScrollBar::handle:vertical:hover { background: #0F2A20; }
-QScrollBar::handle:vertical:pressed { background: #081A13; }
-QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical { height: 0; }
-QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical { background: transparent; }
-QScrollBar:horizontal { background: #E8F0EC; height: 11px; border-radius: 5px; }
-QScrollBar::handle:horizontal { background: #1B4332; border-radius: 5px; min-width: 25px; }
-QScrollBar::handle:horizontal:hover { background: #0F2A20; }
-QScrollBar::handle:horizontal:pressed { background: #081A13; }
-QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal { width: 0; }
-QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal { background: transparent; }
-QTableCornerButton::section { background-color: #2D6A4F; border: none; }
-"""
-
-# Left panel width is ~395 px (inputs span x=18 to x=379).
-# All section-header labels use x=10, w=375 so they're always fully visible.
-_LBL_X  = 10    # consistent left margin for section headers
-_LBL_W  = 375   # full left-panel width
-_LBL_H  = 24    # consistent height
-
-
 class Ui_Dashboard(object):
     def setupUi(self, Dashboard):
         Dashboard.setObjectName("Dashboard")
@@ -1362,7 +1265,7 @@ class Ui_Dashboard(object):
         self.actualChemLabel.setObjectName("actualChemLabel")
         self.contentPanel = QtWidgets.QWidget(self.scrollAreaWidgetContents_2)
         self.contentPanel.setGeometry(QtCore.QRect(400, 10, 961, 891))
-        self.contentPanel.setStyleSheet("QWidget { background-color: #ECFAE5; border-radius: 15px;}")
+        self.contentPanel.setStyleSheet("QWidget#contentPanel { background-color: #ECFAE5; border-radius: 15px;}")
         self.contentPanel.setObjectName("contentPanel")
         self.tableListahan = QtWidgets.QTableWidget(self.contentPanel)
         self.tableListahan.setGeometry(QtCore.QRect(15, 71, 931, 801))
@@ -2171,17 +2074,17 @@ class Ui_Dashboard(object):
         item = self.tableListahan.verticalHeaderItem(0)
         item.setText(_translate("Dashboard", "1"))
         item = self.tableListahan.horizontalHeaderItem(0)
-        item.setText(_translate("Dashboard", "Name of User"))
+        item.setText(_translate("Dashboard", "Admin User"))
         item = self.tableListahan.horizontalHeaderItem(1)
-        item.setText(_translate("Dashboard", "Date of Treatment"))
+        item.setText(_translate("Dashboard", "Date of|(Treatment)"))
         item = self.tableListahan.horizontalHeaderItem(2)
-        item.setText(_translate("Dashboard", "Name of Client"))
+        item.setText(_translate("Dashboard", "Name of Client|(Treatment)"))
         item = self.tableListahan.horizontalHeaderItem(3)
-        item.setText(_translate("Dashboard", "Time of Treatment"))
+        item.setText(_translate("Dashboard", "Time of|(Treatment)"))
         item = self.tableListahan.horizontalHeaderItem(4)
-        item.setText(_translate("Dashboard", "Chemical/s Used"))
+        item.setText(_translate("Dashboard", "Chemical/s Used|(Treatment)"))
         item = self.tableListahan.horizontalHeaderItem(5)
-        item.setText(_translate("Dashboard", "Actual Chemical/s Used"))
+        item.setText(_translate("Dashboard", "Actual Chemical/s Used|(Treatment)"))
         item = self.tableListahan.horizontalHeaderItem(6)
         item.setText(_translate("Dashboard", "Remarks"))
         item = self.tableListahan.horizontalHeaderItem(7)
