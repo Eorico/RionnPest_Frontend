@@ -5,6 +5,7 @@ from PyQt5.QtWidgets import (
 from util.dashboard_util import DashboardFormatter
 from util.edit_record_dialog_util import EditRecordDialog
 from util.check_box_util import _GreenCheckBox
+from util.table_util import TableDataHelper
 
 from PyQt5.QtCore import Qt, QObject
 from PyQt5.QtGui import QColor
@@ -39,39 +40,22 @@ class DashboardTableRenderer(QObject):
 
         for row_idx, r in enumerate(self._records):
             self.table.insertRow(row_idx)
-
             self._set_checkbox(row_idx)
 
             btn_edit = QPushButton("Edit")
             btn_edit.setFixedWidth(80)
             btn_edit.setStyleSheet(btn_style)
             btn_edit.clicked.connect(lambda _, rec=r: self._open_edit_dialog(rec))
-            
-            chem_remarks   = [f"[C.U]: {c.get('remarks')}"     for c in (r.get('chemicals_use') or [])        if (c.get('remarks') or '').strip()]
-            actual_remarks = [f"[A.C.U]: {c.get('remarks')}"   for c in (r.get('actual_chemicals_used') or []) if (c.get('remarks') or '').strip()]
-            all_remarks    = chem_remarks + actual_remarks
-            
-            date = DashboardFormatter.format_date(
-                r.get('date', ''), 
-                r.get('month', ''), 
-                r.get('year', '')
-            )
-            time_range = DashboardFormatter.format_time_range(
-                r.get('start_time', 'n/a'),
-                r.get('end_time', 'n/a'),
-                r.get('start_meridiem', 'n/a'),
-                r.get('end_meridiem', 'n/a')
-            )
 
             self._set_cell(row_idx, 1, r.get('admin_under') or 'n/a')
-            self._set_cell(row_idx, 2, date)
-            self._set_cell(row_idx, 3, r.get('client_name'))
-            self._set_cell(row_idx, 4, time_range)
-            self._set_cell(row_idx, 5, DashboardFormatter.format_chemicals(r.get('chemicals_use')))
-            self._set_cell(row_idx, 6, DashboardFormatter.format_chemicals(r.get('actual_chemicals_used'), True))
-            self._set_cell(row_idx, 7, "\n".join(all_remarks) if all_remarks else "n/a")
+            self._set_cell(row_idx, 2, TableDataHelper.fmt_date(r))
+            self._set_cell(row_idx, 3, r.get('client_name') or 'n/a')
+            self._set_cell(row_idx, 4, TableDataHelper.fmt_time_range(r))
+            self._set_cell(row_idx, 5, TableDataHelper.fmt_chemicals(TableDataHelper.get_chemicals(r)))
+            self._set_cell(row_idx, 6, TableDataHelper.fmt_chemicals(TableDataHelper.get_actual_chemicals(r), True))
+            self._set_cell(row_idx, 7, TableDataHelper.fmt_remarks(r))
             self._set_cell(row_idx, 8, btn_edit)
-            
+
         self._sync_checkbox_column()
 
     # ── Checkbox helpers ──────────────────────────────────────────────────────

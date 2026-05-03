@@ -1,7 +1,7 @@
-from PyQt5.QtWidgets import QTableWidgetItem, QMessageBox,  QTableWidget, QAbstractItemView
+from PyQt5.QtWidgets import QTableWidgetItem, QMessageBox,  QMainWindow, QAbstractItemView
 from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import Qt
-from ui.dashboard import DashboardController
+from ui.dashboard import Ui_Dashboard
 from .dashboard_renderer import DashboardTableRenderer
 from util.dashboard_util import DashboardFormatter
 import os
@@ -9,10 +9,11 @@ import os
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 IMAGE_PATH = os.path.join(os.path.dirname(CURRENT_DIR), "ui", "assets")
 
-class DashboardWindow(DashboardController):
+class DashboardWindow(QMainWindow):
     def __init__(self, api_service):
         super().__init__()
-
+        self.ui = Ui_Dashboard()
+        self.ui.setupUi(self)
         self.api = api_service
         self.current_category = "treatment"
         self.is_online = False
@@ -60,6 +61,7 @@ class DashboardWindow(DashboardController):
         table.setColumnCount(9)
         table.horizontalHeader().setSectionResizeMode(0, table.horizontalHeader().Interactive)
         table.setColumnWidth(0, 50)
+        table.setColumnWidth(2, 350)
         table.setColumnWidth(3, 350)
         table.setColumnWidth(4, 350)  
         table.setColumnWidth(5, 350) 
