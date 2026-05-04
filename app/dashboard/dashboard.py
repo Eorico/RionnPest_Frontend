@@ -66,6 +66,7 @@ class DashboardWindow(QMainWindow):
         table.setColumnWidth(4, 350)  
         table.setColumnWidth(5, 350) 
         table.setColumnWidth(6, 350)   
+        table.setColumnWidth(7, 250)   
         table.setColumnWidth(8, 100)  
 
         fixed_ss = table.styleSheet().replace("background-color: transparent;", "")
