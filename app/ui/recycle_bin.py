@@ -187,29 +187,9 @@ class Ui_RecycleBin(object):
         self.Restore_btn.setStyleSheet(_BTN_SS)
         self.Restore_btn.setObjectName("Restore_btn")
 
-        # Restore All icon label (32×32, sits behind button)
-        self.label_17 = QtWidgets.QLabel()
-        self.label_17.setFixedSize(32, 32)
-        self.label_17.setPixmap(
-            QtGui.QPixmap(f"{image_path}/restore-all.png").scaled(
-                32, 32, QtCore.Qt.KeepAspectRatio, QtCore.Qt.SmoothTransformation))
-        self.label_17.setScaledContents(True)
-        self.label_17.setStyleSheet("background: transparent;")
-
-        self.Restore_all_btn = QtWidgets.QPushButton()
-        self.Restore_all_btn.setFixedSize(44, 44)
-        self.Restore_all_btn.setStyleSheet(_BTN_SS)
-        self.Restore_all_btn.setObjectName("Restore_all_btn")
-
-        # thin divider between the two restore buttons
-        sep = QtWidgets.QFrame()
-        sep.setFrameShape(QtWidgets.QFrame.VLine)
-        sep.setFixedHeight(30)
-        sep.setStyleSheet("color: rgba(255,255,255,0.20);")
+  
 
         ag_layout.addWidget(self._icon_btn_wrap(self.Restore_btn,     self.label_16, "Restore"))
-        ag_layout.addWidget(sep)
-        ag_layout.addWidget(self._icon_btn_wrap(self.Restore_all_btn, self.label_17, "Restore All"))
         h_layout.addWidget(action_group)
 
         h_layout.addSpacing(16)

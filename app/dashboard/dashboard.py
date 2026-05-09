@@ -4,12 +4,13 @@ from PyQt5.QtCore import Qt
 from ui.dashboard import Ui_Dashboard
 from .dashboard_renderer import DashboardTableRenderer
 from util.dashboard_util import DashboardFormatter
+from util.operation_util import Operation
 import os
 
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 IMAGE_PATH = os.path.join(os.path.dirname(CURRENT_DIR), "ui", "assets")
 
-class DashboardWindow(QMainWindow):
+class DashboardWindow(Operation, QMainWindow):
     def __init__(self, api_service):
         super().__init__()
         self.ui = Ui_Dashboard()
@@ -21,24 +22,7 @@ class DashboardWindow(QMainWindow):
         self.setWindowIcon(QIcon(f"{IMAGE_PATH}/Logo.png"))
         
         self._setup_table()
-        
-        self.ui.tableListahan.setColumnCount(9)
-        self.ui.tableListahan.setHorizontalHeaderItem(0, QTableWidgetItem(""))
-        self.ui.tableListahan.setHorizontalHeaderItem(1, QTableWidgetItem("Admin User"))
-        self.ui.tableListahan.setHorizontalHeaderItem(2, QTableWidgetItem("Date of | (Treatment)"))
-        self.ui.tableListahan.setHorizontalHeaderItem(3, QTableWidgetItem("Name of Client | (Treatment)"))
-        self.ui.tableListahan.setHorizontalHeaderItem(4, QTableWidgetItem("Time of | (Treatment)"))
-        self.ui.tableListahan.setHorizontalHeaderItem(5, QTableWidgetItem("Chemical/s Used | (Treatment)"))
-        self.ui.tableListahan.setHorizontalHeaderItem(6, QTableWidgetItem("Actual Chemical/s Used | (Treatment)"))
-        self.ui.tableListahan.setHorizontalHeaderItem(7, QTableWidgetItem("Remarks"))
-        self.ui.tableListahan.setHorizontalHeaderItem(8, QTableWidgetItem("Edit"))
-
-        self.table_renderer = DashboardTableRenderer(
-            self.ui.tableListahan,
-            on_trash_callback=self.handle_trash_dashboard,
-            on_edit_callback=self.handle_edit_dashboard
-        )
-            
+        self._setup_renderer()
         self.bind_event_dashboard()
         self.load_table_data_dashboard()
         
@@ -73,6 +57,33 @@ class DashboardWindow(QMainWindow):
         table.setStyleSheet(fixed_ss)
         
         table.setColumnHidden(0, True)
+        
+    def _set_headers(self):
+        for col, text in enumerate([
+            "", "Admin User", 
+            "Date of | (Treatment)" , "Name of Client | (Treatment)",
+            "Time of | (Treatment)", "Chemical/s Used | (Treatment)",
+            "Actual Chemical/s Used | (Treatment)", "Remarks", "Edit"
+        ]):
+            self.ui.tableListahan.setHorizontalHeaderItem(
+                col, QTableWidgetItem(text)
+            )
+            
+    def _setup_renderer(self):
+        self.table_renderer = DashboardTableRenderer(
+            self.ui.tableListahan,
+            on_trash_callback=self.handle_trash_dashboard,
+            on_edit_callback=self.handle_edit_dashboard
+        )
+        
+    def _get_checked_ids(self) -> list:
+        return [r.get("id") for r in self.table_renderer.get_checked_records()]
+    
+    def _clear_checks(self):
+        self.table_renderer.clear_all_checks()
+        
+    def _reload(self):
+        self.load_table_data_dashboard()
             
     def bind_event_dashboard(self):
         self.ui.confirmButton.clicked.connect(self.handle_submit_dashboard)
@@ -93,7 +104,7 @@ class DashboardWindow(QMainWindow):
         self.ui.chemLabel.setText(f"CHEMICAL/S USED - {mode_capital}")
         self.ui.actualChemLabel.setText(f"ACTUAL CHEMICAL/S USED - {mode_capital}")
 
-        headers = [
+        for col, text in [
             (0, ""),  
             (1, "Admin User"),
             (2, f"Date of | ({mode_capital})"),
@@ -103,10 +114,10 @@ class DashboardWindow(QMainWindow):
             (6, f"Actual Chemical/s Used | ({mode_capital})"),
             (7, "Remarks"),
             (8, "Edit")
-        ]
-
-        for col, text in headers:
-            self.ui.tableListahan.setHorizontalHeaderItem(col, QTableWidgetItem(text))
+        ]:
+            self.ui.tableListahan.setHorizontalHeaderItem(
+                col, QTableWidgetItem(text)
+            )
 
         self.load_table_data_dashboard()
 
@@ -210,20 +221,11 @@ class DashboardWindow(QMainWindow):
         if rec_id is None:
             return
 
-        reply = QMessageBox.question(
-            self, 'Move to Trash',
-            'Are you sure you want to move this record to the recycle bin?',
-            QMessageBox.Yes | QMessageBox.No, QMessageBox.No
-        )
-
-        if reply == QMessageBox.Yes:
-            success, msg = self.api.move_to_bin(rec_id)
-
-            if success:
-                QMessageBox.information(self, "Success", "Record move to trash")
-                self.load_table_data_dashboard()
-            else:
-                QMessageBox.critical(self, "Error", f"Failed to move to trash: {msg}")
+        success, msg = self.api.move_to_bin(rec_id)
+        if not success:
+            QMessageBox.critical(self, "Error", f"Failed to move  to trash: {msg}")
+        else:
+            self.load_table_data_dashboard()
 
     def handle_logout_dashboard(self):
         reply = QMessageBox.question(
@@ -282,11 +284,23 @@ class DashboardWindow(QMainWindow):
 
     def handle_trash_selected(self):
         records = self._require_selection("TRASH")
-        if records:
-            for rec in records:
-                self.handle_trash_dashboard(rec.get("id"))
-            self.table_renderer.clear_all_checks()
+        if not records:
+            return
 
+        if not self._confirm(
+            "Move to Trash",
+            f"Move {len(records)} record(s) to the recycle bin"
+        ):
+            return
+        
+        self._bulk_operation(
+            ids = [r.get('id') for r in records],
+            operation = lambda rec_id: self.api.move_to_bin(rec_id),
+            success_msg = "{count} record(s) moved to recycle bin.",
+            failed_title = "Trash Failed"
+        )
+        
+        
     def handle_pdf_selected(self):
         records = self._require_selection("CONVERT TO PDF")
         if records:

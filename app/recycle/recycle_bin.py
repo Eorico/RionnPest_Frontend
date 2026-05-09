@@ -6,13 +6,14 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QIcon, QColor
 from ui.recycle_bin import Ui_RecycleBin
 from util.table_util import TableDataHelper
+from util.operation_util import Operation
 import os
 
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 IMAGE_PATH = os.path.join(os.path.dirname(CURRENT_DIR), "ui", "assets")
 
 
-class RecyclBinWindow(QMainWindow):
+class RecyclBinWindow(Operation, QMainWindow):
     def __init__(self, api_service, on_restore_callback=None, parent=None):
         super().__init__(parent)
         self.ui = Ui_RecycleBin()
@@ -22,34 +23,49 @@ class RecyclBinWindow(QMainWindow):
         self._records = []
 
         self.setWindowIcon(QIcon(f"{IMAGE_PATH}/Logo.png"))
-
-        self.ui.Restore_btn.clicked.connect(self.handle_restore)
-        self.ui.Restore_all_btn.clicked.connect(self.handle_restore_all)
-        self.ui.Delete_permanently_btn.clicked.connect(self.handle_permanent_delete_restore)
-
-        self.ui.recycle_table.setColumnCount(9)  # +1 for remarks
-        self.ui.recycle_table.setHorizontalHeaderItem(0, QTableWidgetItem(""))
-        self.ui.recycle_table.setHorizontalHeaderItem(1, QTableWidgetItem("Category"))
-        self.ui.recycle_table.setHorizontalHeaderItem(2, QTableWidgetItem("Admin"))
-        self.ui.recycle_table.setHorizontalHeaderItem(3, QTableWidgetItem("Date"))
-        self.ui.recycle_table.setHorizontalHeaderItem(4, QTableWidgetItem("Client"))
-        self.ui.recycle_table.setHorizontalHeaderItem(5, QTableWidgetItem("Time"))
-        self.ui.recycle_table.setHorizontalHeaderItem(6, QTableWidgetItem("Chemicals Used"))
-        self.ui.recycle_table.setHorizontalHeaderItem(7, QTableWidgetItem("Actual Chemicals"))
-        self.ui.recycle_table.setHorizontalHeaderItem(8, QTableWidgetItem("Remarks"))
-
-        self.ui.recycle_table.setColumnWidth(0, 50)
-        self.ui.recycle_table.setColumnWidth(5, 300)
-        self.ui.recycle_table.setColumnWidth(6, 400)
-        self.ui.recycle_table.setColumnWidth(7, 400)
-        self.ui.recycle_table.setColumnWidth(8, 250)
-        self.ui.recycle_table.setColumnHidden(0, True)  # hidden until data loads
-
-        self.ui.recycle_table.setWordWrap(True)
-        self.ui.recycle_table.verticalHeader().setSectionResizeMode(
-            self.ui.recycle_table.verticalHeader().ResizeToContents
+        self._setup_table()
+        self._bind_buttons()
+        self.load_bin_data_restore()
+        
+    def _setup_table(self):
+        t = self.ui.recycle_table
+        t.setColumnCount(9)
+        for col, text in enumerate([
+            "", "Category", "Admin", "Date",
+            "Client", "Time", "Chemicals Used",
+            "Actual Chemicals", "Remarks"
+        ]):
+            t.setHorizontalHeaderItem(col, QTableWidgetItem(text))
+            
+        for col, width in [(0,50),(5,300),(6,400),(7,400),(8,250)]:
+            t.setColumnWidth(col, width)
+        
+        t.setColumnHidden(0, True)
+        t.setWordWrap(True)
+        t.verticalHeader().setSectionResizeMode(
+            t.verticalHeader().ResizeToContents
         )
 
+    def _bind_buttons(self):
+        self.ui.Restore_btn.clicked.connect(self.handle_restore)
+        self.ui.Delete_permanently_btn.clicked.connect(
+            self.handle_permanent_delete_restore
+        )
+        
+    def _get_checked_ids(self) -> list:
+        ids = []
+        for row in range(self.ui.recycle_table.rowCount()):
+            cb = self._get_checkbox(row)
+            if cb:
+                cb.blockSignals(True)
+                cb.setChecked(False)
+                cb.blockSignals(False)
+            for col in range(1, self.ui.recycle_table.columnCount()):
+                item = self.ui.recycle_table.item(row, col)
+                if item:
+                    item.setBackground(QColor(Qt.white))
+    
+    def _reload(self):
         self.load_bin_data_restore()
 
     def showEvent(self, event):
@@ -65,6 +81,7 @@ class RecyclBinWindow(QMainWindow):
             self._set_checkbox(row, r)
 
             cat_item = QTableWidgetItem(r.get('category', 'Unknown'))
+            cat_item
             cat_item.setData(Qt.UserRole, r.get('id'))
 
             self.ui.recycle_table.setItem(row, 1, cat_item)
@@ -157,53 +174,40 @@ class RecyclBinWindow(QMainWindow):
         return None
 
     def handle_restore(self):
-        ids = self._get_checked_ids()
+        ids = self._require_check("restore")
         if not ids:
-            QMessageBox.warning(self, "No Selection", "Check at least one record to restore.")
             return
-        for rec_id in ids:
-            success, msg = self.api.restore_record(rec_id)
-            if not success:
-                QMessageBox.critical(self, "Error", f"Failed to restore {rec_id}: {msg}")
-                return
-        QMessageBox.information(self, "Success", f"{len(ids)} record(s) restored.")
-        self.load_bin_data_restore()
-        self._clear_checks()
-        if self.on_restore_callback:
-            self.on_restore_callback()
-
-    def handle_restore_all(self):
-        success, msg = self.api.restore_all()
-        if success:
-            QMessageBox.information(self, "Success", "All records restored.")
-            self.load_bin_data_restore()
-            if self.on_restore_callback:
-                self.on_restore_callback()
-        else:
-            if "429" in str(msg):
-                QMessageBox.critical(self, "Rate Limit Exceeded",
-                    "Too fast — wait a minute before retrying.")
-            else:
-                QMessageBox.critical(self, "Error", f"Failed to restore all: {msg}")
+        if not self._confirm(
+            "Restore Records", 
+            f"Restore {len(ids)} record(s) from the recycle bin?"
+            ):
+            return
+        
+        self._bulk_operation(
+            ids=ids,
+            operation=lambda rec_id: self.api.restore_record(rec_id),
+            success_msg="{count} record(s) restored",
+            failed_title="Restore Failed",
+            after_reload=self.on_restore_callback
+        )
+       
 
     def handle_permanent_delete_restore(self):
-        ids = self._get_checked_ids()
+        ids = self._require_check("delete")
         if not ids:
-            QMessageBox.warning(self, "No Selection", "Check at least one record to delete.")
             return
-        confirm = QMessageBox.question(
-            self, "Confirm",
-            f"Permanently delete {len(ids)} record(s)? This cannot be undone.",
-            QMessageBox.Yes | QMessageBox.No
+        if not self._confirm(
+            "Confirm Permanent Delete",
+            f"Permanently delete {len(ids)} record(s)? This cannot be undone"
+            ):
+            return
+        
+        
+        self._bulk_operation(
+            ids=ids,
+            operation=lambda rec_id: self.api.permanent_delete(rec_id),
+            success_msg="{count} record(s) permanently deleted",
+            failed_title="Delete Failed",
+            after_reload=self.on_restore_callback
         )
-        if confirm == QMessageBox.Yes:
-            for rec_id in ids:
-                success, msg = self.api.permanent_delete(rec_id)
-                if not success:
-                    QMessageBox.critical(self, "Error", f"Failed to delete {rec_id}: {msg}")
-                    return
-            QMessageBox.information(self, "Done", f"{len(ids)} record(s) permanently deleted.")
-            self.load_bin_data_restore()
-            self._clear_checks()
-            if self.on_restore_callback:
-                self.on_restore_callback()
+                
