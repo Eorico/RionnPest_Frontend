@@ -8,13 +8,17 @@ class ApiService:
         self.base_url = str(os.getenv("API_SERVICE", "http://127.0.0.1:8000"))
         self.session = requests.Session()
         
+    # connections
+        
     def check_connection_service(self):
         try:
             response = self.session.get(f"{self.base_url}/inventory/", timeout=2) 
             return response.status_code == 200
         except requests.exceptions.RequestException:
             return False
-        
+    
+    # auth 
+    
     def login_service(self, username, password):
         try:
             payload = {"username": username, "password": password}
@@ -33,6 +37,7 @@ class ApiService:
     def logout_service(self):
         self.session.headers.pop("Authorization", None)
         
+    # admin     
     def get_active_inventory(self):
         try:
             response = self.session.get(f"{self.base_url}/inventory/")
@@ -99,7 +104,8 @@ class ApiService:
             return False, f"Server Error {response.status_code}: {response.text}"
         except requests.exceptions.RequestException as e:
             return False, str(e)
-        
+
+    # recycle bin
     def move_to_bin(self, record_id):
         try:
             response = self.session.delete(f"{self.base_url}/inventory/{record_id}")
@@ -132,6 +138,53 @@ class ApiService:
             response = self.session.delete(f"{self.base_url}/inventory/permanent/{record_id}")
             if response.status_code == 200:
                 return True, response.json().get("message", "Permanently deleted")
+            return False, f"Server Error: {response.status_code}"
+        except requests.exceptions.RequestException as e:
+            return False, str(e)
+        
+    # convert to document
+    def upload_document(self, title: str, file_name: str, file_data: bytes):
+        try:
+            response = self.session.post(
+                f"{self.base_url}/documents/",
+                data={
+                    "title": title,
+                    "file_name": file_name
+                },
+                files={
+                    "file": (
+                        file_name,
+                        file_data,
+                    )
+                },
+                timeout=10,
+            )
+            if response.status_code == 200:
+                return True, response.json()
+            return False, response.text
+        except requests.exceptions.RequestException as e:
+            return False, str(e)
+
+    def get_documents(self):
+        try:
+            response = self.session.get(f"{self.base_url}/documents/")
+            return response.json() if response.status_code == 200 else []
+        except requests.exceptions.RequestException:
+            return []
+
+    def download_document(self, doc_id: int) -> bytes | None:
+        try:
+            response = self.session.get(
+                f"{self.base_url}/documents/{doc_id}/download", timeout=10)
+            return response.content if response.status_code == 200 else None
+        except requests.exceptions.RequestException:
+            return None
+        
+    def delete_document(self, doc_id: int):
+        try:
+            response = self.session.delete(f"{self.base_url}/documents/{doc_id}")
+            if response.status_code == 200:
+                return True, response.json().get("message", "Deleted")
             return False, f"Server Error: {response.status_code}"
         except requests.exceptions.RequestException as e:
             return False, str(e)

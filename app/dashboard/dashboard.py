@@ -5,19 +5,27 @@ from ui.dashboard import Ui_Dashboard
 from .dashboard_renderer import DashboardTableRenderer
 from util.dashboard_util import DashboardFormatter
 from util.operation_util import Operation
+from util.docs_generator import generate_docx
+from docs_viewer.docs_viewer import DocxViewer
+from datetime import datetime
+from io import BytesIO
+from docx import Document
 import os
 
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 IMAGE_PATH = os.path.join(os.path.dirname(CURRENT_DIR), "ui", "assets")
+DEFAULT_ROW_COUNT = 5
 
 class DashboardWindow(Operation, QMainWindow):
     def __init__(self, api_service):
         super().__init__()
         self.ui = Ui_Dashboard()
         self.ui.setupUi(self)
+        self.ui._install_drag(self)
         self.api = api_service
         self.current_category = "treatment"
         self.is_online = False
+        self._docx_viewer = None
         
         self.setWindowIcon(QIcon(f"{IMAGE_PATH}/Logo.png"))
         
@@ -27,7 +35,7 @@ class DashboardWindow(Operation, QMainWindow):
         self.load_table_data_dashboard()
         
         self.ui.confirmButton_3.clicked.connect(self.handle_trash_selected)
-        self.ui.confirmButton_2.clicked.connect(self.handle_pdf_selected)
+        self.ui.confirmButton_2.clicked.connect(self.handle_docx_selected)
 
     def _setup_table(self):
         table = self.ui.tableListahan
@@ -37,9 +45,9 @@ class DashboardWindow(Operation, QMainWindow):
         table.setMouseTracking(True)
         table.viewport().setMouseTracking(True)
         table.setWordWrap(True)
-        table.verticalHeader().setDefaultSectionSize(60)
+         
         table.verticalHeader().setSectionResizeMode(
-            table.verticalHeader().Fixed
+            table.verticalHeader().ResizeToContents
         )
        
         table.setColumnCount(9)
@@ -87,10 +95,11 @@ class DashboardWindow(Operation, QMainWindow):
             
     def bind_event_dashboard(self):
         self.ui.confirmButton.clicked.connect(self.handle_submit_dashboard)
-        self.ui.inspection.triggered.connect(lambda: self.switch_mode_category_dashboard('inspection'))
-        self.ui.treatment.triggered.connect(lambda: self.switch_mode_category_dashboard('treatment'))
-        self.ui.logout.triggered.connect(self.handle_logout_dashboard)
+        self.ui.inspection.clicked.connect(lambda: self.switch_mode_category_dashboard('inspection'))
+        self.ui.treatment.clicked.connect(lambda: self.switch_mode_category_dashboard('treatment'))
+        self.ui.logout.clicked.connect(self.handle_logout_dashboard)
         self.ui.searchDate.textChanged.connect(self.handle_search_input_dashboard)
+        self.ui.actionPDF_STORAGE.triggered.connect(self.open_docx_viewer)
 
     def switch_mode_category_dashboard(self, mode):
         self.current_category = mode
@@ -249,25 +258,28 @@ class DashboardWindow(Operation, QMainWindow):
         ]:
             combo.setCurrentIndex(0)
 
-        self.ui.chemicalUsed.clearContents()
-        self.ui.actualchemicalUsed.clearContents()
+        for table in [self.ui.chemicalUsed, self.ui.actualchemicalUsed]:
+            table.setRowCount(DEFAULT_ROW_COUNT)
+            for row in range(DEFAULT_ROW_COUNT):
+                for col in range(table.columnCount()):
+                    table.setItem(row, col, QTableWidgetItem(""))
         
     def update_table_inputs_dashboard(self, table_widget, data):
         table_widget.blockSignals(True)
         table_widget.setUpdatesEnabled(False)
+
+        new_count = max(DEFAULT_ROW_COUNT, len(data))
+        table_widget.setRowCount(new_count)
         
-        for row in range(table_widget.rowCount()):
-            entry = data[row] if row < len(data) else {}
-
-            name = entry.get('name', '')
-            qty = entry.get('qty', '')
-            remarks = entry.get('remarks', '')
-
-            table_widget.setItem(row, 0, QTableWidgetItem(name))
-            table_widget.setItem(row, 1, QTableWidgetItem(qty))
-
+        for row, entry in enumerate(data):
+            table_widget.setItem(row, 0, QTableWidgetItem(entry.get('name', '')))
+            table_widget.setItem(row, 1, QTableWidgetItem(entry.get('qty', '')))
             if table_widget.columnCount() > 2:
-                table_widget.setItem(row, 2, QTableWidgetItem(remarks))
+                table_widget.setItem(row, 2, QTableWidgetItem(entry.get('remarks', '')))
+                
+        for row in range(len(data), new_count):
+            for col in range(table_widget.columnCount()):
+                table_widget.setItem(row, col, QTableWidgetItem(""))
 
         table_widget.setUpdatesEnabled(True)
         table_widget.blockSignals(False)
@@ -280,7 +292,7 @@ class DashboardWindow(Operation, QMainWindow):
                 self, "No Row Selected",
                 f"Check at least one row first, then press {action}."
             )
-        return records  # now returns a list
+        return records
 
     def handle_trash_selected(self):
         records = self._require_selection("TRASH")
@@ -300,13 +312,49 @@ class DashboardWindow(Operation, QMainWindow):
             failed_title = "Trash Failed"
         )
         
-        
-    def handle_pdf_selected(self):
-        records = self._require_selection("CONVERT TO PDF")
-        if records:
-            for rec in records:
-                self.handle_generate_pdf(rec)
-            self.table_renderer.clear_all_checks()
+    def handle_docx_selected(self):
+        records = self._require_selection("CONVERT TO DOCUMENT")
+        if not records:
+            return
+
+        title     = f"Inventory Report — {datetime.now().strftime('%B %d, %Y')}"
+        file_name = f"inventory_{datetime.now().strftime('%Y%m%d_%H%M%S')}.docx"
+
+        try:
+            docx_bytes = generate_docx(records, title=title)
+        except Exception as e:
+            QMessageBox.critical(self, "Error", f"Failed to generate document:\n{e}")
+            return
+
+        success, result = self.api.upload_document(title, file_name, docx_bytes)
+        if not success:
+            QMessageBox.critical(self, "Upload Failed", str(result))
+            return
+
+        QMessageBox.information(self, "Success", f"Document saved:\n{file_name}")
+        self.table_renderer.clear_all_checks()
+
+        # ── Always ensure the viewer exists and is refreshed ──────────────
+        # Create it if it hasn't been opened yet so the file list is ready
+        # when the user opens it.  If it IS open, refresh it live.
+        if self._docx_viewer is None:
+            self._docx_viewer = DocxViewer(self.api, parent=self)
+
+        self._docx_viewer.refresh_file_list()
+
+        # If it's already visible, also bring it to the front
+        if self._docx_viewer.isVisible():
+            self._docx_viewer.raise_()
+            self._docx_viewer.activateWindow()
+
+    def open_docx_viewer(self):
+        if self._docx_viewer is None:
+            self._docx_viewer = DocxViewer(self.api, parent=self)
+
+        self._docx_viewer.refresh_file_list()
+        self._docx_viewer.show()
+        self._docx_viewer.raise_()
+        self._docx_viewer.activateWindow()
 
     def handle_edit_dashboard(self, updated_record: dict):
         success, msg = self.api.update_inventory_record(
@@ -320,4 +368,3 @@ class DashboardWindow(Operation, QMainWindow):
         else:
             from PyQt5.QtWidgets import QMessageBox
             QMessageBox.critical(self, "Error", f"Failed to update: {msg}")
-        

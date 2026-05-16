@@ -181,4 +181,6 @@ class DashboardTableRenderer(QObject):
             container.setStyleSheet("background-color: #FFFFFF;")
             self.table.setCellWidget(row, col, container)
         else:
+            item = QTableWidgetItem(str(value))
+            item.setTextAlignment(Qt.AlignLeft | Qt.AlignTop)
             self.table.setItem(row, col, QTableWidgetItem(str(value)))

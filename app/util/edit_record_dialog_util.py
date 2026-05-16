@@ -3,269 +3,438 @@ from PyQt5.QtWidgets import (
     QHBoxLayout, QFormLayout, QLineEdit, QComboBox,
     QDialogButtonBox, QMessageBox, QLabel, QTableWidget,
     QVBoxLayout, QHeaderView, QAbstractItemView, QStyledItemDelegate,
-    QPushButton, QFrame, QSizePolicy
+    QPushButton, QFrame, QSizePolicy, QScrollArea
 )
-from PyQt5.QtCore import Qt, QSize
-from PyQt5.QtGui import QFont, QColor
+from PyQt5.QtCore import Qt, QSize, QPoint, QRect
+from PyQt5.QtGui import QFont, QColor, QPainter, QPainterPath, QPen, QRegion
 
-# ── Theme ─────────────────────────────────────────────────────────────────────
+
+# ══════════════════════════════════════════════════════════════════════════════
+#  Theme tokens  (unchanged palette)
+# ══════════════════════════════════════════════════════════════════════════════
 _CLR_BG          = "#F0FAF4"
 _CLR_PRIMARY     = "#2F6B3F"
 _CLR_PRIMARY_DK  = "#1B4332"
+_CLR_PRIMARY_XDK = "#0D2B1A"
 _CLR_ACCENT      = "#C6F6D5"
 _CLR_TEXT        = "#1B4332"
-_CLR_BORDER_TOP  = "#C6F6D5"
-_CLR_BORDER_BOT  = "#2D6A4F"
+_CLR_BORDER      = "#A8D5BA"
+_CLR_GRID        = "#D6EDE0"
+_CLR_SURFACE     = "#FFFFFF"
+_CLR_SURFACE_2   = "#EDF7F1"
+_CLR_DANGER      = "#B91C1C"
+_CLR_DANGER_BG   = "#FEF2F2"
 
-_DIALOG_SS = f"""
-QDialog {{
-    background-color: {_CLR_BG};
-}}
-QLabel {{
-    font: 10pt 'Segoe UI';
+_FONT            = "'SF Pro Text', '.AppleSystemUIFont', 'Segoe UI', sans-serif"
+_FONT_DISPLAY    = "'SF Pro Display', '.AppleSystemUIFont', 'Segoe UI Semibold', sans-serif"
+_CORNER_R        = 12          # card corner radius
+_SHADOW_INSET    = 0           # REMOVED: Shadow margin stripped out to maximize layout usage
+
+# ══════════════════════════════════════════════════════════════════════════════
+#  Shared style strings
+# ══════════════════════════════════════════════════════════════════════════════
+_INPUT_SS = f"""
+QLineEdit {{
+    background: {_CLR_SURFACE};
+    border: 1.5px solid {_CLR_BORDER};
+    border-radius: 7px;
+    padding: 6px 12px;
+    font: 13px {_FONT};
     color: {_CLR_TEXT};
-    background: transparent;
+    min-height: 32px;
+    selection-background-color: {_CLR_ACCENT};
+    selection-color: {_CLR_TEXT};
 }}
-QLineEdit, QComboBox {{
-    background: #FFFFFF;
-    border-radius: 6px;
-    padding: 5px 10px;
-    font: 10pt 'Segoe UI';
-    color: {_CLR_TEXT};
-    border: 1.5px solid #A8D5BA;
-    min-height: 30px;
-    selection-background-color: #C6F6D5;
-    selection-color: #1B4332;
-}}
-QLineEdit:focus, QComboBox:focus {{
+QLineEdit:focus {{
     border: 1.5px solid {_CLR_PRIMARY};
+    background: {_CLR_SURFACE};
 }}
-QComboBox::drop-down {{
-    border: none;
-    width: 24px;
-    background: transparent;
+"""
+
+_COMBO_SS = f"""
+QComboBox {{
+    background: {_CLR_SURFACE};
+    border: 1.5px solid {_CLR_BORDER};
+    border-radius: 7px;
+    padding: 4px 10px;
+    font: 13px {_FONT};
+    color: {_CLR_TEXT};
+    min-height: 32px;
+    selection-background-color: {_CLR_ACCENT};
+    selection-color: {_CLR_TEXT};
 }}
-QComboBox::down-arrow {{
-    width: 10px;
-    height: 10px;
-}}
+QComboBox:focus {{ border: 1.5px solid {_CLR_PRIMARY}; }}
+QComboBox::drop-down {{ border: none; width: 22px; background: transparent; }}
+QComboBox::down-arrow {{ width: 10px; height: 10px; }}
 QComboBox QAbstractItemView {{
-    background-color: #FFFFFF;
-    color: #1B4332;
-    border: 1.5px solid #A8D5BA;
-    border-radius: 6px;
+    background: {_CLR_SURFACE};
+    border: 1.5px solid {_CLR_BORDER};
+    border-radius: 7px;
     padding: 4px;
     outline: none;
-    selection-background-color: #C6F6D5;
-    selection-color: #1B4332;
-    font: 10pt 'Segoe UI';
-}}
-QComboBox QAbstractItemView::item {{
-    padding: 6px 10px;
-    min-height: 28px;
-    color: #1B4332;
-    background-color: #FFFFFF;
-}}
-QComboBox QAbstractItemView::item:hover {{
-    background-color: #EDF7F1;
-    color: #1B4332;
-}}
-QComboBox QAbstractItemView::item:selected {{
-    background-color: #C6F6D5;
-    color: #1B4332;
-}}
-QTableWidget {{
-    background: #FFFFFF;
-    border: 1.5px solid #A8D5BA;
-    border-radius: 6px;
-    gridline-color: #D6EDE0;
-    font: 10pt 'Segoe UI';
+    font: 13px {_FONT};
     color: {_CLR_TEXT};
+    selection-background-color: {_CLR_ACCENT};
+    selection-color: {_CLR_TEXT};
+}}
+"""
+
+_LISTVIEW_SS = f"""
+QListView {{
+    background: {_CLR_SURFACE};
+    color: {_CLR_TEXT};
+    font: 13px {_FONT};
+    border: none;
+    outline: none;
+    padding: 4px;
+}}
+QListView::item {{
+    padding: 5px 10px;
+    min-height: 26px;
+    background: {_CLR_SURFACE};
+    color: {_CLR_TEXT};
+}}
+QListView::item:hover    {{ background: {_CLR_SURFACE_2}; }}
+QListView::item:selected {{ background: {_CLR_ACCENT}; color: {_CLR_TEXT}; }}
+"""
+
+_EDITOR_SS = f"""
+QLineEdit {{
+    font: 13px {_FONT};
+    padding: 5px 8px;
+    border: 1.5px solid {_CLR_PRIMARY};
+    border-radius: 5px;
+    background: {_CLR_SURFACE};
+    color: {_CLR_TEXT};
+    min-height: 32px;
+}}
+QLineEdit:focus {{ border-color: {_CLR_PRIMARY_DK}; }}
+"""
+
+_TABLE_SS = f"""
+QTableWidget {{
+    background: {_CLR_SURFACE};
+    border: none;
+    gridline-color: {_CLR_GRID};
+    font: 13px {_FONT};
+    color: {_CLR_TEXT};
+    alternate-background-color: {_CLR_BG};
 }}
 QTableWidget::item {{
-    padding: 6px 8px;
+    padding: 6px 10px;
     color: {_CLR_TEXT};
+    border: none;
 }}
 QTableWidget::item:selected {{
-    background-color: #C6F6D5;
+    background-color: {_CLR_ACCENT};
     color: {_CLR_TEXT};
 }}
 QHeaderView::section {{
     background-color: {_CLR_PRIMARY};
     color: #FFFFFF;
-    padding: 7px;
+    padding: 8px 10px;
     border: none;
-    font: bold 9pt 'Segoe UI';
+    border-right: 1px solid {_CLR_PRIMARY_DK};
+    font: bold 11px {_FONT};
+    letter-spacing: 0.4px;
 }}
+QHeaderView::section:last {{ border-right: none; }}
 QScrollBar:vertical {{
-    background: transparent;
-    width: 10px;
+    background: transparent; width: 8px;
 }}
 QScrollBar::handle:vertical {{
-    background: #C6F6D5;
-    border-radius: 5px;
-    min-height: 24px;
+    background: {_CLR_ACCENT}; border-radius: 4px; min-height: 20px;
 }}
-QScrollBar::handle:vertical:hover  {{ background: #A8D5BA; }}
-QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {{ height: 0; }}
+QScrollBar::handle:vertical:hover {{ background: {_CLR_BORDER}; }}
+QScrollBar::add-line:vertical,
+QScrollBar::sub-line:vertical {{ height: 0; }}
 """
 
-_EDITOR_SS = """
-QLineEdit {
-    font: 10pt 'Segoe UI';
-    padding: 5px 8px;
-    border: 1.5px solid #2D6A4F;
-    border-radius: 4px;
-    background: #FFFFFF;
-    color: #1B4332;
-    min-height: 32px;
-}
-QLineEdit:focus { border-color: #1B4332; }
-"""
-
-_SAVE_BTN_SS = """
-QPushButton {
-    background-color: #2F6B3F;
-    color: #FFFFFF;
-    border: none;
-    border-radius: 8px;
-    padding: 8px 28px;
-    font: bold 10pt 'Segoe UI';
-    min-width: 100px;
-}
-QPushButton:hover   { background-color: #1B4332; }
-QPushButton:pressed { background-color: #0D2B1A; }
-"""
-
-_CANCEL_BTN_SS = """
-QPushButton {
-    background-color: #FFFFFF;
-    color: #2F6B3F;
-    border: 1.5px solid #A8D5BA;
-    border-radius: 8px;
-    padding: 8px 28px;
-    font: 10pt 'Segoe UI';
-    min-width: 100px;
-}
-QPushButton:hover   { background-color: #F0FAF4; border-color: #2F6B3F; }
-QPushButton:pressed { background-color: #C6F6D5; }
-"""
-
-_SECTION_LABEL_SS = """
-QLabel {
-    font: bold 10pt 'Segoe UI';
-    color: #2F6B3F;
-    background: transparent;
-    padding: 2px 0px;
-    letter-spacing: 0.3px;
-}
-"""
-
-_FIELD_LABEL_SS = """
-QLabel {
-    font: 9pt 'Segoe UI';
+_FIELD_LBL_SS = f"""
+QLabel {{
+    font: 13px {_FONT};
     color: #4A6655;
     background: transparent;
-    min-width: 90px;
-}
+}}
+"""
+
+_SECTION_LBL_SS = f"""
+QLabel {{
+    font: bold 10px {_FONT};
+    color: {_CLR_PRIMARY};
+    background: transparent;
+    letter-spacing: 0.8px;
+}}
 """
 
 
+# ══════════════════════════════════════════════════════════════════════════════
+#  Windows-style title-bar controls  (min / max / close)
+# ══════════════════════════════════════════════════════════════════════════════
+class _WinControlBtn(QPushButton):
+    """Flat button matching Windows 11 caption-button style."""
+
+    _STYLE = """
+        QPushButton {{
+            background: transparent;
+            border: none;
+            color: {fg};
+            font: 13px 'Segoe MDL2 Assets', 'Segoe UI Symbol', sans-serif;
+            min-width: 44px;
+            min-height: 36px;
+            max-width: 44px;
+            max-height: 36px;
+        }}
+        QPushButton:hover   {{ background: {hbg}; color: {hfg}; }}
+        QPushButton:pressed {{ background: {pbg}; color: {hfg}; }}
+    """
+
+    def __init__(self, glyph: str, role: str, parent=None):
+        super().__init__(glyph, parent)
+        fg = "rgba(255,255,255,0.72)"
+        if role == "close":
+            self.setStyleSheet(self._STYLE.format(
+                fg=fg, hbg="#C42B1C", hfg="#FFFFFF", pbg="#B52416"))
+        else:
+            self.setStyleSheet(self._STYLE.format(
+                fg=fg,
+                hbg="rgba(255,255,255,0.11)",
+                hfg="#FFFFFF",
+                pbg="rgba(255,255,255,0.20)"))
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+#  Apple-style title bar  (green strip + Windows caption controls)
+# ══════════════════════════════════════════════════════════════════════════════
+class _TitleBar(QWidget):
+
+    def __init__(self, dialog: "EditRecordDialog"):
+        super().__init__(dialog)
+        self._dialog   = dialog
+        self._drag_pos = None
+        self.setFixedHeight(52)
+        self.setAttribute(Qt.WA_StyledBackground, True)
+        self.setStyleSheet(f"""
+            QWidget {{
+                background: qlineargradient(
+                    x1:0, y1:0, x2:0, y2:1,
+                    stop:0 #2F6B3F, stop:1 #245432
+                );
+            }}
+        """)
+
+        lay = QHBoxLayout(self)
+        lay.setContentsMargins(18, 0, 0, 0)
+        lay.setSpacing(0)
+
+        # Thin white accent pip (Apple-style left accent)
+        pip = QFrame()
+        pip.setFixedSize(4, 28)
+        pip.setStyleSheet(
+            "background: rgba(255,255,255,0.35); border-radius: 2px;")
+        lay.addWidget(pip)
+        lay.addSpacing(12)
+
+        # Title + subtitle column
+        col = QVBoxLayout()
+        col.setSpacing(1)
+        col.setContentsMargins(0, 0, 0, 0)
+
+        t = QLabel("Edit Record Data")
+        t.setStyleSheet(f"""
+            QLabel {{
+                font: bold 13px {_FONT_DISPLAY};
+                color: #FFFFFF;
+                background: transparent;
+                border: transparent;
+            }}
+        """)
+        s = QLabel("Update the fields below and press Save Changes")
+        s.setStyleSheet(f"""
+            QLabel {{
+                font: 11px {_FONT};
+                color: rgba(255,255,255,0.60);
+                background: transparent;
+                border: transparent;
+            }}
+        """)
+        col.addWidget(t)
+        col.addWidget(s)
+        lay.addLayout(col)
+        lay.addStretch()
+
+        # ── Windows caption controls ──────────────────────────────────────────
+        self._btn_min   = _WinControlBtn("⊟", "min")
+        self._btn_max   = _WinControlBtn("⊡", "max")
+        self._btn_close = _WinControlBtn("✕", "close")
+
+        self._btn_min.setToolTip("Minimize")
+        self._btn_max.setToolTip("Maximize / Restore")
+        self._btn_close.setToolTip("Close")
+
+        self._btn_min.clicked.connect(dialog.showMinimized)
+        self._btn_max.clicked.connect(
+            lambda: dialog.showNormal() if dialog.isMaximized()
+            else dialog.showMaximized())
+        self._btn_close.clicked.connect(dialog.reject)
+
+        lay.addWidget(self._btn_min)
+        lay.addWidget(self._btn_max)
+        lay.addWidget(self._btn_close)
+
+    # drag-to-move
+    def mousePressEvent(self, e):
+        if e.button() == Qt.LeftButton:
+            self._drag_pos = (
+                e.globalPos() - self._dialog.frameGeometry().topLeft())
+
+    def mouseMoveEvent(self, e):
+        if e.buttons() == Qt.LeftButton and self._drag_pos is not None:
+            self._dialog.move(e.globalPos() - self._drag_pos)
+
+    def mouseReleaseEvent(self, _):
+        self._drag_pos = None
+
+    def mouseDoubleClickEvent(self, _):
+        if self._dialog.isMaximized():
+            self._dialog.showNormal()
+        else:
+            self._dialog.showMaximized()
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+#  Inline table editor
+# ══════════════════════════════════════════════════════════════════════════════
 class _TallEditor(QStyledItemDelegate):
     def createEditor(self, parent, option, index):
-        editor = QLineEdit(parent)
-        editor.setMinimumHeight(36)
-        editor.setStyleSheet(_EDITOR_SS)
-        return editor
+        ed = QLineEdit(parent)
+        ed.setMinimumHeight(36)
+        ed.setStyleSheet(_EDITOR_SS)
+        return ed
 
 
-def _hline():
-    line = QFrame()
-    line.setFrameShape(QFrame.HLine)
-    line.setStyleSheet("color: #D6EDE0;")
-    line.setFixedHeight(1)
-    return line
+# ══════════════════════════════════════════════════════════════════════════════
+#  Small helpers
+# ══════════════════════════════════════════════════════════════════════════════
+def _hline() -> QFrame:
+    ln = QFrame()
+    ln.setFrameShape(QFrame.HLine)
+    ln.setFixedHeight(1)
+    ln.setStyleSheet(f"background: {_CLR_GRID}; border: none;")
+    return ln
 
 
 def _section_label(text: str) -> QLabel:
-    lbl = QLabel(text)
-    lbl.setStyleSheet(_SECTION_LABEL_SS)
+    lbl = QLabel(text.upper())
+    lbl.setStyleSheet(_SECTION_LBL_SS)
     return lbl
 
 
+def _field_label(text: str, width: int = 90) -> QLabel:
+    lbl = QLabel(text)
+    lbl.setStyleSheet(_FIELD_LBL_SS)
+    lbl.setFixedWidth(width)
+    return lbl
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+#  Main dialog
+# ══════════════════════════════════════════════════════════════════════════════
 class EditRecordDialog(QDialog):
 
     MONTHS   = [str(i) for i in range(1, 13)]
     DATES    = [str(i) for i in range(1, 32)]
     YEARS    = [str(i) for i in range(2015, 2030)]
-    HOURS    = [f"{i}" for i in range(1, 13)]
+    HOURS    = [str(i) for i in range(1, 13)]
     MINUTES  = [f"{i:02d}" for i in range(0, 60)]
     MERIDIEM = ["AM", "PM"]
 
     def __init__(self, record: dict, parent=None):
         super().__init__(parent)
         self.record = record
-        self.setWindowTitle("Edit Record")
-        self.setMinimumWidth(730)
-        self.setMinimumHeight(780)
-        self.setStyleSheet(_DIALOG_SS)
+
+        # Borderless + translucent so paintEvent draws the floating card smoothly
+        self.setWindowFlags(Qt.FramelessWindowHint | Qt.Dialog)
+        self.setAttribute(Qt.WA_TranslucentBackground, True)
+
+        self.setMinimumWidth(730 + _SHADOW_INSET * 2)
+        self.setMinimumHeight(900 + _SHADOW_INSET * 2)
+
         self._build_ui()
         self._populate()
 
-    # ── UI Build ──────────────────────────────────────────────────────────────
+    # ── Paint: Clean rounded card without shadow ──────────────────
+    def paintEvent(self, event):
+        p = QPainter(self)
+        p.setRenderHint(QPainter.Antialiasing)
 
+        # UPDATED: Shadow logic completely omitted. Only drawing the solid base card frame now.
+        card = self.rect().adjusted(
+            _SHADOW_INSET, _SHADOW_INSET,
+            -_SHADOW_INSET, -_SHADOW_INSET)
+        path = QPainterPath()
+        path.addRoundedRect(
+            float(card.x()), float(card.y()),
+            float(card.width()), float(card.height()),
+            float(_CORNER_R), float(_CORNER_R))
+        p.setBrush(QColor(_CLR_BG))
+        p.setPen(QPen(QColor(_CLR_BORDER), 0.8))
+        p.drawPath(path)
+        p.end()
+
+    # ── Build UI ──────────────────────────────────────────────────────────────
     def _build_ui(self):
-        root = QVBoxLayout(self)
+        # Outer layout respects shadow inset
+        outer = QVBoxLayout(self)
+        outer.setContentsMargins(
+            _SHADOW_INSET, _SHADOW_INSET,
+            _SHADOW_INSET, _SHADOW_INSET)
+        outer.setSpacing(0)
+
+        # Card container
+        card = QWidget()
+        card.setObjectName("card")
+        card.setStyleSheet(f"""
+            QWidget#card {{
+                background: {_CLR_BG};
+            }}
+        """)
+        card.setAttribute(Qt.WA_StyledBackground, True)
+        outer.addWidget(card)
+
+        root = QVBoxLayout(card)
         root.setContentsMargins(0, 0, 0, 0)
         root.setSpacing(0)
 
-        # ── Header ────────────────────────────────────────────────────────────
-        header = QWidget()
-        header.setFixedHeight(60)
-        header.setStyleSheet("""
-            QWidget {
-                background-color: #2F6B3F;
-            }
-        """)
-        h_lay = QHBoxLayout(header)
-        h_lay.setContentsMargins(20, 0, 20, 0)
+        # ── Title bar ─────────────────────────────────────────────────────────
+        root.addWidget(_TitleBar(self))
 
-        title_col = QVBoxLayout()
-        title_col.setSpacing(2)
-
-        h_title = QLabel("Edit Record Data")
-        h_title.setStyleSheet(
-            "font: bold 13pt 'Segoe UI'; color: #FFFFFF; background: transparent;")
-        h_sub = QLabel("Update the fields below and press Save")
-        h_sub.setStyleSheet(
-            "font: 9pt 'Segoe UI'; color: rgba(255,255,255,0.70); background: transparent;")
-
-        title_col.addWidget(h_title)
-        title_col.addWidget(h_sub)
-        h_lay.addLayout(title_col)
-        h_lay.addStretch()
-        root.addWidget(header)
+        # 2px accent rule below title bar
+        rule = QFrame()
+        rule.setFrameShape(QFrame.HLine)
+        rule.setFixedHeight(2)
+        rule.setStyleSheet(f"background: {_CLR_PRIMARY_DK}; border: none;")
+        root.addWidget(rule)
 
         # ── Scrollable body ───────────────────────────────────────────────────
-        from PyQt5.QtWidgets import QScrollArea
         scroll = QScrollArea()
         scroll.setWidgetResizable(True)
         scroll.setFrameShape(QFrame.NoFrame)
-        scroll.setStyleSheet("""
-            QScrollArea { background-color: #F0FAF4; border: none; }
-            QScrollBar:vertical {
-                background: transparent; width: 10px;
-            }
-            QScrollBar::handle:vertical {
-                background: #C6F6D5; border-radius: 5px; min-height: 24px;
-            }
-            QScrollBar::handle:vertical:hover { background: #A8D5BA; }
+        scroll.setStyleSheet(f"""
+            QScrollArea {{ background: {_CLR_BG}; border: none; }}
+            QScrollBar:vertical {{
+                background: transparent; width: 8px; margin: 2px;
+            }}
+            QScrollBar::handle:vertical {{
+                background: {_CLR_ACCENT}; border-radius: 4px; min-height: 24px;
+            }}
+            QScrollBar::handle:vertical:hover {{ background: {_CLR_BORDER}; }}
             QScrollBar::add-line:vertical,
-            QScrollBar::sub-line:vertical { height: 0; }
+            QScrollBar::sub-line:vertical {{ height: 0; }}
         """)
 
         body = QWidget()
-        body.setStyleSheet("background-color: #F0FAF4;")
+        body.setStyleSheet(f"background: {_CLR_BG};")
         body_lay = QVBoxLayout(body)
         body_lay.setContentsMargins(24, 20, 24, 20)
         body_lay.setSpacing(10)
@@ -277,6 +446,7 @@ class EditRecordDialog(QDialog):
         self.client_input = QLineEdit()
         self.client_input.setPlaceholderText("Enter client name…")
         self.client_input.setMinimumHeight(36)
+        self.client_input.setStyleSheet(_INPUT_SS)
         body_lay.addWidget(self._field_row("Client Name", self.client_input))
         body_lay.addSpacing(6)
 
@@ -293,6 +463,7 @@ class EditRecordDialog(QDialog):
         body_lay.addWidget(_hline())
         self.chem_table = self._build_chem_table()
         body_lay.addWidget(self.chem_table)
+        body_lay.addLayout(self._table_action_bar(self.chem_table))
         body_lay.addSpacing(10)
 
         # ── Actual Chemicals ──────────────────────────────────────────────────
@@ -300,188 +471,192 @@ class EditRecordDialog(QDialog):
         body_lay.addWidget(_hline())
         self.actual_table = self._build_chem_table()
         body_lay.addWidget(self.actual_table)
+        body_lay.addLayout(self._table_action_bar(self.actual_table))
 
         scroll.setWidget(body)
         root.addWidget(scroll)
 
         # ── Footer ────────────────────────────────────────────────────────────
+        foot_sep = QFrame()
+        foot_sep.setFrameShape(QFrame.HLine)
+        foot_sep.setFixedHeight(1)
+        foot_sep.setStyleSheet(f"background: {_CLR_GRID}; border: none;")
+        root.addWidget(foot_sep)
+
         footer = QWidget()
         footer.setFixedHeight(64)
-        footer.setStyleSheet("""
-            QWidget {
-                background-color: #FFFFFF;
-                border-top: 1px solid #D6EDE0;
-            }
+        footer.setStyleSheet(f"""
+            QWidget {{
+                background: {_CLR_SURFACE_2};
+                border-bottom-left-radius: {_CORNER_R}px;
+                border-bottom-right-radius: {_CORNER_R}px;
+            }}
         """)
+        footer.setAttribute(Qt.WA_StyledBackground, True)
         f_lay = QHBoxLayout(footer)
         f_lay.setContentsMargins(24, 0, 24, 0)
-        f_lay.setSpacing(12)
+        f_lay.setSpacing(10)
         f_lay.addStretch()
 
         self.btn_cancel = QPushButton("Cancel")
-        self.btn_cancel.setStyleSheet(_CANCEL_BTN_SS)
-        self.btn_cancel.setFixedHeight(40)
+        self.btn_cancel.setFixedHeight(38)
+        self.btn_cancel.setMinimumWidth(96)
+        self.btn_cancel.setStyleSheet(f"""
+            QPushButton {{
+                background: {_CLR_SURFACE};
+                color: {_CLR_PRIMARY};
+                border: 1.5px solid {_CLR_BORDER};
+                border-radius: 8px;
+                padding: 0 20px;
+                font: 13px {_FONT};
+            }}
+            QPushButton:hover   {{ background: {_CLR_BG}; border-color: {_CLR_PRIMARY}; }}
+            QPushButton:pressed {{ background: {_CLR_ACCENT}; }}
+        """)
         self.btn_cancel.clicked.connect(self.reject)
 
         self.btn_save = QPushButton("Save Changes")
-        self.btn_save.setStyleSheet(_SAVE_BTN_SS)
-        self.btn_save.setFixedHeight(40)
+        self.btn_save.setFixedHeight(38)
+        self.btn_save.setMinimumWidth(120)
         self.btn_save.setDefault(True)
+        self.btn_save.setStyleSheet(f"""
+            QPushButton {{
+                background: {_CLR_PRIMARY};
+                color: #FFFFFF;
+                border: none;
+                border-radius: 8px;
+                padding: 0 20px;
+                font: bold 13px {_FONT};
+            }}
+            QPushButton:hover   {{ background: {_CLR_PRIMARY_DK}; }}
+            QPushButton:pressed {{ background: {_CLR_PRIMARY_XDK}; }}
+        """)
         self.btn_save.clicked.connect(self._on_save)
 
         f_lay.addWidget(self.btn_cancel)
         f_lay.addWidget(self.btn_save)
         root.addWidget(footer)
 
-    def _make_client_row(self):
-        self.client_input = QLineEdit()
-        self.client_input.setPlaceholderText("Enter client name…")
-        return self.client_input
-
-    def _make_date_row(self):
-        row = QWidget()
-        row.setStyleSheet("background: transparent;")
-        lay = QHBoxLayout(row)
-        lay.setContentsMargins(0, 0, 0, 0)
-        lay.setSpacing(8)
-
-        self.month_cb = self._combo(self.MONTHS)
-        self.date_cb  = self._combo(self.DATES)
-        self.year_cb  = self._combo(self.YEARS)
-
-        for cb, lbl in [(self.month_cb, "Month"), (self.date_cb, "Day"), (self.year_cb, "Year")]:
-            l = QLabel(lbl)
-            l.setStyleSheet(_FIELD_LABEL_SS + "min-width: 36px;")
-            lay.addWidget(l)
-            lay.addWidget(cb)
-            if lbl != "Year":
-                sep = QFrame()
-                sep.setFrameShape(QFrame.VLine)
-                sep.setStyleSheet("color: #D6EDE0;")
-                lay.addWidget(sep)
-        lay.addStretch()
-        return row
-
-    def _make_time_row(self):
-        row = QWidget()
-        row.setStyleSheet("background: transparent;")
-        lay = QHBoxLayout(row)
-        lay.setContentsMargins(0, 0, 0, 0)
-        lay.setSpacing(6)
-
-        self.start_h        = self._combo(self.HOURS)
-        self.start_m        = self._combo(self.MINUTES)
-        self.start_meridiem = self._combo(self.MERIDIEM)
-        self.end_h          = self._combo(self.HOURS)
-        self.end_m          = self._combo(self.MINUTES)
-        self.end_meridiem   = self._combo(self.MERIDIEM)
-
-        def tag(text, bold=False):
-            l = QLabel(text)
-            style = "font: bold 9pt 'Segoe UI';" if bold else "font: 9pt 'Segoe UI';"
-            l.setStyleSheet(f"background: transparent; color: #2F6B3F; {style}")
-            return l
-
-        lay.addWidget(tag("[S]", bold=True))
-        lay.addWidget(self.start_h)
-        lay.addWidget(tag(":"))
-        lay.addWidget(self.start_m)
-        lay.addWidget(self.start_meridiem)
-        lay.addSpacing(10)
-
-        arrow = QLabel("→")
-        arrow.setStyleSheet("font: 12pt 'Segoe UI'; color: #A8D5BA; background: transparent;")
-        lay.addWidget(arrow)
-        lay.addSpacing(10)
-
-        lay.addWidget(tag("[E]", bold=True))
-        lay.addWidget(self.end_h)
-        lay.addWidget(tag(":"))
-        lay.addWidget(self.end_m)
-        lay.addWidget(self.end_meridiem)
-        lay.addStretch()
-        return row
-
+    # ── Row builders ──────────────────────────────────────────────────────────
     def _field_row(self, label_text: str, widget: QWidget) -> QWidget:
         row = QWidget()
         row.setStyleSheet("background: transparent;")
         lay = QHBoxLayout(row)
         lay.setContentsMargins(0, 2, 0, 2)
         lay.setSpacing(12)
-
-        lbl = QLabel(label_text)
-        lbl.setStyleSheet(_FIELD_LABEL_SS)
-        lbl.setFixedWidth(90)
-        lay.addWidget(lbl)
+        lay.addWidget(_field_label(label_text))
         lay.addWidget(widget)
         return row
 
-    def _combo(self, items):
+    def _make_date_row(self) -> QWidget:
+        row = QWidget()
+        row.setStyleSheet("background: transparent;")
+        lay = QHBoxLayout(row)
+        lay.setContentsMargins(0, 0, 0, 0)
+        lay.setSpacing(8)
+
+        self.month_cb = self._combo(self.MONTHS, 72)
+        self.date_cb  = self._combo(self.DATES,  60)
+        self.year_cb  = self._combo(self.YEARS,  90)
+
+        for cb, lbl_text, is_last in [
+            (self.month_cb, "Month", False),
+            (self.date_cb,  "Day",   False),
+            (self.year_cb,  "Year",  True),
+        ]:
+            lbl = QLabel(lbl_text)
+            lbl.setStyleSheet(
+                f"font: 12px {_FONT}; color: #4A6655; background: transparent;")
+            lay.addWidget(lbl)
+            lay.addWidget(cb)
+            if not is_last:
+                sep = QFrame()
+                sep.setFrameShape(QFrame.VLine)
+                sep.setFixedHeight(20)
+                sep.setStyleSheet(
+                    f"background: {_CLR_GRID}; border: none; max-width: 1px;")
+                lay.addWidget(sep, 0, Qt.AlignVCenter)
+        lay.addStretch()
+        return row
+
+    def _make_time_row(self) -> QWidget:
+        row = QWidget()
+        row.setStyleSheet("background: transparent;")
+        lay = QHBoxLayout(row)
+        lay.setContentsMargins(0, 0, 0, 0)
+        lay.setSpacing(6)
+
+        self.start_h        = self._combo(self.HOURS,    54)
+        self.start_m        = self._combo(self.MINUTES,  58)
+        self.start_meridiem = self._combo(self.MERIDIEM, 58)
+        self.end_h          = self._combo(self.HOURS,    54)
+        self.end_m          = self._combo(self.MINUTES,  58)
+        self.end_meridiem   = self._combo(self.MERIDIEM, 58)
+
+        def _tag(text: str) -> QLabel:
+            l = QLabel(text)
+            l.setStyleSheet(
+                f"font: 12px {_FONT}; color: {_CLR_PRIMARY}; background: transparent;")
+            return l
+
+        # Start badge
+        s_badge = QLabel("START")
+        s_badge.setStyleSheet(f"""
+            QLabel {{
+                font: bold 9px {_FONT};
+                color: #FFFFFF;
+                background: {_CLR_PRIMARY};
+                border-radius: 3px;
+                padding: 2px 7px;
+                letter-spacing: 0.5px;
+            }}
+        """)
+        lay.addWidget(s_badge)
+        lay.addSpacing(4)
+        lay.addWidget(self.start_h)
+        lay.addWidget(_tag(":"))
+        lay.addWidget(self.start_m)
+        lay.addWidget(self.start_meridiem)
+        lay.addSpacing(14)
+
+        arrow = QLabel("→")
+        arrow.setStyleSheet(
+            f"font: bold 15px; color: {_CLR_PRIMARY}; background: transparent;")
+        lay.addWidget(arrow)
+        lay.addSpacing(14)
+
+        # End badge
+        e_badge = QLabel("END")
+        e_badge.setStyleSheet(f"""
+            QLabel {{
+                font: bold 9px {_FONT};
+                color: #FFFFFF;
+                background: {_CLR_PRIMARY_DK};
+                border-radius: 3px;
+                padding: 2px 7px;
+                letter-spacing: 0.5px;
+            }}
+        """)
+        lay.addWidget(e_badge)
+        lay.addSpacing(4)
+        lay.addWidget(self.end_h)
+        lay.addWidget(_tag(":"))
+        lay.addWidget(self.end_m)
+        lay.addWidget(self.end_meridiem)
+        lay.addStretch()
+        return row
+
+    def _combo(self, items, min_width: int = 70) -> QComboBox:
         cb = QComboBox()
         cb.addItems(items)
-        cb.setMinimumWidth(70)
-        cb.setStyleSheet("""
-            QComboBox {
-                background: #FFFFFF;
-                border-radius: 6px;
-                padding: 4px 10px;
-                font: 10pt 'Segoe UI';
-                color: #1B4332;
-                border: 1.5px solid #A8D5BA;
-                min-height: 30px;
-            }
-            QComboBox:focus {
-                border: 1.5px solid #2F6B3F;
-            }
-            QComboBox::drop-down {
-                border: none;
-                width: 20px;
-                background: transparent;
-            }
-            QComboBox::down-arrow {
-                width: 10px;
-                height: 10px;
-            }
-            QComboBox QAbstractItemView {
-                background-color: #FFFFFF;
-                color: #1B4332;
-                border: 1.5px solid #A8D5BA;
-                border-radius: 4px;
-                selection-background-color: #C6F6D5;
-                selection-color: #1B4332;
-                font: 10pt 'Segoe UI';
-                outline: none;
-            }
-        """)
-        # set directly on the view — this is the only reliable fix
-        cb.view().setStyleSheet("""
-            QListView {
-                background-color: #FFFFFF;
-                color: #1B4332;
-                font: 10pt 'Segoe UI';
-                border: none;
-                outline: none;
-                padding: 4px;
-            }
-            QListView::item {
-                background-color: #FFFFFF;
-                color: #1B4332;
-                padding: 6px 10px;
-                min-height: 28px;
-            }
-            QListView::item:hover {
-                background-color: #EDF7F1;
-                color: #1B4332;
-            }
-            QListView::item:selected {
-                background-color: #C6F6D5;
-                color: #1B4332;
-            }
-        """)
+        cb.setMinimumWidth(min_width)
+        cb.setStyleSheet(_COMBO_SS)
+        cb.view().setStyleSheet(_LISTVIEW_SS)
         return cb
 
-    def _build_chem_table(self):
-        t = QTableWidget(5, 3)
+    # ── Table ─────────────────────────────────────────────────────────────────
+    def _build_chem_table(self) -> QTableWidget:
+        t = QTableWidget(0, 3)
         t.setHorizontalHeaderLabels(["Chemical Name", "Quantity", "Remarks"])
 
         t.horizontalHeader().setSectionResizeMode(0, QHeaderView.Stretch)
@@ -493,61 +668,119 @@ class EditRecordDialog(QDialog):
         t.setWordWrap(True)
         t.setShowGrid(True)
         t.setAlternatingRowColors(True)
-        t.setStyleSheet("""
-            QTableWidget {
-                background: #FFFFFF;
-                border: 1.5px solid #A8D5BA;
-                border-radius: 8px;
-                gridline-color: #D6EDE0;
-                font: 10pt 'Segoe UI';
-                color: #1B4332;
-                alternate-background-color: #F0FAF4;
-            }
-            QTableWidget::item {
-                padding: 6px 10px;
-                color: #1B4332;
-                border: none;
-            }
-            QTableWidget::item:selected {
-                background-color: #C6F6D5;
-                color: #1B4332;
-            }
-            QHeaderView::section {
-                background-color: #2F6B3F;
-                color: #FFFFFF;
-                padding: 8px 10px;
-                border: none;
-                font: bold 9pt 'Segoe UI';
-            }
-            QScrollBar:vertical {
-                background: transparent; width: 8px;
-            }
-            QScrollBar::handle:vertical {
-                background: #C6F6D5; border-radius: 4px; min-height: 20px;
-            }
-            QScrollBar::handle:vertical:hover { background: #A8D5BA; }
-            QScrollBar::add-line:vertical,
-            QScrollBar::sub-line:vertical { height: 0; }
-        """)
+        t.setStyleSheet(_TABLE_SS)
 
         t.verticalHeader().setSectionResizeMode(QHeaderView.Fixed)
         t.verticalHeader().setDefaultSectionSize(48)
-        t.verticalHeader().setVisible(False)  # cleaner without row numbers
-
+        t.verticalHeader().setVisible(False)
         t.setItemDelegate(_TallEditor(t))
-        t.setMinimumHeight(290)
-        t.setMaximumHeight(290)
         return t
 
-    # ── Populate ──────────────────────────────────────────────────────────────
+    def _table_action_bar(self, table: QTableWidget) -> QHBoxLayout:
+        bar = QHBoxLayout()
+        bar.setContentsMargins(0, 4, 0, 0)
+        bar.setSpacing(8)
 
+        add_btn = QPushButton("＋  Add Row")
+        add_btn.setFixedHeight(32)
+        add_btn.setStyleSheet(f"""
+            QPushButton {{
+                background: {_CLR_SURFACE_2};
+                color: {_CLR_PRIMARY};
+                border: 1.5px solid {_CLR_BORDER};
+                border-radius: 7px;
+                padding: 0 14px;
+                font: bold 12px {_FONT};
+            }}
+            QPushButton:hover   {{ background: {_CLR_ACCENT}; border-color: {_CLR_PRIMARY}; }}
+            QPushButton:pressed {{ background: {_CLR_ACCENT}; }}
+        """)
+        add_btn.clicked.connect(lambda: self._append_row(table))
+
+        del_btn = QPushButton("−  Delete Row")
+        del_btn.setFixedHeight(32)
+        del_btn.setEnabled(False)
+        del_btn.setStyleSheet(f"""
+            QPushButton {{
+                background: transparent;
+                color: {_CLR_DANGER};
+                border: 1.5px dashed #FECACA;
+                border-radius: 7px;
+                padding: 0 14px;
+                font: 12px {_FONT};
+            }}
+            QPushButton:hover   {{ background: {_CLR_DANGER_BG}; border-color: {_CLR_DANGER}; }}
+            QPushButton:pressed {{ background: #FECACA; }}
+            QPushButton:disabled {{ color: #D1D5DB; border-color: {_CLR_GRID}; }}
+        """)
+        del_btn.clicked.connect(lambda: self._delete_row(table))
+        table.itemSelectionChanged.connect(
+            lambda: del_btn.setEnabled(len(table.selectedItems()) > 0))
+
+        bar.addWidget(add_btn)
+        bar.addWidget(del_btn)
+        bar.addStretch()
+        return bar
+
+    def _append_row(self, table: QTableWidget):
+        r = table.rowCount()
+        table.insertRow(r)
+        for col in range(table.columnCount()):
+            item = QTableWidgetItem("")
+            item.setTextAlignment(Qt.AlignLeft | Qt.AlignTop)
+            table.setItem(r, col, item)
+        self._resize_table(table)
+        table.scrollToBottom()
+        table.setCurrentCell(r, 0)
+        table.editItem(table.item(r, 0))
+
+    def _delete_row(self, table: QTableWidget):
+        row = table.currentRow()
+        if row < 0:
+            return
+        msg = QMessageBox(self)
+        msg.setWindowTitle("Delete Row")
+        msg.setText("Are you sure you want to delete this row?")
+        msg.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
+        msg.setDefaultButton(QMessageBox.No)
+        msg.setStyleSheet(f"""
+            QMessageBox {{
+                background: {_CLR_BG};
+                font: 13px {_FONT};
+                color: {_CLR_TEXT};
+            }}
+            QPushButton {{
+                background: {_CLR_SURFACE};
+                color: {_CLR_TEXT};
+                border: 1px solid {_CLR_BORDER};
+                border-radius: 7px;
+                padding: 4px 16px;
+                min-width: 72px;
+                font: 13px {_FONT};
+            }}
+            QPushButton:default {{
+                background: {_CLR_PRIMARY};
+                color: #FFFFFF;
+                border: none;
+            }}
+        """)
+        if msg.exec_() == QMessageBox.Yes:
+            table.removeRow(row)
+            self._resize_table(table)
+
+    def _resize_table(self, table: QTableWidget):
+        row_h   = table.verticalHeader().defaultSectionSize()
+        hdr_h   = table.horizontalHeader().height()
+        visible = min(max(table.rowCount(), 1), 8)
+        table.setFixedHeight(row_h * visible + hdr_h + 4)
+
+    # ── Populate ──────────────────────────────────────────────────────────────
     def _populate(self):
         r = self.record
         chemicals_use    = r.get("chemicals_use")         or r.get("chemical_use")        or []
         actual_chemicals = r.get("actual_chemicals_used") or r.get("actual_chemical_used") or []
 
         self.client_input.setText(r.get("client_name", ""))
-
         self._set_combo(self.month_cb, str(r.get("month", "")))
         self._set_combo(self.date_cb,  str(r.get("date",  "")))
         self._set_combo(self.year_cb,  str(r.get("year",  "")))
@@ -575,7 +808,8 @@ class EditRecordDialog(QDialog):
             cb.setCurrentIndex(idx)
 
     def _fill_chem_table(self, table: QTableWidget, chemicals: list):
-        for row, entry in enumerate(chemicals[:5]):
+        table.setRowCount(len(chemicals))
+        for row, entry in enumerate(chemicals):
             name = (
                 entry.get("chemical_name") or
                 entry.get("actual_chemicals_name") or
@@ -583,31 +817,29 @@ class EditRecordDialog(QDialog):
             )
             qty     = entry.get("quantity") or entry.get("qty") or ""
             remarks = entry.get("remarks") or ""
-
             for col, val in enumerate([name, qty, remarks]):
                 item = QTableWidgetItem(val)
                 item.setTextAlignment(Qt.AlignLeft | Qt.AlignTop)
                 table.setItem(row, col, item)
+        self._resize_table(table)
 
     # ── Save ──────────────────────────────────────────────────────────────────
-
     def _on_save(self):
         client = self.client_input.text().strip()
         if not client:
             QMessageBox.warning(self, "Validation", "Client name is required.")
             return
 
-        self.record["client_name"]        = client
-        self.record["month"]              = int(self.month_cb.currentText())
-        self.record["date"]               = int(self.date_cb.currentText())
-        self.record["year"]               = int(self.year_cb.currentText())
-        self.record["start_time"]         = f"{int(self.start_h.currentText()):02d}:{self.start_m.currentText()}"
-        self.record["end_time"]           = f"{int(self.end_h.currentText()):02d}:{self.end_m.currentText()}"
-        self.record["start_meridiem"]     = self.start_meridiem.currentText()
-        self.record["end_meridiem"]       = self.end_meridiem.currentText()
-        self.record["chemicals_use"]      = self._read_chem_table(self.chem_table,   "chemical_name")
+        self.record["client_name"]           = client
+        self.record["month"]                 = int(self.month_cb.currentText())
+        self.record["date"]                  = int(self.date_cb.currentText())
+        self.record["year"]                  = int(self.year_cb.currentText())
+        self.record["start_time"]            = f"{int(self.start_h.currentText()):02d}:{self.start_m.currentText()}"
+        self.record["end_time"]              = f"{int(self.end_h.currentText()):02d}:{self.end_m.currentText()}"
+        self.record["start_meridiem"]        = self.start_meridiem.currentText()
+        self.record["end_meridiem"]          = self.end_meridiem.currentText()
+        self.record["chemicals_use"]         = self._read_chem_table(self.chem_table,   "chemical_name")
         self.record["actual_chemicals_used"] = self._read_chem_table(self.actual_table, "actual_chemicals_name")
-
         self.accept()
 
     def _read_chem_table(self, table: QTableWidget, name_key: str) -> list:

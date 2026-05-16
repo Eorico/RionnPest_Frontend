@@ -1,292 +1,445 @@
 # -*- coding: utf-8 -*-
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-# ══════════════════════════════════════════════════════════════════════════════
-#  Shared style constants
-# ══════════════════════════════════════════════════════════════════════════════
-_CLR_PRIMARY     = "#2D6A4F"
-_CLR_PRIMARY_DK  = "#1B4332"
-_CLR_PRIMARY_XDK = "#0D1F17"
-_CLR_ACCENT      = "#C6F6D5"
-_CLR_BG          = "#F0FAF4"
-_CLR_SIDEBAR_BG  = "#1B4332"
-_CLR_PANEL_BG    = "#EAF7EE"
-_CLR_WHITE       = "#FFFFFF"
-_CLR_TEXT        = "#1B4332"
-_CLR_SUBTEXT     = "#6B8F78"
-_CLR_BORDER      = "#D4E6DA"
+# ── Theme tokens ──────────────────────────────────────────────────────────────
+_G100 = "#C6F6D5"
+_G200 = "#74C69D"
+_G400 = "#2D6A4F"
+_G600 = "#1B4332"
+_G800 = "#081C15"
 
-_MENUBAR_SS = """
-QMenuBar {
-    background-color: #1B4332;
-    color: #C6F6D5;
-    font: 10pt 'Segoe UI';
-    padding: 2px 6px;
-    border: none;
-    spacing: 2px;
-}
-QMenuBar::item {
-    padding: 5px 14px;
-    border-radius: 4px;
-    background: transparent;
-    color: rgba(198,246,213,0.80);
-}
-QMenuBar::item:selected {
-    background-color: rgba(255,255,255,0.12);
-    color: #FFFFFF;
-}
-QMenuBar::item:pressed {
-    background-color: rgba(255,255,255,0.20);
-}
-QMenu {
-    background-color: #FFFFFF;
-    color: #1B4332;
-    border: 1px solid #D4E6DA;
-    border-radius: 8px;
-    font: 10pt 'Segoe UI';
-    padding: 4px 0;
-}
-QMenu::item {
-    padding: 7px 22px 7px 16px;
-    border-radius: 4px;
-    margin: 1px 4px;
-}
-QMenu::item:selected {
-    background-color: #2D6A4F;
-    color: #FFFFFF;
-}
-QMenu::separator {
-    height: 1px;
-    background-color: #E0EEE7;
-    margin: 4px 12px;
-}
-"""
+_SURFACE    = "#FFFFFF"
+_BG         = "#F4FAF7"
+_TEXT       = _G600
+_MUTED      = "#6B8F78"
+_BORDER     = "#E0EDE6"
+_HEADER_BG  = _G400
+_SIDEBAR_BG = "#1A3D2B"
 
-_TOOLBAR_SS = """
-QToolBar {
-    background-color: #2D6A4F;
-    border: none;
-    border-bottom: 1px solid #1B4332;
-    spacing: 2px;
-    padding: 5px 10px;
-}
-QToolBar::separator {
-    background-color: rgba(198,246,213,0.25);
-    width: 1px;
-    margin: 6px 8px;
-}
-QToolBar QToolButton {
-    background-color: transparent;
-    color: rgba(198,246,213,0.85);
-    border: 1px solid transparent;
-    border-radius: 6px;
-    padding: 5px 12px;
-    font: 10pt 'Segoe UI';
-    min-width: 60px;
-}
-QToolBar QToolButton:hover {
-    background-color: rgba(255,255,255,0.14);
-    border-color: rgba(198,246,213,0.30);
-    color: #FFFFFF;
-}
-QToolBar QToolButton:pressed {
-    background-color: rgba(255,255,255,0.22);
-    border-color: rgba(198,246,213,0.50);
-}
-"""
-
-_STATUSBAR_SS = """
-QStatusBar {
-    background-color: #1B4332;
-    color: rgba(198,246,213,0.65);
-    font: 8pt 'Segoe UI';
-    border-top: 1px solid #0D1F17;
-    padding: 2px 10px;
-}
-QStatusBar::item { border: none; }
-"""
-
-_SIDEBAR_HEADER_SS = """
-QLabel {
-    background-color: #0D1F17;
-    color: rgba(198,246,213,0.55);
-    font: bold 7pt 'Segoe UI';
-    letter-spacing: 3px;
+# ── Stylesheets ───────────────────────────────────────────────────────────────
+_SIDEBAR_HEADER_SS = f"""
+QLabel {{
+    background: #0F2419;
+    color: rgba(198,246,213,0.40);
+    font: 600 7pt 'Segoe UI';
+    letter-spacing: 2px;
     padding: 8px 14px;
     border: none;
-}
+}}
 """
 
-_LIST_SS = """
-QListWidget {
-    background-color: transparent;
-    color: #C6F6D5;
+_LIST_SS = f"""
+QListWidget {{
+    background: transparent;
+    color: {_G100};
     border: none;
     font: 10pt 'Segoe UI';
     outline: none;
     padding: 4px 0;
-}
-QListWidget::item {
+}}
+QListWidget::item {{
     padding: 8px 14px;
     border-radius: 6px;
     margin: 1px 6px;
-    color: rgba(198,246,213,0.75);
-}
-QListWidget::item:hover {
-    background-color: rgba(255,255,255,0.08);
-    color: #C6F6D5;
-}
-QListWidget::item:selected {
-    background-color: rgba(198,246,213,0.15);
-    color: #FFFFFF;
-    border-left: 3px solid #74C69D;
+    color: rgba(198,246,213,0.70);
+}}
+QListWidget::item:hover {{
+    background: rgba(255,255,255,0.07);
+    color: {_G100};
+}}
+QListWidget::item:selected {{
+    background: rgba(198,246,213,0.14);
+    color: #fff;
+    border-left: 3px solid {_G200};
     padding-left: 11px;
-}
-QScrollBar:vertical {
-    background: transparent; width: 6px; margin: 4px 2px;
-}
-QScrollBar::handle:vertical {
-    background: rgba(198,246,213,0.25); border-radius: 3px; min-height: 20px;
-}
-QScrollBar::handle:vertical:hover { background: rgba(198,246,213,0.45); }
-QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical { height: 0; }
+}}
+QScrollBar:vertical {{
+    background: transparent; width: 5px; border-radius: 2px;
+}}
+QScrollBar::handle:vertical {{
+    background: rgba(198,246,213,0.25); border-radius: 2px; min-height: 20px;
+}}
+QScrollBar::handle:vertical:hover {{ background: rgba(198,246,213,0.45); }}
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {{ height: 0; }}
 """
 
-_SPLITTER_SS = """
-QSplitter#leftSplitter::handle {
-    background-color: rgba(255,255,255,0.08);
+_SPLITTER_SS = f"""
+QSplitter#leftSplitter::handle {{
+    background: rgba(255,255,255,0.06);
     height: 1px;
-}
-QSplitter#leftSplitter::handle:hover {
-    background-color: rgba(198,246,213,0.25);
-}
+}}
+QSplitter#leftSplitter::handle:hover {{
+    background: rgba(198,246,213,0.20);
+}}
 """
 
-_SCROLL_AREA_SS = """
-QScrollArea#pageScrollArea {
-    background-color: #E8F5EE;
+_SCROLL_AREA_SS = f"""
+QScrollArea#pageScrollArea {{
+    background: {_BG};
     border: none;
-}
-QWidget#scrollAreaContent {
-    background-color: #E8F5EE;
-}
-QScrollBar:vertical {
-    background: #D4E6DA; width: 10px; border-radius: 5px; margin: 2px;
-}
-QScrollBar::handle:vertical {
-    background: #74C69D; border-radius: 5px; min-height: 24px;
-}
-QScrollBar::handle:vertical:hover   { background: #2D6A4F; }
-QScrollBar::handle:vertical:pressed { background: #1B4332; }
-QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical { height: 0; }
-QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical { background: transparent; }
-QScrollBar:horizontal {
-    background: #D4E6DA; height: 10px; border-radius: 5px; margin: 2px;
-}
-QScrollBar::handle:horizontal {
-    background: #74C69D; border-radius: 5px; min-width: 24px;
-}
-QScrollBar::handle:horizontal:hover   { background: #2D6A4F; }
-QScrollBar::handle:horizontal:pressed { background: #1B4332; }
-QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal { width: 0; }
-QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal { background: transparent; }
+}}
+QWidget#scrollAreaContent {{
+    background: {_BG};
+}}
+QScrollBar:vertical {{
+    background: {_BG}; width: 8px; border-radius: 4px; margin: 2px;
+}}
+QScrollBar::handle:vertical {{
+    background: {_G200}; border-radius: 4px; min-height: 24px;
+}}
+QScrollBar::handle:vertical:hover {{ background: {_G400}; }}
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {{ height: 0; }}
+QScrollBar:horizontal {{
+    background: {_BG}; height: 8px; border-radius: 4px; margin: 2px;
+}}
+QScrollBar::handle:horizontal {{
+    background: {_G200}; border-radius: 4px; min-width: 24px;
+}}
+QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal {{ width: 0; }}
 """
 
-_TABLE_SS = """
+_TABLE_SS = f"""
 QTableWidget#inventoryTable1,
-QTableWidget#inventoryTable2 {
-    background-color: #FFFFFF;
-    alternate-background-color: #F4FBF7;
-    gridline-color: #E0EEE7;
-    color: #1B4332;
+QTableWidget#inventoryTable2 {{
+    background: {_SURFACE};
+    alternate-background-color: {_BG};
+    gridline-color: {_BORDER};
+    color: {_TEXT};
     font: 10pt 'Segoe UI';
     border: none;
-    border-radius: 6px;
-    selection-background-color: #C6F6D5;
-    selection-color: #1B4332;
-}
+    selection-background-color: {_G100};
+    selection-color: {_TEXT};
+}}
 QTableWidget#inventoryTable1::item,
-QTableWidget#inventoryTable2::item {
-    padding: 6px 10px;
+QTableWidget#inventoryTable2::item {{
+    padding: 8px 12px;
     border: none;
-}
+}}
 QTableWidget#inventoryTable1::item:hover,
-QTableWidget#inventoryTable2::item:hover {
-    background-color: #E8F5EE;
-}
+QTableWidget#inventoryTable2::item:hover {{ background: #E8F5EE; }}
 QTableWidget#inventoryTable1 QHeaderView::section,
-QTableWidget#inventoryTable2 QHeaderView::section {
-    background-color: #2D6A4F;
-    color: #FFFFFF;
-    font: bold 9pt 'Segoe UI';
-    padding: 8px 10px;
+QTableWidget#inventoryTable2 QHeaderView::section {{
+    background: {_G400};
+    color: #fff;
+    font: 600 9pt 'Segoe UI';
+    padding: 9px 12px;
     border: none;
-    border-right: 1px solid #1B4332;
-    border-bottom: 2px solid #52B788;
-}
-QTableWidget#inventoryTable1 QHeaderView::section:hover,
-QTableWidget#inventoryTable2 QHeaderView::section:hover {
-    background-color: #1B4332;
-}
-QTableCornerButton::section {
-    background-color: #2D6A4F; border: none;
-}
-QScrollBar:vertical {
-    background: #EAF5EF; width: 8px; border-radius: 4px;
-}
-QScrollBar::handle:vertical {
-    background: #74C69D; border-radius: 4px; min-height: 20px;
-}
-QScrollBar::handle:vertical:hover { background: #2D6A4F; }
-QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical { height: 0; }
+    border-right: 1px solid {_G600};
+}}
+QTableCornerButton::section {{ background: {_G400}; border: none; }}
+QScrollBar:vertical {{
+    background: {_BG}; width: 6px; border-radius: 3px;
+}}
+QScrollBar::handle:vertical {{
+    background: {_G200}; border-radius: 3px; min-height: 20px;
+}}
+QScrollBar::handle:vertical:hover {{ background: {_G400}; }}
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {{ height: 0; }}
 """
 
-_NOTES_SS = """
-QTextEdit#notesEdit {
-    background-color: #FAFFFE;
-    color: #1B4332;
+_NOTES_SS = f"""
+QTextEdit#notesEdit {{
+    background: {_SURFACE};
+    color: {_TEXT};
     font: 10pt 'Segoe UI';
-    border: 1.5px solid #D4E6DA;
+    border: 1.5px solid {_BORDER};
     border-radius: 8px;
-    padding: 10px 12px;
-    selection-background-color: #C6F6D5;
+    padding: 12px 14px;
+    selection-background-color: {_G100};
+}}
+QTextEdit#notesEdit:focus {{
+    border-color: {_G200};
+    background: #FAFFFE;
+}}
+"""
+
+_CAPTION_IDLE_SS = """
+QPushButton {
+    background: transparent;
+    color: rgba(255,255,255,0.70);
+    border: none;
+    border-radius: 0px;
+    font: 11pt 'Segoe MDL2 Assets', 'Segoe UI Symbol', 'Arial';
 }
-QTextEdit#notesEdit:focus {
-    border-color: #2D6A4F;
-    background-color: #F8FDF9;
+QPushButton:hover   { background: rgba(255,255,255,0.12); color: #fff; }
+QPushButton:pressed { background: rgba(255,255,255,0.20); }
+"""
+
+_CAPTION_CLOSE_SS = """
+QPushButton {
+    background: transparent;
+    color: rgba(255,255,255,0.80);
+    border: none;
+    border-radius: 0px;
+    font: 11pt 'Segoe MDL2 Assets', 'Segoe UI Symbol', 'Arial';
 }
+QPushButton:hover   { background: #C42B1C; color: #fff; }
+QPushButton:pressed { background: #B01F13; }
+"""
+
+_TOOLBAR_BTN_SS = f"""
+QPushButton {{
+    background: transparent;
+    color: rgba(198,246,213,0.80);
+    border: 1px solid transparent;
+    border-radius: 5px;
+    padding: 3px 10px;
+    font: 10pt 'Segoe UI';
+    min-width: 48px;
+}}
+QPushButton:hover {{
+    background: rgba(255,255,255,0.12);
+    border-color: rgba(198,246,213,0.28);
+    color: #fff;
+}}
+QPushButton:pressed {{
+    background: rgba(255,255,255,0.20);
+}}
 """
 
 
-# ══════════════════════════════════════════════════════════════════════════════
-#  UI class
-# ══════════════════════════════════════════════════════════════════════════════
+# ── Caption button helper ─────────────────────────────────────────────────────
+def _caption_btn(symbol: str, close: bool = False) -> QtWidgets.QPushButton:
+    btn = QtWidgets.QPushButton(symbol)
+    btn.setFixedSize(46, 48)
+    btn.setFlat(True)
+    btn.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
+    btn.setStyleSheet(_CAPTION_CLOSE_SS if close else _CAPTION_IDLE_SS)
+    return btn
+
+
+# ── Main UI class ─────────────────────────────────────────────────────────────
 class Ui_DocxViewer(object):
 
     def setupUi(self, DocxViewer):
         DocxViewer.setObjectName("DocxViewer")
-        DocxViewer.setMinimumSize(1416, 988)
+        DocxViewer.setMinimumSize(1280, 860)
+        DocxViewer.resize(1416, 988)
+
+        # Frameless — we draw every chrome row ourselves
+        DocxViewer.setWindowFlags(
+            QtCore.Qt.FramelessWindowHint | QtCore.Qt.Window)
+        DocxViewer.setAttribute(QtCore.Qt.WA_TranslucentBackground, False)
         DocxViewer.setStyleSheet(
-            f"QMainWindow, QWidget#centralwidget {{ background-color: {_CLR_BG}; }}"
-            + _MENUBAR_SS + _TOOLBAR_SS + _STATUSBAR_SS
+            f"QMainWindow {{ background: {_BG}; }}"
             + _SPLITTER_SS + _SCROLL_AREA_SS + _TABLE_SS + _NOTES_SS
         )
 
-        # ── Central widget ────────────────────────────────────────────────────
-        self.centralwidget = QtWidgets.QWidget(DocxViewer)
-        self.centralwidget.setObjectName("centralwidget")
+        cw = QtWidgets.QWidget(DocxViewer)
+        cw.setObjectName("centralwidget")
+        cw.setStyleSheet(f"background: {_BG};")
+        DocxViewer.setCentralWidget(cw)
 
-        main_h = QtWidgets.QHBoxLayout(self.centralwidget)
-        main_h.setContentsMargins(0, 0, 0, 0)
-        main_h.setSpacing(0)
-        self.mainHLayout = main_h
+        # Master vertical stack — every row added top-to-bottom
+        root = QtWidgets.QVBoxLayout(cw)
+        root.setContentsMargins(0, 0, 0, 0)
+        root.setSpacing(0)
 
         # ══════════════════════════════════════════════════════════════════════
-        #  LEFT SIDEBAR
+        # ROW 1 ── TITLE BAR   icon · title/sub ·· stretch ·· [─][□][✕]
         # ══════════════════════════════════════════════════════════════════════
+        self.titleBar = QtWidgets.QFrame()
+        self.titleBar.setObjectName("titleBar")
+        self.titleBar.setFixedHeight(48)
+        self.titleBar.setStyleSheet(
+            f"QFrame#titleBar {{ background: {_HEADER_BG}; border: none; }}")
+
+        tb_h = QtWidgets.QHBoxLayout(self.titleBar)
+        tb_h.setContentsMargins(14, 0, 0, 0)
+        tb_h.setSpacing(10)
+
+        icon_pill = QtWidgets.QLabel("📄")
+        icon_pill.setFixedSize(30, 30)
+        icon_pill.setAlignment(QtCore.Qt.AlignCenter)
+        icon_pill.setStyleSheet(
+            "background: rgba(255,255,255,0.12); border-radius: 7px; "
+            "font: 14pt 'Segoe UI'; color: #fff; border: none;")
+        tb_h.addWidget(icon_pill)
+
+        title_col = QtWidgets.QVBoxLayout()
+        title_col.setSpacing(0)
+        title_col.setContentsMargins(0, 0, 0, 0)
+        h_title = QtWidgets.QLabel("Document Viewer")
+        h_title.setStyleSheet(
+            "color: #fff; font: 700 10pt 'Segoe UI'; "
+            "background: transparent; border: none;")
+        h_sub = QtWidgets.QLabel("Raionn Pest Solutions — Report Archive")
+        h_sub.setStyleSheet(
+            "color: rgba(198,246,213,0.55); font: 8pt 'Segoe UI'; "
+            "background: transparent; border: none;")
+        title_col.addWidget(h_title)
+        title_col.addWidget(h_sub)
+        tb_h.addLayout(title_col)
+
+        tb_h.addStretch(1)   # ← caption buttons flush right
+
+        self._minimizeBtn = _caption_btn("─")
+        self._minimizeBtn.setToolTip("Minimize")
+        self._maximizeBtn = _caption_btn("□")
+        self._maximizeBtn.setToolTip("Maximize / Restore")
+        self._closeBtn    = _caption_btn("✕", close=True)
+        self._closeBtn.setToolTip("Close")
+        tb_h.addWidget(self._minimizeBtn)
+        tb_h.addWidget(self._maximizeBtn)
+        tb_h.addWidget(self._closeBtn)
+
+        root.addWidget(self.titleBar)
+
+        # ══════════════════════════════════════════════════════════════════════
+        # ROW 2 ── ACCENT LINE
+        # ══════════════════════════════════════════════════════════════════════
+        accent = QtWidgets.QFrame()
+        accent.setFixedHeight(2)
+        accent.setStyleSheet(f"background: {_G200}; border: none;")
+        root.addWidget(accent)
+
+        # ══════════════════════════════════════════════════════════════════════
+        # ROW 3 ── CUSTOM MENU BAR   File · View · Edit · Help
+        # ══════════════════════════════════════════════════════════════════════
+        self.menuBarRow = QtWidgets.QFrame()
+        self.menuBarRow.setObjectName("menuBarRow")
+        self.menuBarRow.setFixedHeight(34)
+        self.menuBarRow.setStyleSheet(
+            f"QFrame#menuBarRow {{ background: {_G600}; border: none; }}")
+
+        mb_h = QtWidgets.QHBoxLayout(self.menuBarRow)
+        mb_h.setContentsMargins(6, 0, 0, 0)
+        mb_h.setSpacing(0)
+
+        self.menubar = QtWidgets.QMenuBar()
+        self.menubar.setObjectName("menubar")
+        self.menubar.setSizePolicy(
+            QtWidgets.QSizePolicy.Minimum,
+            QtWidgets.QSizePolicy.Preferred)
+        self.menubar.setStyleSheet(f"""
+            QMenuBar {{
+                background: transparent;
+                color: rgba(198,246,213,0.80);
+                font: 10pt 'Segoe UI';
+                padding: 0px;
+                border: none;
+                spacing: 0px;
+            }}
+            QMenuBar::item {{
+                padding: 5px 14px;
+                border-radius: 4px;
+                background: transparent;
+                color: rgba(198,246,213,0.75);
+            }}
+            QMenuBar::item:selected {{
+                background: rgba(255,255,255,0.12);
+                color: #fff;
+            }}
+            QMenuBar::item:pressed {{
+                background: rgba(255,255,255,0.20);
+            }}
+            QMenu {{
+                background: {_SURFACE};
+                color: {_TEXT};
+                border: 1px solid {_BORDER};
+                border-radius: 8px;
+                font: 10pt 'Segoe UI';
+                padding: 4px 0;
+            }}
+            QMenu::item {{
+                padding: 7px 22px 7px 16px;
+                border-radius: 4px;
+                margin: 1px 4px;
+            }}
+            QMenu::item:selected {{
+                background: {_G400};
+                color: #fff;
+            }}
+            QMenu::separator {{
+                height: 1px;
+                background: {_BORDER};
+                margin: 4px 12px;
+            }}
+        """)
+
+        self.menuFile = QtWidgets.QMenu("File", self.menubar)
+        self.menuFile.setObjectName("menuFile")
+        self.menuView = QtWidgets.QMenu("View", self.menubar)
+        self.menuView.setObjectName("menuView")
+        self.menuEdit = QtWidgets.QMenu("Edit", self.menubar)
+        self.menuEdit.setObjectName("menuEdit")
+        self.menuHelp = QtWidgets.QMenu("Help", self.menubar)
+        self.menuHelp.setObjectName("menuHelp")
+
+        self.menubar.addMenu(self.menuFile)
+        self.menubar.addMenu(self.menuView)
+        self.menubar.addMenu(self.menuEdit)
+        self.menubar.addMenu(self.menuHelp)
+
+        mb_h.addWidget(self.menubar, 0, QtCore.Qt.AlignVCenter)
+        mb_h.addStretch(1)
+
+        root.addWidget(self.menuBarRow)
+
+        # ══════════════════════════════════════════════════════════════════════
+        # ROW 4 ── CUSTOM TOOLBAR   Open Refresh | Export Print | Zoom… | Find
+        # ══════════════════════════════════════════════════════════════════════
+        self.toolBarRow = QtWidgets.QFrame()
+        self.toolBarRow.setObjectName("toolBarRow")
+        self.toolBarRow.setFixedHeight(38)
+        self.toolBarRow.setStyleSheet(f"""
+            QFrame#toolBarRow {{
+                background: {_G400};
+                border: none;
+                border-bottom: 1px solid {_G600};
+            }}
+        """)
+
+        tool_h = QtWidgets.QHBoxLayout(self.toolBarRow)
+        tool_h.setContentsMargins(10, 0, 10, 0)
+        tool_h.setSpacing(2)
+
+        def _tbtn(label: str) -> QtWidgets.QPushButton:
+            b = QtWidgets.QPushButton(label)
+            b.setStyleSheet(_TOOLBAR_BTN_SS)
+            b.setFixedHeight(28)
+            return b
+
+        def _tsep() -> QtWidgets.QFrame:
+            f = QtWidgets.QFrame()
+            f.setFrameShape(QtWidgets.QFrame.VLine)
+            f.setFixedHeight(18)
+            f.setStyleSheet(
+                "background: rgba(198,246,213,0.22); "
+                "border: none; min-width: 1px; max-width: 1px;")
+            return f
+
+        self.btnOpen    = _tbtn("Open")
+        self.btnRefresh = _tbtn("Refresh")
+        self.btnExport  = _tbtn("Export")
+        self.btnPrint   = _tbtn("Print")
+        self.btnZoomIn  = _tbtn("Zoom +")
+        self.btnZoomOut = _tbtn("Zoom −")
+        self.btnZoom100 = _tbtn("100%")
+        self.btnFind    = _tbtn("Find")
+
+        for w in [
+            self.btnOpen, self.btnRefresh, _tsep(),
+            self.btnExport, self.btnPrint, _tsep(),
+            self.btnZoomIn, self.btnZoomOut, self.btnZoom100, _tsep(),
+            self.btnFind,
+        ]:
+            tool_h.addWidget(w, 0, QtCore.Qt.AlignVCenter)
+
+        tool_h.addStretch(1)
+        root.addWidget(self.toolBarRow)
+
+        # ══════════════════════════════════════════════════════════════════════
+        # ROW 5 ── BODY   sidebar | vsep | document scroll area
+        # ══════════════════════════════════════════════════════════════════════
+        body_h = QtWidgets.QHBoxLayout()
+        body_h.setContentsMargins(0, 0, 0, 0)
+        body_h.setSpacing(0)
+
+        # ── Left sidebar ──────────────────────────────────────────────────────
         sidebar = QtWidgets.QWidget()
-        sidebar.setFixedWidth(240)
-        sidebar.setStyleSheet(f"background-color: {_CLR_SIDEBAR_BG};")
+        sidebar.setFixedWidth(232)
+        sidebar.setStyleSheet(f"background: {_SIDEBAR_BG};")
 
         sidebar_v = QtWidgets.QVBoxLayout(sidebar)
         sidebar_v.setContentsMargins(0, 0, 0, 0)
@@ -299,11 +452,11 @@ class Ui_DocxViewer(object):
         self.leftSplitter.setChildrenCollapsible(False)
         self.leftSplitter.setStyleSheet(_SPLITTER_SS)
 
-        # ── Files panel ───────────────────────────────────────────────────────
+        # Files panel
         self.filesPanel = QtWidgets.QWidget()
         self.filesPanel.setObjectName("filesPanel")
         self.filesPanel.setMinimumHeight(180)
-        self.filesPanel.setStyleSheet(f"background-color: {_CLR_SIDEBAR_BG};")
+        self.filesPanel.setStyleSheet(f"background: {_SIDEBAR_BG};")
 
         files_v = QtWidgets.QVBoxLayout(self.filesPanel)
         files_v.setContentsMargins(0, 0, 0, 0)
@@ -312,7 +465,7 @@ class Ui_DocxViewer(object):
 
         self.filesPanelHeader = QtWidgets.QLabel("  AVAILABLE FILES")
         self.filesPanelHeader.setObjectName("filesPanelHeader")
-        self.filesPanelHeader.setFixedHeight(36)
+        self.filesPanelHeader.setFixedHeight(34)
         self.filesPanelHeader.setStyleSheet(_SIDEBAR_HEADER_SS)
         files_v.addWidget(self.filesPanelHeader)
 
@@ -321,14 +474,13 @@ class Ui_DocxViewer(object):
         self.filesList.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
         self.filesList.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.filesList.setStyleSheet(_LIST_SS)
-        self.filesList.addItem(QtWidgets.QListWidgetItem("Sample File List.pdf"))
         files_v.addWidget(self.filesList)
 
-        # ── ToC panel ─────────────────────────────────────────────────────────
+        # ToC panel
         self.tocPanel = QtWidgets.QWidget()
         self.tocPanel.setObjectName("tocPanel")
         self.tocPanel.setMinimumHeight(150)
-        self.tocPanel.setStyleSheet(f"background-color: {_CLR_SIDEBAR_BG};")
+        self.tocPanel.setStyleSheet(f"background: {_SIDEBAR_BG};")
 
         toc_v = QtWidgets.QVBoxLayout(self.tocPanel)
         toc_v.setContentsMargins(0, 0, 0, 0)
@@ -337,7 +489,7 @@ class Ui_DocxViewer(object):
 
         self.tocPanelHeader = QtWidgets.QLabel("  TABLE OF CONTENTS")
         self.tocPanelHeader.setObjectName("tocPanelHeader")
-        self.tocPanelHeader.setFixedHeight(36)
+        self.tocPanelHeader.setFixedHeight(34)
         self.tocPanelHeader.setStyleSheet(_SIDEBAR_HEADER_SS)
         toc_v.addWidget(self.tocPanelHeader)
 
@@ -346,7 +498,6 @@ class Ui_DocxViewer(object):
         self.tocList.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
         self.tocList.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.tocList.setStyleSheet(_LIST_SS)
-        self.tocList.addItem(QtWidgets.QListWidgetItem("1. Sample Panel Content"))
         toc_v.addWidget(self.tocList)
 
         self.leftSplitter.addWidget(self.filesPanel)
@@ -354,18 +505,15 @@ class Ui_DocxViewer(object):
         self.leftSplitter.setSizes([340, 300])
         sidebar_v.addWidget(self.leftSplitter)
 
-        main_h.addWidget(sidebar)
+        body_h.addWidget(sidebar)
 
-        # Vertical separator
         v_sep = QtWidgets.QFrame()
         v_sep.setFrameShape(QtWidgets.QFrame.VLine)
         v_sep.setFixedWidth(1)
-        v_sep.setStyleSheet("background-color: #0D1F17; border: none;")
-        main_h.addWidget(v_sep)
+        v_sep.setStyleSheet(f"background: {_G800}; border: none;")
+        body_h.addWidget(v_sep)
 
-        # ══════════════════════════════════════════════════════════════════════
-        #  MAIN DOCUMENT AREA
-        # ══════════════════════════════════════════════════════════════════════
+        # ── Document scroll area ──────────────────────────────────────────────
         self.pageScrollArea = QtWidgets.QScrollArea()
         self.pageScrollArea.setObjectName("pageScrollArea")
         self.pageScrollArea.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
@@ -375,20 +523,20 @@ class Ui_DocxViewer(object):
         self.scrollAreaContent = QtWidgets.QWidget()
         self.scrollAreaContent.setObjectName("scrollAreaContent")
 
+        # A4 at 96 DPI = 794 × 1123 px — pages are centered in the scroll area
         self.scrollContentVLayout = QtWidgets.QVBoxLayout(self.scrollAreaContent)
-        self.scrollContentVLayout.setContentsMargins(48, 36, 48, 48)
-        self.scrollContentVLayout.setSpacing(28)
+        self.scrollContentVLayout.setContentsMargins(0, 32, 0, 40)
+        self.scrollContentVLayout.setSpacing(32)
+        self.scrollContentVLayout.setAlignment(QtCore.Qt.AlignHCenter)
 
-        # ══════════════════════════════════════════════════════════════════════
-        #  PAGE 1
-        # ══════════════════════════════════════════════════════════════════════
+        # Page 1  —  A4 @ 96 DPI: 794 × 1123 px
         self.paperPage1 = self._make_page("paperPage1")
+        self.paperPage1.setFixedSize(794, 1123)
         lay1 = QtWidgets.QVBoxLayout(self.paperPage1)
-        lay1.setContentsMargins(56, 48, 56, 48)
+        lay1.setContentsMargins(72, 64, 72, 64)   # ≈ 19 mm margin all sides
         lay1.setSpacing(0)
         self.paperLayout1 = lay1
 
-        # Company header
         hdr_block1 = QtWidgets.QWidget()
         hdr_block1.setStyleSheet("background: transparent;")
         hdr_h1 = QtWidgets.QHBoxLayout(hdr_block1)
@@ -398,56 +546,51 @@ class Ui_DocxViewer(object):
         accent_bar = QtWidgets.QFrame()
         accent_bar.setFixedWidth(5)
         accent_bar.setStyleSheet(
-            "background-color: #2D6A4F; border-radius: 3px; border: none;")
+            f"background: {_G400}; border-radius: 3px; border: none;")
         hdr_h1.addWidget(accent_bar)
 
-        title_col = QtWidgets.QVBoxLayout()
-        title_col.setSpacing(2)
+        hdr_title_col = QtWidgets.QVBoxLayout()
+        hdr_title_col.setSpacing(2)
 
         self.companyName = QtWidgets.QLabel("Raionn Pest Solutions")
         self.companyName.setObjectName("companyName")
         self.companyName.setStyleSheet(
-            "color: #1B4332; font: bold 20pt 'Georgia'; background: transparent;")
-        title_col.addWidget(self.companyName)
+            f"color: {_TEXT}; font: bold 20pt 'Georgia'; background: transparent;")
+        hdr_title_col.addWidget(self.companyName)
 
         self.companyTagline = QtWidgets.QLabel(
-            "Professional Pest Control and Inventory Management  |  raionnpest@gmail.com")
+            "Professional Pest Control and Inventory Management"
+            "  |  raionnpest@gmail.com")
         self.companyTagline.setObjectName("companyTagline")
         self.companyTagline.setStyleSheet(
-            "color: #6B8F78; font: 9pt 'Segoe UI'; background: transparent;")
-        title_col.addWidget(self.companyTagline)
+            f"color: {_MUTED}; font: 9pt 'Segoe UI'; background: transparent;")
+        hdr_title_col.addWidget(self.companyTagline)
 
-        hdr_h1.addLayout(title_col)
+        hdr_h1.addLayout(hdr_title_col)
         hdr_h1.addStretch()
 
         chip = QtWidgets.QLabel("  ACTIVE  ")
         chip.setFixedHeight(24)
         chip.setStyleSheet("""
             QLabel {
-                background-color: #D1FAE5;
-                color: #065F46;
-                font: bold 8pt 'Segoe UI';
-                border-radius: 12px;
-                padding: 0 10px;
-                letter-spacing: 2px;
+                background: #D1FAE5; color: #065F46;
+                font: bold 8pt 'Segoe UI'; border-radius: 12px;
+                padding: 0 10px; letter-spacing: 2px;
             }
         """)
         hdr_h1.addWidget(chip, 0, QtCore.Qt.AlignVCenter)
         lay1.addWidget(hdr_block1)
 
         lay1.addSpacing(16)
-        self.headerDivider = self._make_hline("headerDivider", "#2D6A4F", 2)
+        self.headerDivider = self._make_hline("headerDivider", _G400, 2)
         lay1.addWidget(self.headerDivider)
         lay1.addSpacing(14)
 
-        # Meta row
         meta_row = QtWidgets.QHBoxLayout()
-        meta_row.setSpacing(0)
-
         self.docTitleLabel = QtWidgets.QLabel("Inventory Report — Q1 2025")
         self.docTitleLabel.setObjectName("docTitleLabel")
         self.docTitleLabel.setStyleSheet(
-            "color: #1B4332; font: bold 14pt 'Segoe UI'; background: transparent;")
+            f"color: {_TEXT}; font: bold 14pt 'Segoe UI'; background: transparent;")
         meta_row.addWidget(self.docTitleLabel)
         meta_row.addStretch()
 
@@ -455,30 +598,25 @@ class Ui_DocxViewer(object):
             "Generated: January 31, 2025  |  Prepared by: Admin  |  Status: Active")
         self.metaLabel.setObjectName("metaLabel")
         self.metaLabel.setStyleSheet(
-            "color: #6B8F78; font: 9pt 'Segoe UI'; background: transparent;")
+            f"color: {_MUTED}; font: 9pt 'Segoe UI'; background: transparent;")
         self.metaLabel.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignVCenter)
         meta_row.addWidget(self.metaLabel)
         lay1.addLayout(meta_row)
 
         lay1.addSpacing(6)
-        self.innerDivider = self._make_hline("innerDivider", "#C6F6D5", 1)
+        self.innerDivider = self._make_hline("innerDivider", _G100, 1)
         lay1.addWidget(self.innerDivider)
         lay1.addSpacing(18)
 
-        # Section label (QWidget wrapper — inner QLabel objectName = "sectionLabel")
         self.sectionLabel = self._make_section_lbl(
             self.paperPage1, "sectionLabel", "Inventory Table")
         lay1.addWidget(self.sectionLabel)
         lay1.addSpacing(10)
 
-        # Table 1
         self.inventoryTable1 = self._make_table("inventoryTable1", 10, 6)
         lay1.addWidget(self.inventoryTable1)
+        lay1.addSpacing(16)
 
-        lay1.addStretch()
-        lay1.addSpacing(12)
-
-        # Footer 1 (QWidget wrapper — inner QLabel objectName = "pageFooter1")
         self.pageFooter1 = self._make_footer(
             self.paperPage1, "pageFooter1",
             "Raionn Pest Solutions — Confidential", "Page 1 of 2")
@@ -486,12 +624,11 @@ class Ui_DocxViewer(object):
 
         self.scrollContentVLayout.addWidget(self.paperPage1)
 
-        # ══════════════════════════════════════════════════════════════════════
-        #  PAGE 2
-        # ══════════════════════════════════════════════════════════════════════
+        # Page 2  —  A4 @ 96 DPI: 794 × 1123 px
         self.paperPage2 = self._make_page("paperPage2")
+        self.paperPage2.setFixedSize(794, 1123)
         lay2 = QtWidgets.QVBoxLayout(self.paperPage2)
-        lay2.setContentsMargins(56, 48, 56, 48)
+        lay2.setContentsMargins(72, 64, 72, 64)   # ≈ 19 mm margin all sides
         lay2.setSpacing(0)
         self.paperLayout2 = lay2
 
@@ -504,37 +641,33 @@ class Ui_DocxViewer(object):
         accent_bar2 = QtWidgets.QFrame()
         accent_bar2.setFixedWidth(5)
         accent_bar2.setStyleSheet(
-            "background-color: #2D6A4F; border-radius: 3px; border: none;")
+            f"background: {_G400}; border-radius: 3px; border: none;")
         hdr_h2.addWidget(accent_bar2)
 
         self.companyName2 = QtWidgets.QLabel("Raionn Pest Solutions")
         self.companyName2.setObjectName("companyName2")
         self.companyName2.setStyleSheet(
-            "color: #1B4332; font: bold 14pt 'Georgia'; background: transparent;")
+            f"color: {_TEXT}; font: bold 14pt 'Georgia'; background: transparent;")
         hdr_h2.addWidget(self.companyName2)
         hdr_h2.addStretch()
 
         pg2_chip = QtWidgets.QLabel("  Page 2  ")
         pg2_chip.setFixedHeight(22)
-        pg2_chip.setStyleSheet("""
-            QLabel {
-                background-color: #EAF7EE;
-                color: #2D6A4F;
-                font: bold 8pt 'Segoe UI';
-                border-radius: 11px;
-                border: 1px solid #C6F6D5;
-                padding: 0 8px;
-            }
+        pg2_chip.setStyleSheet(f"""
+            QLabel {{
+                background: {_BG}; color: {_G400};
+                font: bold 8pt 'Segoe UI'; border-radius: 11px;
+                border: 1px solid {_G100}; padding: 0 8px;
+            }}
         """)
         hdr_h2.addWidget(pg2_chip, 0, QtCore.Qt.AlignVCenter)
         lay2.addWidget(hdr_block2)
 
         lay2.addSpacing(12)
-        self.headerDivider2 = self._make_hline("headerDivider2", "#2D6A4F", 2)
+        self.headerDivider2 = self._make_hline("headerDivider2", _G400, 2)
         lay2.addWidget(self.headerDivider2)
         lay2.addSpacing(22)
 
-        # Notes label (QWidget wrapper — inner QLabel objectName = "notesLabel")
         self.notesLabel = self._make_section_lbl(
             self.paperPage2, "notesLabel", "Statement  (click to edit)")
         lay2.addWidget(self.notesLabel)
@@ -547,19 +680,17 @@ class Ui_DocxViewer(object):
         self.notesEdit.setPlaceholderText(
             "Click here to type your notes, observations, "
             "or remarks for this report...")
+        self.notesEdit.setStyleSheet(_NOTES_SS)
         lay2.addWidget(self.notesEdit)
-
         lay2.addStretch()
         lay2.addSpacing(12)
 
-        # Footer 2 (QWidget wrapper — inner QLabel objectName = "pageFooter2")
         self.pageFooter2 = self._make_footer(
             self.paperPage2, "pageFooter2",
             "Raionn Pest Solutions © 2025 — Confidential", "Page 2 of 2")
         lay2.addWidget(self.pageFooter2)
 
         self.scrollContentVLayout.addWidget(self.paperPage2)
-
         self.scrollContentVLayout.addItem(
             QtWidgets.QSpacerItem(
                 20, 32,
@@ -567,76 +698,42 @@ class Ui_DocxViewer(object):
                 QtWidgets.QSizePolicy.Fixed))
 
         self.pageScrollArea.setWidget(self.scrollAreaContent)
-        main_h.addWidget(self.pageScrollArea)
+        body_h.addWidget(self.pageScrollArea)
 
-        DocxViewer.setCentralWidget(self.centralwidget)
-
-        # ══════════════════════════════════════════════════════════════════════
-        #  TOOLBAR
-        # ══════════════════════════════════════════════════════════════════════
-        self.mainToolBar = QtWidgets.QToolBar(DocxViewer)
-        self.mainToolBar.setObjectName("mainToolBar")
-        self.mainToolBar.setMovable(False)
-        self.mainToolBar.setFloatable(False)
-        self.mainToolBar.setIconSize(QtCore.QSize(16, 16))
-        DocxViewer.addToolBar(QtCore.Qt.TopToolBarArea, self.mainToolBar)
+        body_widget = QtWidgets.QWidget()
+        body_widget.setStyleSheet(f"background: {_BG};")
+        body_widget.setLayout(body_h)
+        root.addWidget(body_widget, 1)   # stretch=1 fills all remaining space
 
         # ══════════════════════════════════════════════════════════════════════
-        #  MENU BAR
+        # ROW 6 ── STATUS BAR
         # ══════════════════════════════════════════════════════════════════════
-        self.menubar = QtWidgets.QMenuBar(DocxViewer)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 1416, 33))
-        self.menubar.setObjectName("menubar")
-
-        self.menuFile = QtWidgets.QMenu(self.menubar)
-        self.menuFile.setObjectName("menuFile")
-        self.menuView = QtWidgets.QMenu(self.menubar)
-        self.menuView.setObjectName("menuView")
-        self.menuEdit = QtWidgets.QMenu(self.menubar)
-        self.menuEdit.setObjectName("menuEdit")
-        self.menuHelp = QtWidgets.QMenu(self.menubar)
-        self.menuHelp.setObjectName("menuHelp")
-        DocxViewer.setMenuBar(self.menubar)
-
         self.statusbar = QtWidgets.QStatusBar(DocxViewer)
         self.statusbar.setObjectName("statusbar")
         self.statusbar.setSizeGripEnabled(True)
+        self.statusbar.setStyleSheet(f"""
+            QStatusBar {{
+                background: {_G600};
+                color: rgba(198,246,213,0.55);
+                font: 8pt 'Segoe UI';
+                border-top: 1px solid {_G800};
+                padding: 2px 10px;
+            }}
+            QStatusBar::item {{ border: none; }}
+        """)
         DocxViewer.setStatusBar(self.statusbar)
 
         # ── Actions ───────────────────────────────────────────────────────────
-        self.actionOpen      = QtWidgets.QAction(DocxViewer)
-        self.actionOpen.setObjectName("actionOpen")
-        self.actionRefresh   = QtWidgets.QAction(DocxViewer)
-        self.actionRefresh.setObjectName("actionRefresh")
-        self.actionExport    = QtWidgets.QAction(DocxViewer)
-        self.actionExport.setObjectName("actionExport")
-        self.actionPrint     = QtWidgets.QAction(DocxViewer)
-        self.actionPrint.setObjectName("actionPrint")
-        self.actionZoomIn    = QtWidgets.QAction(DocxViewer)
-        self.actionZoomIn.setObjectName("actionZoomIn")
-        self.actionZoomOut   = QtWidgets.QAction(DocxViewer)
-        self.actionZoomOut.setObjectName("actionZoomOut")
-        self.actionZoomReset = QtWidgets.QAction(DocxViewer)
-        self.actionZoomReset.setObjectName("actionZoomReset")
-        self.actionFind      = QtWidgets.QAction(DocxViewer)
-        self.actionFind.setObjectName("actionFind")
-        self.actionClose     = QtWidgets.QAction(DocxViewer)
-        self.actionClose.setObjectName("actionClose")
-        self.actionAbout     = QtWidgets.QAction(DocxViewer)
-        self.actionAbout.setObjectName("actionAbout")
+        for name in [
+            "actionOpen", "actionRefresh", "actionExport", "actionPrint",
+            "actionZoomIn", "actionZoomOut", "actionZoomReset",
+            "actionFind", "actionClose", "actionAbout",
+        ]:
+            a = QtWidgets.QAction(DocxViewer)
+            a.setObjectName(name)
+            setattr(self, name, a)
 
-        self.mainToolBar.addAction(self.actionOpen)
-        self.mainToolBar.addAction(self.actionRefresh)
-        self.mainToolBar.addSeparator()
-        self.mainToolBar.addAction(self.actionExport)
-        self.mainToolBar.addAction(self.actionPrint)
-        self.mainToolBar.addSeparator()
-        self.mainToolBar.addAction(self.actionZoomIn)
-        self.mainToolBar.addAction(self.actionZoomOut)
-        self.mainToolBar.addAction(self.actionZoomReset)
-        self.mainToolBar.addSeparator()
-        self.mainToolBar.addAction(self.actionFind)
-
+        # Wire actions into menus
         self.menuFile.addAction(self.actionOpen)
         self.menuFile.addAction(self.actionRefresh)
         self.menuFile.addSeparator()
@@ -650,32 +747,38 @@ class Ui_DocxViewer(object):
         self.menuEdit.addAction(self.actionFind)
         self.menuHelp.addAction(self.actionAbout)
 
-        self.menubar.addAction(self.menuFile.menuAction())
-        self.menubar.addAction(self.menuView.menuAction())
-        self.menubar.addAction(self.menuEdit.menuAction())
-        self.menubar.addAction(self.menuHelp.menuAction())
+        # Wire toolbar buttons → actions
+        self.btnOpen.clicked.connect(self.actionOpen.trigger)
+        self.btnRefresh.clicked.connect(self.actionRefresh.trigger)
+        self.btnExport.clicked.connect(self.actionExport.trigger)
+        self.btnPrint.clicked.connect(self.actionPrint.trigger)
+        self.btnZoomIn.clicked.connect(self.actionZoomIn.trigger)
+        self.btnZoomOut.clicked.connect(self.actionZoomOut.trigger)
+        self.btnZoom100.clicked.connect(self.actionZoomReset.trigger)
+        self.btnFind.clicked.connect(self.actionFind.trigger)
+
+        # ── Drag + window controls ────────────────────────────────────────────
+        self._install_drag(DocxViewer)
 
         self.retranslateUi(DocxViewer)
         QtCore.QMetaObject.connectSlotsByName(DocxViewer)
 
-    # ══════════════════════════════════════════════════════════════════════════
-    #  Helpers
-    # ══════════════════════════════════════════════════════════════════════════
+    # ── Helpers ───────────────────────────────────────────────────────────────
     def _make_page(self, obj_name: str) -> QtWidgets.QFrame:
         page = QtWidgets.QFrame()
         page.setObjectName(obj_name)
         page.setFrameShape(QtWidgets.QFrame.NoFrame)
         page.setStyleSheet(f"""
             QFrame#{obj_name} {{
-                background-color: #FFFFFF;
-                border-radius: 4px;
-                border: 1px solid #D4E6DA;
+                background: {_SURFACE};
+                border-radius: 6px;
+                border: 1px solid {_BORDER};
             }}
         """)
         shadow = QtWidgets.QGraphicsDropShadowEffect()
         shadow.setBlurRadius(28)
         shadow.setOffset(0, 4)
-        shadow.setColor(QtGui.QColor(0, 0, 0, 40))
+        shadow.setColor(QtGui.QColor(0, 0, 0, 35))
         page.setGraphicsEffect(shadow)
         return page
 
@@ -687,12 +790,11 @@ class Ui_DocxViewer(object):
         f.setFrameShadow(QtWidgets.QFrame.Plain)
         f.setFixedHeight(height)
         f.setStyleSheet(
-            f"background-color: {color}; border: none; max-height: {height}px;")
+            f"background: {color}; border: none; max-height: {height}px;")
         return f
 
     def _make_section_lbl(self, parent, obj_name: str,
                           text: str) -> QtWidgets.QWidget:
-        """Returns QWidget wrapper. The inner QLabel carries the objectName."""
         row = QtWidgets.QWidget(parent)
         row.setStyleSheet("background: transparent; border: none;")
         h = QtWidgets.QHBoxLayout(row)
@@ -702,13 +804,13 @@ class Ui_DocxViewer(object):
         pip = QtWidgets.QFrame()
         pip.setFixedSize(4, 18)
         pip.setStyleSheet(
-            "background-color: #52B788; border-radius: 2px; border: none;")
+            f"background: {_G200}; border-radius: 2px; border: none;")
         h.addWidget(pip, 0, QtCore.Qt.AlignVCenter)
 
         lbl = QtWidgets.QLabel(text)
-        lbl.setObjectName(obj_name)   # ← objectName on the inner QLabel
+        lbl.setObjectName(obj_name)
         lbl.setStyleSheet(
-            "color: #1B4332; font: bold 11pt 'Segoe UI'; "
+            f"color: {_TEXT}; font: bold 11pt 'Segoe UI'; "
             "background: transparent; border: none;")
         h.addWidget(lbl)
         h.addStretch()
@@ -716,10 +818,8 @@ class Ui_DocxViewer(object):
 
     def _make_footer(self, parent, obj_name: str,
                      left_text: str, right_text: str) -> QtWidgets.QWidget:
-        """Returns QWidget wrapper. The left inner QLabel carries the objectName."""
         row = QtWidgets.QWidget(parent)
         row.setStyleSheet("background: transparent; border: none;")
-
         v = QtWidgets.QVBoxLayout(row)
         v.setContentsMargins(0, 8, 0, 0)
         v.setSpacing(6)
@@ -727,56 +827,57 @@ class Ui_DocxViewer(object):
         div = QtWidgets.QFrame()
         div.setFrameShape(QtWidgets.QFrame.HLine)
         div.setFixedHeight(1)
-        div.setStyleSheet("background-color: #C6F6D5; border: none;")
+        div.setStyleSheet(f"background: {_G100}; border: none;")
         v.addWidget(div)
 
         inner = QtWidgets.QHBoxLayout()
         inner.setContentsMargins(0, 0, 0, 0)
 
         left_lbl = QtWidgets.QLabel(left_text)
-        left_lbl.setObjectName(obj_name)   # ← objectName on the inner QLabel
+        left_lbl.setObjectName(obj_name)
         left_lbl.setStyleSheet(
-            "color: #A0C4AE; font: 8pt 'Segoe UI'; "
+            f"color: {_MUTED}; font: 8pt 'Segoe UI'; "
             "background: transparent; border: none;")
         inner.addWidget(left_lbl)
         inner.addStretch()
 
         right_lbl = QtWidgets.QLabel(right_text)
         right_lbl.setStyleSheet(
-            "color: #A0C4AE; font: 8pt 'Segoe UI'; "
+            f"color: {_MUTED}; font: 8pt 'Segoe UI'; "
             "background: transparent; border: none;")
         inner.addWidget(right_lbl)
         v.addLayout(inner)
-
         return row
 
     def _make_table(self, obj_name: str, rows: int,
                     cols: int) -> QtWidgets.QTableWidget:
         tbl = QtWidgets.QTableWidget(rows, cols)
         tbl.setObjectName(obj_name)
-        tbl.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-        tbl.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-        tbl.setSizeAdjustPolicy(
-            QtWidgets.QAbstractScrollArea.AdjustToContents)
-        tbl.setEditTriggers(
-            QtWidgets.QAbstractItemView.AnyKeyPressed |
-            QtWidgets.QAbstractItemView.DoubleClicked |
-            QtWidgets.QAbstractItemView.EditKeyPressed)
+        tbl.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
+        tbl.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
+        tbl.setSizePolicy(
+            QtWidgets.QSizePolicy.Expanding,
+            QtWidgets.QSizePolicy.Expanding)
+        tbl.setMinimumHeight(400)
+        tbl.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
         tbl.setAlternatingRowColors(True)
         tbl.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)
         tbl.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
         tbl.setShowGrid(True)
         tbl.setGridStyle(QtCore.Qt.SolidLine)
+        tbl.setStyleSheet(_TABLE_SS)
 
         for col, txt in enumerate([
             "Date of Treatment", "Name of Client", "Time of Treatment",
-            "Chemical/s Used", "Actual Chemical/s Used", "Remarks"
+            "Chemical/s Used", "Actual Chemical/s Used", "Remarks",
         ]):
             tbl.setHorizontalHeaderItem(col, QtWidgets.QTableWidgetItem(txt))
 
-        tbl.horizontalHeader().setDefaultSectionSize(157)
-        tbl.horizontalHeader().setStretchLastSection(True)
-        tbl.verticalHeader().setDefaultSectionSize(36)
+        hdr = tbl.horizontalHeader()
+        for col in range(6):
+            hdr.setSectionResizeMode(col, QtWidgets.QHeaderView.Stretch)
+
+        tbl.verticalHeader().setDefaultSectionSize(40)
         tbl.verticalHeader().setVisible(False)
 
         for r in range(rows):
@@ -785,25 +886,43 @@ class Ui_DocxViewer(object):
 
         return tbl
 
-    # ══════════════════════════════════════════════════════════════════════════
-    #  retranslateUi
-    #  Rule: only call .setText() on actual QLabel / QAction objects.
-    #        For wrapper QWidgets use findChild to reach the inner QLabel.
-    # ══════════════════════════════════════════════════════════════════════════
+    # ── Draggable title bar ───────────────────────────────────────────────────
+    def _install_drag(self, window):
+        self._drag_pos = None
+
+        def _press(e):
+            if e.button() == QtCore.Qt.LeftButton:
+                self._drag_pos = (
+                    e.globalPos() - window.frameGeometry().topLeft())
+
+        def _move(e):
+            if (e.buttons() == QtCore.Qt.LeftButton
+                    and self._drag_pos is not None):
+                window.move(e.globalPos() - self._drag_pos)
+
+        def _release(e):
+            self._drag_pos = None
+
+        self.titleBar.mousePressEvent   = _press
+        self.titleBar.mouseMoveEvent    = _move
+        self.titleBar.mouseReleaseEvent = _release
+
+        self._closeBtn.clicked.connect(window.close)
+        self._minimizeBtn.clicked.connect(window.showMinimized)
+        self._maximizeBtn.clicked.connect(
+            lambda: window.showNormal()
+            if window.isMaximized() else window.showMaximized())
+
+    # ── retranslateUi ─────────────────────────────────────────────────────────
     def retranslateUi(self, DocxViewer):
         _t = QtCore.QCoreApplication.translate
 
         DocxViewer.setWindowTitle(
             _t("DocxViewer", "Raionn Pest Solutions — Document Viewer"))
 
-        # Sidebar — these ARE QLabel, so .setText() is fine
         self.filesPanelHeader.setText(_t("DocxViewer", "  AVAILABLE FILES"))
-        self.filesList.item(0).setText(_t("DocxViewer", "Sample Sir Dong"))
         self.tocPanelHeader.setText(_t("DocxViewer", "  TABLE OF CONTENTS"))
-        self.tocList.item(0).setText(
-            _t("DocxViewer", "1. Bakit Panot si sir Dong?"))
 
-        # Page 1 — direct QLabel members
         self.companyName.setText(_t("DocxViewer", "Raionn Pest Solutions"))
         self.companyTagline.setText(
             _t("DocxViewer",
@@ -816,105 +935,63 @@ class Ui_DocxViewer(object):
                "Generated: January 31, 2025  |  Prepared by: Admin"
                "  |  Status: Active"))
 
-        # Table 1 headers
         for col, txt in enumerate([
             "Date of Treatment", "Name of Client", "Time of Treatment",
-            "Chemical/s Used", "Actual Chemical/s Used", "Remarks"
+            "Chemical/s Used", "Actual Chemical/s Used", "Remarks",
         ]):
             h_item = self.inventoryTable1.horizontalHeaderItem(col)
             if h_item:
                 h_item.setText(_t("DocxViewer", txt))
         self.inventoryTable1.setSortingEnabled(True)
 
-        # pageFooter1 — QWidget wrapper, reach inner QLabel via findChild
-        lbl1 = self.pageFooter1.findChild(QtWidgets.QLabel, "pageFooter1")
-        if lbl1:
-            lbl1.setText(
-                _t("DocxViewer",
-                   "Raionn Pest Solutions — Confidential"
-                   "                    Page 1 of 2"))
-
-        # Page 2 — direct QLabel member
         self.companyName2.setText(_t("DocxViewer", "Raionn Pest Solutions"))
-
-        # notesLabel — QWidget wrapper, reach inner QLabel via findChild
-        lbl2 = self.notesLabel.findChild(QtWidgets.QLabel, "notesLabel")
-        if lbl2:
-            lbl2.setText(_t("DocxViewer", "Statement  (click to edit)"))
-
-        # notesEdit is a real QTextEdit
         self.notesEdit.setPlaceholderText(
             _t("DocxViewer",
                "Click here to type your notes, observations, "
                "or remarks for this report..."))
 
-        # pageFooter2 — QWidget wrapper, reach inner QLabel via findChild
-        lbl3 = self.pageFooter2.findChild(QtWidgets.QLabel, "pageFooter2")
-        if lbl3:
-            lbl3.setText(
-                _t("DocxViewer",
-                   "Raionn Pest Solutions © 2025 — Confidential"
-                   "             Page 2 of 2"))
-
-        # Menus
         self.menuFile.setTitle(_t("DocxViewer", "File"))
         self.menuView.setTitle(_t("DocxViewer", "View"))
         self.menuEdit.setTitle(_t("DocxViewer", "Edit"))
         self.menuHelp.setTitle(_t("DocxViewer", "Help"))
 
-        # Actions
         self.actionOpen.setText(_t("DocxViewer", "Open"))
-        self.actionOpen.setToolTip(
-            _t("DocxViewer", "Open a document  (Ctrl+O)"))
         self.actionOpen.setShortcut(_t("DocxViewer", "Ctrl+O"))
-
         self.actionRefresh.setText(_t("DocxViewer", "Refresh"))
-        self.actionRefresh.setToolTip(
-            _t("DocxViewer", "Refresh file list  (F5)"))
         self.actionRefresh.setShortcut(_t("DocxViewer", "F5"))
-
         self.actionExport.setText(_t("DocxViewer", "Export"))
-        self.actionExport.setToolTip(
-            _t("DocxViewer", "Export document  (Ctrl+E)"))
         self.actionExport.setShortcut(_t("DocxViewer", "Ctrl+E"))
-
         self.actionPrint.setText(_t("DocxViewer", "Print"))
-        self.actionPrint.setToolTip(
-            _t("DocxViewer", "Print document  (Ctrl+P)"))
         self.actionPrint.setShortcut(_t("DocxViewer", "Ctrl+P"))
-
         self.actionZoomIn.setText(_t("DocxViewer", "Zoom In"))
-        self.actionZoomIn.setToolTip(_t("DocxViewer", "Zoom in  (Ctrl++)"))
         self.actionZoomIn.setShortcut(_t("DocxViewer", "Ctrl+="))
-
         self.actionZoomOut.setText(_t("DocxViewer", "Zoom Out"))
-        self.actionZoomOut.setToolTip(_t("DocxViewer", "Zoom out  (Ctrl+-)"))
         self.actionZoomOut.setShortcut(_t("DocxViewer", "Ctrl+-"))
-
         self.actionZoomReset.setText(_t("DocxViewer", "Reset Zoom"))
         self.actionZoomReset.setShortcut(_t("DocxViewer", "Ctrl+0"))
-
         self.actionFind.setText(_t("DocxViewer", "Find"))
-        self.actionFind.setToolTip(
-            _t("DocxViewer", "Find in document  (Ctrl+F)"))
         self.actionFind.setShortcut(_t("DocxViewer", "Ctrl+F"))
-
         self.actionClose.setText(_t("DocxViewer", "Close"))
         self.actionClose.setShortcut(_t("DocxViewer", "Ctrl+W"))
-
         self.actionAbout.setText(_t("DocxViewer", "About"))
-        self.mainToolBar.setWindowTitle(_t("DocxViewer", "Main Toolbar"))
+
+        self.btnOpen.setText(_t("DocxViewer", "Open"))
+        self.btnRefresh.setText(_t("DocxViewer", "Refresh"))
+        self.btnExport.setText(_t("DocxViewer", "Export"))
+        self.btnPrint.setText(_t("DocxViewer", "Print"))
+        self.btnZoomIn.setText(_t("DocxViewer", "Zoom +"))
+        self.btnZoomOut.setText(_t("DocxViewer", "Zoom −"))
+        self.btnZoom100.setText(_t("DocxViewer", "100%"))
+        self.btnFind.setText(_t("DocxViewer", "Find"))
 
 
-# ══════════════════════════════════════════════════════════════════════════════
-#  Entry point
-# ══════════════════════════════════════════════════════════════════════════════
+# ── Standalone preview ────────────────────────────────────────────────────────
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     app.setStyle("Fusion")
-    DocxViewer = QtWidgets.QMainWindow()
+    win = QtWidgets.QMainWindow()
     ui = Ui_DocxViewer()
-    ui.setupUi(DocxViewer)
-    DocxViewer.show()
+    ui.setupUi(win)
+    win.show()
     sys.exit(app.exec_())
