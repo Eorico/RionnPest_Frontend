@@ -1,16 +1,24 @@
+# -*- coding: utf-8 -*-
 from PyQt5.QtWidgets import (
-    QTableWidgetItem, QWidget, QDialog,
+    QTableWidgetItem, QWidget, QDialog, QApplication,
     QHBoxLayout, QFormLayout, QLineEdit, QComboBox,
     QDialogButtonBox, QMessageBox, QLabel, QTableWidget,
     QVBoxLayout, QHeaderView, QAbstractItemView, QStyledItemDelegate,
     QPushButton, QFrame, QSizePolicy, QScrollArea
 )
-from PyQt5.QtCore import Qt, QSize, QPoint, QRect
-from PyQt5.QtGui import QFont, QColor, QPainter, QPainterPath, QPen, QRegion
+from PyQt5.QtCore import (
+    Qt, QSize, QPoint, QRect, QEvent, QTimer,
+    QPropertyAnimation, QEasingCurve, QParallelAnimationGroup,
+    pyqtProperty
+)
+from PyQt5.QtGui import (
+    QFont, QColor, QPainter, QPainterPath, QPen, QRegion,
+    QFontMetrics, QCursor
+)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-#  Theme tokens  (unchanged palette)
+#  Theme tokens
 # ══════════════════════════════════════════════════════════════════════════════
 _CLR_BG          = "#F0FAF4"
 _CLR_PRIMARY     = "#2F6B3F"
@@ -27,8 +35,114 @@ _CLR_DANGER_BG   = "#FEF2F2"
 
 _FONT            = "'SF Pro Text', '.AppleSystemUIFont', 'Segoe UI', sans-serif"
 _FONT_DISPLAY    = "'SF Pro Display', '.AppleSystemUIFont', 'Segoe UI Semibold', sans-serif"
-_CORNER_R        = 12          # card corner radius
-_SHADOW_INSET    = 0           # REMOVED: Shadow margin stripped out to maximize layout usage
+_CORNER_R        = 12
+_SHADOW_INSET    = 18
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+#  Custom tooltip — fully painted, works on frameless / translucent windows
+# ══════════════════════════════════════════════════════════════════════════════
+class _CustomTooltip(QWidget):
+    _instance = None
+
+    def __init__(self):
+        super().__init__(None, Qt.ToolTip | Qt.FramelessWindowHint)
+        self.setAttribute(Qt.WA_TranslucentBackground, True)
+        self.setAttribute(Qt.WA_ShowWithoutActivating, True)
+        self.setWindowFlags(
+            Qt.ToolTip
+            | Qt.FramelessWindowHint
+            | Qt.WindowStaysOnTopHint
+            | Qt.BypassGraphicsProxyWidget
+        )
+        self._text = ""
+        self._hide_timer = QTimer(self)
+        self._hide_timer.setSingleShot(True)
+        self._hide_timer.timeout.connect(self.hide)
+
+    @classmethod
+    def instance(cls):
+        if cls._instance is None:
+            cls._instance = cls()
+        return cls._instance
+
+    def show_tip(self, global_pos: QPoint, text: str, duration: int = 3000):
+        if not text:
+            self.hide()
+            return
+        self._text = text
+        fm = QFontMetrics(QFont("Segoe UI", 9))
+        text_rect = fm.boundingRect(text)
+        pad_x, pad_y = 14, 8
+        w = text_rect.width()  + pad_x * 2
+        h = text_rect.height() + pad_y * 2
+        self.setFixedSize(w, h)
+
+        screen = QApplication.screenAt(global_pos)
+        if screen:
+            sr = screen.availableGeometry()
+            x = min(global_pos.x() + 12, sr.right()  - w - 4)
+            y = min(global_pos.y() + 20, sr.bottom() - h - 4)
+        else:
+            x = global_pos.x() + 12
+            y = global_pos.y() + 20
+        self.move(x, y)
+        self.show()
+        self.raise_()
+        self._hide_timer.start(duration)
+
+    def paintEvent(self, event):
+        p = QPainter(self)
+        p.setRenderHint(QPainter.Antialiasing)
+        path = QPainterPath()
+        path.addRoundedRect(0.5, 0.5,
+                            self.width() - 1, self.height() - 1, 6, 6)
+        p.setBrush(QColor("#FFFFFF"))
+        p.setPen(QPen(QColor("#A8D5BA"), 1.0))
+        p.drawPath(path)
+        p.setPen(QColor("#1B4332"))
+        p.setFont(QFont("Segoe UI", 9))
+        p.drawText(self.rect(), Qt.AlignCenter, self._text)
+        p.end()
+
+
+class _TooltipFilter:
+    """
+    Mixin-style event filter — install on a QDialog to intercept ToolTip
+    events and show our custom white tooltip instead of the black native one.
+    """
+    @staticmethod
+    def install_on(widget: QWidget):
+        f = _TooltipEventFilter(widget)
+        widget.installEventFilter(f)
+        widget._tooltip_filter = f  # prevent GC
+
+
+class _TooltipEventFilter(QWidget):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.setVisible(False)
+
+    def eventFilter(self, obj, event):
+        if event.type() == QEvent.ToolTip:
+            widget = obj
+            if isinstance(widget, QWidget) and widget.toolTip():
+                _CustomTooltip.instance().show_tip(
+                    event.globalPos(), widget.toolTip())
+            return True
+        if event.type() == QEvent.Leave:
+            _CustomTooltip.instance().hide()
+        return False
+
+
+def install_custom_tooltips(app_or_widget):
+    """
+    Install custom tooltips on a QApplication (global) or a single QWidget.
+    """
+    f = _TooltipEventFilter(app_or_widget)
+    app_or_widget.installEventFilter(f)
+    app_or_widget._tooltip_filter = f
+
 
 # ══════════════════════════════════════════════════════════════════════════════
 #  Shared style strings
@@ -64,7 +178,13 @@ QComboBox {{
     selection-color: {_CLR_TEXT};
 }}
 QComboBox:focus {{ border: 1.5px solid {_CLR_PRIMARY}; }}
-QComboBox::drop-down {{ border: none; width: 22px; background: transparent; }}
+QComboBox::drop-down {{
+    border: none;
+    width: 26px;
+    background: transparent;
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+}}
 QComboBox::down-arrow {{ width: 10px; height: 10px; }}
 QComboBox QAbstractItemView {{
     background: {_CLR_SURFACE};
@@ -76,6 +196,7 @@ QComboBox QAbstractItemView {{
     color: {_CLR_TEXT};
     selection-background-color: {_CLR_ACCENT};
     selection-color: {_CLR_TEXT};
+    min-width: 80px;
 }}
 """
 
@@ -169,50 +290,53 @@ QLabel {{
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-#  Windows-style title-bar controls  (min / max / close)
+#  Windows-style title-bar controls — full-height (matches recycle bin)
 # ══════════════════════════════════════════════════════════════════════════════
 class _WinControlBtn(QPushButton):
-    """Flat button matching Windows 11 caption-button style."""
-
     _STYLE = """
         QPushButton {{
             background: transparent;
             border: none;
             color: {fg};
-            font: 13px 'Segoe MDL2 Assets', 'Segoe UI Symbol', sans-serif;
-            min-width: 44px;
-            min-height: 36px;
-            max-width: 44px;
-            max-height: 36px;
+            font: 10pt 'Segoe MDL2 Assets', 'Segoe UI Symbol', 'Segoe UI', sans-serif;
+            min-width: 46px;
+            min-height: {h}px;
+            max-height: {h}px;
         }}
         QPushButton:hover   {{ background: {hbg}; color: {hfg}; }}
         QPushButton:pressed {{ background: {pbg}; color: {hfg}; }}
     """
 
-    def __init__(self, glyph: str, role: str, parent=None):
+    def __init__(self, glyph: str, role: str, bar_height: int = 52, parent=None):
         super().__init__(glyph, parent)
-        fg = "rgba(255,255,255,0.72)"
+        fg = "rgba(255,255,255,0.75)"
         if role == "close":
             self.setStyleSheet(self._STYLE.format(
-                fg=fg, hbg="#C42B1C", hfg="#FFFFFF", pbg="#B52416"))
+                fg=fg, hbg="#C42B1C", hfg="#FFFFFF", pbg="#A31C12", h=bar_height))
         else:
             self.setStyleSheet(self._STYLE.format(
                 fg=fg,
-                hbg="rgba(255,255,255,0.11)",
+                hbg="rgba(255,255,255,0.13)",
                 hfg="#FFFFFF",
-                pbg="rgba(255,255,255,0.20)"))
+                pbg="rgba(255,255,255,0.22)",
+                h=bar_height))
+        self.setFixedSize(46, bar_height)
+        self.setFlat(True)
+        self.setCursor(QCursor(Qt.ArrowCursor))
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-#  Apple-style title bar  (green strip + Windows caption controls)
+#  Title bar
 # ══════════════════════════════════════════════════════════════════════════════
+_TITLE_BAR_H = 52
+
 class _TitleBar(QWidget):
 
     def __init__(self, dialog: "EditRecordDialog"):
         super().__init__(dialog)
         self._dialog   = dialog
         self._drag_pos = None
-        self.setFixedHeight(52)
+        self.setFixedHeight(_TITLE_BAR_H)
         self.setAttribute(Qt.WA_StyledBackground, True)
         self.setStyleSheet(f"""
             QWidget {{
@@ -227,7 +351,6 @@ class _TitleBar(QWidget):
         lay.setContentsMargins(18, 0, 0, 0)
         lay.setSpacing(0)
 
-        # Thin white accent pip (Apple-style left accent)
         pip = QFrame()
         pip.setFixedSize(4, 28)
         pip.setStyleSheet(
@@ -235,7 +358,6 @@ class _TitleBar(QWidget):
         lay.addWidget(pip)
         lay.addSpacing(12)
 
-        # Title + subtitle column
         col = QVBoxLayout()
         col.setSpacing(1)
         col.setContentsMargins(0, 0, 0, 0)
@@ -263,10 +385,10 @@ class _TitleBar(QWidget):
         lay.addLayout(col)
         lay.addStretch()
 
-        # ── Windows caption controls ──────────────────────────────────────────
-        self._btn_min   = _WinControlBtn("⊟", "min")
-        self._btn_max   = _WinControlBtn("⊡", "max")
-        self._btn_close = _WinControlBtn("✕", "close")
+        # Full-height caption buttons (same style as recycle bin)
+        self._btn_min   = _WinControlBtn("—",  "min",   _TITLE_BAR_H)
+        self._btn_max   = _WinControlBtn("⬜", "max",   _TITLE_BAR_H)
+        self._btn_close = _WinControlBtn("✕",  "close", _TITLE_BAR_H)
 
         self._btn_min.setToolTip("Minimize")
         self._btn_max.setToolTip("Maximize / Restore")
@@ -282,7 +404,6 @@ class _TitleBar(QWidget):
         lay.addWidget(self._btn_max)
         lay.addWidget(self._btn_close)
 
-    # drag-to-move
     def mousePressEvent(self, e):
         if e.button() == Qt.LeftButton:
             self._drag_pos = (
@@ -349,56 +470,129 @@ class EditRecordDialog(QDialog):
     MINUTES  = [f"{i:02d}" for i in range(0, 60)]
     MERIDIEM = ["AM", "PM"]
 
+    # ── Animation constants ───────────────────────────────────────────────────
+    _ANIM_DURATION = 340
+    _ANIM_SCALE    = 0.94
+
     def __init__(self, record: dict, parent=None):
         super().__init__(parent)
         self.record = record
 
-        # Borderless + translucent so paintEvent draws the floating card smoothly
         self.setWindowFlags(Qt.FramelessWindowHint | Qt.Dialog)
         self.setAttribute(Qt.WA_TranslucentBackground, True)
 
         self.setMinimumWidth(730 + _SHADOW_INSET * 2)
         self.setMinimumHeight(900 + _SHADOW_INSET * 2)
 
+        # Install custom tooltips on this dialog
+        install_custom_tooltips(self)
+
+        # Opacity for open animation (starts invisible)
+        self.__card_opacity = 0.0
+
         self._build_ui()
         self._populate()
 
-    # ── Paint: Clean rounded card without shadow ──────────────────
+    # ── Card opacity property for animation ───────────────────────────────────
+    def _get_card_opacity(self) -> float:
+        return self.__card_opacity
+
+    def _set_card_opacity(self, val: float):
+        self.__card_opacity = max(0.0, min(1.0, val))
+        self.update()
+
+    cardOpacity = pyqtProperty(float, _get_card_opacity, _set_card_opacity)
+
+    # ── Apple-style open animation ────────────────────────────────────────────
+    def show_animated(self):
+        """Show with macOS-style scale-up + fade-in animation."""
+        # Centre on screen or parent
+        if self.parent():
+            pg = self.parent().geometry()
+            cx = pg.center().x() - self.width() // 2
+            cy = pg.center().y() - self.height() // 2
+        else:
+            screen = QApplication.primaryScreen().availableGeometry()
+            cx = screen.center().x() - self.width() // 2
+            cy = screen.center().y() - self.height() // 2
+        self.move(cx, cy)
+        self.show()
+        QTimer.singleShot(0, self._run_open_animation)
+
+    def _run_open_animation(self):
+        geo = self.geometry()
+        cx, cy = geo.center().x(), geo.center().y()
+        sw = int(geo.width()  * self._ANIM_SCALE)
+        sh = int(geo.height() * self._ANIM_SCALE)
+        start_geo = QRect(cx - sw // 2, cy - sh // 2, sw, sh)
+
+        # Scale spring
+        self._anim_geo = QPropertyAnimation(self, b"geometry")
+        self._anim_geo.setDuration(self._ANIM_DURATION)
+        self._anim_geo.setStartValue(start_geo)
+        self._anim_geo.setEndValue(geo)
+        self._anim_geo.setEasingCurve(QEasingCurve.OutBack)
+
+        # Fade in
+        self._anim_fade = QPropertyAnimation(self, b"cardOpacity")
+        self._anim_fade.setDuration(self._ANIM_DURATION - 60)
+        self._anim_fade.setStartValue(0.0)
+        self._anim_fade.setEndValue(1.0)
+        self._anim_fade.setEasingCurve(QEasingCurve.OutCubic)
+
+        self._anim_group = QParallelAnimationGroup(self)
+        self._anim_group.addAnimation(self._anim_geo)
+        self._anim_group.addAnimation(self._anim_fade)
+        self._anim_group.start()
+
+    # ── Paint: shadow + card, respects cardOpacity ────────────────────────────
     def paintEvent(self, event):
+        if self.__card_opacity <= 0:
+            return
+
         p = QPainter(self)
         p.setRenderHint(QPainter.Antialiasing)
+        p.setOpacity(self.__card_opacity)
 
-        # UPDATED: Shadow logic completely omitted. Only drawing the solid base card frame now.
         card = self.rect().adjusted(
             _SHADOW_INSET, _SHADOW_INSET,
             -_SHADOW_INSET, -_SHADOW_INSET)
-        path = QPainterPath()
-        path.addRoundedRect(
+
+        # Multi-layer drop shadow
+        for spread, alpha in [(14, 0.06), (10, 0.08), (6, 0.10), (3, 0.12), (1, 0.09)]:
+            sr = card.adjusted(-spread // 4, spread // 3,
+                               spread // 4, spread)
+            sp = QPainterPath()
+            sp.addRoundedRect(
+                float(sr.x()), float(sr.y()),
+                float(sr.width()), float(sr.height()),
+                float(_CORNER_R + 2), float(_CORNER_R + 2))
+            p.setBrush(QColor(27, 67, 50, int(alpha * 255)))
+            p.setPen(Qt.NoPen)
+            p.drawPath(sp)
+
+        # Card background
+        cp = QPainterPath()
+        cp.addRoundedRect(
             float(card.x()), float(card.y()),
             float(card.width()), float(card.height()),
             float(_CORNER_R), float(_CORNER_R))
         p.setBrush(QColor(_CLR_BG))
         p.setPen(QPen(QColor(_CLR_BORDER), 0.8))
-        p.drawPath(path)
+        p.drawPath(cp)
         p.end()
 
     # ── Build UI ──────────────────────────────────────────────────────────────
     def _build_ui(self):
-        # Outer layout respects shadow inset
         outer = QVBoxLayout(self)
         outer.setContentsMargins(
             _SHADOW_INSET, _SHADOW_INSET,
             _SHADOW_INSET, _SHADOW_INSET)
         outer.setSpacing(0)
 
-        # Card container
         card = QWidget()
         card.setObjectName("card")
-        card.setStyleSheet(f"""
-            QWidget#card {{
-                background: {_CLR_BG};
-            }}
-        """)
+        card.setStyleSheet(f"QWidget#card {{ background: {_CLR_BG}; }}")
         card.setAttribute(Qt.WA_StyledBackground, True)
         outer.addWidget(card)
 
@@ -406,17 +600,14 @@ class EditRecordDialog(QDialog):
         root.setContentsMargins(0, 0, 0, 0)
         root.setSpacing(0)
 
-        # ── Title bar ─────────────────────────────────────────────────────────
         root.addWidget(_TitleBar(self))
 
-        # 2px accent rule below title bar
         rule = QFrame()
         rule.setFrameShape(QFrame.HLine)
         rule.setFixedHeight(2)
         rule.setStyleSheet(f"background: {_CLR_PRIMARY_DK}; border: none;")
         root.addWidget(rule)
 
-        # ── Scrollable body ───────────────────────────────────────────────────
         scroll = QScrollArea()
         scroll.setWidgetResizable(True)
         scroll.setFrameShape(QFrame.NoFrame)
@@ -439,7 +630,6 @@ class EditRecordDialog(QDialog):
         body_lay.setContentsMargins(24, 20, 24, 20)
         body_lay.setSpacing(10)
 
-        # ── Client ────────────────────────────────────────────────────────────
         body_lay.addWidget(_section_label("Client Information"))
         body_lay.addWidget(_hline())
 
@@ -450,7 +640,6 @@ class EditRecordDialog(QDialog):
         body_lay.addWidget(self._field_row("Client Name", self.client_input))
         body_lay.addSpacing(6)
 
-        # ── Date & Time ───────────────────────────────────────────────────────
         body_lay.addWidget(_section_label("Date & Time"))
         body_lay.addWidget(_hline())
         body_lay.addWidget(self._field_row("Date", self._make_date_row()))
@@ -458,7 +647,6 @@ class EditRecordDialog(QDialog):
         body_lay.addWidget(self._field_row("Time", self._make_time_row()))
         body_lay.addSpacing(6)
 
-        # ── Chemicals Used ────────────────────────────────────────────────────
         body_lay.addWidget(_section_label("Chemicals Used"))
         body_lay.addWidget(_hline())
         self.chem_table = self._build_chem_table()
@@ -466,7 +654,6 @@ class EditRecordDialog(QDialog):
         body_lay.addLayout(self._table_action_bar(self.chem_table))
         body_lay.addSpacing(10)
 
-        # ── Actual Chemicals ──────────────────────────────────────────────────
         body_lay.addWidget(_section_label("Actual Chemicals on Hand"))
         body_lay.addWidget(_hline())
         self.actual_table = self._build_chem_table()
@@ -476,7 +663,6 @@ class EditRecordDialog(QDialog):
         scroll.setWidget(body)
         root.addWidget(scroll)
 
-        # ── Footer ────────────────────────────────────────────────────────────
         foot_sep = QFrame()
         foot_sep.setFrameShape(QFrame.HLine)
         foot_sep.setFixedHeight(1)
@@ -588,10 +774,10 @@ class EditRecordDialog(QDialog):
 
         self.start_h        = self._combo(self.HOURS,    54)
         self.start_m        = self._combo(self.MINUTES,  58)
-        self.start_meridiem = self._combo(self.MERIDIEM, 58)
+        self.start_meridiem = self._combo(self.MERIDIEM, 80)
         self.end_h          = self._combo(self.HOURS,    54)
         self.end_m          = self._combo(self.MINUTES,  58)
-        self.end_meridiem   = self._combo(self.MERIDIEM, 58)
+        self.end_meridiem   = self._combo(self.MERIDIEM, 80)
 
         def _tag(text: str) -> QLabel:
             l = QLabel(text)
@@ -599,7 +785,6 @@ class EditRecordDialog(QDialog):
                 f"font: 12px {_FONT}; color: {_CLR_PRIMARY}; background: transparent;")
             return l
 
-        # Start badge
         s_badge = QLabel("START")
         s_badge.setStyleSheet(f"""
             QLabel {{
@@ -625,7 +810,6 @@ class EditRecordDialog(QDialog):
         lay.addWidget(arrow)
         lay.addSpacing(14)
 
-        # End badge
         e_badge = QLabel("END")
         e_badge.setStyleSheet(f"""
             QLabel {{
@@ -658,18 +842,15 @@ class EditRecordDialog(QDialog):
     def _build_chem_table(self) -> QTableWidget:
         t = QTableWidget(0, 3)
         t.setHorizontalHeaderLabels(["Chemical Name", "Quantity", "Remarks"])
-
         t.horizontalHeader().setSectionResizeMode(0, QHeaderView.Stretch)
         t.horizontalHeader().setSectionResizeMode(1, QHeaderView.Fixed)
         t.horizontalHeader().setSectionResizeMode(2, QHeaderView.Stretch)
         t.setColumnWidth(1, 100)
-
         t.setSelectionMode(QAbstractItemView.SingleSelection)
         t.setWordWrap(True)
         t.setShowGrid(True)
         t.setAlternatingRowColors(True)
         t.setStyleSheet(_TABLE_SS)
-
         t.verticalHeader().setSectionResizeMode(QHeaderView.Fixed)
         t.verticalHeader().setDefaultSectionSize(48)
         t.verticalHeader().setVisible(False)

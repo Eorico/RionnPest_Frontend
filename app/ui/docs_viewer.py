@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtCore import QEvent, QPoint, QTimer
+from PyQt5.QtGui import QFontMetrics, QFont as QGuiFont, QColor, QPainter, QPainterPath, QPen
 
 # ── Theme tokens ──────────────────────────────────────────────────────────────
 _G100 = "#C6F6D5"
@@ -15,6 +17,85 @@ _MUTED      = "#6B8F78"
 _BORDER     = "#E0EDE6"
 _HEADER_BG  = _G400
 _SIDEBAR_BG = "#1A3D2B"
+
+# ── Custom tooltip (same as recycle bin / edit dialog) ────────────────────────
+class _CustomTooltip(QtWidgets.QWidget):
+    _instance = None
+
+    def __init__(self):
+        super().__init__(None, QtCore.Qt.ToolTip | QtCore.Qt.FramelessWindowHint)
+        self.setAttribute(QtCore.Qt.WA_TranslucentBackground, True)
+        self.setAttribute(QtCore.Qt.WA_ShowWithoutActivating, True)
+        self.setWindowFlags(
+            QtCore.Qt.ToolTip | QtCore.Qt.FramelessWindowHint
+            | QtCore.Qt.WindowStaysOnTopHint
+            | QtCore.Qt.BypassGraphicsProxyWidget)
+        self._text = ""
+        self._hide_timer = QTimer(self)
+        self._hide_timer.setSingleShot(True)
+        self._hide_timer.timeout.connect(self.hide)
+
+    @classmethod
+    def instance(cls):
+        if cls._instance is None:
+            cls._instance = cls()
+        return cls._instance
+
+    def show_tip(self, global_pos: QPoint, text: str, duration: int = 3000):
+        if not text:
+            self.hide()
+            return
+        self._text = text
+        fm = QFontMetrics(QGuiFont("Segoe UI", 9))
+        tr = fm.boundingRect(text)
+        px, py = 14, 8
+        self.setFixedSize(tr.width() + px * 2, tr.height() + py * 2)
+        screen = QtWidgets.QApplication.screenAt(global_pos)
+        if screen:
+            sr = screen.availableGeometry()
+            x = min(global_pos.x() + 12, sr.right()  - self.width()  - 4)
+            y = min(global_pos.y() + 20, sr.bottom() - self.height() - 4)
+        else:
+            x, y = global_pos.x() + 12, global_pos.y() + 20
+        self.move(x, y)
+        self.show()
+        self.raise_()
+        self._hide_timer.start(duration)
+
+    def paintEvent(self, event):
+        p = QPainter(self)
+        p.setRenderHint(QPainter.Antialiasing)
+        path = QPainterPath()
+        path.addRoundedRect(0.5, 0.5, self.width() - 1, self.height() - 1, 6, 6)
+        p.setBrush(QColor("#FFFFFF"))
+        p.setPen(QPen(QColor("#A8D5BA"), 1.0))
+        p.drawPath(path)
+        p.setPen(QColor("#1B4332"))
+        p.setFont(QGuiFont("Segoe UI", 9))
+        p.drawText(self.rect(), QtCore.Qt.AlignCenter, self._text)
+        p.end()
+
+
+class _TooltipEventFilter(QtWidgets.QWidget):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.setVisible(False)
+
+    def eventFilter(self, obj, event):
+        if event.type() == QEvent.ToolTip:
+            if isinstance(obj, QtWidgets.QWidget) and obj.toolTip():
+                _CustomTooltip.instance().show_tip(event.globalPos(), obj.toolTip())
+            return True
+        if event.type() == QEvent.Leave:
+            _CustomTooltip.instance().hide()
+        return False
+
+
+def install_custom_tooltips(target):
+    f = _TooltipEventFilter(target)
+    target.installEventFilter(f)
+    target._tooltip_filter = f
+
 
 # ── Stylesheets ───────────────────────────────────────────────────────────────
 _SIDEBAR_HEADER_SS = f"""
@@ -137,44 +218,52 @@ QScrollBar::handle:vertical:hover {{ background: {_G400}; }}
 QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {{ height: 0; }}
 """
 
+# FIX: Borderless statement editor — no border, no outline, blends into page
 _NOTES_SS = f"""
 QTextEdit#notesEdit {{
     background: {_SURFACE};
     color: {_TEXT};
     font: 10pt 'Segoe UI';
-    border: 1.5px solid {_BORDER};
-    border-radius: 8px;
-    padding: 12px 14px;
+    border: none;
+    padding: 8px 4px;
     selection-background-color: {_G100};
 }}
 QTextEdit#notesEdit:focus {{
-    border-color: {_G200};
-    background: #FAFFFE;
+    border: none;
+    background: {_SURFACE};
 }}
 """
 
-_CAPTION_IDLE_SS = """
-QPushButton {
+_TITLE_BAR_H = 48
+
+_CAPTION_IDLE_SS = f"""
+QPushButton {{
     background: transparent;
-    color: rgba(255,255,255,0.70);
+    color: rgba(255,255,255,0.75);
     border: none;
     border-radius: 0px;
-    font: 11pt 'Segoe MDL2 Assets', 'Segoe UI Symbol', 'Arial';
-}
-QPushButton:hover   { background: rgba(255,255,255,0.12); color: #fff; }
-QPushButton:pressed { background: rgba(255,255,255,0.20); }
+    font: 10pt 'Segoe MDL2 Assets', 'Segoe UI Symbol', 'Segoe UI', sans-serif;
+    min-width: 46px;
+    min-height: {_TITLE_BAR_H}px;
+    max-height: {_TITLE_BAR_H}px;
+}}
+QPushButton:hover   {{ background: rgba(255,255,255,0.13); color: #fff; }}
+QPushButton:pressed {{ background: rgba(255,255,255,0.22); color: #fff; }}
 """
 
-_CAPTION_CLOSE_SS = """
-QPushButton {
+_CAPTION_CLOSE_SS = f"""
+QPushButton {{
     background: transparent;
-    color: rgba(255,255,255,0.80);
+    color: rgba(255,255,255,0.85);
     border: none;
     border-radius: 0px;
-    font: 11pt 'Segoe MDL2 Assets', 'Segoe UI Symbol', 'Arial';
-}
-QPushButton:hover   { background: #C42B1C; color: #fff; }
-QPushButton:pressed { background: #B01F13; }
+    font: 10pt 'Segoe MDL2 Assets', 'Segoe UI Symbol', 'Segoe UI', sans-serif;
+    min-width: 46px;
+    min-height: {_TITLE_BAR_H}px;
+    max-height: {_TITLE_BAR_H}px;
+}}
+QPushButton:hover   {{ background: #C42B1C; color: #fff; }}
+QPushButton:pressed {{ background: #A31C12; color: #fff; }}
 """
 
 _TOOLBAR_BTN_SS = f"""
@@ -201,7 +290,7 @@ QPushButton:pressed {{
 # ── Caption button helper ─────────────────────────────────────────────────────
 def _caption_btn(symbol: str, close: bool = False) -> QtWidgets.QPushButton:
     btn = QtWidgets.QPushButton(symbol)
-    btn.setFixedSize(46, 48)
+    btn.setFixedSize(46, _TITLE_BAR_H)
     btn.setFlat(True)
     btn.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
     btn.setStyleSheet(_CAPTION_CLOSE_SS if close else _CAPTION_IDLE_SS)
@@ -216,7 +305,6 @@ class Ui_DocxViewer(object):
         DocxViewer.setMinimumSize(1280, 860)
         DocxViewer.resize(1416, 988)
 
-        # Frameless — we draw every chrome row ourselves
         DocxViewer.setWindowFlags(
             QtCore.Qt.FramelessWindowHint | QtCore.Qt.Window)
         DocxViewer.setAttribute(QtCore.Qt.WA_TranslucentBackground, False)
@@ -225,22 +313,24 @@ class Ui_DocxViewer(object):
             + _SPLITTER_SS + _SCROLL_AREA_SS + _TABLE_SS + _NOTES_SS
         )
 
+        # Install custom white tooltips
+        install_custom_tooltips(DocxViewer)
+
         cw = QtWidgets.QWidget(DocxViewer)
         cw.setObjectName("centralwidget")
         cw.setStyleSheet(f"background: {_BG};")
         DocxViewer.setCentralWidget(cw)
 
-        # Master vertical stack — every row added top-to-bottom
         root = QtWidgets.QVBoxLayout(cw)
         root.setContentsMargins(0, 0, 0, 0)
         root.setSpacing(0)
 
         # ══════════════════════════════════════════════════════════════════════
-        # ROW 1 ── TITLE BAR   icon · title/sub ·· stretch ·· [─][□][✕]
+        # ROW 1 ── TITLE BAR
         # ══════════════════════════════════════════════════════════════════════
         self.titleBar = QtWidgets.QFrame()
         self.titleBar.setObjectName("titleBar")
-        self.titleBar.setFixedHeight(48)
+        self.titleBar.setFixedHeight(_TITLE_BAR_H)
         self.titleBar.setStyleSheet(
             f"QFrame#titleBar {{ background: {_HEADER_BG}; border: none; }}")
 
@@ -271,11 +361,12 @@ class Ui_DocxViewer(object):
         title_col.addWidget(h_sub)
         tb_h.addLayout(title_col)
 
-        tb_h.addStretch(1)   # ← caption buttons flush right
+        tb_h.addStretch(1)
 
-        self._minimizeBtn = _caption_btn("─")
+        # Full-height Windows caption buttons
+        self._minimizeBtn = _caption_btn("—")
         self._minimizeBtn.setToolTip("Minimize")
-        self._maximizeBtn = _caption_btn("□")
+        self._maximizeBtn = _caption_btn("⬜")
         self._maximizeBtn.setToolTip("Maximize / Restore")
         self._closeBtn    = _caption_btn("✕", close=True)
         self._closeBtn.setToolTip("Close")
@@ -294,7 +385,7 @@ class Ui_DocxViewer(object):
         root.addWidget(accent)
 
         # ══════════════════════════════════════════════════════════════════════
-        # ROW 3 ── CUSTOM MENU BAR   File · View · Edit · Help
+        # ROW 3 ── CUSTOM MENU BAR
         # ══════════════════════════════════════════════════════════════════════
         self.menuBarRow = QtWidgets.QFrame()
         self.menuBarRow.setObjectName("menuBarRow")
@@ -377,7 +468,7 @@ class Ui_DocxViewer(object):
         root.addWidget(self.menuBarRow)
 
         # ══════════════════════════════════════════════════════════════════════
-        # ROW 4 ── CUSTOM TOOLBAR   Open Refresh | Export Print | Zoom… | Find
+        # ROW 4 ── TOOLBAR   Export Print | Zoom… (Open, Refresh, Find removed)
         # ══════════════════════════════════════════════════════════════════════
         self.toolBarRow = QtWidgets.QFrame()
         self.toolBarRow.setObjectName("toolBarRow")
@@ -409,20 +500,16 @@ class Ui_DocxViewer(object):
                 "border: none; min-width: 1px; max-width: 1px;")
             return f
 
-        self.btnOpen    = _tbtn("Open")
-        self.btnRefresh = _tbtn("Refresh")
+        # Kept buttons only: Export, Print, Zoom+, Zoom−, 100%
         self.btnExport  = _tbtn("Export")
         self.btnPrint   = _tbtn("Print")
         self.btnZoomIn  = _tbtn("Zoom +")
         self.btnZoomOut = _tbtn("Zoom −")
         self.btnZoom100 = _tbtn("100%")
-        self.btnFind    = _tbtn("Find")
 
         for w in [
-            self.btnOpen, self.btnRefresh, _tsep(),
             self.btnExport, self.btnPrint, _tsep(),
-            self.btnZoomIn, self.btnZoomOut, self.btnZoom100, _tsep(),
-            self.btnFind,
+            self.btnZoomIn, self.btnZoomOut, self.btnZoom100,
         ]:
             tool_h.addWidget(w, 0, QtCore.Qt.AlignVCenter)
 
@@ -523,17 +610,16 @@ class Ui_DocxViewer(object):
         self.scrollAreaContent = QtWidgets.QWidget()
         self.scrollAreaContent.setObjectName("scrollAreaContent")
 
-        # A4 at 96 DPI = 794 × 1123 px — pages are centered in the scroll area
         self.scrollContentVLayout = QtWidgets.QVBoxLayout(self.scrollAreaContent)
         self.scrollContentVLayout.setContentsMargins(0, 32, 0, 40)
         self.scrollContentVLayout.setSpacing(32)
         self.scrollContentVLayout.setAlignment(QtCore.Qt.AlignHCenter)
 
-        # Page 1  —  A4 @ 96 DPI: 794 × 1123 px
+        # ── Page 1 ────────────────────────────────────────────────────────────
         self.paperPage1 = self._make_page("paperPage1")
         self.paperPage1.setFixedSize(794, 1123)
         lay1 = QtWidgets.QVBoxLayout(self.paperPage1)
-        lay1.setContentsMargins(72, 64, 72, 64)   # ≈ 19 mm margin all sides
+        lay1.setContentsMargins(72, 64, 72, 64)
         lay1.setSpacing(0)
         self.paperLayout1 = lay1
 
@@ -568,17 +654,7 @@ class Ui_DocxViewer(object):
 
         hdr_h1.addLayout(hdr_title_col)
         hdr_h1.addStretch()
-
-        chip = QtWidgets.QLabel("  ACTIVE  ")
-        chip.setFixedHeight(24)
-        chip.setStyleSheet("""
-            QLabel {
-                background: #D1FAE5; color: #065F46;
-                font: bold 8pt 'Segoe UI'; border-radius: 12px;
-                padding: 0 10px; letter-spacing: 2px;
-            }
-        """)
-        hdr_h1.addWidget(chip, 0, QtCore.Qt.AlignVCenter)
+ 
         lay1.addWidget(hdr_block1)
 
         lay1.addSpacing(16)
@@ -594,13 +670,8 @@ class Ui_DocxViewer(object):
         meta_row.addWidget(self.docTitleLabel)
         meta_row.addStretch()
 
-        self.metaLabel = QtWidgets.QLabel(
-            "Generated: January 31, 2025  |  Prepared by: Admin  |  Status: Active")
-        self.metaLabel.setObjectName("metaLabel")
-        self.metaLabel.setStyleSheet(
-            f"color: {_MUTED}; font: 9pt 'Segoe UI'; background: transparent;")
-        self.metaLabel.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignVCenter)
-        meta_row.addWidget(self.metaLabel)
+       
+     
         lay1.addLayout(meta_row)
 
         lay1.addSpacing(6)
@@ -624,11 +695,11 @@ class Ui_DocxViewer(object):
 
         self.scrollContentVLayout.addWidget(self.paperPage1)
 
-        # Page 2  —  A4 @ 96 DPI: 794 × 1123 px
+        # ── Page 2 ────────────────────────────────────────────────────────────
         self.paperPage2 = self._make_page("paperPage2")
         self.paperPage2.setFixedSize(794, 1123)
         lay2 = QtWidgets.QVBoxLayout(self.paperPage2)
-        lay2.setContentsMargins(72, 64, 72, 64)   # ≈ 19 mm margin all sides
+        lay2.setContentsMargins(72, 64, 72, 64)
         lay2.setSpacing(0)
         self.paperLayout2 = lay2
 
@@ -669,14 +740,16 @@ class Ui_DocxViewer(object):
         lay2.addSpacing(22)
 
         self.notesLabel = self._make_section_lbl(
-            self.paperPage2, "notesLabel", "Statement  (click to edit)")
+            self.paperPage2, "notesLabel", "Statement")
         lay2.addWidget(self.notesLabel)
         lay2.addSpacing(10)
 
+        # FIX: Borderless text editor — blends into the page like MS Word
         self.notesEdit = QtWidgets.QTextEdit()
         self.notesEdit.setObjectName("notesEdit")
         self.notesEdit.setMinimumHeight(220)
         self.notesEdit.setAcceptRichText(False)
+        self.notesEdit.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.notesEdit.setPlaceholderText(
             "Click here to type your notes, observations, "
             "or remarks for this report...")
@@ -703,7 +776,7 @@ class Ui_DocxViewer(object):
         body_widget = QtWidgets.QWidget()
         body_widget.setStyleSheet(f"background: {_BG};")
         body_widget.setLayout(body_h)
-        root.addWidget(body_widget, 1)   # stretch=1 fills all remaining space
+        root.addWidget(body_widget, 1)
 
         # ══════════════════════════════════════════════════════════════════════
         # ROW 6 ── STATUS BAR
@@ -733,7 +806,6 @@ class Ui_DocxViewer(object):
             a.setObjectName(name)
             setattr(self, name, a)
 
-        # Wire actions into menus
         self.menuFile.addAction(self.actionOpen)
         self.menuFile.addAction(self.actionRefresh)
         self.menuFile.addSeparator()
@@ -747,19 +819,14 @@ class Ui_DocxViewer(object):
         self.menuEdit.addAction(self.actionFind)
         self.menuHelp.addAction(self.actionAbout)
 
-        # Wire toolbar buttons → actions
-        self.btnOpen.clicked.connect(self.actionOpen.trigger)
-        self.btnRefresh.clicked.connect(self.actionRefresh.trigger)
+        # Wire toolbar buttons → actions (only the ones still in the toolbar)
         self.btnExport.clicked.connect(self.actionExport.trigger)
         self.btnPrint.clicked.connect(self.actionPrint.trigger)
         self.btnZoomIn.clicked.connect(self.actionZoomIn.trigger)
         self.btnZoomOut.clicked.connect(self.actionZoomOut.trigger)
         self.btnZoom100.clicked.connect(self.actionZoomReset.trigger)
-        self.btnFind.clicked.connect(self.actionFind.trigger)
 
-        # ── Drag + window controls ────────────────────────────────────────────
         self._install_drag(DocxViewer)
-
         self.retranslateUi(DocxViewer)
         QtCore.QMetaObject.connectSlotsByName(DocxViewer)
 
@@ -886,7 +953,6 @@ class Ui_DocxViewer(object):
 
         return tbl
 
-    # ── Draggable title bar ───────────────────────────────────────────────────
     def _install_drag(self, window):
         self._drag_pos = None
 
@@ -913,7 +979,6 @@ class Ui_DocxViewer(object):
             lambda: window.showNormal()
             if window.isMaximized() else window.showMaximized())
 
-    # ── retranslateUi ─────────────────────────────────────────────────────────
     def retranslateUi(self, DocxViewer):
         _t = QtCore.QCoreApplication.translate
 
@@ -930,10 +995,7 @@ class Ui_DocxViewer(object):
                "  |  raionnpest@gmail.com"))
         self.docTitleLabel.setText(
             _t("DocxViewer", "Inventory Report — Q1 2025"))
-        self.metaLabel.setText(
-            _t("DocxViewer",
-               "Generated: January 31, 2025  |  Prepared by: Admin"
-               "  |  Status: Active"))
+     
 
         for col, txt in enumerate([
             "Date of Treatment", "Name of Client", "Time of Treatment",
@@ -975,14 +1037,11 @@ class Ui_DocxViewer(object):
         self.actionClose.setShortcut(_t("DocxViewer", "Ctrl+W"))
         self.actionAbout.setText(_t("DocxViewer", "About"))
 
-        self.btnOpen.setText(_t("DocxViewer", "Open"))
-        self.btnRefresh.setText(_t("DocxViewer", "Refresh"))
         self.btnExport.setText(_t("DocxViewer", "Export"))
         self.btnPrint.setText(_t("DocxViewer", "Print"))
         self.btnZoomIn.setText(_t("DocxViewer", "Zoom +"))
         self.btnZoomOut.setText(_t("DocxViewer", "Zoom −"))
         self.btnZoom100.setText(_t("DocxViewer", "100%"))
-        self.btnFind.setText(_t("DocxViewer", "Find"))
 
 
 # ── Standalone preview ────────────────────────────────────────────────────────
