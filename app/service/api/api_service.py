@@ -1,190 +1,82 @@
 from dotenv import load_dotenv
 import os, requests
 
-load_dotenv()
+from .auth_api_service import AuthApiService
+from .inventory_api_service import InventoryApiService
+from .recycle_api_service import RecycleBinApiService
+from .document_service import DocumentApiService
+from .base import IConnectionService
+from pathlib import Path
 
-class ApiService:
+env_path = Path(__file__).resolve().parent.parent / ".env"
+load_dotenv(dotenv_path=env_path)
+
+class ApiService(IConnectionService):
     def __init__(self):
-        self.base_url = str(os.getenv("API_SERVICE", "http://127.0.0.1:8000"))
-        self.session = requests.Session()
+        self._base_url = str(os.getenv("API_SERVICE", "http://127.0.0.1:8000"))
+        self._session = requests.Session()
+        self.admin_under: str | None = None
         
-    # connections
+        self.auth = AuthApiService(self._base_url, self._session)
+        self.inventory = InventoryApiService(self._base_url, self._session)
+        self.recycle = RecycleBinApiService(self._base_url, self._session)
+        self.documents = DocumentApiService(self._base_url, self._session)
         
-    def check_connection_service(self):
+    def check_connection_service(self) -> bool:
         try:
-            response = self.session.get(f"{self.base_url}/inventory/", timeout=2) 
-            return response.status_code == 200
+            r = self._session.get(f"{self._base_url}/inventory/", timeout=2)
+            return r.status_code == 200
         except requests.exceptions.RequestException:
             return False
-    
-    # auth 
-    
+        
     def login_service(self, username, password):
-        try:
-            payload = {"username": username, "password": password}
-            response = self.session.post(f"{self.base_url}/auth/login", json=payload, timeout=5)
-            
-            if response.status_code == 200:
-                data = response.json()
-                token = data.get("access_token")
-                if token: 
-                    self.session.headers.update({"Authorization": f"Bearer {token}"})
-                return True, "Login Successful"
-            return False, "Invalid Credentials"
-        except requests.exceptions.RequestException as e:
-            return False, f"Server Error: {str(e)}"
-        
+        return self.auth.login_service(username, password)
+ 
+    def register_service(self, username, password, email):
+        return self.auth.register_service(username, password, email)
+ 
+    def forgot_password_service(self, username):
+        return self.auth.forgot_password_service(username)
+ 
+    def reset_password_service(self, username, otp, new_password):
+        return self.auth.reset_password_service(username, otp, new_password)
+ 
     def logout_service(self):
-        self.session.headers.pop("Authorization", None)
-        
-    # admin     
+        self.auth.logout_service()
+ 
     def get_active_inventory(self):
-        try:
-            response = self.session.get(f"{self.base_url}/inventory/")
-            return response.json() if response.status_code == 200 else []
-        except requests.exceptions.RequestException:
-            return []
-        
-    def get_recycle_bin(self):
-        try:
-            response = self.session.get(f"{self.base_url}/inventory/recycle-bin")
-            return response.json() if response.status_code == 200 else []
-        except requests.exceptions.RequestException:
-            return []
-        
+        return self.inventory.get_active_inventory()
+ 
     def add_inventory_record(self, data):
-        try:
-            response = self.session.post(f"{self.base_url}/inventory/", json=data, timeout=5)
-            return response.status_code == 200, response.text
-        except requests.exceptions.RequestException as e:
-            return False, str(e)
-        
-    def update_inventory_record(self, record_id: int, data: dict):
-        try:
-            payload = {
-                "date":           data.get("date"),
-                "month":          data.get("month"),
-                "year":           data.get("year"),
-                "category":       data.get("category"),
-                "client_name":    data.get("client_name"),
-                "start_time":     data.get("start_time"),
-                "end_time":       data.get("end_time"),
-                "start_meridiem": data.get("start_meridiem"),
-                "end_meridiem":   data.get("end_meridiem"),
-
-                "chemicals_use": [
-                    {
-                        "chemical_name": c.get("chemical_name") or c.get("name") or "",
-                        "quantity":      c.get("quantity") or c.get("qty") or "",
-                        "remarks":       c.get("remarks") or "",
-                    } for c in data.get("chemicals_use", data.get("chemical_use", []))
-                ],
-
-                "actual_chemicals_used": [
-                    {
-                        "actual_chemicals_name": c.get("actual_chemicals_name") or c.get("chemical_name") or c.get("name") or "",  # correct key
-                        "quantity":              c.get("quantity") or c.get("qty") or "",
-                        "remarks":               c.get("remarks") or "",
-                    } for c in data.get("actual_chemicals_used", data.get("actual_chemical_used", []))
-                ],
-            }
-
-            print("=== UPDATE PAYLOAD ===", payload)
-
-            response = self.session.put(
-                f"{self.base_url}/inventory/{record_id}",
-                json=payload,
-                timeout=5
-            )
-
-            print(response.status_code, response.text)
-
-            if response.status_code == 200:
-                return True, response.json()
-            return False, f"Server Error {response.status_code}: {response.text}"
-        except requests.exceptions.RequestException as e:
-            return False, str(e)
-
-    # recycle bin
+        return self.inventory.add_inventory_record(data)
+ 
+    def update_inventory_record(self, record_id, data):
+        return self.inventory.update_inventory_record(record_id, data)
+ 
+    def get_recycle_bin(self):
+        return self.recycle.get_recycle_bin()
+ 
     def move_to_bin(self, record_id):
-        try:
-            response = self.session.delete(f"{self.base_url}/inventory/{record_id}")
-            if response.status_code == 200:
-                return True, response.json().get("message", "Moved to bin")
-            return False, f"Server Error: {response.status_code}"
-        except requests.exceptions.RequestException as e:
-            return False, str(e)
-        
+        return self.recycle.move_to_bin(record_id)
+ 
     def restore_record(self, record_id):
-        try:
-            response = self.session.post(f"{self.base_url}/inventory/restore/{record_id}")
-            if response.status_code == 200:
-                return True, response.json().get("message", "Record restored")
-            return False, f"Server Error: {response.status_code}"
-        except requests.exceptions.RequestException as e:
-            return False, str(e) 
-        
+        return self.recycle.restore_record(record_id)
+ 
     def restore_all(self):
-        try:
-            response = self.session.post(f"{self.base_url}/inventory/restore-all")
-            if response.status_code == 200:
-                return True, response.json().get("message", "All record restored")
-            return False, f"Server Error: {response.status_code}"
-        except requests.exceptions.RequestException as e:
-            return False, str(e)
-        
+        return self.recycle.restore_all()
+ 
     def permanent_delete(self, record_id):
-        try:
-            response = self.session.delete(f"{self.base_url}/inventory/permanent/{record_id}")
-            if response.status_code == 200:
-                return True, response.json().get("message", "Permanently deleted")
-            return False, f"Server Error: {response.status_code}"
-        except requests.exceptions.RequestException as e:
-            return False, str(e)
-        
-    # convert to document
-    def upload_document(self, title: str, file_name: str, file_data: bytes):
-        try:
-            response = self.session.post(
-                f"{self.base_url}/documents/",
-                data={
-                    "title": title,
-                    "file_name": file_name
-                },
-                files={
-                    "file": (
-                        file_name,
-                        file_data,
-                    )
-                },
-                timeout=10,
-            )
-            if response.status_code == 200:
-                return True, response.json()
-            return False, response.text
-        except requests.exceptions.RequestException as e:
-            return False, str(e)
-
+        return self.recycle.permanent_delete(record_id)
+ 
+    def upload_document(self, title, file_name, file_data):
+        return self.documents.upload_document(title, file_name, file_data)
+ 
     def get_documents(self):
-        try:
-            response = self.session.get(f"{self.base_url}/documents/")
-            return response.json() if response.status_code == 200 else []
-        except requests.exceptions.RequestException:
-            return []
-
-    def download_document(self, doc_id: int) -> bytes | None:
-        try:
-            response = self.session.get(
-                f"{self.base_url}/documents/{doc_id}/download", timeout=10)
-            return response.content if response.status_code == 200 else None
-        except requests.exceptions.RequestException:
-            return None
-        
-    def delete_document(self, doc_id: int):
-        try:
-            response = self.session.delete(f"{self.base_url}/documents/{doc_id}")
-            if response.status_code == 200:
-                return True, response.json().get("message", "Deleted")
-            return False, f"Server Error: {response.status_code}"
-        except requests.exceptions.RequestException as e:
-            return False, str(e)
+        return self.documents.get_documents()
+ 
+    def download_document(self, doc_id):
+        return self.documents.download_document(doc_id)
+ 
+    def delete_document(self, doc_id):
+        return self.documents.delete_document(doc_id)
+     

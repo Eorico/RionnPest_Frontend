@@ -9,22 +9,28 @@ from util.table_util import TableDataHelper
 
 from PyQt5.QtCore import Qt, QObject
 from PyQt5.QtGui import QColor
-from ui.style import btn_style
+from ui.style import btn_style, _BTN_EDIT_LOCKED
 
 _SELECTED_COLOR = QColor("#A8D5BA")
 _DEFAULT_COLOR  = QColor(Qt.white)
+_BTN_EDIT_OWNED = btn_style
 
 
 class DashboardTableRenderer(QObject):
-    def __init__(self, table, on_trash_callback, on_edit_callback):
+    def __init__(self, table, on_trash_callback, on_edit_callback, current_admin=None):
         super().__init__()
-        self.table    = table
-        self.on_trash = on_trash_callback
-        self.on_edit  = on_edit_callback
-        self._records = []
+        self.table         = table
+        self.on_trash      = on_trash_callback
+        self.on_edit       = on_edit_callback
+        self._records      = []
+        self.current_admin = (current_admin or "").strip().lower() 
 
     # ── Public ────────────────────────────────────────────────────────────────
-    
+
+    def update_admin(self, admin: str):
+        """Refresh the stored admin after login completes."""
+        self.current_admin = (admin or "").strip().lower()
+
     def _sync_checkbox_column(self):
         has_data = self.table.rowCount() > 0
         self.table.setColumnHidden(0, not has_data)
@@ -40,12 +46,25 @@ class DashboardTableRenderer(QObject):
 
         for row_idx, r in enumerate(self._records):
             self.table.insertRow(row_idx)
-            self._set_checkbox(row_idx)
+
+            row_admin = (r.get('admin_under') or "").strip().lower()
+            is_owner  = bool(self.current_admin) and (row_admin == self.current_admin)
+ 
+            self._set_checkbox(row_idx, is_owner)
 
             btn_edit = QPushButton("Edit")
             btn_edit.setFixedWidth(80)
-            btn_edit.setStyleSheet(btn_style)
-            btn_edit.clicked.connect(lambda _, rec=r: self._open_edit_dialog(rec))
+
+            if is_owner:
+                btn_edit.setStyleSheet(_BTN_EDIT_OWNED)
+                btn_edit.setCursor(Qt.PointingHandCursor)
+                btn_edit.setToolTip("Edit this record")
+                btn_edit.clicked.connect(lambda _, rec=r: self._open_edit_dialog(rec))
+            else:
+                btn_edit.setStyleSheet(_BTN_EDIT_LOCKED)
+                btn_edit.setCursor(Qt.ForbiddenCursor)
+                btn_edit.setEnabled(False)
+                btn_edit.setToolTip(f"Owned by {row_admin or 'another admin'} — you cannot edit this")
 
             self._set_cell(row_idx, 1, r.get('admin_under') or 'n/a')
             self._set_cell(row_idx, 2, TableDataHelper.fmt_date(r))
@@ -54,27 +73,46 @@ class DashboardTableRenderer(QObject):
             self._set_cell(row_idx, 5, TableDataHelper.fmt_chemicals(TableDataHelper.get_chemicals(r)))
             self._set_cell(row_idx, 6, TableDataHelper.fmt_chemicals(TableDataHelper.get_actual_chemicals(r), True))
             self._set_cell(row_idx, 7, TableDataHelper.fmt_remarks(r))
-            self._set_cell(row_idx, 8, btn_edit)
+            self._set_action_cell(row_idx, 8, btn_edit)
+
+            if not is_owner:
+                self._dim_row(row_idx)
 
         self._sync_checkbox_column()
 
     # ── Checkbox helpers ──────────────────────────────────────────────────────
 
-    def _set_checkbox(self, row: int):
+    def _set_checkbox(self, row: int, is_owner: bool = True):   
         cb = _GreenCheckBox()
         cb.setFixedSize(26, 26)
-        cb.setCursor(Qt.PointingHandCursor)
-        cb.stateChanged.connect(lambda state, r=row: self._on_checkbox_changed(r, state))
+
+        if is_owner:
+            cb.setCursor(Qt.PointingHandCursor)
+            cb.setToolTip("Select this record")
+            cb.stateChanged.connect(lambda state, r=row: self._on_checkbox_changed(r, state))
+        else:
+            cb.setEnabled(False)
+            cb.setCursor(Qt.ForbiddenCursor)
+            cb.setToolTip("You cannot select another admin's record")   
+            cb.setStyleSheet("""
+                QCheckBox::indicator {
+                    width: 18px; height: 18px;
+                    border: 2px solid #D1D5DB;
+                    border-radius: 4px;
+                    background: #F3F4F6;
+                }
+            """)
 
         container = QWidget()
         layout = QHBoxLayout(container)
         layout.addWidget(cb)
         layout.setAlignment(Qt.AlignCenter)
         layout.setContentsMargins(0, 0, 0, 0)
-        # ✅ Force white — stops scrollArea's QWidget cascade from tinting it
         container.setStyleSheet("background-color: #FFFFFF;")
 
-        def container_mouse_press(event):
+        def container_mouse_press(event, _is_owner=is_owner):
+            if not _is_owner:
+                return
             if event.button() == Qt.LeftButton:
                 cb.setChecked(not cb.isChecked())
 
@@ -131,14 +169,12 @@ class DashboardTableRenderer(QObject):
         is_selected = color != _DEFAULT_COLOR
 
         for col in range(self.table.columnCount()):
-            # ── Col 0 (checkbox) and col 8 (edit) always stay white ──────────────
             if col == 0 or col == 8:
                 widget = self.table.cellWidget(row, col)
                 if widget:
                     widget.setStyleSheet("background-color: #FFFFFF;")
-                continue  # skip item background too — no tint on these columns
+                continue
 
-            # ── Data columns 1–7: apply or remove highlight ───────────────────────
             item = self.table.item(row, col)
             if item:
                 item.setBackground(color)
@@ -154,11 +190,19 @@ class DashboardTableRenderer(QObject):
                 else:
                     widget.setStyleSheet("background-color: #FFFFFF;")
 
-        # ── Vertical header ───────────────────────────────────────────────────────
         v_header = self.table.verticalHeaderItem(row)
         if v_header:
             v_header.setBackground(color if is_selected else QColor("#F0F0F0"))
             v_header.setForeground(QColor("#1B4332"))
+
+    def _dim_row(self, row: int):  
+        muted      = QColor("#F3F4F6")
+        muted_text = QColor("#9CA3AF")
+        for col in range(1, 8):  
+            item = self.table.item(row, col)
+            if item:
+                item.setBackground(muted)
+                item.setForeground(muted_text)
 
     # ── Internals ─────────────────────────────────────────────────────────────
 
@@ -170,6 +214,16 @@ class DashboardTableRenderer(QObject):
         if dlg.exec_() == QDialog.Accepted:
             self.on_edit(dlg.get_data())
 
+    def _set_action_cell(self, row, col, btn_edit):
+        container = QWidget()
+        layout    = QHBoxLayout(container)
+        layout.addWidget(btn_edit)
+        layout.setAlignment(Qt.AlignCenter)
+        layout.setContentsMargins(4, 2, 4, 2)
+        layout.setSpacing(4)
+        container.setStyleSheet("background-color: #FFFFFF;")
+        self.table.setCellWidget(row, col, container)
+
     def _set_cell(self, row, col, value):
         if isinstance(value, QPushButton):
             container = QWidget()
@@ -177,10 +231,9 @@ class DashboardTableRenderer(QObject):
             layout.addWidget(value)
             layout.setAlignment(Qt.AlignCenter)
             layout.setContentsMargins(0, 0, 0, 0)
-            # ✅ Force white background on all button containers from the start
             container.setStyleSheet("background-color: #FFFFFF;")
             self.table.setCellWidget(row, col, container)
         else:
             item = QTableWidgetItem(str(value))
             item.setTextAlignment(Qt.AlignLeft | Qt.AlignTop)
-            self.table.setItem(row, col, QTableWidgetItem(str(value)))
+            self.table.setItem(row, col, item)

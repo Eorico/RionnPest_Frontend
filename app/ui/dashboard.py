@@ -643,10 +643,10 @@ def _build_treatment_page(ui) -> QtWidgets.QWidget:
     ui.tableListahan.setVerticalHeaderItem(0, QtWidgets.QTableWidgetItem("1"))
 
     for col, (txt, w) in enumerate([
-        ("Admin user", 110), ("Date of treatment", 130),
-        ("Name of client", 160), ("Time of treatment", 130),
-        ("Chemicals used", 170), ("Actual chemicals", 170),
-        ("Remarks", 140), ("Edit", 80),
+        ("Admin user", 350), ("Date of treatment", 350),
+        ("Name of client", 350), ("Time of treatment", 350),
+        ("Chemicals used", 350), ("Actual chemicals", 350),
+        ("Remarks", 350), ("Edit", 100),
     ]):
         item = QtWidgets.QTableWidgetItem(txt)
         item.setFont(QtGui.QFont("Segoe UI", 9, QtGui.QFont.Medium))

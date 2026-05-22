@@ -1,8 +1,8 @@
 import requests
 
-def is_online():
+def is_online(base_url: str, timeout: int = 2) -> bool:
     try:
-        requests.get("", timeout=2)
+        requests.get(f"{base_url}/inventory/", timeout=timeout)
         return True
     except:
-        pass
+        return False

@@ -61,3 +61,13 @@ QPushButton {
 QPushButton:hover   { background: #1B4332; }
 QPushButton:pressed { background: #081A13; }
 """
+
+_BTN_EDIT_LOCKED = """
+QPushButton {
+    background: #E5E7EB;
+    color: #9CA3AF;
+    border: 1px solid #D1D5DB;
+    border-radius: 6px;
+    padding: 6px;
+}
+"""

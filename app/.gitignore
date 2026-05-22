@@ -17,3 +17,5 @@ tempCodeRunnerFile.py
 # os junk
 .DS_Store
 Thumbs.db
+
+local_database.db

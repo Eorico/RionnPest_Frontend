@@ -69,7 +69,6 @@ class Ui_Intro(object):
         self.centralwidget.setStyleSheet("""
             QWidget#centralwidget {
                 background-color: #0D1F17;
-                border-radius: 18px;
             }
         """)
 

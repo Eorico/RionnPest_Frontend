@@ -8,8 +8,7 @@ from util.operation_util import Operation
 from util.docs_generator import generate_docx
 from docs_viewer.docs_viewer import DocxViewer
 from datetime import datetime
-from io import BytesIO
-from docx import Document
+from PyQt5.QtCore import pyqtSignal 
 import os
 
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -17,6 +16,8 @@ IMAGE_PATH = os.path.join(os.path.dirname(CURRENT_DIR), "ui", "assets")
 DEFAULT_ROW_COUNT = 5
 
 class DashboardWindow(Operation, QMainWindow):
+    logged_out = pyqtSignal()
+    record_saved = pyqtSignal()
     def __init__(self, api_service):
         super().__init__()
         self.ui = Ui_Dashboard()
@@ -36,6 +37,12 @@ class DashboardWindow(Operation, QMainWindow):
         
         self.ui.confirmButton_3.clicked.connect(self.handle_trash_selected)
         self.ui.confirmButton_2.clicked.connect(self.handle_docx_selected)
+        
+        for col in range(3):
+            self.ui.chemicalUsed.setColumnWidth(col, 150)
+            
+        for col in range(3):
+            self.ui.actualchemicalUsed.setColumnWidth(col, 180)
 
     def _setup_table(self):
         table = self.ui.tableListahan
@@ -59,12 +66,13 @@ class DashboardWindow(Operation, QMainWindow):
         table.setColumnWidth(5, 350) 
         table.setColumnWidth(6, 350)   
         table.setColumnWidth(7, 250)   
-        table.setColumnWidth(8, 100)  
+        table.setColumnWidth(8, 150)  
 
         fixed_ss = table.styleSheet().replace("background-color: transparent;", "")
         table.setStyleSheet(fixed_ss)
         
         table.setColumnHidden(0, True)
+        self._set_headers()
         
     def _set_headers(self):
         for col, text in enumerate([
@@ -81,7 +89,8 @@ class DashboardWindow(Operation, QMainWindow):
         self.table_renderer = DashboardTableRenderer(
             self.ui.tableListahan,
             on_trash_callback=self.handle_trash_dashboard,
-            on_edit_callback=self.handle_edit_dashboard
+            on_edit_callback=self.handle_edit_dashboard,
+            current_admin=(getattr(self.api, 'admin_under', None) or '').strip().lower()  # ← fix
         )
         
     def _get_checked_ids(self) -> list:
@@ -181,6 +190,7 @@ class DashboardWindow(Operation, QMainWindow):
                 QMessageBox.information(self, "Success", f"{self.current_category.capitalize()} recorded!")
                 self.clear_inputs_dashboard()
                 self.load_table_data_dashboard()
+                self.record_saved.emit()
             else:
                 if "429" in str(msg):
                     QMessageBox.critical(self, "Rate Limit Exceeded",
@@ -192,7 +202,10 @@ class DashboardWindow(Operation, QMainWindow):
             QMessageBox.warning(self, "Validation", "Date and Time are required.")
             print(f"Error input: {e}")
 
-    def load_table_data_dashboard(self):
+    def load_table_data_dashboard(self):       
+        self.table_renderer.update_admin(
+            (getattr(self.api, 'admin_under', None) or '').strip().lower()
+        )
         records = self.api.get_active_inventory()
         filtered = [r for r in records if r.get('category') == self.current_category]
         self.table_renderer.render(filtered)
@@ -226,8 +239,12 @@ class DashboardWindow(Operation, QMainWindow):
 
         self.table_renderer.render(filtered)
         
-    def handle_trash_dashboard(self, rec_id):
+    def handle_trash_dashboard(self, rec_id, record_admin=None):
         if rec_id is None:
+            return
+        
+        if record_admin and record_admin != getattr(self.api, 'admin_under', None):
+            QMessageBox.warning(self, "Permission Denied", "You can only move your own records to trash.")
             return
 
         success, msg = self.api.move_to_bin(rec_id)
@@ -299,17 +316,29 @@ class DashboardWindow(Operation, QMainWindow):
         if not records:
             return
 
-        if not self._confirm(
-            "Move to Trash",
-            f"Move {len(records)} record(s) to the recycle bin"
-        ):
+        current_admin = getattr(self.api, 'admin_under', None)
+
+        own_records     = [r for r in records if r.get('admin_under') == current_admin]
+        foreign_records = [r for r in records if r.get('admin_under') != current_admin]
+
+        if foreign_records:
+            names = ", ".join(r.get('admin_under', '?') for r in foreign_records)
+            QMessageBox.warning(self, "Permission Denied",
+                                f"You cannot trash records belonging to: {names}.\n"
+                                f"Only your own records will be processed.")
+
+        if not own_records:
             return
-        
+
+        if not self._confirm("Move to Trash",
+                            f"Move {len(own_records)} of your record(s) to the recycle bin"):
+            return
+
         self._bulk_operation(
-            ids = [r.get('id') for r in records],
-            operation = lambda rec_id: self.api.move_to_bin(rec_id),
-            success_msg = "{count} record(s) moved to recycle bin.",
-            failed_title = "Trash Failed"
+            ids=[r.get('id') for r in own_records],
+            operation=lambda rec_id: self.api.move_to_bin(rec_id),
+            success_msg="{count} record(s) moved to recycle bin.",
+            failed_title="Trash Failed"
         )
         
     def handle_docx_selected(self):
@@ -357,14 +386,29 @@ class DashboardWindow(Operation, QMainWindow):
         self._docx_viewer.activateWindow()
 
     def handle_edit_dashboard(self, updated_record: dict):
+        current_admin = getattr(self.api, 'admin_under', None)
+        if updated_record.get('admin_under') != current_admin:
+            QMessageBox.warning(self, "Permission Denied",
+                                "You can only edit your own records.")
+            return
+
         success, msg = self.api.update_inventory_record(
-            updated_record["id"],
-            updated_record
+            updated_record["id"], updated_record
         )
         if success:
-            from PyQt5.QtWidgets import QMessageBox
             QMessageBox.information(self, "Success", "Record updated.")
             self.load_table_data_dashboard()
         else:
-            from PyQt5.QtWidgets import QMessageBox
             QMessageBox.critical(self, "Error", f"Failed to update: {msg}")
+            
+    def handle_logout_dashboard(self):
+        reply = QMessageBox.question(
+            self,
+            'Confirm Logout',
+            'Are you sure you want to exit the system?',
+            QMessageBox.Yes | QMessageBox.No,
+            QMessageBox.No
+        )
+        
+        if reply == QMessageBox.Yes:
+            self.logged_out.emit()
