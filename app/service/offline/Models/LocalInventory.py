@@ -1,7 +1,7 @@
 # service/offline/Models/LocalInventory.py
 from sqlalchemy import (
-    Column, Integer, String, Float,
-    Boolean, ForeignKey, DateTime
+    Column, Integer, String,
+    Boolean, ForeignKey, DateTime, LargeBinary
 )
 from sqlalchemy.orm import relationship
 from service.offline.Database.localDatabase import Base
@@ -71,3 +71,13 @@ class LocalActualChemicalUsed(Base):
 
     parent_record = relationship(
         "LocalInventory", back_populates="actual_chemicals_used")
+    
+class LocalDocument(Base):
+    __tablename__ = "local_documents"
+    
+    id          = Column(Integer, primary_key=True, autoincrement=True)
+    title       = Column(String(255), nullable=False)
+    file_name   = Column(String(255), nullable=False)
+    file_data   = Column(LargeBinary, nullable=False)
+    synced      = Column(Boolean, default=False)
+    created_at  = Column(DateTime, nullable=True)

@@ -1,7 +1,7 @@
 # service/offline/Service/offlineApiService.py
 from service.offline.Database.localDatabase import session_local
 from service.offline.Repositories.localRepository import (
-    local_admin_repo, local_inventory_repo,
+    local_admin_repo, local_inventory_repo, local_document_repo
 )
 from service.connections.connectionChecker import is_online
 
@@ -220,10 +220,6 @@ class OfflineCapableApiService:
         return self._api.permanent_delete(record_id) if self._online() \
                else (False, "Cannot permanently delete while offline")
 
-    def upload_document(self, title, file_name, file_data) -> tuple[bool, str]:
-        return self._api.upload_document(title, file_name, file_data) if self._online() \
-               else (False, "Cannot upload documents while offline")
-
     def get_documents(self) -> list:
         return self._api.get_documents() if self._online() else []
 
@@ -233,3 +229,84 @@ class OfflineCapableApiService:
     def delete_document(self, doc_id) -> tuple[bool, str]:
         return self._api.delete_document(doc_id) if self._online() \
                else (False, "Cannot delete documents while offline")
+               
+    def upload_document(self, title:str, file_name:str, file_data:bytes) -> tuple[bool, str | dict]:
+        if self._online():
+            success, result = self._api.upload_document(title, file_name, file_data)
+            
+            if success:
+                db = session_local()
+                try:
+                    local_document_repo.save(db, title, file_name, file_data)
+                except Exception as e:
+                    print(f"[OfflineAPI] could not cache document: {e}")
+                finally:
+                    db.close()
+            return success, result
+        
+        db = session_local()
+        
+        try:
+            doc = local_document_repo.save(db, title, file_name, file_data)
+            return True, {
+                "id": doc.id,
+                "title": doc.title,
+                "file_name": doc.file_name,
+                "_offline": True,
+            }
+        except Exception as e:
+            return False, f"Local document save failed: {e}"
+        finally:
+            db.close()
+            
+    def get_documents(self) -> list:
+        if self._online():
+            return self._api.get_documents()
+        db = session_local()
+        try:
+            return [
+                {
+                    "id": d.id,
+                    "title": d.title,
+                    "file_name": d.file_name,
+                    "_offline": True
+                }
+                for d in local_document_repo.get_all(db)
+            ]
+        finally:
+            db.close()
+    
+    def download_document(self, doc_id:int) -> bytes | None:
+        if self._online():
+            raw = self._api.download_document(doc_id)
+            if raw:
+                return raw
+            
+        db = session_local()
+        try:
+            doc = local_document_repo.get_by_id(db, doc_id)
+            return doc.file_data if doc else None
+        finally:
+            db.close()
+    
+    def delete_document(self, doc_id:int) -> tuple[bool, str]:
+        if self._online():
+            success, msg = self._api.delete_document(doc_id)
+            if success:
+                db = session_local()
+                try:
+                    local_document_repo.delete(db, doc_id)
+                except Exception:
+                    pass
+                finally:
+                    db.close()
+            return success, msg
+        
+        db = session_local()
+        try:
+            local_document_repo.delete(db, doc_id)
+            return True, "Deleted locally"
+        except Exception as e:
+            return False, str(e)
+        finally:
+            db.close()

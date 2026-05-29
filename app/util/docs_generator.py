@@ -175,10 +175,7 @@ def generate_docx(records: list, title: str = "Inventory Report") -> bytes:
     stmt = doc.add_heading("Statement", level=2)
     for run in stmt.runs:
         run.font.color.rgb = RGBColor(0x1A, 0x56, 0x2E)
-    doc.add_paragraph(
-        "This document is a system-generated inventory report. "
-        "All records reflect data submitted through the inventory management system."
-    )
+    doc.add_paragraph("")
 
     buf = BytesIO()
     doc.save(buf)

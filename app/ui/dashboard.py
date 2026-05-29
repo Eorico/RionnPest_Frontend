@@ -618,7 +618,7 @@ def _build_treatment_page(ui) -> QtWidgets.QWidget:
     rp_v.setSpacing(10)
 
     rp_hdr = QtWidgets.QHBoxLayout()
-    rp_title = QtWidgets.QLabel("Treatment records")
+    rp_title = QtWidgets.QLabel("Inventory records")
     rp_title.setStyleSheet(
         f"color: {_TEXT}; font: 600 12pt 'Segoe UI'; background: transparent; border: none;")
     rp_hdr.addWidget(rp_title); rp_hdr.addStretch()

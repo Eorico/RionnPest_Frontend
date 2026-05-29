@@ -36,5 +36,6 @@ def init_db():
         LocalInventory,
         LocalChemicalUsed,
         LocalActualChemicalUsed,
+        LocalDocument,
     )
     Base.metadata.create_all(bind=engine)

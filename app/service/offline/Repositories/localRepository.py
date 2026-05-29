@@ -4,7 +4,9 @@ from passlib.context import CryptContext
 from service.offline.Models.LocalInventory import (
     LocalAdmin, LocalInventory,
     LocalChemicalUsed, LocalActualChemicalUsed,
+    LocalDocument
 )
+from datetime import datetime
 
 _pwd = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
@@ -144,6 +146,42 @@ class LocalInventoryRepository:
             db.delete(r)
             db.commit()
 
+class LocalDocumentRepository:
+    
+    def save(self, db:Session, title:str, file_name:str, file_data:bytes) -> LocalDocument:
+        doc = LocalDocument(
+            title = title,
+            file_name = file_name,
+            file_data = file_data,
+            synced = False,
+            created_at = datetime.utcnow(),
+        )
+        db.add(doc)
+        db.commit()
+        db.refresh(doc)
+        return doc
+    
+    def get_all(self, db:Session) -> list[LocalDocument]:
+        return db.query(LocalDocument).all()
+    
+    def get_by_id(self, db:Session, doc_id:int) -> LocalDocument | None:
+        return db.query(LocalDocument).filter_by(id=doc_id).first()
+    
+    def get_unsycned(self, db:Session) -> list[LocalDocument]:
+        return db.query(LocalDocument).filter_by(synced=False).all()
+    
+    def mark_synced(self, db:Session, doc_id:int):
+        doc = db.query(LocalDocument).filter_by(id=doc_id).first()
+        if doc:
+            doc.synced = True
+            db.commit()
+            
+    def delete(self, db:Session, doc_id:int):
+        doc = db.query(LocalDocument).filter_by(id=doc_id).first()
+        if doc:
+            db.delete(doc)
+            db.commit()
 
 local_admin_repo     = LocalAdminRepository()
 local_inventory_repo = LocalInventoryRepository()
+local_document_repo = LocalDocumentRepository()

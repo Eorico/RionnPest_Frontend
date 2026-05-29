@@ -5,6 +5,8 @@ from PyQt5.QtWidgets import (
 from PyQt5.QtCore import Qt, QSize
 from PyQt5.QtGui import QCursor, QFont
 from ui.docs_viewer import Ui_DocxViewer
+from io import BytesIO
+from docx import Document
 
 # ── Zoom constants ────────────────────────────────────────────────────────────
 _ZOOM_MIN  = 50
@@ -160,6 +162,7 @@ class DocxViewer(QMainWindow):
         self._render_document(records, file_name)
         self._build_toc(records)
         self.ui.docTitleLabel.setText(file_name)
+        self.ui.notesEdit.setPlainText(self._extract_statement(raw))
 
     @staticmethod
     def _validate_template(raw: bytes) -> tuple[bool, str]:
@@ -258,7 +261,6 @@ class DocxViewer(QMainWindow):
             return
 
         try:
-            # If opened from API, re-download; if opened locally, use raw bytes
             if self._current_doc.get("id") is not None:
                 raw = self.api.download_document(self._current_doc["id"])
             else:
@@ -268,9 +270,48 @@ class DocxViewer(QMainWindow):
                 QMessageBox.critical(self, "Error", "Document data not available.")
                 return
 
-            with open(path, 'wb') as f:
+            from io import BytesIO
+            from docx import Document as DocxDocument
+            from docx.shared import Pt, RGBColor
+
+            doc = DocxDocument(BytesIO(raw))
+            statement_text = self.ui.notesEdit.toPlainText().strip()
+
+            # ── Remove everything from the Statement heading onward ───────────
+            found_stmt = False
+            to_remove  = []
+            for para in doc.paragraphs:
+                if para.text.strip().lower() == "statement":
+                    found_stmt = True
+                if found_stmt:
+                    to_remove.append(para)
+
+            for para in to_remove:
+                p = para._element
+                p.getparent().remove(p)
+
+            # ── Re-add Statement heading + new text ───────────────────────────
+            doc.add_paragraph()
+            heading = doc.add_heading("Statement", level=2)
+            if heading.runs:
+                heading.runs[0].font.color.rgb = RGBColor(0x1A, 0x56, 0x2E)
+
+            if statement_text:
+                for line in statement_text.split("\n"):
+                    p = doc.add_paragraph(line)
+                    p.paragraph_format.space_after = Pt(4)
+            else:
+                doc.add_paragraph("")
+
+            buffer = BytesIO()
+            doc.save(buffer)
+            raw = buffer.getvalue()
+
+            with open(path, "wb") as f:
                 f.write(raw)
+
             QMessageBox.information(self, "Saved", f"Document saved to:\n{path}")
+
         except Exception as e:
             QMessageBox.critical(self, "Save Failed", f"Could not save DOCX:\n{e}")
 
@@ -295,8 +336,10 @@ class DocxViewer(QMainWindow):
             QMessageBox.critical(self, "Print Failed", f"Could not print:\n{e}")
 
     def _build_html_for_print(self) -> str:
-        """Build a clean HTML table from current records for PDF/print output."""
+        """Build HTML for PDF/print — includes inventory table AND statement."""
         records = self._current_doc.get("records", [])
+ 
+        # ── Inventory table rows ──────────────────────────────────────────────
         rows_html = ""
         for r in records:
             chem   = self._fmt_chem(r.get("chemical_use") or r.get("chemicals_use") or [])
@@ -311,27 +354,57 @@ class DocxViewer(QMainWindow):
                 chem, actual,
                 self._extract_remarks(r),
             ]
-            cells = "".join(f"<td style='padding:6px 10px;border:1px solid #e0ede6'>{c}</td>"
-                            for c in cols)
+            cells = "".join(
+                f"<td style='padding:6px 10px;border:1px solid #e0ede6'>{c}</td>"
+                for c in cols)
             rows_html += f"<tr>{cells}</tr>"
-
-        headers = ["Category","Date","Client","Time","Chemicals Used","Actual Chemicals","Remarks"]
+ 
+        headers = ["Category","Date","Client","Time",
+                   "Chemicals Used","Actual Chemicals","Remarks"]
         hdr_cells = "".join(
             f"<th style='background:#2D6A4F;color:#fff;padding:8px 10px;"
             f"border:1px solid #1B4332;text-align:left'>{h}</th>"
             for h in headers)
-
+ 
         title = self._current_doc.get("title", "Inventory Report")
+ 
+        # ── Statement (notes) — include if not empty ──────────────────────────
+        statement_text = self.ui.notesEdit.toPlainText().strip()
+        statement_html = ""
+        if statement_text:
+            # Preserve line breaks
+            escaped = statement_text.replace("&", "&amp;") \
+                                    .replace("<", "&lt;") \
+                                    .replace(">", "&gt;") \
+                                    .replace("\n", "<br>")
+            statement_html = f"""
+            <div style='margin-top:40px; border-top:2px solid #2D6A4F; padding-top:20px;'>
+                <h3 style='color:#2D6A4F; margin:0 0 12px;'>Statement</h3>
+                <p style='color:#1B4332; font-size:10pt; line-height:1.6;
+                          white-space:pre-wrap;'>{escaped}</p>
+            </div>
+            """
+ 
         return f"""
-        <html><body style='font-family:Segoe UI,Arial;font-size:10pt;color:#1B4332'>
-        <h2 style='color:#2D6A4F'>Raionn Pest Solutions</h2>
-        <p style='color:#6B8F78'>Professional Pest Control and Inventory Management</p>
-        <h3>{title}</h3>
-        <table style='border-collapse:collapse;width:100%'>
+        <html>
+        <body style='font-family:Segoe UI,Arial;font-size:10pt;color:#1B4332;
+                     margin:0;padding:0;'>
+ 
+          <h2 style='color:#2D6A4F;margin:0 0 4px;'>Raionn Pest Solutions</h2>
+          <p style='color:#6B8F78;margin:0 0 20px;font-size:9pt;'>
+            Professional Pest Control and Inventory Management
+          </p>
+          <h3 style='color:#1B4332;margin:0 0 14px;'>{title}</h3>
+ 
+          <table style='border-collapse:collapse;width:100%;'>
             <tr>{hdr_cells}</tr>
             {rows_html}
-        </table>
-        </body></html>
+          </table>
+ 
+          {statement_html}
+ 
+        </body>
+        </html>
         """
 
     # ── File list ─────────────────────────────────────────────────────────────
@@ -418,6 +491,7 @@ class DocxViewer(QMainWindow):
         self._current_doc = {"id": doc["id"], "title": doc["file_name"], "records": records}
         self._render_document(records, doc["file_name"])
         self._build_toc(records)
+        self.ui.notesEdit.setPlainText(self._extract_statement(raw))
 
     # ── Render ────────────────────────────────────────────────────────────────
 
@@ -484,6 +558,23 @@ class DocxViewer(QMainWindow):
             val = (c.get("remarks") or "").strip()
             if val: parts.append(f"[A.C.U] {val}")
         return "; ".join(parts) if parts else "—"
+    
+    @staticmethod
+    def _extract_statement(raw: bytes) -> str:
+        try:
+            doc = Document(BytesIO(raw))
+            lines = []
+            int_stmt = False
+            for para in doc.paragraphs:
+                text = para.text.strip()
+                if not int_stmt:
+                    if text.lower() == "statement":
+                        int_stmt = True
+                else:
+                    lines.append(text)
+            return "\n".join(lines).strip()
+        except Exception:
+            return ""
 
     @staticmethod
     def _fmt_chem(chems: list, key: str = "chemical_name") -> str:

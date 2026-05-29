@@ -54,7 +54,7 @@ class InventoryApiService(BaseApiService, IInventoryService):
                         data.get("actual_chemical_used", []))
                 ],
             }
-            r = self._session.put(
+            r = self._session.patch(
                 f"{self._base_url}/inventory/{record_id}",
                 json=payload, timeout=5,
             )
